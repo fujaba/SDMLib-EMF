@@ -1,0 +1,149 @@
+[
+  {
+    "id":"KE.K1",
+    "class":"org.sdmlib.scenarios.KanbanEntry",
+    "prop":{
+      "name":"Project",
+      "phase":"active",
+      "lastDeveloper":"zuendorf",
+      "hoursRemaining":4,
+      "hoursSpend":10,
+      "subentries":[
+        {"id":"KE.K2"},
+        {"id":"KE.K7"}
+      ],
+      "logEntries":[
+        {"id":"KE.L6"},
+        {"id":"KE.L11"}
+      ]
+    }
+  },
+  {
+    "id":"KE.K2",
+    "class":"org.sdmlib.scenarios.KanbanEntry",
+    "prop":{
+      "name":"GroupAccountRuleRecognition",
+      "phase":"modeling",
+      "lastDeveloper":"zuendorf",
+      "hoursRemaining":4,
+      "hoursSpend":8,
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L3"},
+        {"id":"KE.L4"},
+        {"id":"KE.L5"}
+      ]
+    }
+  },
+  {
+    "id":"KE.K7",
+    "class":"org.sdmlib.scenarios.KanbanEntry",
+    "prop":{
+      "name":"GroupAccountCodegen",
+      "phase":"done",
+      "lastDeveloper":"zuendorf",
+      "hoursSpend":2,
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L8"},
+        {"id":"KE.L9"},
+        {"id":"KE.L10"}
+      ]
+    }
+  },
+  {
+    "id":"KE.L3",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K2"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L4",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"04.04.2012 00:26:59",
+      "hoursRemainingInTotal":4,
+      "kanbanEntry":{"id":"KE.K2"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: Start situation: classes have been generated. Now create some example object structure"
+    }
+  },
+  {
+    "id":"KE.L5",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"15.04.2012 17:18:42",
+      "hoursSpend":8,
+      "hoursRemainingInTotal":4,
+      "kanbanEntry":{"id":"KE.K2"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: We will call updateBalances() to compute the correct balances.\n"
+    }
+  },
+  {
+    "id":"KE.L6",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "hoursSpend":8,
+      "hoursRemainingInTotal":2,
+      "kanbanEntry":{"id":"KE.K1"},
+      "developer":"zuendorf",
+      "phase":"active",
+      "comment":"GroupAccountRuleRecognition: null"
+    }
+  },
+  {
+    "id":"KE.L8",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K7"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L9",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"04.04.2012 00:11:32",
+      "hoursSpend":1,
+      "kanbanEntry":{"id":"KE.K7"},
+      "developer":"zuendorf",
+      "phase":"done",
+      "comment":"Achieved: Start situation: Nothing here yet. Generated classes"
+    }
+  },
+  {
+    "id":"KE.L10",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"24.05.2012 00:16:18",
+      "hoursSpend":1,
+      "kanbanEntry":{"id":"KE.K7"},
+      "developer":"zuendorf",
+      "phase":"done",
+      "comment":"Achieved: Resolved Bug: creatorcreator class is no longer growing on each run. "
+    }
+  },
+  {
+    "id":"KE.L11",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "hoursSpend":2,
+      "hoursRemainingInTotal":4,
+      "kanbanEntry":{"id":"KE.K1"},
+      "developer":"zuendorf",
+      "phase":"active",
+      "comment":"GroupAccountRuleRecognition: null"
+    }
+  }
+]
