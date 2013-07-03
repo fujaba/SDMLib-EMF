@@ -42,7 +42,7 @@ public class EMFStudyRightModel
    {
       Scenario scenario = new Scenario("emfsrc");
 
-      scenario.add("We build some example classes and then turn them into an Ecore model ", Scenario.MODELING, "zuendorf", "08.02.2013 14:53:42", 8, 0);
+      scenario.add("We build some example classes and then turn them into an Ecore model ", Scenario.MODELING, "zuendorf", "03.07.2013 13:19:42", 1, 0);
 
       ClassModel model = new ClassModel("org.sdmlib.examples.emfstudyright");
 
@@ -159,7 +159,7 @@ public class EMFStudyRightModel
    {
       Scenario scenario = new Scenario("emfsrc");
 
-      scenario.add("Reading ecore file and generating sdmlib classModel ", Scenario.MODELING, "zuendorf", "28.06.2013 12:56:42", 1, 24);
+      scenario.add("Reading ecore file and generating sdmlib classModel ", Scenario.MODELING, "zuendorf", "03.07.2013 13:20:42", 1, 22);
 
       
       EMFTool emfTool = new EMFTool();
