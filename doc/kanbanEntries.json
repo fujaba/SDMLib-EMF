@@ -6,16 +6,20 @@
       "name":"Project",
       "phase":"active",
       "lastDeveloper":"zuendorf",
-      "hoursRemaining":2,
-      "hoursSpend":10,
+      "hoursRemaining":26,
+      "hoursSpend":19,
       "subentries":[
         {"id":"KE.K2"},
-        {"id":"KE.K7"}
+        {"id":"KE.K7"},
+        {"id":"KE.K13"},
+        {"id":"KE.K17"}
       ],
       "logEntries":[
         {"id":"KE.L6"},
         {"id":"KE.L11"},
-        {"id":"KE.L12"}
+        {"id":"KE.L12"},
+        {"id":"KE.L16"},
+        {"id":"KE.L20"}
       ]
     }
   },
@@ -49,6 +53,37 @@
         {"id":"KE.L8"},
         {"id":"KE.L9"},
         {"id":"KE.L10"}
+      ]
+    }
+  },
+  {
+    "id":"KE.K13",
+    "class":"org.sdmlib.scenarios.KanbanEntry",
+    "prop":{
+      "name":"EMFStudyRightClasses",
+      "phase":"modeling",
+      "lastDeveloper":"zuendorf",
+      "hoursSpend":8,
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L14"},
+        {"id":"KE.L15"}
+      ]
+    }
+  },
+  {
+    "id":"KE.K17",
+    "class":"org.sdmlib.scenarios.KanbanEntry",
+    "prop":{
+      "name":"LoadEcoreCreateClassModel",
+      "phase":"modeling",
+      "lastDeveloper":"zuendorf",
+      "hoursRemaining":24,
+      "hoursSpend":1,
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L18"},
+        {"id":"KE.L19"}
       ]
     }
   },
@@ -153,6 +188,77 @@
     "prop":{
       "date":"03.07.2013 12:00:00",
       "hoursRemainingInTotal":2,
+      "kanbanEntry":{"id":"KE.K1"},
+      "developer":"zuendorf",
+      "phase":"active",
+      "comment":"GroupAccountRuleRecognition: null"
+    }
+  },
+  {
+    "id":"KE.L14",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K13"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L15",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"08.02.2013 14:53:42",
+      "hoursSpend":8,
+      "kanbanEntry":{"id":"KE.K13"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: We build some example classes and then turn them into an Ecore model "
+    }
+  },
+  {
+    "id":"KE.L16",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "hoursSpend":8,
+      "hoursRemainingInTotal":2,
+      "kanbanEntry":{"id":"KE.K1"},
+      "developer":"zuendorf",
+      "phase":"active",
+      "comment":"GroupAccountRuleRecognition: null"
+    }
+  },
+  {
+    "id":"KE.L18",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K17"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L19",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"28.06.2013 12:56:42",
+      "hoursSpend":1,
+      "hoursRemainingInTotal":24,
+      "kanbanEntry":{"id":"KE.K17"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: Reading ecore file and generating sdmlib classModel "
+    }
+  },
+  {
+    "id":"KE.L20",
+    "class":"org.sdmlib.scenarios.LogEntry",
+    "prop":{
+      "date":"03.07.2013 12:00:00",
+      "hoursSpend":1,
+      "hoursRemainingInTotal":26,
       "kanbanEntry":{"id":"KE.K1"},
       "developer":"zuendorf",
       "phase":"active",
