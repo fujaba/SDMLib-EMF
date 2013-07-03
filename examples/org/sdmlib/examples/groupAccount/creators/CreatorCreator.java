@@ -21,6 +21,8 @@ public class CreatorCreator
          creatorSet.add(new org.sdmlib.examples.groupAccount.creators.PersonPOCreator());
          creatorSet.add(new org.sdmlib.examples.groupAccount.creators.ItemCreator());
          creatorSet.add(new org.sdmlib.examples.groupAccount.creators.ItemPOCreator());
+         creatorSet.add(new org.sdmlib.examples.groupAccount.creators.GroupAccountTestsCreator());
+         creatorSet.add(new org.sdmlib.examples.groupAccount.creators.GroupAccountTestsPOCreator());
          creatorSet.addAll(org.sdmlib.models.pattern.creators.CreatorCreator.getCreatorSet());
       }
       
@@ -36,4 +38,5 @@ public class CreatorCreator
       return jsonIdMap;
    }
 }
+
 

@@ -4,6 +4,11 @@ import org.sdmlib.examples.groupAccount.GroupAccount;
 import org.sdmlib.examples.groupAccount.Item;
 import org.sdmlib.examples.groupAccount.Person;
 import org.sdmlib.models.pattern.Pattern;
+import org.sdmlib.examples.groupAccount.creators.GroupAccountPO;
+import org.sdmlib.examples.groupAccount.creators.PersonPO;
+import org.sdmlib.examples.groupAccount.creators.ItemPO;
+import org.sdmlib.examples.groupAccount.creators.GroupAccountTestsPO;
+import org.sdmlib.examples.groupAccount.GroupAccountTests;
 
 public class ModelPattern extends Pattern
 {
@@ -90,6 +95,31 @@ public class ModelPattern extends Pattern
       return value;
    } 
 
+   public GroupAccountTestsPO hasElementGroupAccountTestsPO()
+   {
+      GroupAccountTestsPO value = new GroupAccountTestsPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public GroupAccountTestsPO hasElementGroupAccountTestsPO(GroupAccountTests hostGraphObject)
+   {
+      GroupAccountTestsPO value = new GroupAccountTestsPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
 }
+
 
 

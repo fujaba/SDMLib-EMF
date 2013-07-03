@@ -151,7 +151,7 @@ public class GroupAccountTests implements PropertyChangeInterface
       
       // model.removeAllGeneratedCode("examples", "examples", "examples");
       
-      model.generate("examples", "examplehelpers");
+      model.generate("examples", "examples");
       
       scenario.addImage(model.dumpClassDiag("examples", "GroupAccountClassDiag01"));
 
