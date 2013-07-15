@@ -169,5 +169,7 @@ public class EMFStudyRightModel
       scenario.addImage(model.dumpClassDiag("StudyRighLoadedFromECore"));
       
       scenario.dumpHTML();
+      
+      
    }
 }
