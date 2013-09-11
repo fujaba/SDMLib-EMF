@@ -31,8 +31,8 @@ import org.sdmlib.models.classes.Association;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.transformations.TransformOp;
-import org.sdmlib.scenarios.Scenario;
-import org.sdmlib.scenarios.ScenarioManager;
+import org.sdmlib.storyboards.Storyboard;
+import org.sdmlib.storyboards.StoryboardManager;
 import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
    
@@ -41,9 +41,9 @@ public class GroupAccountTests implements PropertyChangeInterface
    @Test
    public void testGroupAccountRuleRecognition()
    {
-      Scenario scenario = new Scenario("examples");
+      Storyboard storyboard = new Storyboard("examples");
       
-      scenario.add("Start situation: classes have been generated. Now create some example object structure",
+      storyboard.add("Start situation: classes have been generated. Now create some example object structure",
          MODELING, "zuendorf", "04.04.2012 00:26:59", 0, 0);
       
       GroupAccount groupAccount = new GroupAccount();
@@ -77,45 +77,45 @@ public class GroupAccountTests implements PropertyChangeInterface
       .withParent(groupAccount);
 
       // JsonIdMap createIdMap = org.sdmlib.examples.groupAccount.creators.GroupAccountCreator.createIdMap("az42");
-      scenario.addObjectDiag(groupAccount);
+      storyboard.addObjectDiagram(groupAccount);
       
-      scenario.add("We will call updateBalances() to compute the correct balances.\n",
+      storyboard.add("We will call updateBalances() to compute the correct balances.\n",
          MODELING, "zuendorf", "15.04.2012 17:18:42", 8, 2);
       
-      scenario.markCodeStart();
+      storyboard.markCodeStart();
       groupAccount.updateBalances();
-      scenario.addCode("examples");
+      storyboard.addCode("examples");
       
-      scenario.add("Now see updateBalances() first as code and then as a graphical model transformation operation diagram.");
+      storyboard.add("Now see updateBalances() first as code and then as a graphical model transformation operation diagram.");
       
-      String methodText = scenario.getMethodText("examples", "org.sdmlib.examples.groupAccount.GroupAccount", "updateBalances()");
+      String methodText = storyboard.getMethodText("examples", "org.sdmlib.examples.groupAccount.GroupAccount", "updateBalances()");
       
-      scenario.add(methodText);
+      storyboard.add(methodText);
       
       TransformOp transformOp = new TransformOp()
       .withName("org.sdmlib.examples.groupAccount.GroupAccount.updateBalances()");
       
       transformOp.updateFromSourceCode("examples", "org.sdmlib.examples.groupAccount");
       
-      scenario.addImage(transformOp.dumpTransformOpDiagram("GroupAccount.UpdateBalances02"));
+      storyboard.addImage(transformOp.dumpTransformOpDiagram("GroupAccount.UpdateBalances02"));
       
-      scenario.add("The effects of executing updateBalances() is shown in: ");
+      storyboard.add("The effects of executing updateBalances() is shown in: ");
       
-      scenario.addObjectDiag(groupAccount);
+      storyboard.addObjectDiagram(groupAccount);
 
-      scenario.assertEquals("Balance for Albert is now ", 5, albert.getBalance(), 0.0001);
+      storyboard.assertEquals("Balance for Albert is now ", 5, albert.getBalance(), 0.0001);
 
-      scenario.assertEquals("The sum of all balances is ", 0, groupAccount.getPersons().getBalance().sum(), 0.0001);
+      storyboard.assertEquals("The sum of all balances is ", 0, groupAccount.getPersons().getBalance().sum(), 0.0001);
       
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
    }
 
    @Test
    public void testGroupAccountCodegen()
    {
-      Scenario scenario = new Scenario("examples");
+      Storyboard storyboard = new Storyboard("examples");
       
-      scenario.add("Start situation: Nothing here yet. Generated classes",
+      storyboard.add("Start situation: Nothing here yet. Generated classes",
          DONE, "zuendorf", "04.04.2012 00:11:32", 1, 0);
       
       ClassModel model = new ClassModel("org.sdmlib.examples.groupAccount");
@@ -153,13 +153,13 @@ public class GroupAccountTests implements PropertyChangeInterface
       
       model.generate("examples", "examples");
       
-      scenario.addImage(model.dumpClassDiag("examples", "GroupAccountClassDiag01"));
+      storyboard.addImage(model.dumpClassDiagram("examples", "GroupAccountClassDiag01"));
 
-      scenario.add("Resolved Bug: creatorcreator class is no longer growing on each run. ",
+      storyboard.add("Resolved Bug: creatorcreator class is no longer growing on each run. ",
          DONE, "zuendorf", "24.05.2012 00:16:18", 1, 0);
       
-      ScenarioManager.get()
-      .add(scenario)
+      StoryboardManager.get()
+      .add(storyboard)
       .dumpHTML();
    }
 

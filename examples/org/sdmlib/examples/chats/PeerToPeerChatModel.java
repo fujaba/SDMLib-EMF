@@ -9,7 +9,7 @@ import org.sdmlib.model.taskflows.creators.PeerProxySet;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.scenarios.Scenario;
+import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.serialization.json.SDMLibJsonIdMap;
 
@@ -22,7 +22,7 @@ public class PeerToPeerChatModel
    @Test
    public void peerToPeerChatModel()
    {
-      Scenario scenario = new Scenario("examples");
+      Storyboard storyboard = new Storyboard("examples");
 
       ClassModel model = new ClassModel("org.sdmlib.examples.chats");
 
@@ -131,12 +131,12 @@ public class PeerToPeerChatModel
          .withSuperClass(taskFlowClass)
          .createMethods("run()", "void");
          
-      scenario.addToDo("we should build attr.remove", Scenario.BACKLOG, "zuendorf", "04.10.2012 12:50:42", 0, 8);
+      storyboard.addToDo("we should build attr.remove", Storyboard.BACKLOG, "zuendorf", "04.10.2012 12:50:42", 0, 8);
       
       model.generate("examples");
 
-      scenario.addImage(model.dumpClassDiag("examples", "PeerToPeerChatModel"));
+      storyboard.addImage(model.dumpClassDiagram("examples", "PeerToPeerChatModel"));
 
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
    }
 }

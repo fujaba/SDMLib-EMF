@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.scenarios.Scenario;
+import org.sdmlib.storyboards.Storyboard;
 
 public class MauMauModel
 {
@@ -16,7 +16,7 @@ public class MauMauModel
    @Test
    public void testMauMauModel()
    {
-      Scenario scenario = new Scenario("examples");
+      Storyboard storyboard = new Storyboard("examples");
 
       ClassModel model = new ClassModel("org.sdmlib.examples.replication.maumau");
 
@@ -42,10 +42,10 @@ public class MauMauModel
       mauMauClass.withAssoc(playerClass, "currentMove", R.ONE, "assignment", R.ONE);
       
 
-      scenario.addImage(model.dumpClassDiag("src", "MauMauClassDiag"));
+      storyboard.addImage(model.dumpClassDiagram("src", "MauMauClassDiag"));
 
       model.generate("examples");
 
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
    }
 }

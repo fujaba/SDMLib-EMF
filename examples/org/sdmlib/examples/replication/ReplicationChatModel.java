@@ -5,13 +5,13 @@ import java.net.Socket;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.scenarios.Scenario;
+import org.sdmlib.storyboards.Storyboard;
 
 public class ReplicationChatModel
 {
    public static void main(String[] args)
    {
-      Scenario scenario = new Scenario("examples", "ReplicationChatModel");
+      Storyboard storyboard = new Storyboard("examples", "ReplicationChatModel");
       
       ClassModel model = new ClassModel("org.sdmlib.examples.replication");
       
@@ -26,9 +26,9 @@ public class ReplicationChatModel
       
       model.generate("examples");
       
-      scenario.addImage(model.dumpClassDiag("examples", "ReplicationChatModel01"));
+      storyboard.addImage(model.dumpClassDiagram("examples", "ReplicationChatModel01"));
       
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
    }
 
 }

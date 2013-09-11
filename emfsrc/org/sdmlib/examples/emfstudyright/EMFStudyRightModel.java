@@ -32,7 +32,7 @@ import org.sdmlib.models.EMFTool;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.scenarios.Scenario;
+import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.utils.StrUtil;
 
 public class EMFStudyRightModel
@@ -40,9 +40,9 @@ public class EMFStudyRightModel
    @Test
    public void EMFStudyRightClasses()
    {
-      Scenario scenario = new Scenario("emfsrc");
+      Storyboard storyboard = new Storyboard("emfsrc");
 
-      scenario.add("We build some example classes and then turn them into an Ecore model ", Scenario.MODELING, "zuendorf", "03.07.2013 13:19:42", 1, 0);
+      storyboard.add("We build some example classes and then turn them into an Ecore model ", Storyboard.MODELING, "zuendorf", "03.07.2013 13:19:42", 1, 0);
 
       ClassModel model = new ClassModel("org.sdmlib.examples.emfstudyright");
 
@@ -54,7 +54,7 @@ public class EMFStudyRightModel
             .withAttributes("studId", R.STRING)
             .withSuperClass(persClazz);
       
-      scenario.addImage(model.dumpClassDiag("examples", "EMFStudyRightClassDiag"));
+      storyboard.addImage(model.dumpClassDiagram("examples", "EMFStudyRightClassDiag"));
       
       EMFTool emfTool = new EMFTool();
       
@@ -79,7 +79,7 @@ public class EMFStudyRightModel
          
          String xmlText = "<textarea rows=\"20\" cols=\"120\" style='border:none'>" + out.toString() +  "</textarea>";
          
-         scenario.add(xmlText);
+         storyboard.add(xmlText);
       }
       catch (IOException e)
       {
@@ -151,24 +151,24 @@ public class EMFStudyRightModel
       //      gen.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, basicMonitor);
       
       
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
    }
    
    @Test
    public void testLoadEcoreCreateClassModel()
    {
-      Scenario scenario = new Scenario("emfsrc");
+      Storyboard storyboard = new Storyboard("emfsrc");
 
-      scenario.add("Reading ecore file and generating sdmlib classModel ", Scenario.MODELING, "zuendorf", "03.07.2013 13:20:42", 1, 22);
+      storyboard.add("Reading ecore file and generating sdmlib classModel ", Storyboard.MODELING, "zuendorf", "03.07.2013 13:20:42", 1, 22);
 
       
       EMFTool emfTool = new EMFTool();
       
       ClassModel model = emfTool.genModelToClassModel("./EMFStudyRight.genmodel");
       
-      scenario.addImage(model.dumpClassDiag("StudyRighLoadedFromECore"));
+      storyboard.addImage(model.dumpClassDiagram("StudyRighLoadedFromECore"));
       
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
       
       
    }

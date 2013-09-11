@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.sdmlib.codegen.CGUtil;
 import org.sdmlib.examples.chats.creators.CreatorCreator;
 import org.sdmlib.model.taskflows.SocketThread;
-import org.sdmlib.scenarios.Scenario;
+import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.serialization.json.SDMLibJsonIdMap;
 
@@ -33,9 +33,9 @@ public class PeerToPeerNetworkChatTest
 //   }
 //
    @Test
-   public void PeerToPeerNetworkChatScenario()
+   public void PeerToPeerNetworkChatStoryboard()
    {
-      Scenario scenario = new Scenario("examples");
+      Storyboard storyboard = new Storyboard("examples");
              
       // Albert's client will serve as first peer
       runJava("10113", PeerToPeerChat.class.getName(), "11123 Albert");
@@ -82,9 +82,9 @@ public class PeerToPeerNetworkChatTest
 //      
 //      killSubProcesses();
 //      
-//      scenario.addImage("CSChatMessageFlow.svg");
+//      storyboard.addImage("CSChatMessageFlow.svg");
       
-      scenario.dumpHTML();
+      storyboard.dumpHTML();
       
    }
 
