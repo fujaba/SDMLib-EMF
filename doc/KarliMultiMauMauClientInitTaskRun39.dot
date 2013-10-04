@@ -1,0 +1,9 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+c2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ClickStartGameButton.java"> <u>c2 :ClickStartGameButton</u></td></tr></table>>];
+l9 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l9 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "When all players have shown up, Start Game"</td></tr></table></td></tr></table>>];
+
+}

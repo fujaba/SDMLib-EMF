@@ -1,0 +1,16 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+server [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ReplicationMauMauServer.java"> <u>server :ReplicationMauMauServer</u></td></tr></table>>];
+taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
+serverLane [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>serverLane :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "server"</td></tr></table></td></tr></table>>];
+taskBoardLanesListener [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/server.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ReplicationMauMauServer.java"> <u>taskBoardLanesListener :ReplicationMauMauServer$TaskBoardLanesListener</u></td></tr></table>>];
+serverLaneListener [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/server.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ServerLaneListener.java"> <u>serverLaneListener :ServerLaneListener</u></td></tr></table>>];
+maumau [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MauMau.java"> <u>maumau :MauMau</u></td></tr></table>>];
+
+taskboard -- serverLane [headlabel = "lanes" taillabel = "board"];
+taskBoardLanesListener -- taskboard [headlabel = "taskFlowBoard" taillabel = ""];
+serverLaneListener -- serverLane [headlabel = "source" taillabel = ""];
+}

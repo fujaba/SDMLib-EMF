@@ -1,0 +1,19 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+theo [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/SharedSpaceMauMauStoryboards.java"> <u>theo :SharedSpaceMauMauStoryboards</u></td></tr></table>>];
+taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
+storyTheo [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/SharedSpaceMauMauStoryboards.java"> <u>storyTheo :SharedSpaceMauMauStoryboards$StoryTheo</u></td></tr></table>>];
+game42storyboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/storyboards/Storyboard.java"> <u>game42storyboard :Storyboard</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>rootDir = "examples"</td></tr><tr><td align='left'>stepCounter = 2</td></tr><tr><td align='left'>stepDoneCounter = 0</td></tr></table></td></tr></table>>];
+s1 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/storyboards/StoryboardStep.java"> <u>s1 :StoryboardStep</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "SharedSpaceMauMau"</td></tr></table></td></tr></table>>];
+s2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/storyboards/StoryboardStep.java"> <u>s2 :StoryboardStep</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "Start: Abu, Karli, and Sabine want to play some replication maumau."</td></tr></table></td></tr></table>>];
+s3 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/storyboards/StoryboardStep.java"> <u>s3 :StoryboardStep</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "<p><a name = 'step_1'>Step 1: Abu starts a replication maumau server. (Actually Theo the tester starts the server and connects to it. The current storyboard is shared and storyTheo is added as a listener to the story. When other participants add story steps, storyTheo get informed and initiates the next actions.)</a></p>"</td></tr></table></td></tr></table>>];
+s4 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/storyboards/StoryboardWall.java"> <u>s4 :StoryboardWall</u></td></tr></table>>];
+
+game42storyboard -- s1 [headlabel = "storyboardSteps" taillabel = "storyboard"];
+game42storyboard -- s2 [headlabel = "storyboardSteps" taillabel = "storyboard"];
+game42storyboard -- s3 [headlabel = "storyboardSteps" taillabel = "storyboard"];
+game42storyboard -- s4 [headlabel = "wall" taillabel = "storyboard"];
+}

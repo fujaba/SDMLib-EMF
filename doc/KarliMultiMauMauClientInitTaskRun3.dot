@@ -1,0 +1,27 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+karliInit [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MultiMauMauClientInitTask.java"> <u>karliInit :MultiMauMauClientInitTask</u></td></tr></table>>];
+taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
+l1 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l1 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "KarliLane"</td></tr></table></td></tr></table>>];
+karliLaneListener [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/PlayerLaneListener.java"> <u>karliLaneListener :PlayerLaneListener</u></td></tr></table>>];
+karliStartGameHandler [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ShowStartGameButton.java"> <u>karliStartGameHandler :ShowStartGameButton</u></td></tr></table>>];
+c2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ClickStartGameButton.java"> <u>c2 :ClickStartGameButton</u></td></tr></table>>];
+c3 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/CardsAreDeltScreenDumpHandler.java"> <u>c3 :CardsAreDeltScreenDumpHandler</u></td></tr></table>>];
+k4 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/KarliDrawCardsHandler.java"> <u>k4 :KarliDrawCardsHandler</u></td></tr></table>>];
+maumau [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MauMau.java"> <u>maumau :MauMau</u></td></tr></table>>];
+karli [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>karli :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Karli"</td></tr></table></td></tr></table>>];
+abuMauMauController [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MultiMauMauControler.java"> <u>abuMauMauController :MultiMauMauControler</u></td></tr></table>>];
+
+taskboard -- l1 [headlabel = "lanes" taillabel = "board"];
+karliLaneListener -- karliStartGameHandler [headlabel = "handlerList" taillabel = ""];
+karliLaneListener -- c2 [headlabel = "handlerList" taillabel = ""];
+karliLaneListener -- c3 [headlabel = "handlerList" taillabel = ""];
+karliLaneListener -- k4 [headlabel = "handlerList" taillabel = ""];
+karliLaneListener -- l1 [headlabel = "sources" taillabel = ""];
+maumau -- karli [headlabel = "players" taillabel = "game"];
+abuMauMauController -- maumau [headlabel = "mauMau" taillabel = ""];
+abuMauMauController -- karli [headlabel = "activePlayer" taillabel = ""];
+}

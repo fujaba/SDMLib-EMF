@@ -1,0 +1,47 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+k4 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/KarliDrawCardsHandler.java"> <u>k4 :KarliDrawCardsHandler</u></td></tr></table>>];
+maumau [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MauMau.java"> <u>maumau :MauMau</u></td></tr></table>>];
+c21 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c21 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Clubs"</td></tr><tr><td align='left'>value = "10"</td></tr></table></td></tr></table>>];
+karli [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>karli :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Karli"</td></tr></table></td></tr></table>>];
+c28 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c28 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Spades"</td></tr><tr><td align='left'>value = "9"</td></tr></table></td></tr></table>>];
+c49 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c49 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Diamonds"</td></tr><tr><td align='left'>value = "Ace"</td></tr></table></td></tr></table>>];
+c40 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c40 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Hearts"</td></tr><tr><td align='left'>value = "King"</td></tr></table></td></tr></table>>];
+c32 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c32 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Spades"</td></tr><tr><td align='left'>value = "King"</td></tr></table></td></tr></table>>];
+p12 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p12 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Sabine"</td></tr></table></td></tr></table>>];
+p6 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p6 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Abu"</td></tr></table></td></tr></table>>];
+d51 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Duty.java"> <u>d51 :Duty</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>kind = "Draw2"</td></tr><tr><td align='left'>number = 2</td></tr></table></td></tr></table>>];
+c41 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c41 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Hearts"</td></tr><tr><td align='left'>value = "Ace"</td></tr></table></td></tr></table>>];
+h16 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Holder.java"> <u>h16 :Holder</u></td></tr></table>>];
+topCardOnDeckControler [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/CardControler.java"> <u>topCardOnDeckControler :CardControler</u></td></tr></table>>];
+l55 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l55 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = " "</td></tr></table></td></tr></table>>];
+c56 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/CardListener.java"> <u>c56 :CardListener</u></td></tr></table>>];
+
+maumau -- c21 [headlabel = "cards" taillabel = "game"];
+maumau -- c28 [headlabel = "cards" taillabel = "game"];
+maumau -- c32 [headlabel = "cards" taillabel = "game"];
+maumau -- c40 [headlabel = "cards" taillabel = "game"];
+maumau -- c41 [headlabel = "cards" taillabel = "game"];
+maumau -- c49 [headlabel = "cards" taillabel = "game"];
+maumau -- h16 [headlabel = "deck" taillabel = "deckOwner"];
+maumau -- p6 [headlabel = "players" taillabel = "game"];
+maumau -- karli [headlabel = "players_currentMove" taillabel = "game_assignment"];
+maumau -- p12 [headlabel = "players" taillabel = "game"];
+maumau -- d51 [headlabel = "duty" taillabel = "game"];
+c21 -- karli [headlabel = "holder" taillabel = "cards"];
+karli -- c28 [headlabel = "cards" taillabel = "holder"];
+karli -- c49 [headlabel = "cards" taillabel = "holder"];
+karli -- c40 [headlabel = "cards" taillabel = "holder"];
+karli -- c32 [headlabel = "cards" taillabel = "holder"];
+karli -- p12 [headlabel = "next" taillabel = "prev"];
+karli -- p6 [headlabel = "prev" taillabel = "next"];
+karli -- d51 [headlabel = "duty" taillabel = "player"];
+p12 -- p6 [headlabel = "next" taillabel = "prev"];
+c41 -- h16 [headlabel = "holder" taillabel = "cards"];
+topCardOnDeckControler -- c41 [headlabel = "card" taillabel = ""];
+topCardOnDeckControler -- l55 [headlabel = "label" taillabel = ""];
+topCardOnDeckControler -- c56 [headlabel = "listener" taillabel = ""];
+}
