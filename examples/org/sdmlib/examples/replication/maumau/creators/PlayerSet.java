@@ -30,6 +30,8 @@ import org.sdmlib.examples.replication.maumau.MauMau;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.examples.replication.maumau.Card;
 import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
+import org.sdmlib.examples.replication.maumau.creators.DutySet;
+import org.sdmlib.examples.replication.maumau.Duty;
 
 public class PlayerSet extends LinkedHashSet<Player> implements org.sdmlib.models.modelsets.ModelSet
 {
@@ -147,7 +149,7 @@ public class PlayerSet extends LinkedHashSet<Player> implements org.sdmlib.model
       
       for (Player obj : this)
       {
-         result.addAll(obj.getStackOwner());
+         result.add(obj.getStackOwner());
       }
       
       return result;
@@ -158,16 +160,6 @@ public class PlayerSet extends LinkedHashSet<Player> implements org.sdmlib.model
       for (Player obj : this)
       {
          obj.withStackOwner(value);
-      }
-      
-      return this;
-   }
-
-   public PlayerSet withoutStackOwner(MauMau value)
-   {
-      for (Player obj : this)
-      {
-         obj.withoutStackOwner(value);
       }
       
       return this;
@@ -256,6 +248,28 @@ public class PlayerSet extends LinkedHashSet<Player> implements org.sdmlib.model
       for (Player obj : this)
       {
          obj.withAssignment(value);
+      }
+      
+      return this;
+   }
+
+   public DutySet getDuty()
+   {
+      DutySet result = new DutySet();
+      
+      for (Player obj : this)
+      {
+         result.add(obj.getDuty());
+      }
+      
+      return result;
+   }
+
+   public PlayerSet withDuty(Duty value)
+   {
+      for (Player obj : this)
+      {
+         obj.withDuty(value);
       }
       
       return this;

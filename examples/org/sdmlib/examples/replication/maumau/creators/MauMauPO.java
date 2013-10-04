@@ -14,6 +14,8 @@ import org.sdmlib.examples.replication.maumau.Holder;
 import org.sdmlib.examples.replication.maumau.creators.PlayerPO;
 import org.sdmlib.examples.replication.maumau.Player;
 import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
+import org.sdmlib.examples.replication.maumau.creators.DutyPO;
+import org.sdmlib.examples.replication.maumau.Duty;
 
 public class MauMauPO extends PatternObject<MauMauPO, MauMau>
 {
@@ -194,6 +196,39 @@ public class MauMauPO extends PatternObject<MauMauPO, MauMau>
       if (this.getPattern().getHasMatch())
       {
          return ((MauMau) this.getCurrentMatch()).getCurrentMove();
+      }
+      return null;
+   }
+
+   public DutyPO hasDuty()
+   {
+      DutyPO result = new DutyPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(MauMau.PROPERTY_DUTY, result);
+      
+      return result;
+   }
+
+   public MauMauPO hasDuty(DutyPO tgt)
+   {
+      LinkConstraint patternLink = (LinkConstraint) new LinkConstraint()
+      .withTgt(tgt).withTgtRoleName(MauMau.PROPERTY_DUTY)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier());
+      
+      this.getPattern().addToElements(patternLink);
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+
+   public Duty getDuty()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((MauMau) this.getCurrentMatch()).getDuty();
       }
       return null;
    }

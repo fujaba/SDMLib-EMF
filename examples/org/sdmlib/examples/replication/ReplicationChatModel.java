@@ -26,7 +26,7 @@ public class ReplicationChatModel
       
       model.generate("examples");
       
-      storyboard.addImage(model.dumpClassDiagram("examples", "ReplicationChatModel01"));
+      storyboard.addSVGImage(model.dumpClassDiagram("examples", "ReplicationChatModel01"));
       
       storyboard.dumpHTML();
    }

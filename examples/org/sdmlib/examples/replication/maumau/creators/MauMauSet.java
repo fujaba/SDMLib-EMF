@@ -30,6 +30,8 @@ import org.sdmlib.examples.replication.maumau.creators.HolderSet;
 import org.sdmlib.examples.replication.maumau.Holder;
 import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
 import org.sdmlib.examples.replication.maumau.Player;
+import org.sdmlib.examples.replication.maumau.creators.DutySet;
+import org.sdmlib.examples.replication.maumau.Duty;
 
 public class MauMauSet extends LinkedHashSet<MauMau> implements org.sdmlib.models.modelsets.ModelSet
 {
@@ -190,6 +192,28 @@ public class MauMauSet extends LinkedHashSet<MauMau> implements org.sdmlib.model
       for (MauMau obj : this)
       {
          obj.withCurrentMove(value);
+      }
+      
+      return this;
+   }
+
+   public DutySet getDuty()
+   {
+      DutySet result = new DutySet();
+      
+      for (MauMau obj : this)
+      {
+         result.add(obj.getDuty());
+      }
+      
+      return result;
+   }
+
+   public MauMauSet withDuty(Duty value)
+   {
+      for (MauMau obj : this)
+      {
+         obj.withDuty(value);
       }
       
       return this;

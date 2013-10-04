@@ -29,6 +29,7 @@ import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import java.util.LinkedHashSet;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.Holder;
+import java.beans.PropertyChangeListener;
 
 public class Player extends Holder implements PropertyChangeInterface
 {
@@ -76,6 +77,11 @@ public class Player extends Holder implements PropertyChangeInterface
       if (PROPERTY_STACKOWNER.equalsIgnoreCase(attrName))
       {
          return getStackOwner();
+      }
+
+      if (PROPERTY_DUTY.equalsIgnoreCase(attrName))
+      {
+         return getDuty();
       }
 
       return null;
@@ -134,15 +140,15 @@ public class Player extends Holder implements PropertyChangeInterface
          return true;
       }
 
-      if (PROPERTY_STACKOWNER.equalsIgnoreCase(attrName))
+      if (PROPERTY_DUTY.equalsIgnoreCase(attrName))
       {
-         addToStackOwner((MauMau) value);
+         setDuty((Duty) value);
          return true;
       }
-      
-      if ((PROPERTY_STACKOWNER + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+
+      if (PROPERTY_STACKOWNER.equalsIgnoreCase(attrName))
       {
-         removeFromStackOwner((MauMau) value);
+         setStackOwner((MauMau) value);
          return true;
       }
 
@@ -170,7 +176,8 @@ public class Player extends Holder implements PropertyChangeInterface
       setAssignment(null);
       setDeckOwner(null);
       removeAllFromCards();
-      removeAllFromStackOwner();
+      setDuty(null);
+      setStackOwner(null);
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -447,6 +454,65 @@ public class Player extends Holder implements PropertyChangeInterface
    {
       MauMau value = new MauMau();
       withAssignment(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       one
+    * Player ----------------------------------- Duty
+    *              player                   duty
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DUTY = "duty";
+   
+   private Duty duty = null;
+   
+   public Duty getDuty()
+   {
+      return this.duty;
+   }
+   
+   public boolean setDuty(Duty value)
+   {
+      boolean changed = false;
+      
+      if (this.duty != value)
+      {
+         Duty oldValue = this.duty;
+         
+         if (this.duty != null)
+         {
+            this.duty = null;
+            oldValue.setPlayer(null);
+         }
+         
+         this.duty = value;
+         
+         if (value != null)
+         {
+            value.withPlayer(this);
+         }
+         
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_DUTY, oldValue, value);
+         changed = true;
+      }
+      
+      return changed;
+   }
+   
+   public Player withDuty(Duty value)
+   {
+      setDuty(value);
+      return this;
+   } 
+   
+   public Duty createDuty()
+   {
+      Duty value = new Duty();
+      withDuty(value);
       return value;
    } 
 }

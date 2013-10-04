@@ -22,15 +22,20 @@
 package org.sdmlib.examples.replication.maumau;
 
 import org.sdmlib.utils.PropertyChangeInterface;
+
 import java.beans.PropertyChangeSupport;
+
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
+
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
 import org.sdmlib.examples.replication.maumau.creators.HolderSet;
 import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
+
+import java.beans.PropertyChangeListener;
 
 public class MauMau implements PropertyChangeInterface
 {
@@ -63,6 +68,11 @@ public class MauMau implements PropertyChangeInterface
       if (PROPERTY_STACK.equalsIgnoreCase(attrName))
       {
          return getStack();
+      }
+
+      if (PROPERTY_DUTY.equalsIgnoreCase(attrName))
+      {
+         return getDuty();
       }
 
       return null;
@@ -115,6 +125,12 @@ public class MauMau implements PropertyChangeInterface
          return true;
       }
 
+      if (PROPERTY_DUTY.equalsIgnoreCase(attrName))
+      {
+         setDuty((Duty) value);
+         return true;
+      }
+
       return false;
    }
 
@@ -138,6 +154,7 @@ public class MauMau implements PropertyChangeInterface
       setCurrentMove(null);
       setDeck(null);
       setStack(null);
+      setDuty(null);
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -449,9 +466,31 @@ public class MauMau implements PropertyChangeInterface
    public static final MauMauSet EMPTY_SET = new MauMauSet();
 
    
+   public void shuffleStackToDeck()
+   {
+      // put top card from stack aside. 
+      Card lastCard = getStack().getCards().getLast();
+      
+      lastCard.setHolder(null);
+      
+      CardSet shuffle = new CardSet();
+      
+      shuffle.addAll(getStack().getCards());
+      
+      Collections.shuffle(shuffle);
+      
+      for (Card c : shuffle)
+      {
+         getDeck().addToCards(c);
+      }
+      
+      getStack().addToCards(lastCard);
+   } 
+
+   
    /********************************************************************
     * <pre>
-    *              many                       one
+    *              one                       one
     * MauMau ----------------------------------- Holder
     *              stackOwner                   stack
     * </pre>
@@ -477,7 +516,7 @@ public class MauMau implements PropertyChangeInterface
          if (this.stack != null)
          {
             this.stack = null;
-            oldValue.withoutStackOwner(this);
+            oldValue.setStackOwner(null);
          }
          
          this.stack = value;
@@ -508,25 +547,74 @@ public class MauMau implements PropertyChangeInterface
    }
 
 
-   public void shuffleStackToDeck()
+   public void checkDuties()
    {
-      // put top card from stack aside. 
-      Card lastCard = getStack().getCards().getLast();
+      // new card on stack, if 7 then draw 2
+      Card lastCard = this.getStack().getCards().getLast();
       
-      lastCard.setHolder(null);
-      
-      CardSet shuffle = new CardSet();
-      
-      shuffle.addAll(getStack().getCards());
-      
-      Collections.shuffle(shuffle);
-      
-      for (Card c : shuffle)
+      if (lastCard.getValue() == Value._7)
       {
-         getDeck().addToCards(c);
+         new Duty().withKind(MultiMauMau.DRAW2).withNumber(2).withPlayer(getCurrentMove()).withGame(this);
+      }
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       one
+    * MauMau ----------------------------------- Duty
+    *              game                   duty
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DUTY = "duty";
+   
+   private Duty duty = null;
+   
+   public Duty getDuty()
+   {
+      return this.duty;
+   }
+   
+   public boolean setDuty(Duty value)
+   {
+      boolean changed = false;
+      
+      if (this.duty != value)
+      {
+         Duty oldValue = this.duty;
+         
+         if (this.duty != null)
+         {
+            this.duty = null;
+            oldValue.setGame(null);
+         }
+         
+         this.duty = value;
+         
+         if (value != null)
+         {
+            value.withGame(this);
+         }
+         
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_DUTY, oldValue, value);
+         changed = true;
       }
       
-      getStack().addToCards(lastCard);
+      return changed;
+   }
+   
+   public MauMau withDuty(Duty value)
+   {
+      setDuty(value);
+      return this;
+   } 
+   
+   public Duty createDuty()
+   {
+      Duty value = new Duty();
+      withDuty(value);
+      return value;
    } 
 }
 

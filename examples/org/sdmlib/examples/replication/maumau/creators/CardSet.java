@@ -166,5 +166,14 @@ public class CardSet extends LinkedList<Card> implements org.sdmlib.models.model
       return this;
    }
 
+   public CardSet union(CardSet cards)
+   {
+      CardSet result = new CardSet();
+      result.addAll(this);
+      result.addAll(cards);
+      
+      return result;
+   }
+
 }
 

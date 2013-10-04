@@ -14,6 +14,7 @@ public class MauMauCreator extends EntityFactory
       MauMau.PROPERTY_STACK,
       MauMau.PROPERTY_PLAYERS,
       MauMau.PROPERTY_CURRENTMOVE,
+      MauMau.PROPERTY_DUTY,
    };
    
    public String[] getProperties()
@@ -33,7 +34,7 @@ public class MauMauCreator extends EntityFactory
    
    public boolean setValue(Object target, String attrName, Object value, String type)
    {
-      if (JsonIdMap.REMOVE.equals(type))
+      if (JsonIdMap.REMOVE.equals(type) && value != null)
       {
          attrName = attrName + type;
       }

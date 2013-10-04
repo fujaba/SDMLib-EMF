@@ -28,6 +28,7 @@ import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import java.util.LinkedHashSet;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
+import java.beans.PropertyChangeListener;
 
 public class Holder implements PropertyChangeInterface
 {
@@ -80,16 +81,10 @@ public class Holder implements PropertyChangeInterface
 
       if (PROPERTY_STACKOWNER.equalsIgnoreCase(attrName))
       {
-         addToStackOwner((MauMau) value);
+         setStackOwner((MauMau) value);
          return true;
       }
       
-      if ((PROPERTY_STACKOWNER + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromStackOwner((MauMau) value);
-         return true;
-      }
-
       return false;
    }
 
@@ -110,7 +105,7 @@ public class Holder implements PropertyChangeInterface
    {
       setDeckOwner(null);
       removeAllFromCards();
-      removeAllFromStackOwner();
+      setStackOwner(null);
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -270,9 +265,11 @@ public class Holder implements PropertyChangeInterface
    } 
 
    
+
+   
    /********************************************************************
     * <pre>
-    *              one                       many
+    *              one                       one
     * Holder ----------------------------------- MauMau
     *              stack                   stackOwner
     * </pre>
@@ -280,80 +277,46 @@ public class Holder implements PropertyChangeInterface
    
    public static final String PROPERTY_STACKOWNER = "stackOwner";
    
-   private MauMauSet stackOwner = null;
+   private MauMau stackOwner = null;
    
-   public MauMauSet getStackOwner()
+   public MauMau getStackOwner()
    {
-      if (this.stackOwner == null)
-      {
-         return MauMau.EMPTY_SET;
-      }
-   
       return this.stackOwner;
    }
    
-   public boolean addToStackOwner(MauMau value)
+   public boolean setStackOwner(MauMau value)
    {
       boolean changed = false;
       
-      if (value != null)
+      if (this.stackOwner != value)
       {
-         if (this.stackOwner == null)
+         MauMau oldValue = this.stackOwner;
+         
+         if (this.stackOwner != null)
          {
-            this.stackOwner = new MauMauSet();
+            this.stackOwner = null;
+            oldValue.setStack(null);
          }
          
-         changed = this.stackOwner.add (value);
+         this.stackOwner = value;
          
-         if (changed)
+         if (value != null)
          {
             value.withStack(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STACKOWNER, null, value);
          }
-      }
          
-      return changed;   
-   }
-   
-   public boolean removeFromStackOwner(MauMau value)
-   {
-      boolean changed = false;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_STACKOWNER, oldValue, value);
+         changed = true;
+      }
       
-      if ((this.stackOwner != null) && (value != null))
-      {
-         changed = this.stackOwner.remove (value);
-         
-         if (changed)
-         {
-            value.setStack(null);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STACKOWNER, value, null);
-         }
-      }
-         
-      return changed;   
+      return changed;
    }
    
    public Holder withStackOwner(MauMau value)
    {
-      addToStackOwner(value);
+      setStackOwner(value);
       return this;
    } 
-   
-   public Holder withoutStackOwner(MauMau value)
-   {
-      removeFromStackOwner(value);
-      return this;
-   } 
-   
-   public void removeAllFromStackOwner()
-   {
-      LinkedHashSet<MauMau> tmpSet = new LinkedHashSet<MauMau>(this.getStackOwner());
-   
-      for (MauMau value : tmpSet)
-      {
-         this.removeFromStackOwner(value);
-      }
-   }
    
    public MauMau createStackOwner()
    {

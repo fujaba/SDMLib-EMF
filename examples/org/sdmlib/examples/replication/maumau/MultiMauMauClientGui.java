@@ -20,6 +20,8 @@ public class MultiMauMauClientGui
 
          Display.getDefault().asyncExec(new MultiMauMauClientInitTask(gui, args));
 
+         System.out.println("Starting maumau client for " + args[0]);
+
          gui.open();
       }
       catch (Exception e)

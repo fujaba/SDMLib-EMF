@@ -18,6 +18,7 @@ public class PlayerCreator extends EntityFactory
       Player.PROPERTY_NEXT,
       Player.PROPERTY_PREV,
       Player.PROPERTY_ASSIGNMENT,
+      Player.PROPERTY_DUTY,
    };
    
    public String[] getProperties()
@@ -37,7 +38,7 @@ public class PlayerCreator extends EntityFactory
    
    public boolean setValue(Object target, String attrName, Object value, String type)
    {
-      if (JsonIdMap.REMOVE.equals(type))
+      if (JsonIdMap.REMOVE.equals(type) && value != null)
       {
          attrName = attrName + type;
       }

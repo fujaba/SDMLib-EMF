@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Label;
 public class CardListener implements MouseListener, MouseMoveListener
 {
 
-   private MauMauControler mauMauControler;
+   private MultiMauMauControler mauMauControler;
    private Card card;
    private Label label;
 
@@ -18,11 +18,11 @@ public class CardListener implements MouseListener, MouseMoveListener
    private int deltaY = 0;
    private MauMauClientGui gui;
   
-   public CardListener(Card newCard, MauMauControler mauMauControler, Label label)
+   public CardListener(Card newCard, MultiMauMauControler mauMauControler2, Label label)
    {
       this.card = newCard;
-      this.mauMauControler = mauMauControler;
-      this.gui = mauMauControler.getGui();
+      this.mauMauControler = mauMauControler2;
+      this.gui = mauMauControler2.getGui();
       this.label = label;
    }
 
@@ -49,8 +49,8 @@ public class CardListener implements MouseListener, MouseMoveListener
       // drop zone reached?
       Rectangle cardBounds = label.getBounds();
       
-      boolean inX = cardBounds.x <= gui.STACK_X + gui.CARD_WIDTH && cardBounds.x + gui.CARD_WIDTH >= gui.STACK_X;
-      boolean inY = cardBounds.y <= gui.STACK_Y + gui.CARD_HEIGHT && cardBounds.y + gui.CARD_HEIGHT >= gui.STACK_Y;
+      boolean inX = cardBounds.x <= MauMauClientGui.STACK_X + card.getHolder().getCards().size() * 10 - 8 + gui.CARD_WIDTH && cardBounds.x + gui.CARD_WIDTH >= gui.STACK_X;
+      boolean inY = cardBounds.y <= gui.STACK_Y + gui.CARD_HEIGHT && cardBounds.y + gui.CARD_HEIGHT >= gui.STACK_Y - card.getHolder().getCards().size() * 2;
 
       if (inX && inY)
       {
@@ -64,7 +64,7 @@ public class CardListener implements MouseListener, MouseMoveListener
             
             if (playerLabel != null)
             {
-               label.setLocation(label.getLocation().x, playerLabel.getLocation().y - 40);
+               label.setLocation(label.getLocation().x + 80, playerLabel.getLocation().y - 40);
             }
          }
          
@@ -72,27 +72,11 @@ public class CardListener implements MouseListener, MouseMoveListener
       }
 
       if (card.getHolder() == card.getGame().getDeck() // card from deck
-            && (cardBounds.y <= 200  || cardBounds.y >= 400))
+            && cardBounds.y >= 400)
       {
          boolean flag; 
          
-         Player targetPlayer = null;
-         
-         for (Player p : mauMauControler.getPlayerLabels().keySet())
-         {
-            int playerPos = mauMauControler.getPlayerLabels().get(p).getLocation().y;
-            
-            if (cardBounds.y <= 200 && playerPos <= 200)
-            {
-               targetPlayer = p;
-               break;
-            }
-            else if (cardBounds.y >= 400 && playerPos >= 400)
-            {
-               targetPlayer = p;
-               break;
-            }
-         }
+         Player targetPlayer = mauMauControler.getActivePlayer();
          
          flag = card.draw(targetPlayer);
          

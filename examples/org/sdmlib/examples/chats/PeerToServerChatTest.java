@@ -101,7 +101,7 @@ public class PeerToServerChatTest
       
       killSubProcesses();
       
-      storyboard.addImage("CSChatMessageFlow.svg");
+      storyboard.addSVGImage("CSChatMessageFlow.svg");
       
       storyboard.dumpHTML();
       

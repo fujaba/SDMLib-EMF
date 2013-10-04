@@ -2,10 +2,13 @@ package org.sdmlib.examples.replication.maumau;
 
 import static org.sdmlib.models.classes.Role.R.*;
 
+import org.eclipse.swt.widgets.Label;
 import org.junit.Test;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
+import org.sdmlib.replication.creators.LaneSet;
+import org.sdmlib.replication.creators.TaskHandlerSet;
 import org.sdmlib.storyboards.Storyboard;
 
 public class MauMauModel
@@ -16,6 +19,7 @@ public class MauMauModel
    @Test
    public void testMauMauModel()
    {
+      // file:///C:/Users/zuendorf/eclipseworkspaces/indigo/SDMLibEMF/doc/MauMauModel.html
       Storyboard storyboard = new Storyboard("examples");
 
       ClassModel model = new ClassModel("org.sdmlib.examples.replication.maumau");
@@ -31,7 +35,7 @@ public class MauMauModel
       Clazz holderClass = mauMauClass.createClassAndAssoc("Holder", "deck", R.ONE, "deckOwner", R.ONE)
             .withAssoc(cardClass, "cards", R.MANY, "holder", R.ONE);
       
-      mauMauClass.withAssoc(holderClass, "stack", R.ONE, "stackOwner", R.MANY);
+      mauMauClass.withAssoc(holderClass, "stack", R.ONE, "stackOwner", R.ONE);
 
       Clazz playerClass = mauMauClass.createClassAndAssoc("Player", "players", MANY, "game", ONE)
             .withSuperClass(holderClass)
@@ -41,8 +45,35 @@ public class MauMauModel
 
       mauMauClass.withAssoc(playerClass, "currentMove", R.ONE, "assignment", R.ONE);
       
+      Clazz dutyClass = model.createClazz("Duty", "kind", STRING, "number", INT);
+      
+      playerClass.withAssoc(dutyClass, "duty", ONE, "player", ONE);
+      mauMauClass.withAssoc(dutyClass, "duty", R.ONE, "game", R.ONE);
 
-      storyboard.addImage(model.dumpClassDiagram("src", "MauMauClassDiag"));
+      
+      // add some listeners to the model
+      model.createClazz(ReplicationMauMauServer.class.getName());
+     
+      model.createClazz(ServerLaneListener.class.getName(), "source", Object.class.getName());
+      
+      Clazz multiMauMauControler = model.createClazz(MultiMauMauControler.class.getName(), 
+         "mauMau", mauMauClass.getName(), 
+         "activePlayer", playerClass.getName());
+      
+      Clazz cardControler = multiMauMauControler.createClassAndAssoc(CardControler.class.getName(), "cardControlers", R.MANY, "mauMauControler", R.ONE)
+            .withAttributes(
+               "card", Card.class.getName(),
+               "label", Label.class.getName(),
+               "listener", CardListener.class.getName()
+                  );
+      
+      model.createClazz(PlayerLaneListener.class.getName(), 
+         "handlerList", TaskHandlerSet.class.getName(),
+         "sources", LaneSet.class.getName());
+      
+      model.createClazz(Label.class.getName(), "text", R.STRING).withWrapped(true);
+      
+      storyboard.addClassDiagram(model);
 
       model.generate("examples");
 

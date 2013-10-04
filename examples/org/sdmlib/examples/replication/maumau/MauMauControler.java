@@ -33,7 +33,7 @@ public class MauMauControler implements PropertyChangeListener
    private LinkedHashMap<Label, Card> labelToCards = new LinkedHashMap<Label, Card>();
    private SharedSpace sharedSpace;
 
-   public MauMauClientGui getGui()
+   public MauMauClientGui getGui() 
    {
       return gui;
    }
@@ -164,9 +164,9 @@ public class MauMauControler implements PropertyChangeListener
          // new Card, add CardController to it
          Card newCard = (Card) evt.getNewValue();
 
-         CardControler listener = new CardControler(this, newCard);
-         newCard.getPropertyChangeSupport().addPropertyChangeListener(listener);
-         listener.propertyChange(null);
+//         CardControler listener = new CardControler(this, newCard);
+//         newCard.getPropertyChangeSupport().addPropertyChangeListener(listener);
+//         listener.propertyChange(null);
       }
 
 

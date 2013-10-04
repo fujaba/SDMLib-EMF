@@ -24,6 +24,7 @@ package org.sdmlib.examples.replication.maumau;
 import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
+import java.beans.PropertyChangeListener;
 
 public class Card implements PropertyChangeInterface
 {
@@ -35,12 +36,12 @@ public class Card implements PropertyChangeInterface
    {
       if (PROPERTY_SUIT.equalsIgnoreCase(attrName))
       {
-         return getSuit();
+         return getSuit() == null ? null : getSuit().toString();
       }
 
       if (PROPERTY_VALUE.equalsIgnoreCase(attrName))
       {
-         return getValue();
+         return getValue() == null ? null : getValue().toString();
       }
 
       if (PROPERTY_GAME.equalsIgnoreCase(attrName))
@@ -251,14 +252,16 @@ public class Card implements PropertyChangeInterface
       {
          player = (Player) this.getHolder();
 
-         if (player.getAssignment() != null)
+         if (player.getAssignment() != null && this.getGame().getDuty() == null)
          {
             if (this.getValue() == Value.Jack || lastCard.getSuit() == this.getSuit() 
                   || lastCard.getValue() == this.getValue())
             {
-               this.getGame().setCurrentMove(player.getNext());
-
                this.getGame().getStack().addToCards(this);
+
+               this.getGame().setCurrentMove(player.getNext());
+               
+               this.getGame().checkDuties();
 
                return true;
             }
@@ -280,7 +283,21 @@ public class Card implements PropertyChangeInterface
       {
          this.setHolder(targetPlayer);
          
-         this.getGame().setCurrentMove(targetPlayer.getNext());
+         Duty duty = this.getGame().getDuty();
+         if (duty != null && duty.getKind().equals(MultiMauMau.DRAW2) && duty.getNumber() > 0)
+         {
+            duty.setNumber(duty.getNumber() - 1);
+            
+            if (duty.getNumber() == 0)
+            {
+               duty.getGame().setDuty(null);
+               duty.removeYou();
+            }
+         }
+         else
+         {
+            this.getGame().setCurrentMove(targetPlayer.getNext());
+         }
          
          return true;
       }

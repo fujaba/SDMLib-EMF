@@ -11,7 +11,6 @@ import org.sdmlib.examples.replication.maumau.MauMau;
 import org.sdmlib.examples.replication.maumau.creators.CardPO;
 import org.sdmlib.examples.replication.maumau.Card;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
 
 public class HolderPO extends PatternObject<HolderPO, Holder>
 {
@@ -121,7 +120,7 @@ public class HolderPO extends PatternObject<HolderPO, Holder>
       return this;
    }
 
-   public MauMauSet getStackOwner()
+   public MauMau getStackOwner()
    {
       if (this.getPattern().getHasMatch())
       {

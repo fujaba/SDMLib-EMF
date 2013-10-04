@@ -135,7 +135,7 @@ public class PeerToPeerChatModel
       
       model.generate("examples");
 
-      storyboard.addImage(model.dumpClassDiagram("examples", "PeerToPeerChatModel"));
+      storyboard.addSVGImage(model.dumpClassDiagram("examples", "PeerToPeerChatModel"));
 
       storyboard.dumpHTML();
    }

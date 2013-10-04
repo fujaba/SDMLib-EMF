@@ -123,7 +123,7 @@ public class HolderSet extends LinkedHashSet<Holder> implements org.sdmlib.model
       
       for (Holder obj : this)
       {
-         result.addAll(obj.getStackOwner());
+         result.add(obj.getStackOwner());
       }
       
       return result;
@@ -134,16 +134,6 @@ public class HolderSet extends LinkedHashSet<Holder> implements org.sdmlib.model
       for (Holder obj : this)
       {
          obj.withStackOwner(value);
-      }
-      
-      return this;
-   }
-
-   public HolderSet withoutStackOwner(MauMau value)
-   {
-      for (Holder obj : this)
-      {
-         obj.withoutStackOwner(value);
       }
       
       return this;
