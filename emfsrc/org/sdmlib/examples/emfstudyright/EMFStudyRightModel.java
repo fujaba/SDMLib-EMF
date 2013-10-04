@@ -54,7 +54,7 @@ public class EMFStudyRightModel
             .withAttributes("studId", R.STRING)
             .withSuperClass(persClazz);
       
-      storyboard.addImage(model.dumpClassDiagram("examples", "EMFStudyRightClassDiag"));
+      storyboard.addSVGImage(model.dumpClassDiagram("examples", "EMFStudyRightClassDiag"));
       
       EMFTool emfTool = new EMFTool();
       
@@ -166,7 +166,7 @@ public class EMFStudyRightModel
       
       ClassModel model = emfTool.genModelToClassModel("./EMFStudyRight.genmodel");
       
-      storyboard.addImage(model.dumpClassDiagram("StudyRighLoadedFromECore"));
+      storyboard.addSVGImage(model.dumpClassDiagram("StudyRighLoadedFromECore"));
       
       storyboard.dumpHTML();
       
