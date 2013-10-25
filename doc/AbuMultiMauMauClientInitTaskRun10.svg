@@ -27,18 +27,18 @@
 <text text-anchor="start" x="241.5" y="-193" font-family="Times New Roman,serif" font-size="10.00">taskboard :TaskFlowBoard</text>
 </a>
 </g>
-<!-- l5 -->
-<g id="node3" class="node"><title>l5</title>
+<!-- l3 -->
+<g id="node3" class="node"><title>l3</title>
 <a xlink:href="../../SDMLib/src/org/sdmlib/replication/Lane.java" xlink:title="&lt;TABLE&gt;">
 <polygon fill="none" stroke="black" points="197,-106 197,-123 273,-123 273,-106 197,-106"/>
 <text text-anchor="start" x="218" y="-112.5" font-family="Times New Roman,serif" font-size="10.00"> </text>
-<text text-anchor="start" x="221" y="-112.5" font-family="Times New Roman,serif" font-size="10.00">l5 :Lane</text>
+<text text-anchor="start" x="221" y="-112.5" font-family="Times New Roman,serif" font-size="10.00">l3 :Lane</text>
 </a>
 <polygon fill="none" stroke="black" points="197,-86 197,-106 273,-106 273,-86 197,-86"/>
 <text text-anchor="start" x="202" y="-94" font-family="Times New Roman,serif" font-size="10.00">name = &quot;server&quot;</text>
 </g>
-<!-- taskboard&#45;&#45;l5 -->
-<g id="edge2" class="edge"><title>taskboard&#45;&#45;l5</title>
+<!-- taskboard&#45;&#45;l3 -->
+<g id="edge2" class="edge"><title>taskboard&#45;&#45;l3</title>
 <path fill="none" stroke="black" d="M279.718,-183.309C269.896,-166.328 256.975,-143.99 247.548,-127.694"/>
 <text text-anchor="middle" x="255.745" y="-130.923" font-family="Times New Roman,serif" font-size="10.00">lanes</text>
 <text text-anchor="middle" x="271.522" y="-175.08" font-family="Times New Roman,serif" font-size="10.00">board</text>
@@ -59,43 +59,43 @@
 <text text-anchor="middle" x="338.858" y="-135.161" font-family="Times New Roman,serif" font-size="10.00">lanes</text>
 <text text-anchor="middle" x="308.846" y="-170.841" font-family="Times New Roman,serif" font-size="10.00">board</text>
 </g>
-<!-- b8 -->
-<g id="node5" class="node"><title>b8</title>
+<!-- b6 -->
+<g id="node5" class="node"><title>b6</title>
 <a xlink:href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java" xlink:title="&lt;TABLE&gt;">
 <polygon fill="none" stroke="black" points="318,-24 318,-41 386,-41 386,-24 318,-24"/>
 <text text-anchor="start" x="321.5" y="-30.5" font-family="Times New Roman,serif" font-size="10.00"> </text>
-<text text-anchor="start" x="324.5" y="-30.5" font-family="Times New Roman,serif" font-size="10.00">b8 :BoardTask</text>
+<text text-anchor="start" x="324.5" y="-30.5" font-family="Times New Roman,serif" font-size="10.00">b6 :BoardTask</text>
 </a>
 <polygon fill="none" stroke="black" points="318,-4 318,-24 386,-24 386,-4 318,-4"/>
 <text text-anchor="start" x="323" y="-12" font-family="Times New Roman,serif" font-size="10.00">name = &quot;init&quot;</text>
 </g>
-<!-- l1&#45;&#45;b8 -->
-<g id="edge6" class="edge"><title>l1&#45;&#45;b8</title>
+<!-- l1&#45;&#45;b6 -->
+<g id="edge6" class="edge"><title>l1&#45;&#45;b6</title>
 <path fill="none" stroke="black" d="M352,-82.1396C352,-70.759 352,-56.8929 352,-45.5569"/>
 <text text-anchor="middle" x="356.226" y="-52.12" font-family="Times New Roman,serif" font-size="10.00">tasks</text>
 <text text-anchor="middle" x="347.774" y="-70.5766" font-family="Times New Roman,serif" font-size="10.00">lane</text>
 </g>
-<!-- l6 -->
-<g id="node6" class="node"><title>l6</title>
+<!-- l4 -->
+<g id="node6" class="node"><title>l4</title>
 <a xlink:href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java" xlink:title="&lt;TABLE&gt;">
 <polygon fill="none" stroke="black" points="431,-106 431,-123 654,-123 654,-106 431,-106"/>
 <text text-anchor="start" x="524" y="-112.5" font-family="Times New Roman,serif" font-size="10.00"> </text>
-<text text-anchor="start" x="527" y="-112.5" font-family="Times New Roman,serif" font-size="10.00">l6 :Label</text>
+<text text-anchor="start" x="527" y="-112.5" font-family="Times New Roman,serif" font-size="10.00">l4 :Label</text>
 </a>
 <polygon fill="none" stroke="black" points="431,-86 431,-106 654,-106 654,-86 431,-86"/>
 <text text-anchor="start" x="436" y="-94" font-family="Times New Roman,serif" font-size="10.00">text = &quot;When all players have shown up, Start Game&quot;</text>
 </g>
-<!-- s7 -->
-<g id="node7" class="node"><title>s7</title>
+<!-- s5 -->
+<g id="node7" class="node"><title>s5</title>
 <image xlink:href="icons/person1.png" width="32px" height="43px" preserveAspectRatio="xMinYMin meet" x="526" y="-238"/>
 <a xlink:href="../examples/org/sdmlib/examples/replication/maumau/ShowStartGameButton.java" xlink:title="&lt;TABLE&gt;">
 <polygon fill="none" stroke="black" points="448,-177 448,-193 636,-193 636,-177 448,-177"/>
 <text text-anchor="start" x="451.5" y="-183" font-family="Times New Roman,serif" font-size="10.00"> </text>
-<text text-anchor="start" x="454.5" y="-183" font-family="Times New Roman,serif" font-size="10.00">s7 :ShowStartGameButton$StartGameAction</text>
+<text text-anchor="start" x="454.5" y="-183" font-family="Times New Roman,serif" font-size="10.00">s5 :ShowStartGameButton$StartGameAction</text>
 </a>
 </g>
-<!-- s7&#45;&#45;l6 -->
-<g id="edge8" class="edge"><title>s7&#45;&#45;l6</title>
+<!-- s5&#45;&#45;l4 -->
+<g id="edge8" class="edge"><title>s5&#45;&#45;l4</title>
 <path fill="none" stroke="black" d="M542,-173.467C542,-158.325 542,-141.013 542,-127.717"/>
 <text text-anchor="middle" x="546.226" y="-134.28" font-family="Times New Roman,serif" font-size="10.00">startGameLabel</text>
 </g>

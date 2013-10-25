@@ -44,9 +44,7 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
       this.gui = gui;
 
       handlerList.add(new ShowStartGameButton().withGui(gui));
-      handlerList.add(new ClickStartGameButton().withGui(gui));
-      handlerList.add(new CardsAreDeltScreenDumpHandler().withGui(gui));
-      handlerList.add(new KarliDrawCardsHandler().withGui(gui));
+      handlerList.add(new StoryTheo().withGui(gui));
 
       sources.add(playerLane);
 

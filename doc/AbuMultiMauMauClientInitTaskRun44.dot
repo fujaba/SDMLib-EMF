@@ -3,7 +3,7 @@ graph ObjectDiagram {
    edge [fontsize = 10];
    compound=true;
 
-c3 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/CardsAreDeltScreenDumpHandler.java"> <u>c3 :CardsAreDeltScreenDumpHandler</u></td></tr></table>>];
+s2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/StoryTheo.java"> <u>s2 :StoryTheo</u></td></tr></table>>];
 maumau [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MauMau.java"> <u>maumau :MauMau</u></td></tr></table>>];
 c25 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Card.java"> <u>c25 :Card</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>suit = "Spades"</td></tr><tr><td align='left'>value = "8"</td></tr></table></td></tr></table>>];
 abu [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>abu :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Abu"</td></tr></table></td></tr></table>>];

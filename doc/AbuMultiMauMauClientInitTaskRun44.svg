@@ -9,13 +9,13 @@
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 538)">
 <title>ObjectDiagram</title>
 <polygon fill="white" stroke="white" points="-4,5 -4,-538 2166,-538 2166,5 -4,5"/>
-<!-- c3 -->
-<g id="node1" class="node"><title>c3</title>
-<image xlink:href="icons/worker.png" width="80px" height="61px" preserveAspectRatio="xMinYMin meet" x="706.5" y="-527"/>
-<a xlink:href="../examples/org/sdmlib/examples/replication/maumau/CardsAreDeltScreenDumpHandler.java" xlink:title="&lt;TABLE&gt;">
-<polygon fill="none" stroke="black" points="666,-448 666,-464 827,-464 827,-448 666,-448"/>
-<text text-anchor="start" x="669.5" y="-454" font-family="Times New Roman,serif" font-size="10.00"> </text>
-<text text-anchor="start" x="672.5" y="-454" font-family="Times New Roman,serif" font-size="10.00">c3 :CardsAreDeltScreenDumpHandler</text>
+<!-- s2 -->
+<g id="node1" class="node"><title>s2</title>
+<image xlink:href="icons/worker.png" width="63px" height="61px" preserveAspectRatio="xMinYMin meet" x="762" y="-527"/>
+<a xlink:href="../examples/org/sdmlib/examples/replication/maumau/StoryTheo.java" xlink:title="&lt;TABLE&gt;">
+<polygon fill="none" stroke="black" points="760,-448 760,-464 827,-464 827,-448 760,-448"/>
+<text text-anchor="start" x="763.5" y="-454" font-family="Times New Roman,serif" font-size="10.00"> </text>
+<text text-anchor="start" x="766.5" y="-454" font-family="Times New Roman,serif" font-size="10.00">s2 :StoryTheo</text>
 </a>
 </g>
 <!-- maumau -->
@@ -73,9 +73,9 @@
 </g>
 <!-- maumau&#45;&#45;c46 -->
 <g id="edge12" class="edge"><title>maumau&#45;&#45;c46</title>
-<path fill="none" stroke="black" d="M1053.82,-356.345C1044.52,-345.346 1033.56,-332.151 1024,-320 1015.8,-309.573 960.155,-235.172 953,-224 935.685,-196.966 918.279,-164.664 906.518,-141.896"/>
-<text text-anchor="middle" x="914.448" y="-145.488" font-family="Times New Roman,serif" font-size="10.00">cards</text>
-<text text-anchor="middle" x="1044.74" y="-349.644" font-family="Times New Roman,serif" font-size="10.00">game</text>
+<path fill="none" stroke="black" d="M1053.86,-356.315C1044.56,-345.31 1033.6,-332.119 1024,-320 1023.74,-319.673 952.225,-224.351 952,-224 934.754,-197.066 917.664,-164.75 906.161,-141.951"/>
+<text text-anchor="middle" x="914.034" y="-145.617" font-family="Times New Roman,serif" font-size="10.00">cards</text>
+<text text-anchor="middle" x="1044.78" y="-349.609" font-family="Times New Roman,serif" font-size="10.00">game</text>
 </g>
 <!-- c31 -->
 <g id="node6" class="node"><title>c31</title>

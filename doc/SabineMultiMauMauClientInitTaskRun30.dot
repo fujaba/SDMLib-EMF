@@ -5,29 +5,29 @@ graph ObjectDiagram {
 
 sabineStartGameHandler [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ShowStartGameButton.java"> <u>sabineStartGameHandler :ShowStartGameButton</u></td></tr></table>>];
 taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
-l5 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l5 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "server"</td></tr></table></td></tr></table>>];
-l7 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l7 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "AbuLane"</td></tr></table></td></tr></table>>];
-b8 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b8 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
-l10 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l10 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "KarliLane"</td></tr></table></td></tr></table>>];
-b11 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b11 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
+l3 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l3 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "server"</td></tr></table></td></tr></table>>];
+l5 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l5 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "AbuLane"</td></tr></table></td></tr></table>>];
+b6 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b6 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
+l8 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l8 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "KarliLane"</td></tr></table></td></tr></table>>];
+b9 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b9 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
 l1 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l1 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "SabineLane"</td></tr></table></td></tr></table>>];
-b14 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b14 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
-l12 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l12 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "When all players have shown up, Start Game"</td></tr></table></td></tr></table>>];
-s13 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ShowStartGameButton.java"> <u>s13 :ShowStartGameButton$StartGameAction</u></td></tr></table>>];
+b12 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b12 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "init"</td></tr></table></td></tr></table>>];
+l10 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l10 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "When all players have shown up, Start Game"</td></tr></table></td></tr></table>>];
+s11 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/person1.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ShowStartGameButton.java"> <u>s11 :ShowStartGameButton$StartGameAction</u></td></tr></table>>];
 maumau [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/MauMau.java"> <u>maumau :MauMau</u></td></tr></table>>];
-p6 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p6 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Abu"</td></tr></table></td></tr></table>>];
-p9 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p9 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Karli"</td></tr></table></td></tr></table>>];
+p4 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p4 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Abu"</td></tr></table></td></tr></table>>];
+p7 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>p7 :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Karli"</td></tr></table></td></tr></table>>];
 sabine [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../examples/org/sdmlib/examples/replication/maumau/Player.java"> <u>sabine :Player</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Sabine"</td></tr></table></td></tr></table>>];
 
+taskboard -- l3 [headlabel = "lanes" taillabel = "board"];
 taskboard -- l5 [headlabel = "lanes" taillabel = "board"];
-taskboard -- l7 [headlabel = "lanes" taillabel = "board"];
-taskboard -- l10 [headlabel = "lanes" taillabel = "board"];
+taskboard -- l8 [headlabel = "lanes" taillabel = "board"];
 taskboard -- l1 [headlabel = "lanes" taillabel = "board"];
-l7 -- b8 [headlabel = "tasks" taillabel = "lane"];
-l10 -- b11 [headlabel = "tasks" taillabel = "lane"];
-l1 -- b14 [headlabel = "tasks" taillabel = "lane"];
-s13 -- l12 [headlabel = "startGameLabel" taillabel = ""];
-maumau -- p6 [headlabel = "players" taillabel = "game"];
-maumau -- p9 [headlabel = "players" taillabel = "game"];
+l5 -- b6 [headlabel = "tasks" taillabel = "lane"];
+l8 -- b9 [headlabel = "tasks" taillabel = "lane"];
+l1 -- b12 [headlabel = "tasks" taillabel = "lane"];
+s11 -- l10 [headlabel = "startGameLabel" taillabel = ""];
+maumau -- p4 [headlabel = "players" taillabel = "game"];
+maumau -- p7 [headlabel = "players" taillabel = "game"];
 maumau -- sabine [headlabel = "players" taillabel = "game"];
 }
