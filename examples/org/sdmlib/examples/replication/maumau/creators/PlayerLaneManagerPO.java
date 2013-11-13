@@ -2,17 +2,17 @@ package org.sdmlib.examples.replication.maumau.creators;
 
 import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.PlayerLaneListenerSet;
+import org.sdmlib.examples.replication.maumau.creators.PlayerLaneManagerSet;
+import java.lang.Object;
 import org.sdmlib.models.pattern.AttributeConstraint;
-import org.sdmlib.replication.creators.LaneSet;
 
-public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, PlayerLaneManager>
+public class PlayerLaneManagerPO extends PatternObject<PlayerLaneManagerPO, PlayerLaneManager>
 {
-   public PlayerLaneListenerSet allMatches()
+   public PlayerLaneManagerSet allMatches()
    {
       this.setDoAllMatches(true);
       
-      PlayerLaneListenerSet matches = new PlayerLaneListenerSet();
+      PlayerLaneManagerSet matches = new PlayerLaneManagerSet();
 
       while (this.getPattern().getHasMatch())
       {
@@ -24,10 +24,10 @@ public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, Pl
       return matches;
    }
    
-   public PlayerLaneListenerPO hasSources(LaneSet value)
+   public PlayerLaneManagerPO hasSource(Object value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
-      .withAttrName(PlayerLaneManager.PROPERTY_SOURCES)
+      .withAttrName(PlayerLaneManager.PROPERTY_SOURCE)
       .withTgtValue(value)
       .withSrc(this)
       .withModifier(this.getPattern().getModifier())
@@ -38,20 +38,20 @@ public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, Pl
       return this;
    }
    
-   public LaneSet getSources()
+   public Object getSource()
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((PlayerLaneManager) getCurrentMatch()).getSources();
+         return ((PlayerLaneManager) getCurrentMatch()).getSource();
       }
       return null;
    }
    
-   public PlayerLaneListenerPO withSources(LaneSet value)
+   public PlayerLaneManagerPO withSource(Object value)
    {
       if (this.getPattern().getHasMatch())
       {
-         ((PlayerLaneManager) getCurrentMatch()).setSources(value);
+         ((PlayerLaneManager) getCurrentMatch()).setSource(value);
       }
       return this;
    }

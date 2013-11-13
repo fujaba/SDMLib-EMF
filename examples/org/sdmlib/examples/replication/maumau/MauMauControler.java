@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskHandler;
 
 public class MauMauControler implements PropertyChangeListener
 {

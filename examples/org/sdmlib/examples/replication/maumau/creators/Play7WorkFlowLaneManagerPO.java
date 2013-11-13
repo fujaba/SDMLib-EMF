@@ -1,22 +1,22 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import org.sdmlib.models.pattern.PatternObject;
-import org.sdmlib.examples.replication.maumau.ServerLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.ServerLaneListenerSet;
+import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
+import org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerSet;
 import java.lang.Object;
 import org.sdmlib.models.pattern.AttributeConstraint;
 
-public class ServerLaneListenerPO extends PatternObject<ServerLaneListenerPO, ServerLaneManager>
+public class Play7WorkFlowLaneManagerPO extends PatternObject<Play7WorkFlowLaneManagerPO, Play7WorkFlowLaneManager>
 {
-   public ServerLaneListenerSet allMatches()
+   public Play7WorkFlowLaneManagerSet allMatches()
    {
       this.setDoAllMatches(true);
       
-      ServerLaneListenerSet matches = new ServerLaneListenerSet();
+      Play7WorkFlowLaneManagerSet matches = new Play7WorkFlowLaneManagerSet();
 
       while (this.getPattern().getHasMatch())
       {
-         matches.add((ServerLaneManager) this.getCurrentMatch());
+         matches.add((Play7WorkFlowLaneManager) this.getCurrentMatch());
          
          this.getPattern().findMatch();
       }
@@ -24,10 +24,10 @@ public class ServerLaneListenerPO extends PatternObject<ServerLaneListenerPO, Se
       return matches;
    }
    
-   public ServerLaneListenerPO hasSource(Object value)
+   public Play7WorkFlowLaneManagerPO hasSource(Object value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
-      .withAttrName(ServerLaneManager.PROPERTY_SOURCE)
+      .withAttrName(Play7WorkFlowLaneManager.PROPERTY_SOURCE)
       .withTgtValue(value)
       .withSrc(this)
       .withModifier(this.getPattern().getModifier())
@@ -42,16 +42,16 @@ public class ServerLaneListenerPO extends PatternObject<ServerLaneListenerPO, Se
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((ServerLaneManager) getCurrentMatch()).getSource();
+         return ((Play7WorkFlowLaneManager) getCurrentMatch()).getSource();
       }
       return null;
    }
    
-   public ServerLaneListenerPO withSource(Object value)
+   public Play7WorkFlowLaneManagerPO withSource(Object value)
    {
       if (this.getPattern().getHasMatch())
       {
-         ((ServerLaneManager) getCurrentMatch()).setSource(value);
+         ((Play7WorkFlowLaneManager) getCurrentMatch()).setSource(value);
       }
       return this;
    }

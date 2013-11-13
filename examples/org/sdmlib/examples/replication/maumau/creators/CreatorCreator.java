@@ -44,10 +44,14 @@ public class CreatorCreator
          creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.ObjectPOCreator());
          creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.CardListenerCreator());
          creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.CardListenerPOCreator());
-         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.TaskHandlerSetCreator());
-         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.TaskHandlerSetPOCreator());
          creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.LaneSetCreator());
          creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.LaneSetPOCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerPOCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerPOCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.PlayerLaneManagerCreator());
+         creatorSet.add(new org.sdmlib.examples.replication.maumau.creators.PlayerLaneManagerPOCreator());
          creatorSet.addAll(org.sdmlib.models.pattern.creators.CreatorCreator.getCreatorSet());
       }
       
@@ -56,11 +60,12 @@ public class CreatorCreator
 
    public static JsonIdMap createIdMap(String sessionID)
    {
-      JsonIdMap jsonIdMap = new SDMLibJsonIdMap().withSessionId(sessionID);
+      JsonIdMap jsonIdMap = (JsonIdMap) new SDMLibJsonIdMap().withSessionId(sessionID);
       
       jsonIdMap.withCreator(getCreatorSet());
 
       return jsonIdMap;
    }
 }
+
 

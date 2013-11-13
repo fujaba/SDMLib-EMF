@@ -11,9 +11,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.sdmlib.serialization.json.JsonIdMap;
 
-import de.uniks.jism.gui.table.SDMLibSearchTableComponent;
-import de.uniks.jism.gui.table.SearchTableComponent;
-
 public class GroupAccountGUI extends Shell
 {
    private GroupAccount groupAccount; // = new GroupAccount().withPersons(new Person().withName("Albert"));
@@ -60,24 +57,24 @@ public class GroupAccountGUI extends Shell
       
       sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
       
-      SearchTableComponent personTable = new SDMLibSearchTableComponent(sashForm, groupAccount, GroupAccount.PROPERTY_PERSONS);
+      //SearchTableComponent personTable = new SDMLibSearchTableComponent(sashForm, groupAccount, GroupAccount.PROPERTY_PERSONS);
       
-      SearchTableComponent itemsTable = new SDMLibSearchTableComponent(sashForm, groupAccount, GroupAccount.PROPERTY_ITEMS);
+      // SearchTableComponent itemsTable = new SDMLibSearchTableComponent(sashForm, groupAccount, GroupAccount.PROPERTY_ITEMS);
       
-      JsonIdMap map = (JsonIdMap) itemsTable.getMap();
+      // JsonIdMap map = (JsonIdMap) itemsTable.getMap();
       
-      map.toJsonObject(groupAccount);
-      
-      map.setUpdateMsgListener(new PropertyChangeListener()
-      {
-         @Override
-         public void propertyChange(PropertyChangeEvent evt)
-         {
-            groupAccount.updateBalances();
-         }
-      });
-      
-      createContents();
+//      map.toJsonObject(groupAccount);
+//      
+//      map.withUpdateMsgListener(new PropertyChangeListener()
+//      {
+//         @Override
+//         public void propertyChange(PropertyChangeEvent evt)
+//         {
+//            groupAccount.updateBalances();
+//         }
+//      });
+//      
+//      createContents();
    }
 
    private void initModel()

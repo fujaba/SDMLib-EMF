@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.sdmlib.examples.replication.SWTSharedSpace;
+import org.sdmlib.replication.BoardTask;
+import org.sdmlib.replication.Lane;
+import org.sdmlib.replication.Node;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.replication.TaskFlowBoard;
@@ -30,16 +33,13 @@ public class SharedSpaceMauMauStoryboards
 
 
    @Test
-   public void testSharedSpaceMauMau()
+   public void testPlay7()
    {
       story = new Storyboard();
 
       story.addStep("Abu, Karli, and Sabine want to play some replication maumau.");
 
-      story.addStep("Abu starts a replication maumau server. "
-            + "(Actually Theo the tester starts the server and connects to it. "
-            + "The current storyboard is shared and storyTheo is added as a listener to the story. "
-            + "When other participants add story steps, storyTheo get informed and initiates the next actions.)" );
+      story.addStep("The testPlay7 starts a game server and connects to it." );
 
       JsonIdMap map = org.sdmlib.examples.replication.maumau.creators.CreatorCreator.createIdMap(nodeId);
       map.withCreator(org.sdmlib.replication.creators.CreatorCreator.getCreatorSet());
@@ -48,7 +48,7 @@ public class SharedSpaceMauMauStoryboards
       ReplicationMauMauServer mauMauServer = new ReplicationMauMauServer().withTestMode(true).start();
 
       // open a shared space to get access to the taskboard
-      nodeId = "Theo";
+      nodeId = "testPlay7";
       gameSpace = new SharedSpace()
       .withSpaceId("game42")
       .withNodeId(nodeId );
@@ -61,12 +61,8 @@ public class SharedSpaceMauMauStoryboards
       channel.start();
       
       // connect to shared space
-      JsonObject jsonObject = new JsonObject();
-      jsonObject.put(SharedSpace.PROPERTY_SPACEID, gameSpace.getSpaceId());
-
-      String line = jsonObject.toString();
-      channel.send(line);
-
+      channel.sendSpaceConnectionRequest(gameSpace.getSpaceId());
+      
       gameSpace.withMap(map);
 
       gameSpace.waitForCurrentHistoryId();
@@ -82,20 +78,28 @@ public class SharedSpaceMauMauStoryboards
       taskFlowBoard = new TaskFlowBoard();
       map.put(gameSpace.getSpaceId() + "taskBoard", taskFlowBoard);
 
-      StoryTheo storyTheo = new StoryTheo()
+      Lane play7WorkFlowLane = taskFlowBoard.createLanes(Play7WorkFlow.PLAY7_WORK_FLOW_LANE);
+      
+      Play7WorkFlowLaneManager play7WorkFlow = new Play7WorkFlowLaneManager()
       .withStoryboard(story)
       .withGameSpace(gameSpace)
-      .withTaskFlowBoard(taskFlowBoard);
+      .withTaskFlowBoard(taskFlowBoard)
+      .withSource(play7WorkFlowLane);
       
-      story.getPropertyChangeSupport().addPropertyChangeListener(storyTheo);
-
+      play7WorkFlowLane.getPropertyChangeSupport().addPropertyChangeListener(play7WorkFlow);
+      
+      BoardTask startAbuTask = taskFlowBoard.createTask(Play7WorkFlow.PLAY7_WORK_FLOW_LANE, Play7WorkFlow.START_CLIENTS);
+      
+      story.setStepCounter(3);
+      story.addStep("testPlay7 initiates the startClients task");
       story.addObjectDiagram(
-         "theo", "icons/worker.png", this,
+         nodeId + "Node", "icons/node.png", new Node(),
+         "play7Tester", "icons/worker.png", this,
          "taskboard", "icons/shared.png", taskFlowBoard, 
-         "storyTheo", "icons/person1.png", storyTheo,
-         gameSpace.getSpaceId() + "storyboard", story);
+         Play7WorkFlow.PLAY7_WORK_FLOW_LANE, "icons/person1.png", play7WorkFlow);
 
-
+      startAbuTask.setStatus(BoardTask.START);
+      
       gameSpace.run();
    }
 

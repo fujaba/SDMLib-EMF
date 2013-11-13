@@ -3,12 +3,13 @@ package org.sdmlib.examples.replication.maumau.creators;
 import org.sdmlib.examples.replication.maumau.creators.CreatorCreator;
 import org.sdmlib.serialization.interfaces.EntityFactory;
 import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.replication.creators.TaskHandlerSet;
+import org.sdmlib.examples.replication.maumau.ServerLaneManager;
 
-public class TaskHandlerSetCreator extends EntityFactory
+public class ServerLaneManagerCreator extends EntityFactory
 {
    private final String[] properties = new String[]
    {
+      ServerLaneManager.PROPERTY_SOURCE,
    };
    
    public String[] getProperties()
@@ -18,12 +19,12 @@ public class TaskHandlerSetCreator extends EntityFactory
    
    public Object getSendableInstance(boolean reference)
    {
-      return new TaskHandlerSet();
+      return new ServerLaneManager();
    }
    
    public Object getValue(Object target, String attrName)
    {
-      return null;
+      return ((ServerLaneManager) target).get(attrName);
    }
    
    public boolean setValue(Object target, String attrName, Object value, String type)
@@ -32,7 +33,7 @@ public class TaskHandlerSetCreator extends EntityFactory
       {
          attrName = attrName + type;
       }
-      return false;
+      return ((ServerLaneManager) target).set(attrName, value);
    }
    
    public static JsonIdMap createIdMap(String sessionID)
@@ -46,7 +47,7 @@ public class TaskHandlerSetCreator extends EntityFactory
    @Override
    public void removeObject(Object entity)
    {
-      // wrapped object has no removeYou method
+      ((ServerLaneManager) entity).removeYou();
    }
 }
 

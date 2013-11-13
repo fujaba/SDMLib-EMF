@@ -1,22 +1,22 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import org.sdmlib.models.pattern.PatternObject;
-import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.PlayerLaneListenerSet;
+import org.sdmlib.examples.replication.maumau.ServerLaneManager;
+import org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerSet;
+import java.lang.Object;
 import org.sdmlib.models.pattern.AttributeConstraint;
-import org.sdmlib.replication.creators.LaneSet;
 
-public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, PlayerLaneManager>
+public class ServerLaneManagerPO extends PatternObject<ServerLaneManagerPO, ServerLaneManager>
 {
-   public PlayerLaneListenerSet allMatches()
+   public ServerLaneManagerSet allMatches()
    {
       this.setDoAllMatches(true);
       
-      PlayerLaneListenerSet matches = new PlayerLaneListenerSet();
+      ServerLaneManagerSet matches = new ServerLaneManagerSet();
 
       while (this.getPattern().getHasMatch())
       {
-         matches.add((PlayerLaneManager) this.getCurrentMatch());
+         matches.add((ServerLaneManager) this.getCurrentMatch());
          
          this.getPattern().findMatch();
       }
@@ -24,10 +24,10 @@ public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, Pl
       return matches;
    }
    
-   public PlayerLaneListenerPO hasSources(LaneSet value)
+   public ServerLaneManagerPO hasSource(Object value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
-      .withAttrName(PlayerLaneManager.PROPERTY_SOURCES)
+      .withAttrName(ServerLaneManager.PROPERTY_SOURCE)
       .withTgtValue(value)
       .withSrc(this)
       .withModifier(this.getPattern().getModifier())
@@ -38,20 +38,20 @@ public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, Pl
       return this;
    }
    
-   public LaneSet getSources()
+   public Object getSource()
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((PlayerLaneManager) getCurrentMatch()).getSources();
+         return ((ServerLaneManager) getCurrentMatch()).getSource();
       }
       return null;
    }
    
-   public PlayerLaneListenerPO withSources(LaneSet value)
+   public ServerLaneManagerPO withSource(Object value)
    {
       if (this.getPattern().getHasMatch())
       {
-         ((PlayerLaneManager) getCurrentMatch()).setSources(value);
+         ((ServerLaneManager) getCurrentMatch()).setSource(value);
       }
       return this;
    }

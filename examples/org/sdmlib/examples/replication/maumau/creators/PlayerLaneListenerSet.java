@@ -22,12 +22,11 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.examples.replication.maumau.PlayerLaneListener;
+import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
 import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.replication.creators.TaskHandlerSet;
 import org.sdmlib.replication.creators.LaneSet;
 
-public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneListener> implements org.sdmlib.models.modelsets.ModelSet
+public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {
 
 
@@ -35,7 +34,7 @@ public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneListener> imp
    {
       StringList stringList = new StringList();
       
-      for (PlayerLaneListener elem : this)
+      for (PlayerLaneManager elem : this)
       {
          stringList.add(elem.toString());
       }
@@ -50,36 +49,15 @@ public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneListener> imp
    }
 
 
-   public PlayerLaneListenerSet with(PlayerLaneListener value)
+   public PlayerLaneListenerSet with(PlayerLaneManager value)
    {
       this.add(value);
       return this;
    }
    
-   public PlayerLaneListenerSet without(PlayerLaneListener value)
+   public PlayerLaneListenerSet without(PlayerLaneManager value)
    {
       this.remove(value);
-      return this;
-   }
-   public TaskHandlerSet getHandlerList()
-   {
-      TaskHandlerSet result = new TaskHandlerSet();
-      
-      for (PlayerLaneListener obj : this)
-      {
-         result.addAll(obj.getHandlerList());
-      }
-      
-      return result;
-   }
-
-   public PlayerLaneListenerSet withHandlerList(TaskHandlerSet value)
-   {
-      for (PlayerLaneListener obj : this)
-      {
-         obj.setHandlerList(value);
-      }
-      
       return this;
    }
 
@@ -87,7 +65,7 @@ public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneListener> imp
    {
       LaneSet result = new LaneSet();
       
-      for (PlayerLaneListener obj : this)
+      for (PlayerLaneManager obj : this)
       {
          result.addAll(obj.getSources());
       }
@@ -97,7 +75,7 @@ public class PlayerLaneListenerSet extends LinkedHashSet<PlayerLaneListener> imp
 
    public PlayerLaneListenerSet withSources(LaneSet value)
    {
-      for (PlayerLaneListener obj : this)
+      for (PlayerLaneManager obj : this)
       {
          obj.setSources(value);
       }

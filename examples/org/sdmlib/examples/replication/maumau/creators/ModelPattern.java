@@ -1,40 +1,38 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.Pattern;
-import org.sdmlib.examples.replication.maumau.creators.MauMauPO;
-import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.CardPO;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.creators.HolderPO;
-import org.sdmlib.examples.replication.maumau.Holder;
-import org.sdmlib.examples.replication.maumau.creators.PlayerPO;
-import org.sdmlib.examples.replication.maumau.Player;
-import org.sdmlib.examples.replication.maumau.creators.DutyPO;
-import org.sdmlib.examples.replication.maumau.Duty;
-import org.sdmlib.examples.replication.maumau.creators.ReplicationMauMauServerPO;
-import org.sdmlib.examples.replication.maumau.ReplicationMauMauServer;
-import org.sdmlib.examples.replication.maumau.creators.ServerLaneListenerPO;
-import org.sdmlib.examples.replication.maumau.ServerLaneListener;
-import org.sdmlib.examples.replication.maumau.creators.MultiMauMauControlerPO;
-import org.sdmlib.examples.replication.maumau.MultiMauMauControler;
-import org.sdmlib.examples.replication.maumau.creators.CardControlerPO;
-import org.sdmlib.examples.replication.maumau.CardControler;
-import org.sdmlib.examples.replication.maumau.creators.PlayerLaneListenerPO;
-import org.sdmlib.examples.replication.maumau.PlayerLaneListener;
-import org.sdmlib.examples.replication.maumau.creators.LabelPO;
 import org.eclipse.swt.widgets.Label;
-import org.sdmlib.examples.replication.maumau.creators.SuitPO;
-import org.sdmlib.examples.replication.maumau.Suit;
-import org.sdmlib.examples.replication.maumau.creators.ValuePO;
-import org.sdmlib.examples.replication.maumau.Value;
-import org.sdmlib.examples.replication.maumau.creators.ObjectPO;
-import java.lang.Object;
-import org.sdmlib.examples.replication.maumau.creators.CardListenerPO;
+import org.sdmlib.examples.replication.maumau.Card;
+import org.sdmlib.examples.replication.maumau.CardControler;
 import org.sdmlib.examples.replication.maumau.CardListener;
-import org.sdmlib.examples.replication.maumau.creators.TaskHandlerSetPO;
-import org.sdmlib.replication.creators.TaskHandlerSet;
-import org.sdmlib.examples.replication.maumau.creators.LaneSetPO;
+import org.sdmlib.examples.replication.maumau.Duty;
+import org.sdmlib.examples.replication.maumau.Holder;
+import org.sdmlib.examples.replication.maumau.MauMau;
+import org.sdmlib.examples.replication.maumau.MultiMauMauControler;
+import org.sdmlib.examples.replication.maumau.Player;
+import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
+import org.sdmlib.examples.replication.maumau.ReplicationMauMauServer;
+import org.sdmlib.examples.replication.maumau.ServerLaneManager;
+import org.sdmlib.examples.replication.maumau.Suit;
+import org.sdmlib.examples.replication.maumau.Value;
+import org.sdmlib.models.pattern.Pattern;
 import org.sdmlib.replication.creators.LaneSet;
+import org.sdmlib.examples.replication.maumau.creators.MauMauPO;
+import org.sdmlib.examples.replication.maumau.creators.CardPO;
+import org.sdmlib.examples.replication.maumau.creators.HolderPO;
+import org.sdmlib.examples.replication.maumau.creators.PlayerPO;
+import org.sdmlib.examples.replication.maumau.creators.DutyPO;
+import org.sdmlib.examples.replication.maumau.creators.ReplicationMauMauServerPO;
+import org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerPO;
+import org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerPO;
+import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
+import org.sdmlib.examples.replication.maumau.creators.PlayerLaneManagerPO;
+import org.sdmlib.examples.replication.maumau.creators.MultiMauMauControlerPO;
+import org.sdmlib.examples.replication.maumau.creators.CardControlerPO;
+import org.sdmlib.examples.replication.maumau.creators.LabelPO;
+import org.sdmlib.examples.replication.maumau.creators.SuitPO;
+import org.sdmlib.examples.replication.maumau.creators.ValuePO;
+import org.sdmlib.examples.replication.maumau.creators.ObjectPO;
+import org.sdmlib.examples.replication.maumau.creators.CardListenerPO;
 
 public class ModelPattern extends Pattern
 {
@@ -204,7 +202,7 @@ public class ModelPattern extends Pattern
       return value;
    }
    
-   public ServerLaneListenerPO hasElementServerLaneListenerPO(ServerLaneListener hostGraphObject)
+   public ServerLaneListenerPO hasElementServerLaneListenerPO(ServerLaneManager hostGraphObject)
    {
       ServerLaneListenerPO value = new ServerLaneListenerPO();
       this.addToElements(value);
@@ -276,7 +274,7 @@ public class ModelPattern extends Pattern
       return value;
    }
    
-   public PlayerLaneListenerPO hasElementPlayerLaneListenerPO(PlayerLaneListener hostGraphObject)
+   public PlayerLaneListenerPO hasElementPlayerLaneListenerPO(PlayerLaneManager hostGraphObject)
    {
       PlayerLaneListenerPO value = new PlayerLaneListenerPO();
       this.addToElements(value);
@@ -409,30 +407,6 @@ public class ModelPattern extends Pattern
       return value;
    } 
 
-   public TaskHandlerSetPO hasElementTaskHandlerSetPO()
-   {
-      TaskHandlerSetPO value = new TaskHandlerSetPO();
-      this.addToElements(value);
-      value.setModifier(this.getModifier());
-      
-      this.findMatch();
-      
-      return value;
-   }
-   
-   public TaskHandlerSetPO hasElementTaskHandlerSetPO(TaskHandlerSet hostGraphObject)
-   {
-      TaskHandlerSetPO value = new TaskHandlerSetPO();
-      this.addToElements(value);
-      value.setModifier(Pattern.BOUND);
-      
-      value.setCurrentMatch(hostGraphObject);
-      
-      this.findMatch();
-      
-      return value;
-   } 
-
    public LaneSetPO hasElementLaneSetPO()
    {
       LaneSetPO value = new LaneSetPO();
@@ -457,6 +431,79 @@ public class ModelPattern extends Pattern
       return value;
    } 
 
+   public ServerLaneManagerPO hasElementServerLaneManagerPO()
+   {
+      ServerLaneManagerPO value = new ServerLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public ServerLaneManagerPO hasElementServerLaneManagerPO(ServerLaneManager hostGraphObject)
+   {
+      ServerLaneManagerPO value = new ServerLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+   public Play7WorkFlowLaneManagerPO hasElementPlay7WorkFlowLaneManagerPO()
+   {
+      Play7WorkFlowLaneManagerPO value = new Play7WorkFlowLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public Play7WorkFlowLaneManagerPO hasElementPlay7WorkFlowLaneManagerPO(Play7WorkFlowLaneManager hostGraphObject)
+   {
+      Play7WorkFlowLaneManagerPO value = new Play7WorkFlowLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+   public PlayerLaneManagerPO hasElementPlayerLaneManagerPO()
+   {
+      PlayerLaneManagerPO value = new PlayerLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public PlayerLaneManagerPO hasElementPlayerLaneManagerPO(PlayerLaneManager hostGraphObject)
+   {
+      PlayerLaneManagerPO value = new PlayerLaneManagerPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
 }
+
 
 

@@ -7,10 +7,9 @@ import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.replication.TaskFlowBoard;
-import org.sdmlib.replication.TaskHandler;
 import org.sdmlib.storyboards.Storyboard;
 
-public class ServerStartGameHandler extends TaskHandler
+public class ServerStartGameHandler 
 {
 
    private SharedSpace sharedSpace;
@@ -22,7 +21,6 @@ public class ServerStartGameHandler extends TaskHandler
 
    private boolean done = false;
    
-   @Override
    public boolean handle(BoardTask oldTask, BoardTask newTask)
    {
       if (newTask != null && MultiMauMau.START_GAME.equals(newTask.getName()))

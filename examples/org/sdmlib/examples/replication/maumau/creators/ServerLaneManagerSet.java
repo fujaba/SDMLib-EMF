@@ -27,7 +27,7 @@ import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
 import java.lang.Object;
 
-public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
+public class ServerLaneManagerSet extends LinkedHashSet<ServerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {
 
 
@@ -46,17 +46,17 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
 
    public String getEntryType()
    {
-      return "org.sdmlib.examples.replication.maumau.ServerLaneListener";
+      return "org.sdmlib.examples.replication.maumau.ServerLaneManager";
    }
 
 
-   public ServerLaneListenerSet with(ServerLaneManager value)
+   public ServerLaneManagerSet with(ServerLaneManager value)
    {
       this.add(value);
       return this;
    }
    
-   public ServerLaneListenerSet without(ServerLaneManager value)
+   public ServerLaneManagerSet without(ServerLaneManager value)
    {
       this.remove(value);
       return this;
@@ -73,7 +73,7 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
       return result;
    }
 
-   public ServerLaneListenerSet withSource(Object value)
+   public ServerLaneManagerSet withSource(Object value)
    {
       for (ServerLaneManager obj : this)
       {

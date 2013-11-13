@@ -22,10 +22,12 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.replication.creators.TaskHandlerSet;
+import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
 import org.sdmlib.models.modelsets.StringList;
+import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
+import java.lang.Object;
 
-public class TaskHandlerSetSet extends LinkedHashSet<TaskHandlerSet> implements org.sdmlib.models.modelsets.ModelSet
+public class PlayerLaneManagerSet extends LinkedHashSet<PlayerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {
 
 
@@ -33,7 +35,7 @@ public class TaskHandlerSetSet extends LinkedHashSet<TaskHandlerSet> implements 
    {
       StringList stringList = new StringList();
       
-      for (TaskHandlerSet elem : this)
+      for (PlayerLaneManager elem : this)
       {
          stringList.add(elem.toString());
       }
@@ -44,20 +46,42 @@ public class TaskHandlerSetSet extends LinkedHashSet<TaskHandlerSet> implements 
 
    public String getEntryType()
    {
-      return "org.sdmlib.replication.creators.TaskHandlerSet";
+      return "org.sdmlib.examples.replication.maumau.PlayerLaneManager";
    }
 
 
-   public TaskHandlerSetSet with(TaskHandlerSet value)
+   public PlayerLaneManagerSet with(PlayerLaneManager value)
    {
       this.add(value);
       return this;
    }
    
-   public TaskHandlerSetSet without(TaskHandlerSet value)
+   public PlayerLaneManagerSet without(PlayerLaneManager value)
    {
       this.remove(value);
       return this;
    }
+   public ObjectSet getSource()
+   {
+      ObjectSet result = new ObjectSet();
+      
+      for (PlayerLaneManager obj : this)
+      {
+         result.add(obj.getSource());
+      }
+      
+      return result;
+   }
+
+   public PlayerLaneManagerSet withSource(Object value)
+   {
+      for (PlayerLaneManager obj : this)
+      {
+         obj.setSource(value);
+      }
+      
+      return this;
+   }
+
 }
 

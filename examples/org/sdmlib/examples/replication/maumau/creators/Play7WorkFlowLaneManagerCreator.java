@@ -3,13 +3,13 @@ package org.sdmlib.examples.replication.maumau.creators;
 import org.sdmlib.examples.replication.maumau.creators.CreatorCreator;
 import org.sdmlib.serialization.interfaces.EntityFactory;
 import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
+import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
 
-public class PlayerLaneListenerCreator extends EntityFactory
+public class Play7WorkFlowLaneManagerCreator extends EntityFactory
 {
    private final String[] properties = new String[]
    {
-      PlayerLaneManager.PROPERTY_SOURCES,
+      Play7WorkFlowLaneManager.PROPERTY_SOURCE,
    };
    
    public String[] getProperties()
@@ -19,12 +19,12 @@ public class PlayerLaneListenerCreator extends EntityFactory
    
    public Object getSendableInstance(boolean reference)
    {
-      return new PlayerLaneManager();
+      return new Play7WorkFlowLaneManager();
    }
    
    public Object getValue(Object target, String attrName)
    {
-      return ((PlayerLaneManager) target).get(attrName);
+      return ((Play7WorkFlowLaneManager) target).get(attrName);
    }
    
    public boolean setValue(Object target, String attrName, Object value, String type)
@@ -33,7 +33,7 @@ public class PlayerLaneListenerCreator extends EntityFactory
       {
          attrName = attrName + type;
       }
-      return ((PlayerLaneManager) target).set(attrName, value);
+      return ((Play7WorkFlowLaneManager) target).set(attrName, value);
    }
    
    public static JsonIdMap createIdMap(String sessionID)
@@ -47,7 +47,7 @@ public class PlayerLaneListenerCreator extends EntityFactory
    @Override
    public void removeObject(Object entity)
    {
-      ((PlayerLaneManager) entity).removeYou();
+      ((Play7WorkFlowLaneManager) entity).removeYou();
    }
 }
 

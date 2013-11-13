@@ -1,14 +1,14 @@
 package org.sdmlib.examples.replication.maumau;
 
-import static org.sdmlib.models.classes.Role.R.*;
+import static org.sdmlib.models.classes.Role.R.MANY;
+import static org.sdmlib.models.classes.Role.R.ONE;
 
 import org.eclipse.swt.widgets.Label;
 import org.junit.Test;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.replication.creators.LaneSet;
-import org.sdmlib.replication.creators.TaskHandlerSet;
+import org.sdmlib.replication.Lane;
 import org.sdmlib.storyboards.Storyboard;
 
 public class MauMauModel
@@ -54,7 +54,9 @@ public class MauMauModel
       // add some listeners to the model
       model.createClazz(ReplicationMauMauServer.class.getName());
      
-      model.createClazz(ServerLaneListener.class.getName(), "source", Object.class.getName());
+      model.createClazz(ServerLaneManager.class.getName(), "source", Object.class.getName());
+      model.createClazz(Play7WorkFlowLaneManager.class.getName(), "source", Object.class.getName());
+      model.createClazz(PlayerLaneManager.class.getName(), "source", Object.class.getName());
       
       Clazz multiMauMauControler = model.createClazz(MultiMauMauControler.class.getName(), 
          "mauMau", mauMauClass.getName(), 
@@ -67,11 +69,8 @@ public class MauMauModel
                "listener", CardListener.class.getName()
                   );
       
-      model.createClazz(PlayerLaneListener.class.getName(), 
-         "handlerList", TaskHandlerSet.class.getName(),
-         "sources", LaneSet.class.getName());
-      
       model.createClazz(Label.class.getName(), "text", R.STRING).withWrapped(true);
+      
       
       storyboard.addClassDiagram(model);
 

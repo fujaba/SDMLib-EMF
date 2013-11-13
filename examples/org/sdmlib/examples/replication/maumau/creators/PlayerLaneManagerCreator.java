@@ -5,11 +5,11 @@ import org.sdmlib.serialization.interfaces.EntityFactory;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
 
-public class PlayerLaneListenerCreator extends EntityFactory
+public class PlayerLaneManagerCreator extends EntityFactory
 {
    private final String[] properties = new String[]
    {
-      PlayerLaneManager.PROPERTY_SOURCES,
+      PlayerLaneManager.PROPERTY_SOURCE,
    };
    
    public String[] getProperties()

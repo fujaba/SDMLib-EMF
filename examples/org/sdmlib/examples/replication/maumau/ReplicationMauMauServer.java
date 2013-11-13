@@ -22,26 +22,23 @@
 package org.sdmlib.examples.replication.maumau;
 
 
-import org.eclipse.swt.widgets.TaskBar;
-import org.junit.Test;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.ChangeHistory;
 import org.sdmlib.replication.Lane;
+import org.sdmlib.replication.Node;
 import org.sdmlib.replication.ReplicationNode;
 import org.sdmlib.replication.ServerSocketAcceptThread;
-import org.sdmlib.replication.SharedModelRoot;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.Step;
 import org.sdmlib.replication.TaskFlowBoard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardWall;
 import org.sdmlib.storyboards.creators.StoryboardWallCreator;
 import org.sdmlib.utils.PropertyChangeInterface;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeListener;
 
 public class ReplicationMauMauServer extends ReplicationNode implements PropertyChangeInterface
 {
@@ -64,18 +61,22 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
             {
                Lane newLane = (Lane) evt.getNewValue();
 
-               newLane.addToTasks(new BoardTask().withName(MultiMauMau.INIT));
-               
+               BoardTask createTask = newLane.createTask(MultiMauMau.SHOW_START_GAME_BUTTON);
+
                if (storyboard != null)
                {
                   sharedSpace.getNewHistoryIdNumber(5);
                   
-                  storyboard.addStep("The taskboard lane listener detects the players lane and adds an init task to it.");
+                  storyboard.add("The taskboard lane listener detects " + newLane.getName() 
+                     + "'s lane and adds an init task to it.");
                   
                   storyboard.addObjectDiagram(
+                     "serverNode", "icons/node.png", new Node(),
                      "icons/worker.png", this
                         );
-               }  
+               }
+               
+               createTask.setStatus(BoardTask.START);
             }
          }
          finally
@@ -157,8 +158,8 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
          TaskBoardLanesListener taskBoardLanesListener = new TaskBoardLanesListener();
          taskFlowBoard.getPropertyChangeSupport().addPropertyChangeListener(TaskFlowBoard.PROPERTY_LANES, taskBoardLanesListener);
 
-         ServerLaneListener serverLaneListener = new ServerLaneListener(sharedSpace).init();
-         serverLane.getPropertyChangeSupport().addPropertyChangeListener(serverLaneListener.withSource(serverLane));
+         ServerLaneManager serverLaneManager = new ServerLaneManager(sharedSpace);
+         serverLane.getPropertyChangeSupport().addPropertyChangeListener(serverLaneManager.withSource(serverLane));
 
          if (storyboard != null)
          {
@@ -167,13 +168,13 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
             storyboard.setStepCounter(2);
             storyboard.addStep("On client connect, the game server creates shared objects and adds a listener for new player lanes");
             storyboard.addObjectDiagram(
+               "serverNode", "icons/node.png", new Node(),
                "server", "icons/worker.png", this,
                "taskboard", "icons/shared.png", taskFlowBoard, 
                "taskBoardLanesListener", "icons/server.png", taskBoardLanesListener,
+               "serverLaneListener", "icons/server.png", serverLaneManager, 
                "serverLane", serverLane, 
-               "serverLaneListener", "icons/server.png", serverLaneListener, 
                "maumau", "icons/shared.png", mauMau);
-            storyboard.setStepDoneCounter(3);
          }
 
       }

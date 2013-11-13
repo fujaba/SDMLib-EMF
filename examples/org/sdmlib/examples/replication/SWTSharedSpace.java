@@ -15,7 +15,7 @@ public class SWTSharedSpace extends SharedSpace
       if (firstMessage)
       {
          firstMessage = false;
-         JsonObject jsonObject = new JsonObject(msg);
+         JsonObject jsonObject = new JsonObject().withValue(msg);
          if (jsonObject.get(SharedSpace.CURRENT_HISTORY_ID) != null)
          {
             long receivedId = jsonObject.getLong(CURRENT_HISTORY_ID);

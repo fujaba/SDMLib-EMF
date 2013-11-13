@@ -23,18 +23,15 @@ package org.sdmlib.examples.replication.maumau;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
-import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskHandler;
-import org.sdmlib.utils.PropertyChangeInterface;
-import java.beans.PropertyChangeSupport;
-import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.creators.CardControlerSet;
+import org.sdmlib.replication.SharedSpace;
+import org.sdmlib.serialization.json.JsonIdMap;
+import org.sdmlib.utils.PropertyChangeInterface;
 
 public class MultiMauMauControler implements PropertyChangeListener, PropertyChangeInterface
 {

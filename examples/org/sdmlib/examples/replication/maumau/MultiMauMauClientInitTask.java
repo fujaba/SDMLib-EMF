@@ -13,6 +13,7 @@ import org.sdmlib.examples.replication.SWTSharedSpace;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.replication.ChangeHistory;
 import org.sdmlib.replication.Lane;
+import org.sdmlib.replication.Node;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.ReplicationServer;
 import org.sdmlib.replication.SharedModelRoot;
@@ -33,7 +34,7 @@ public class MultiMauMauClientInitTask implements Runnable
    private MultiMauMauControler gameControler;
    private String nodeId;
    private MauMau mauMau;
-   private PlayerLaneListener laneListener;
+   private PlayerLaneManager laneListener;
    private SharedSpace gameSpace;
    private StoryboardWall storyboardWall;
 
@@ -113,16 +114,18 @@ public class MultiMauMauClientInitTask implements Runnable
       Lane myLane = new Lane().withName(nodeId + "Lane");
       taskFlowBoard.addToLanes(myLane);
       
-      PlayerLaneListener laneListener = new PlayerLaneListener().init(gui, myLane);
+      PlayerLaneManager laneListener = new PlayerLaneManager().init(gui, myLane);
       myLane.getPropertyChangeSupport().addPropertyChangeListener(laneListener);
       laneListener.getSources().add(myLane);
       
-      storyboard.add("MultiMauMauClientInitTask creates root objects in shared space and adds listeners");
+      storyboard.add("MultiMauMauClientInitTask for " + nodeId
+         + " creates root objects in shared space and adds listeners");
       storyboard.addObjectDiagram(
+         nodeId + "Node", "icons/node.png", new Node(),
          nodeId + "Init", "icons/worker.png", this,
          "taskboard", "icons/shared.png", taskFlowBoard, 
          nodeId + "LaneListener", "icons/person1.png", laneListener,
-         nodeId + "StartGameHandler", laneListener.getHandlerList().getFirst(),
+         // nodeId + "StartGameHandler", laneListener.getHandlerList().getFirst(),
          "maumau", "icons/shared.png", mauMau, 
          nodeId, me,
          "abuMauMauController", "icons/person1.png", gameControler

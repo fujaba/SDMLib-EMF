@@ -28,31 +28,20 @@ import java.util.LinkedHashSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskHandler;
 import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 
-public class ServerLaneListener implements PropertyChangeListener, PropertyChangeInterface
+public class ServerLaneManager implements PropertyChangeListener, PropertyChangeInterface
 {
    private SharedSpace sharedSpace;
    
-   private LinkedHashSet<TaskHandler> handlerlist = new LinkedHashSet<TaskHandler>();
-   
-   public ServerLaneListener init()
-   {
-      handlerlist.add(new ServerStartGameHandler(sharedSpace));
-      
-      return this;
-   }
 
-   
-
-   public ServerLaneListener(SharedSpace sharedSpace)
+   public ServerLaneManager(SharedSpace sharedSpace)
    {
       this.sharedSpace = sharedSpace;
    }
 
-   public ServerLaneListener()
+   public ServerLaneManager()
    {
       // Auto-generated constructor stub
    }
@@ -64,32 +53,16 @@ public class ServerLaneListener implements PropertyChangeListener, PropertyChang
    {
       if (evt.getPropertyName().equals(Lane.PROPERTY_TASKS) && evt.getNewValue() != null)
       {
-         boolean oldState = sharedSpace.isApplyingChangeMsg();
+         BoardTask task = (BoardTask) evt.getNewValue();
          
-         try
+         switch (task.getName())
          {
-            sharedSpace.setApplyingChangeMsg(false);
-            
-            BoardTask oldTask = (BoardTask) evt.getOldValue();
-            BoardTask newTask = (BoardTask) evt.getNewValue();
-            
-            for (TaskHandler handler : handlerlist)
-            {
-               boolean done = handler.handle(oldTask, newTask);
-               
-               if (done)
-               {
-                  break;
-               }
-            }
-         }
-         catch (Exception e )
-         {
-            e.printStackTrace();
-         }
-         finally
-         {
-            sharedSpace.setApplyingChangeMsg(oldState);
+         case MultiMauMau.START_GAME:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new StartGameAction().withSharedSpace(sharedSpace));
+            break;
+
+         default:
+            break;
          }
       }
    }
@@ -166,7 +139,7 @@ public class ServerLaneListener implements PropertyChangeListener, PropertyChang
       }
    }
    
-   public ServerLaneListener withSource(java.lang.Object value)
+   public ServerLaneManager withSource(java.lang.Object value)
    {
       setSource(value);
       return this;

@@ -28,23 +28,21 @@ import java.util.LinkedHashSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Task;
-import org.sdmlib.replication.TaskHandler;
 import org.sdmlib.replication.creators.LaneSet;
-import org.sdmlib.replication.creators.TaskHandlerSet;
 import org.sdmlib.utils.PropertyChangeInterface;
 
 import java.beans.PropertyChangeSupport;
 
-public class PlayerLaneListener implements PropertyChangeListener, PropertyChangeInterface
+public class PlayerLaneManager implements PropertyChangeListener, PropertyChangeInterface
 {
    private MauMauClientGui gui = null;
 
-   public PlayerLaneListener init(MauMauClientGui gui, Lane playerLane)
+   public PlayerLaneManager init(MauMauClientGui gui, Lane playerLane)
    {
       this.gui = gui;
 
-      handlerList.add(new ShowStartGameButton().withGui(gui));
-      handlerList.add(new StoryTheo().withGui(gui));
+      // handlerList.add(new ShowStartGameButton().withGui(gui));
+      // handlerList.add(new Play7WorkFlowLaneManager().withGui(gui));
 
       sources.add(playerLane);
 
@@ -54,30 +52,59 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
    @Override
    public void propertyChange(PropertyChangeEvent evt)
    {
-      if (evt.getPropertyName().equals(Lane.PROPERTY_TASKS))
+      if (evt.getPropertyName().equals(Lane.PROPERTY_TASKS) && evt.getNewValue() != null)
       {
-         boolean oldState = gui.getSharedSpace().isApplyingChangeMsg();
-         try
-         {
-            gui.getSharedSpace().setApplyingChangeMsg(false);
+         // new task, add action to it 
+         BoardTask task = (BoardTask) evt.getNewValue();
          
-            BoardTask oldTask = (BoardTask) evt.getOldValue();
-            BoardTask newTask = (BoardTask) evt.getNewValue();
-            // some task change
-            for (TaskHandler handler : handlerList)
-            {
-               boolean done = handler.handle(oldTask, newTask);
-
-               if (done)
-               {
-                  break;
-               }
-            }
-         }
-         finally
+         switch (task.getName())
          {
-            gui.getSharedSpace().setApplyingChangeMsg(oldState);
+         case MultiMauMau.SHOW_START_GAME_BUTTON:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new ShowStartGameButtonAction().withGui(gui));
+            break;
+
+         case MultiMauMau.HIDE_START_GAME_BUTTON:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new HideStartGameButtonAction().withGui(gui));
+            break;
+
+         case Play7WorkFlow.CLICK_START_BUTTON:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new ClickStartButtonAction().withGui(gui));
+            break;
+
+         case Play7WorkFlow.CARDS_ARE_DELT_SCREEN_DUMP:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new CardsAreDeltScreenDumpAction().withGui(gui));
+            break;
+
+         case Play7WorkFlow.KARLI_DRAW_CARDS:
+            task.getPropertyChangeSupport().addPropertyChangeListener(new KarliDrawCardsAction().withGui(gui));
+            break;
+
+         default:
+            break;
          }
+         System.out.println(task.getName());
+//         boolean oldState = gui.getSharedSpace().isApplyingChangeMsg();
+//         try
+//         {
+//            gui.getSharedSpace().setApplyingChangeMsg(false);
+//         
+//            BoardTask oldTask = (BoardTask) evt.getOldValue();
+//            BoardTask newTask = (BoardTask) evt.getNewValue();
+//            // some task change
+//            for (TaskHandler handler : handlerList)
+//            {
+//               boolean done = handler.handle(oldTask, newTask);
+//
+//               if (done)
+//               {
+//                  break;
+//               }
+//            }
+//         }
+//         finally
+//         {
+//            gui.getSharedSpace().setApplyingChangeMsg(oldState);
+//         }
       }
    }
 
@@ -86,14 +113,14 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
 
    public Object get(String attrName)
    {
-      if (PROPERTY_HANDLERLIST.equalsIgnoreCase(attrName))
-      {
-         return getHandlerList();
-      }
-
       if (PROPERTY_SOURCES.equalsIgnoreCase(attrName))
       {
          return getSources();
+      }
+
+      if (PROPERTY_SOURCE.equalsIgnoreCase(attrName))
+      {
+         return getSource();
       }
 
       return null;
@@ -104,15 +131,15 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
 
    public boolean set(String attrName, Object value)
    {
-      if (PROPERTY_HANDLERLIST.equalsIgnoreCase(attrName))
-      {
-         setHandlerList((org.sdmlib.replication.creators.TaskHandlerSet) value);
-         return true;
-      }
-
       if (PROPERTY_SOURCES.equalsIgnoreCase(attrName))
       {
          setSources((org.sdmlib.replication.creators.LaneSet) value);
+         return true;
+      }
+
+      if (PROPERTY_SOURCE.equalsIgnoreCase(attrName))
+      {
+         setSource((java.lang.Object) value);
          return true;
       }
 
@@ -145,32 +172,6 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
 
    //==========================================================================
 
-   public static final String PROPERTY_HANDLERLIST = "handlerList";
-
-   private org.sdmlib.replication.creators.TaskHandlerSet handlerList = new TaskHandlerSet();
-
-   public org.sdmlib.replication.creators.TaskHandlerSet getHandlerList()
-   {
-      return this.handlerList;
-   }
-
-   public void setHandlerList(org.sdmlib.replication.creators.TaskHandlerSet value)
-   {
-      if (this.handlerList != value)
-      {
-         org.sdmlib.replication.creators.TaskHandlerSet oldValue = this.handlerList;
-         this.handlerList = value;
-         getPropertyChangeSupport().firePropertyChange(PROPERTY_HANDLERLIST, oldValue, value);
-      }
-   }
-
-   public PlayerLaneListener withHandlerList(org.sdmlib.replication.creators.TaskHandlerSet value)
-   {
-      setHandlerList(value);
-      return this;
-   } 
-
-
    //==========================================================================
 
    public static final String PROPERTY_SOURCES = "sources";
@@ -192,9 +193,37 @@ public class PlayerLaneListener implements PropertyChangeListener, PropertyChang
       }
    }
 
-   public PlayerLaneListener withSources(org.sdmlib.replication.creators.LaneSet value)
+   public PlayerLaneManager withSources(org.sdmlib.replication.creators.LaneSet value)
    {
       setSources(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_SOURCE = "source";
+   
+   private java.lang.Object source;
+
+   public java.lang.Object getSource()
+   {
+      return this.source;
+   }
+   
+   public void setSource(java.lang.Object value)
+   {
+      if (this.source != value)
+      {
+         java.lang.Object oldValue = this.source;
+         this.source = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_SOURCE, oldValue, value);
+      }
+   }
+   
+   public PlayerLaneManager withSource(java.lang.Object value)
+   {
+      setSource(value);
       return this;
    } 
 }

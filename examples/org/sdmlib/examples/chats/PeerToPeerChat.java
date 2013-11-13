@@ -113,9 +113,9 @@ public class PeerToPeerChat extends Shell implements PropertyChangeInterface
                line = in.readLine();
                text.append(line).append("\n");
             }
-            JsonObject jsonObject = new JsonObject(text.toString());
+            JsonObject jsonObject = new JsonObject().withValue(text.toString());
             
-            peerArgs = (PeerToPeerChatArgs) idMap.readJson(jsonObject);
+            peerArgs = (PeerToPeerChatArgs) idMap.decode(jsonObject);
          }
          
          if (args.length == 4)

@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-import org.sdmlib.examples.replication.maumau.ShowStartGameButton.StartGameAction;
 
 public class NewDutyHandler extends ChangeHandler
 {

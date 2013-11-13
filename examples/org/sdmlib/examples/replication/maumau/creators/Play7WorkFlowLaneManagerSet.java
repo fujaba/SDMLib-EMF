@@ -22,12 +22,12 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.examples.replication.maumau.ServerLaneManager;
+import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
 import java.lang.Object;
 
-public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
+public class Play7WorkFlowLaneManagerSet extends LinkedHashSet<Play7WorkFlowLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {
 
 
@@ -35,7 +35,7 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
    {
       StringList stringList = new StringList();
       
-      for (ServerLaneManager elem : this)
+      for (Play7WorkFlowLaneManager elem : this)
       {
          stringList.add(elem.toString());
       }
@@ -46,17 +46,17 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
 
    public String getEntryType()
    {
-      return "org.sdmlib.examples.replication.maumau.ServerLaneListener";
+      return "org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager";
    }
 
 
-   public ServerLaneListenerSet with(ServerLaneManager value)
+   public Play7WorkFlowLaneManagerSet with(Play7WorkFlowLaneManager value)
    {
       this.add(value);
       return this;
    }
    
-   public ServerLaneListenerSet without(ServerLaneManager value)
+   public Play7WorkFlowLaneManagerSet without(Play7WorkFlowLaneManager value)
    {
       this.remove(value);
       return this;
@@ -65,7 +65,7 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
    {
       ObjectSet result = new ObjectSet();
       
-      for (ServerLaneManager obj : this)
+      for (Play7WorkFlowLaneManager obj : this)
       {
          result.add(obj.getSource());
       }
@@ -73,9 +73,9 @@ public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> impl
       return result;
    }
 
-   public ServerLaneListenerSet withSource(Object value)
+   public Play7WorkFlowLaneManagerSet withSource(Object value)
    {
-      for (ServerLaneManager obj : this)
+      for (Play7WorkFlowLaneManager obj : this)
       {
          obj.setSource(value);
       }
