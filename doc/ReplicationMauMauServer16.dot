@@ -1,0 +1,26 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+taskBoardLanesListener [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ReplicationMauMauServer.java"> <u>taskBoardLanesListener :ReplicationMauMauServer$TaskBoardLanesListener</u></td></tr></table>>];
+taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
+serverLane [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>serverLane :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "server"</td></tr></table></td></tr></table>>];
+l1 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l1 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "play7WorkFlowLane"</td></tr></table></td></tr></table>>];
+b2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b2 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+b3 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b3 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "startClients"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+l5 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l5 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "AbuLane"</td></tr></table></td></tr></table>>];
+b6 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b6 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+l8 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l8 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "KarliLane"</td></tr></table></td></tr></table>>];
+b9 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b9 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr></table></td></tr></table>>];
+
+taskBoardLanesListener -- taskboard [headlabel = "taskFlowBoard" taillabel = ""];
+taskboard -- serverLane [headlabel = "lanes" taillabel = "board"];
+taskboard -- l1 [headlabel = "lanes" taillabel = "board"];
+taskboard -- l5 [headlabel = "lanes" taillabel = "board"];
+taskboard -- l8 [headlabel = "lanes" taillabel = "board"];
+l1 -- b2 [headlabel = "tasks" taillabel = "lane"];
+l1 -- b3 [headlabel = "tasks" taillabel = "lane"];
+l5 -- b6 [headlabel = "tasks" taillabel = "lane"];
+l8 -- b9 [headlabel = "tasks" taillabel = "lane"];
+}

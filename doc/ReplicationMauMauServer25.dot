@@ -1,0 +1,28 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10];
+   edge [fontsize = 10];
+   compound=true;
+
+taskBoardLanesListener [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ReplicationMauMauServer.java"> <u>taskBoardLanesListener :ReplicationMauMauServer$TaskBoardLanesListener</u></td></tr></table>>];
+taskboard [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/shared.png" /></td></tr><tr> <td href="../../SDMLib/src/org/sdmlib/replication/TaskFlowBoard.java"> <u>taskboard :TaskFlowBoard</u></td></tr></table>>];
+serverLane [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>serverLane :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "server"</td></tr></table></td></tr></table>>];
+l21 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l21 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "play7WorkFlowLane"</td></tr></table></td></tr></table>>];
+b24 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b24 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+b34 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b34 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "startClients"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+l89 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l89 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "AbuLane"</td></tr></table></td></tr></table>>];
+b92 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b92 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+l274 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/Lane.java"> <u>l274 :Lane</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "KarliLane"</td></tr></table></td></tr></table>>];
+b277 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b277 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr><tr><td align='left'>status = "start"</td></tr></table></td></tr></table>>];
+b3975 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/sdmlib/replication/BoardTask.java"> <u>b3975 :BoardTask</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "showStartGameButton"</td></tr></table></td></tr></table>>];
+
+taskBoardLanesListener -- taskboard [headlabel = "taskFlowBoard" taillabel = ""];
+taskboard -- serverLane [headlabel = "lanes" taillabel = "board"];
+taskboard -- l21 [headlabel = "lanes" taillabel = "board"];
+taskboard -- l89 [headlabel = "lanes" taillabel = "board"];
+taskboard -- l274 [headlabel = "lanes" taillabel = "board"];
+l21 -- b24 [headlabel = "tasks" taillabel = "lane"];
+l21 -- b34 [headlabel = "tasks" taillabel = "lane"];
+l89 -- b92 [headlabel = "tasks" taillabel = "lane"];
+l274 -- b277 [headlabel = "tasks" taillabel = "lane"];
+l274 -- b3975 [headlabel = "tasks" taillabel = "lane"];
+}

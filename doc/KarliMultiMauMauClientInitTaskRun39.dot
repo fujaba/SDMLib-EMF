@@ -3,7 +3,7 @@ graph ObjectDiagram {
    edge [fontsize = 10];
    compound=true;
 
-s2 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/StoryTheo.java"> <u>s2 :StoryTheo</u></td></tr></table>>];
-l7 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l7 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "When all players have shown up, Start Game"</td></tr></table></td></tr></table>>];
+c17 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr><td border='0'><IMG src="icons/worker.png" /></td></tr><tr> <td href="../examples/org/sdmlib/examples/replication/maumau/ClickStartButtonAction.java"> <u>c17 :ClickStartButtonAction</u></td></tr></table>>];
+l11 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../../SDMLib/src/org/eclipse/swt/widgets/Label.java"> <u>l11 :Label</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>text = "When all players have shown up, Start Game"</td></tr></table></td></tr></table>>];
 
 }

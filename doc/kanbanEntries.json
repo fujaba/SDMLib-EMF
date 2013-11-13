@@ -7,7 +7,8 @@
       "phase":"active",
       "subentries":[
         {"id":"KE.K2"},
-        {"id":"KE.K4"}
+        {"id":"KE.K4"},
+        {"id":"KE.K6"}
       ]
     }
   },
@@ -40,6 +41,20 @@
     }
   },
   {
+    "id":"KE.K6",
+    "class":"org.sdmlib.storyboards.KanbanEntry",
+    "prop":{
+      "name":"Play7",
+      "phase":"backlog",
+      "lastDeveloper":"zuendorf",
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L7"}
+      ],
+      "oldNoOfLogEntries":1
+    }
+  },
+  {
     "id":"KE.L3",
     "class":"org.sdmlib.storyboards.LogEntry",
     "prop":{
@@ -55,6 +70,16 @@
     "prop":{
       "date":"02.10.2013 12:00:00",
       "kanbanEntry":{"id":"KE.K4"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L7",
+    "class":"org.sdmlib.storyboards.LogEntry",
+    "prop":{
+      "date":"27.10.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K6"},
       "developer":"zuendorf",
       "phase":"backlog"
     }
