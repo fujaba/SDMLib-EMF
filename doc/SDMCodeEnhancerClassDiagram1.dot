@@ -1,0 +1,22 @@
+
+ digraph ClassDiagram {
+    node [shape = none, fontsize = 10, fontname = "Arial"]; 
+    edge [fontsize = 10, fontname = "Arial"];
+    
+    
+    _University [label=<<table color='lightgrey' border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/University.java">University</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td align='left'>name :String</td></tr>  </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _UniversityImpl [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/UniversityImpl.java">UniversityImpl</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _Room [label=<<table color='lightgrey' border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/Room.java">Room</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td align='left'>topic :String</td></tr> <tr><td align='left'>credits :int</td></tr>  </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _RoomImpl [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/RoomImpl.java">RoomImpl</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _Assignment [label=<<table color='lightgrey' border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/Assignment.java">Assignment</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td align='left'>name :String</td></tr> <tr><td align='left'>points :int</td></tr>  </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _AssignmentImpl [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/AssignmentImpl.java">AssignmentImpl</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _Student [label=<<table color='lightgrey' border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/Student.java">Student</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td align='left'>name :String</td></tr> <tr><td align='left'>credits :int</td></tr> <tr><td align='left'>motivation :int</td></tr>  </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    _StudentImpl [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/StudentImpl.java">StudentImpl</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
+    
+    
+    
+    _University ->  _UniversityImpl [dir = "back" arrowtail = "empty"];
+    _Room ->  _RoomImpl [dir = "back" arrowtail = "empty"];
+    _Assignment ->  _AssignmentImpl [dir = "back" arrowtail = "empty"];
+    _Student ->  _StudentImpl [dir = "back" arrowtail = "empty"];
+}

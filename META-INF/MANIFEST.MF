@@ -1,8 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: SDMLibEMF
-Bundle-SymbolicName: SDMLibEMF
+Bundle-Name: %pluginName
+Bundle-SymbolicName: SDMLibEMF;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.sdmlib.examples.emfstudyright.EMFStudyRightModel.provider.EMFStudyRightModelEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.swt,
  org.eclipse.jface,
@@ -12,14 +16,21 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.core.databinding.beans,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ org.eclipse.emf.ecore.xcore.lib;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
  org.eclipse.emf.mapping.ecore2xml,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.emf.ant,
  org.eclipse.xsd,
  org.junit,
  SDMLib
+Bundle-ActivationPolicy: lazy
 Import-Package: org.junit
 Export-Package: org.sdmlib.examples.chats,
  org.sdmlib.examples.chats.creators,
+ org.sdmlib.examples.emfstudyright.EMFStudyRightModel,
+ org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl,
+ org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util,
  org.sdmlib.examples.groupAccount,
  org.sdmlib.examples.groupAccount.creators

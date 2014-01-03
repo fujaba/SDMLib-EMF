@@ -5,51 +5,64 @@
     "prop":{
       "name":"Project",
       "phase":"active",
+      "lastDeveloper":"zuendorf",
+      "hoursRemaining":22,
+      "hoursSpend":2,
       "subentries":[
         {"id":"KE.K2"},
-        {"id":"KE.K4"},
-        {"id":"KE.K6"}
-      ]
+        {"id":"KE.K6"},
+        {"id":"KE.K10"}
+      ],
+      "logEntries":[
+        {"id":"KE.L5"},
+        {"id":"KE.L9"}
+      ],
+      "oldNoOfLogEntries":2
     }
   },
   {
     "id":"KE.K2",
     "class":"org.sdmlib.storyboards.KanbanEntry",
     "prop":{
-      "name":"MauMauModel",
-      "phase":"backlog",
+      "name":"EMFStudyRightClasses",
+      "phase":"modeling",
       "lastDeveloper":"zuendorf",
+      "hoursSpend":1,
       "parent":{"id":"KE.K1"},
       "logEntries":[
-        {"id":"KE.L3"}
+        {"id":"KE.L3"},
+        {"id":"KE.L4"}
       ],
-      "oldNoOfLogEntries":1
-    }
-  },
-  {
-    "id":"KE.K4",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"SharedSpaceMauMau",
-      "phase":"backlog",
-      "lastDeveloper":"zuendorf",
-      "parent":{"id":"KE.K1"},
-      "logEntries":[
-        {"id":"KE.L5"}
-      ],
-      "oldNoOfLogEntries":1
+      "oldNoOfLogEntries":2
     }
   },
   {
     "id":"KE.K6",
     "class":"org.sdmlib.storyboards.KanbanEntry",
     "prop":{
-      "name":"Play7",
+      "name":"LoadEcoreCreateClassModel",
+      "phase":"modeling",
+      "lastDeveloper":"zuendorf",
+      "hoursRemaining":22,
+      "hoursSpend":1,
+      "parent":{"id":"KE.K1"},
+      "logEntries":[
+        {"id":"KE.L7"},
+        {"id":"KE.L8"}
+      ],
+      "oldNoOfLogEntries":2
+    }
+  },
+  {
+    "id":"KE.K10",
+    "class":"org.sdmlib.storyboards.KanbanEntry",
+    "prop":{
+      "name":"SDMCodeEnhancer",
       "phase":"backlog",
       "lastDeveloper":"zuendorf",
       "parent":{"id":"KE.K1"},
       "logEntries":[
-        {"id":"KE.L7"}
+        {"id":"KE.L11"}
       ],
       "oldNoOfLogEntries":1
     }
@@ -58,28 +71,78 @@
     "id":"KE.L3",
     "class":"org.sdmlib.storyboards.LogEntry",
     "prop":{
-      "date":"02.10.2013 12:00:00",
+      "date":"30.12.2013 12:00:00",
       "kanbanEntry":{"id":"KE.K2"},
       "developer":"zuendorf",
       "phase":"backlog"
     }
   },
   {
+    "id":"KE.L4",
+    "class":"org.sdmlib.storyboards.LogEntry",
+    "prop":{
+      "date":"03.07.2013 13:19:42",
+      "hoursSpend":1,
+      "kanbanEntry":{"id":"KE.K2"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: We build some example classes and then turn them into an Ecore model "
+    }
+  },
+  {
     "id":"KE.L5",
     "class":"org.sdmlib.storyboards.LogEntry",
     "prop":{
-      "date":"02.10.2013 12:00:00",
-      "kanbanEntry":{"id":"KE.K4"},
+      "date":"30.12.2013 12:00:00",
+      "hoursSpend":1,
+      "kanbanEntry":{"id":"KE.K1"},
       "developer":"zuendorf",
-      "phase":"backlog"
+      "phase":"active",
+      "comment":"EMFStudyRightClasses: null"
     }
   },
   {
     "id":"KE.L7",
     "class":"org.sdmlib.storyboards.LogEntry",
     "prop":{
-      "date":"27.10.2013 12:00:00",
+      "date":"30.12.2013 12:00:00",
       "kanbanEntry":{"id":"KE.K6"},
+      "developer":"zuendorf",
+      "phase":"backlog"
+    }
+  },
+  {
+    "id":"KE.L8",
+    "class":"org.sdmlib.storyboards.LogEntry",
+    "prop":{
+      "date":"03.07.2013 13:20:42",
+      "hoursSpend":1,
+      "hoursRemainingInTotal":22,
+      "kanbanEntry":{"id":"KE.K6"},
+      "developer":"zuendorf",
+      "phase":"modeling",
+      "comment":"Achieved: Reading ecore file and generating sdmlib classModel "
+    }
+  },
+  {
+    "id":"KE.L9",
+    "class":"org.sdmlib.storyboards.LogEntry",
+    "prop":{
+      "date":"30.12.2013 12:00:00",
+      "hoursSpend":1,
+      "hoursRemainingInTotal":22,
+      "kanbanEntry":{"id":"KE.K1"},
+      "developer":"zuendorf",
+      "phase":"active",
+      "comment":"EMFStudyRightClasses: null"
+    }
+  },
+  {
+    "id":"KE.L11",
+    "class":"org.sdmlib.storyboards.LogEntry",
+    "prop":{
+      "date":"31.12.2013 12:00:00",
+      "kanbanEntry":{"id":"KE.K10"},
       "developer":"zuendorf",
       "phase":"backlog"
     }

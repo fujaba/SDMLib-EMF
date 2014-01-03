@@ -1,0 +1,41 @@
+@GenModel(modelDirectory="/SDMLibEMF/emfsrc")
+
+package org.sdmlib.examples.emfstudyright.EMFStudyRightModel
+
+class University
+{
+	String name
+	
+	contains Room[] rooms opposite uni
+	
+	contains Student[] students opposite uni
+}
+
+class Room 
+{
+	String topic
+	int credits
+	
+	container University uni opposite rooms
+
+	contains Assignment[] assignments opposite room	
+}
+
+class Assignment
+{
+	String name
+	int points
+	
+	container Room room opposite assignments
+}
+
+class Student 
+{
+	String name
+	int credits
+	int motivation
+	
+	container University uni opposite students
+	
+	refers Student[] friends opposite friends
+}
