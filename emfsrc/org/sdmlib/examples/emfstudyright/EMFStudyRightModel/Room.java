@@ -3,9 +3,7 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.utils.StrUtil;
 
 /**
  * <!-- begin-user-doc -->

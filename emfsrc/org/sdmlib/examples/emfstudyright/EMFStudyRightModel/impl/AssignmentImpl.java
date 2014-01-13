@@ -4,22 +4,16 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.StrUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +30,7 @@ import org.sdmlib.utils.StrUtil;
  *
  * @generated
  */
-public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment, PropertyChangeInterface
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -346,8 +340,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
   @Override
   public String toString()
   {
-    if (eIsProxy()) 
-      return super.toString();
+    if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");

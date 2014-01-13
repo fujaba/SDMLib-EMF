@@ -3,30 +3,22 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.StrUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +36,7 @@ import org.sdmlib.utils.StrUtil;
  *
  * @generated
  */
-public class RoomImpl extends MinimalEObjectImpl.Container implements Room, PropertyChangeInterface
+public class RoomImpl extends MinimalEObjectImpl.Container implements Room
 {
   /**
    * The default value of the '{@link #getTopic() <em>Topic</em>}' attribute.
@@ -395,8 +387,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
   @Override
   public String toString()
   {
-    if (eIsProxy()) 
-      return super.toString();
+    if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (topic: ");
