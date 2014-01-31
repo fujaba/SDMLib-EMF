@@ -32,7 +32,7 @@ class AskKarliToStartTheGameAction implements PropertyChangeListener
          {
             workFlowManager.getGameSpace().setApplyingChangeMsg(false);
             
-            workFlowManager.getStoryboard().addStep("Theo signals Karli to click the Start Game button.");
+            workFlowManager.getStoryboard().addStep("testPlay7 signals Karli to click the Start Game button.");
 
             workFlowManager.getTaskFlowBoard().startTask("KarliLane", Play7WorkFlow.CLICK_START_BUTTON);
          }

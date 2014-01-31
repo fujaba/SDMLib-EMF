@@ -138,12 +138,12 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
 
    Process startClient(String name)
    {
-      String abuClientComand = "javaw "
+      String abuClientComand = "java "
             + "-Xdebug -Xrunjdwp:transport=dt_socket,address=" + (debugSocket++) 
             + ",server=y,suspend=n "
             + "-Dfile.encoding=UTF-8 "
-            + "-classpath " + System.getProperty("java.class.path")
-            + " org.sdmlib.examples.replication.maumau.MultiMauMauClientGui "
+            + "-classpath \"" + System.getProperty("java.class.path")
+            + "\" " + MultiMauMauClientGui.class.getName() + " "
             + name
             ;
 

@@ -1,0 +1,49 @@
+<html>
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+<p>Storyboard <a href='../examples/org/sdmlib/examples/replication/maumau/SharedSpaceMauMauStoryboards.java' type='text/x-java'>Play7</a></p>
+<p>Play7</p>
+<p>Start: Abu, Karli, and Sabine want to play some replication maumau.</p>
+<p><a name = 'step_1'>Step 1: The testPlay7 starts a game server and connects to it.</a></p><p><a name = 'step_2'>Step 2: On client connect, the game server creates shared objects and adds a listener for new player lanes</a></p><embed type="image/svg+xml" src='ReplicationMauMauServer3.svg'>
+<p><a name = 'step_3'>Step 3: testPlay7 initiates the startClients task</a></p><embed type="image/svg+xml" src='Play75.svg'>
+<p>The taskboard lane listener detects play7WorkFlowLane's lane and adds an init task to it.</p>
+<embed type="image/svg+xml" src='ReplicationMauMauServer5.svg'>
+<p><a name = 'step_4'>Step 4: The play7Tester starts the three clients.</a></p><pre>   Listening for transport dt_socket at address: 8900
+   Starting maumau client for Abu</pre><pre>   Listening for transport dt_socket at address: 8901
+   Starting maumau client for Karli</pre><pre>   Listening for transport dt_socket at address: 8902
+   Starting maumau client for Sabine</pre><p>MultiMauMauClientInitTask for Abu creates root objects in shared space and adds listeners</p>
+<embed type="image/svg+xml" src='AbuMultiMauMauClientInitTaskRun3.svg'>
+<p>The taskboard lane listener detects AbuLane's lane and adds an init task to it.</p>
+<embed type="image/svg+xml" src='ReplicationMauMauServer11.svg'>
+<p>Abu's player lane manager detects the showStartGameButton task and triggers the responsible action. The showStartGameButton action creates a label and adds a mouse listener to it:</p>
+<embed type="image/svg+xml" src='AbuMultiMauMauClientInitTaskRun15.svg'>
+<p>On the screen we have now a message that may be used to start the game</p>
+<img src='GameSpaceAbuStartGameScreen16.png'><p>MultiMauMauClientInitTask for Karli creates root objects in shared space and adds listeners</p>
+<embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun3.svg'>
+<p>The taskboard lane listener detects KarliLane's lane and adds an init task to it.</p>
+<embed type="image/svg+xml" src='ReplicationMauMauServer20.svg'>
+<p>Karli's player lane manager detects the showStartGameButton task and triggers the responsible action. The showStartGameButton action creates a label and adds a mouse listener to it:</p>
+<embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun24.svg'>
+<p>On the screen we have now a message that may be used to start the game</p>
+<img src='GameSpaceKarliStartGameScreen25.png'><p>MultiMauMauClientInitTask for Sabine creates root objects in shared space and adds listeners</p>
+<embed type="image/svg+xml" src='SabineMultiMauMauClientInitTaskRun3.svg'>
+<p>The taskboard lane listener detects SabineLane's lane and adds an init task to it.</p>
+<embed type="image/svg+xml" src='ReplicationMauMauServer29.svg'>
+<p>Sabine's player lane manager detects the showStartGameButton task and triggers the responsible action. The showStartGameButton action creates a label and adds a mouse listener to it:</p>
+<embed type="image/svg+xml" src='SabineMultiMauMauClientInitTaskRun33.svg'>
+<p>On the screen we have now a message that may be used to start the game</p>
+<img src='GameSpaceSabineStartGameScreen34.png'><p><a name = 'step_8'>Step 8: Theo signals Karli to click the Start Game button.</a></p><p><a name = 'step_9'>Step 9: Karli's clickStartButton handler raises a mouseUp event. </a></p><embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun38.svg'>
+<p><a name = 'step_10'>Step 10: StartGameAction adds a start game task to the server lane</a></p><embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun40.svg'>
+<p><a name = 'step_11'>Step 11: Theo asks Abu to show his card listeners and to do a screen dump.</a></p><p><a name = 'step_11'>Step 11: ServerStartGame handler deals the cards. </a></p><embed type="image/svg+xml" src='ReplicationMauMauServer42.svg'>
+<p><a name = 'step_12'>Step 12: Abu', maumau controler creates labels for all cards on the screen. </a></p><embed type="image/svg+xml" src='AbuMultiMauMauClientInitTaskRun45.svg'>
+<img src='GameSpaceAbuCardsDeltScreen45.png'><p><a name = 'step_13'>Step 13: testPlay7 asks Abu to play a 7.</a></p><p>The CardListener of 7 hearts calls method playToStack() on the card. This moves the card and creates a duty object. </p>
+<embed type="image/svg+xml" src='AbuMultiMauMauClientInitTaskRun49.svg'>
+<p><a name = 'step_14'>Step 14: testPlay7 asks Karli to do a screen dump and to draw cards.</a></p><p><a name = 'step_15'>Step 15: Each player's duty handler creates a label telling that Karli has to draw cards.</a></p><img src='GameSpaceKarliDraw2LabelCreatedScreen51.png'><embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun53.svg'>
+<p>Karli's DrawCardHandler draws a card for Karli</p>
+<img src='GameSpaceKarliDraw2LabelCreatedScreenAfterOneDraw54.png'><embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun56.svg'>
+<p>Karli's DrawCardHandler draws a second card.</p>
+<img src='GameSpaceKarliDraw2LabelCreatedScreenAfterSecondDraw57.png'><embed type="image/svg+xml" src='KarliMultiMauMauClientInitTaskRun59.svg'>
+
+</body>
+</html>
