@@ -57,7 +57,7 @@ public class ClickStartButtonAction implements PropertyChangeListener
 
             if (story != null)
             {
-               story.addStep("Theo asks Abu to show his card listeners and to do a screen dump.");
+               story.addStep("Karli mouse up asks Abu to show his card listeners and to do a screen dump.");
 
                BoardTask task = (BoardTask) evt.getSource();
                
