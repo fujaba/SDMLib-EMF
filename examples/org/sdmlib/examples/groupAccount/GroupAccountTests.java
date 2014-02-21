@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.sdmlib.models.classes.Association;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.transformations.TransformOp;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardManager;
 import org.sdmlib.utils.PropertyChangeInterface;
@@ -38,77 +37,6 @@ import java.beans.PropertyChangeSupport;
    
 public class GroupAccountTests implements PropertyChangeInterface 
 {
-   @Test
-   public void testGroupAccountRuleRecognition()
-   {
-      Storyboard storyboard = new Storyboard("examples");
-      
-      storyboard.add("Start situation: classes have been generated. Now create some example object structure",
-         MODELING, "zuendorf", "04.04.2012 00:26:59", 0, 0);
-      
-      GroupAccount groupAccount = new GroupAccount();
-      
-      Person albert = groupAccount.createPersons()
-      .withName("Albert");
-      
-      Person nina = groupAccount.createPersons()
-      .withName("Nina");
-      
-      Person artjom = new Person()
-      .withName("Artjom")
-      .withParent(groupAccount);
-
-      Item beer = new Item()
-      .withBuyer(albert)
-      .withDescription("Beer")
-      .withValue(12)
-      .withParent(groupAccount);
-      
-      Item bread = new Item()
-      .withBuyer(nina)
-      .withDescription("Bread")
-      .withValue(3)
-      .withParent(groupAccount);
-      
-      Item meat = new Item()
-      .withBuyer(artjom)
-      .withDescription("Meat")
-      .withValue(6)
-      .withParent(groupAccount);
-
-      // JsonIdMap createIdMap = org.sdmlib.examples.groupAccount.creators.GroupAccountCreator.createIdMap("az42");
-      storyboard.addObjectDiagram(groupAccount);
-      
-      storyboard.add("We will call updateBalances() to compute the correct balances.\n",
-         MODELING, "zuendorf", "15.04.2012 17:18:42", 8, 2);
-      
-      storyboard.markCodeStart();
-      groupAccount.updateBalances();
-      storyboard.addCode("examples");
-      
-      storyboard.add("Now see updateBalances() first as code and then as a graphical model transformation operation diagram.");
-      
-      String methodText = storyboard.getMethodText("examples", "org.sdmlib.examples.groupAccount.GroupAccount", "updateBalances()");
-      
-      storyboard.add(methodText);
-      
-      TransformOp transformOp = new TransformOp()
-      .withName("org.sdmlib.examples.groupAccount.GroupAccount.updateBalances()");
-      
-      transformOp.updateFromSourceCode("examples", "org.sdmlib.examples.groupAccount");
-      
-      storyboard.addSVGImage(transformOp.dumpTransformOpDiagram("GroupAccount.UpdateBalances02"));
-      
-      storyboard.add("The effects of executing updateBalances() is shown in: ");
-      
-      storyboard.addObjectDiagram(groupAccount);
-
-      storyboard.assertEquals("Balance for Albert is now ", 5, albert.getBalance(), 0.0001);
-
-      storyboard.assertEquals("The sum of all balances is ", 0, groupAccount.getPersons().getBalance().sum(), 0.0001);
-      
-      storyboard.dumpHTML();
-   }
 
    @Test
    public void testGroupAccountCodegen()
