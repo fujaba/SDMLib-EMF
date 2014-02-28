@@ -18,6 +18,10 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import java.util.LinkedHashSet;
+import org.sdmlib.serialization.json.JsonIdMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +40,7 @@ import java.beans.PropertyChangeListener;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -474,6 +478,16 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          return getMotivation();
       }
 
+      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
+      {
+         return getUni();
+      }
+
+      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
+      {
+         return getFriends();
+      }
+
       return null;
    }
 
@@ -500,6 +514,24 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          return true;
       }
 
+      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
+      {
+         setUni((University) value);
+         return true;
+      }
+
+      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
+      {
+         addToFriends((Student) value);
+         return true;
+      }
+      
+      if ((PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromFriends((Student) value);
+         return true;
+      }
+
       return false;
    }
 
@@ -523,6 +555,8 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    
    public void removeYou()
    {
+      setUni(null);
+      removeAllFromFriends();
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -557,6 +591,119 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    {
       setMotivation(value);
       return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   private University uni = null;
+
+   public Student withUni(University value)
+   {
+      setUni(value);
+      return this;
+   } 
+
+   public University createUni()
+   {
+      University value = new StudentImpl();
+      withUni(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+
+   public boolean addToFriends(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         if (this.friends == null)
+         {
+            this.friends = new StudentSet();
+         }
+         
+         changed = this.friends.add (value);
+         
+         if (changed)
+         {
+            value.withFriends(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromFriends(Student value)
+   {
+      boolean changed = false;
+      
+      if ((this.friends != null) && (value != null))
+      {
+         changed = this.friends.remove (value);
+         
+         if (changed)
+         {
+            value.withoutFriends(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Student withFriends(Student... value)
+   {
+      for (Student item : value)
+      {
+         addToFriends(item);
+      }
+      return this;
+   } 
+
+   public Student withoutFriends(Student... value)
+   {
+      for (Student item : value)
+      {
+         removeFromFriends(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromFriends()
+   {
+      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getFriends());
+   
+      for (Student value : tmpSet)
+      {
+         this.removeFromFriends(value);
+      }
+   }
+
+   public Student createFriends()
+   {
+      Student value = new StudentImpl();
+      withFriends(value);
+      return value;
    } 
 } //StudentImpl
 

@@ -14,6 +14,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPa
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.utils.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import java.beans.PropertyChangeListener;
  *
  * @generated
  */
-public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -367,6 +368,11 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
          return getPoints();
       }
 
+      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
+      {
+         return getRoom();
+      }
+
       return null;
    }
 
@@ -384,6 +390,12 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       if (PROPERTY_POINTS.equalsIgnoreCase(attrName))
       {
          setPoints(Integer.parseInt(value.toString()));
+         return true;
+      }
+
+      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
+      {
+         setRoom((Room) value);
          return true;
       }
 
@@ -410,6 +422,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    
    public void removeYou()
    {
+      setRoom(null);
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -433,6 +446,32 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    {
       setPoints(value);
       return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Assignment ----------------------------------- Room
+    *              assignments                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   private Room room = null;
+
+   public Assignment withRoom(Room value)
+   {
+      setRoom(value);
+      return this;
+   } 
+
+   public Room createRoom()
+   {
+      Room value = new AssignmentImpl();
+      withRoom(value);
+      return value;
    } 
 } //AssignmentImpl
 

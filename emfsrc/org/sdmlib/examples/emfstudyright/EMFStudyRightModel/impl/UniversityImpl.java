@@ -18,6 +18,11 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import java.util.LinkedHashSet;
+import org.sdmlib.serialization.json.JsonIdMap;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +39,7 @@ import java.beans.PropertyChangeListener;
  *
  * @generated
  */
-public class UniversityImpl extends MinimalEObjectImpl.Container implements University
+public class UniversityImpl extends MinimalEObjectImpl.Container implements University, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -302,6 +307,16 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
          return getName();
       }
 
+      if (PROPERTY_ROOMS.equalsIgnoreCase(attrName))
+      {
+         return getRooms();
+      }
+
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         return getStudents();
+      }
+
       return null;
    }
 
@@ -313,6 +328,30 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       if (PROPERTY_NAME.equalsIgnoreCase(attrName))
       {
          setName((String) value);
+         return true;
+      }
+
+      if (PROPERTY_ROOMS.equalsIgnoreCase(attrName))
+      {
+         addToRooms((Room) value);
+         return true;
+      }
+      
+      if ((PROPERTY_ROOMS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromRooms((Room) value);
+         return true;
+      }
+
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         addToStudents((Student) value);
+         return true;
+      }
+      
+      if ((PROPERTY_STUDENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromStudents((Student) value);
          return true;
       }
 
@@ -339,6 +378,8 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    
    public void removeYou()
    {
+      removeAllFromRooms();
+      removeAllFromStudents();
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -351,6 +392,180 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    {
       setName(value);
       return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
+
+   public boolean addToRooms(Room value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         if (this.rooms == null)
+         {
+            this.rooms = new RoomSet();
+         }
+         
+         changed = this.rooms.add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromRooms(Room value)
+   {
+      boolean changed = false;
+      
+      if ((this.rooms != null) && (value != null))
+      {
+         changed = this.rooms.remove (value);
+         
+         if (changed)
+         {
+            value.setUni(null);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public University withRooms(Room... value)
+   {
+      for (Room item : value)
+      {
+         addToRooms(item);
+      }
+      return this;
+   } 
+
+   public University withoutRooms(Room... value)
+   {
+      for (Room item : value)
+      {
+         removeFromRooms(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromRooms()
+   {
+      LinkedHashSet<Room> tmpSet = new LinkedHashSet<Room>(this.getRooms());
+   
+      for (Room value : tmpSet)
+      {
+         this.removeFromRooms(value);
+      }
+   }
+
+   public Room createRooms()
+   {
+      Room value = new UniversityImpl();
+      withRooms(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Student
+    *              uni                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   public boolean addToStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         if (this.students == null)
+         {
+            this.students = new StudentSet();
+         }
+         
+         changed = this.students.add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if ((this.students != null) && (value != null))
+      {
+         changed = this.students.remove (value);
+         
+         if (changed)
+         {
+            value.setUni(null);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public University withStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         addToStudents(item);
+      }
+      return this;
+   } 
+
+   public University withoutStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         removeFromStudents(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromStudents()
+   {
+      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getStudents());
+   
+      for (Student value : tmpSet)
+      {
+         this.removeFromStudents(value);
+      }
+   }
+
+   public Student createStudents()
+   {
+      Student value = new UniversityImpl();
+      withStudents(value);
+      return value;
    } 
 } //UniversityImpl
 

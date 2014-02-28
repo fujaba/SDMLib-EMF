@@ -4,6 +4,9 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import java.util.LinkedHashSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -140,5 +143,46 @@ public interface Room extends EObject
    public Room withCredits(int value);
 
    
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   public Room withUni(University value);
+
+   public University createUni();
+
+   
+   public static final RoomSet EMPTY_SET = new RoomSet();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
+
+   boolean addToAssignments(Assignment value);
+
+   boolean removeFromAssignments(Assignment value);
+
+   public Room withAssignments(Assignment... value);
+
+   public Room withoutAssignments(Assignment... value);
+
+   public void removeAllFromAssignments();
+
+   public Assignment createAssignments();
 } // Room
 

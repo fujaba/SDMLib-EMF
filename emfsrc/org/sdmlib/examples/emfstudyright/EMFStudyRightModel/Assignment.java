@@ -3,6 +3,7 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -120,5 +121,23 @@ public interface Assignment extends EObject
    public Assignment withPoints(int value);
 
    
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Assignment ----------------------------------- Room
+    *              assignments                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   public Assignment withRoom(Room value);
+
+   public Room createRoom();
+
+   
+   public static final AssignmentSet EMPTY_SET = new AssignmentSet();
 } // Assignment
 

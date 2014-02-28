@@ -1,165 +1,132 @@
-[
-  {
-    "id":"KE.K1",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"Project",
-      "phase":"active",
-      "lastDeveloper":"zuendorf",
-      "hoursSpend":4,
-      "subentries":[
-        {"id":"KE.K2"},
-        {"id":"KE.K6"},
-        {"id":"KE.K10"},
-        {"id":"KE.K12"}
-      ],
-      "logEntries":[
-        {"id":"KE.L5"},
-        {"id":"KE.L9"}
-      ],
-      "oldNoOfLogEntries":2,
-      "phases":"active, backlog, implementation, done, modeling"
-    }
-  },
-  {
-    "id":"KE.K2",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"EMFStudyRightClasses",
-      "phase":"backlog",
-      "lastDeveloper":"zuendorf",
-      "hoursSpend":1,
-      "parent":{"id":"KE.K1"},
-      "logEntries":[
-        {"id":"KE.L3"},
-        {"id":"KE.L4"}
-      ],
-      "oldNoOfLogEntries":2,
-      "phases":"active, backlog, implementation, done, modeling"
-    }
-  },
-  {
-    "id":"KE.K6",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"LoadEcoreCreateClassModel",
-      "phase":"backlog",
-      "lastDeveloper":"zuendorf",
-      "hoursSpend":1,
-      "parent":{"id":"KE.K1"},
-      "logEntries":[
-        {"id":"KE.L7"},
-        {"id":"KE.L8"}
-      ],
-      "oldNoOfLogEntries":2,
-      "phases":"active, backlog, implementation, done, modeling"
-    }
-  },
-  {
-    "id":"KE.K10",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"SDMCodeEnhancer",
-      "phase":"backlog",
-      "lastDeveloper":"zuendorf",
-      "parent":{"id":"KE.K1"},
-      "oldNoOfLogEntries":1,
-      "phases":"active, backlog, implementation, done"
-    }
-  },
-  {
-    "id":"KE.K12",
-    "class":"org.sdmlib.storyboards.KanbanEntry",
-    "prop":{
-      "name":"Play7",
-      "phase":"backlog",
-      "lastDeveloper":"zuendorf",
-      "parent":{"id":"KE.K1"},
-      "logEntries":[
-        {"id":"KE.L13"}
-      ],
-      "oldNoOfLogEntries":1,
-      "phases":"active, backlog, implementation, done"
-    }
-  },
-  {
-    "id":"KE.L3",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"30.12.2013 12:00:00",
-      "kanbanEntry":{"id":"KE.K2"},
-      "developer":"zuendorf",
-      "phase":"backlog"
-    }
-  },
-  {
-    "id":"KE.L4",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"03.07.2013 13:19:42",
-      "hoursSpend":1,
-      "kanbanEntry":{"id":"KE.K2"},
-      "developer":"zuendorf",
-      "phase":"modeling",
-      "comment":"Achieved: We build some example classes and then turn them into an Ecore model "
-    }
-  },
-  {
-    "id":"KE.L5",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"30.12.2013 12:00:00",
-      "hoursSpend":1,
-      "kanbanEntry":{"id":"KE.K1"},
-      "developer":"zuendorf",
-      "phase":"active",
-      "comment":"EMFStudyRightClasses: null"
-    }
-  },
-  {
-    "id":"KE.L7",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"30.12.2013 12:00:00",
-      "kanbanEntry":{"id":"KE.K6"},
-      "developer":"zuendorf",
-      "phase":"backlog"
-    }
-  },
-  {
-    "id":"KE.L8",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"03.07.2013 13:20:42",
-      "hoursSpend":1,
-      "hoursRemainingInTotal":22,
-      "kanbanEntry":{"id":"KE.K6"},
-      "developer":"zuendorf",
-      "phase":"modeling",
-      "comment":"Achieved: Reading ecore file and generating sdmlib classModel "
-    }
-  },
-  {
-    "id":"KE.L9",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"30.12.2013 12:00:00",
-      "hoursSpend":1,
-      "hoursRemainingInTotal":22,
-      "kanbanEntry":{"id":"KE.K1"},
-      "developer":"zuendorf",
-      "phase":"active",
-      "comment":"EMFStudyRightClasses: null"
-    }
-  },
-  {
-    "id":"KE.L13",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"31.01.2014 12:00:00",
-      "kanbanEntry":{"id":"KE.K12"},
-      "developer":"zuendorf",
-      "phase":"backlog"
-    }
+[{
+  "id":"KE.K1",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"Project",
+    "phase":"active",
+    "lastDeveloper":"zuendorf",
+    "hoursRemaining":22,
+    "hoursSpend":4,
+    "subentries":[
+    {"id":"KE.K2"},
+      {"id":"KE.K6"},
+      {"id":"KE.K10"},
+      {"id":"KE.K12"}
+    ],
+    "logEntries":[
+    {"id":"KE.L5"},
+      {"id":"KE.L9"}
+    ],
+    "oldNoOfLogEntries":2,
+    "phases":"active, backlog, implementation, done, modeling"
   }
-]
+},  {
+  "id":"KE.K2",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"EMFStudyRightClasses",
+    "phase":"modeling",
+    "lastDeveloper":"zuendorf",
+    "hoursSpend":1,
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L3"}
+    ],
+    "oldNoOfLogEntries":2,
+    "phases":"active, backlog, implementation, done, modeling"
+  }
+},  {
+  "id":"KE.K6",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"LoadEcoreCreateClassModel",
+    "phase":"modeling",
+    "lastDeveloper":"zuendorf",
+    "hoursRemaining":22,
+    "hoursSpend":1,
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L7"}
+    ],
+    "oldNoOfLogEntries":2,
+    "phases":"active, backlog, implementation, done, modeling"
+  }
+},  {
+  "id":"KE.K10",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"SDMCodeEnhancer",
+    "phase":"backlog",
+    "lastDeveloper":"zuendorf",
+    "parent":{"id":"KE.K1"},
+    "oldNoOfLogEntries":1,
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.K12",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"Play7",
+    "phase":"backlog",
+    "lastDeveloper":"zuendorf",
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L13"}
+    ],
+    "oldNoOfLogEntries":1,
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.L3",
+  "class":"org.sdmlib.storyboards.LogEntry",
+  "prop":{
+    "date":"03.07.2013 13:19:42",
+    "hoursSpend":1,
+    "kanbanEntry":{"id":"KE.K2"},
+    "developer":"zuendorf",
+    "phase":"modeling"
+  }
+},  {
+  "id":"KE.L5",
+  "class":"org.sdmlib.storyboards.LogEntry",
+  "prop":{
+    "date":"30.12.2013 12:00:00",
+    "hoursSpend":1,
+    "kanbanEntry":{"id":"KE.K1"},
+    "developer":"zuendorf",
+    "phase":"active",
+    "comment":"EMFStudyRightClasses: null"
+  }
+},  {
+  "id":"KE.L7",
+  "class":"org.sdmlib.storyboards.LogEntry",
+  "prop":{
+    "date":"03.07.2013 13:20:42",
+    "hoursSpend":1,
+    "hoursRemainingInTotal":22,
+    "kanbanEntry":{"id":"KE.K6"},
+    "developer":"zuendorf",
+    "phase":"modeling"
+  }
+},  {
+  "id":"KE.L9",
+  "class":"org.sdmlib.storyboards.LogEntry",
+  "prop":{
+    "date":"30.12.2013 12:00:00",
+    "hoursSpend":1,
+    "hoursRemainingInTotal":22,
+    "kanbanEntry":{"id":"KE.K1"},
+    "developer":"zuendorf",
+    "phase":"active",
+    "comment":"EMFStudyRightClasses: null"
+  }
+},  {
+  "id":"KE.L13",
+  "class":"org.sdmlib.storyboards.LogEntry",
+  "prop":{
+    "date":"31.01.2014 12:00:00",
+    "kanbanEntry":{"id":"KE.K12"},
+    "developer":"zuendorf",
+    "phase":"backlog"
+  }
+}]

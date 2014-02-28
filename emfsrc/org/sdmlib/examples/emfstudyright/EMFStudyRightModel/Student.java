@@ -4,6 +4,8 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import java.util.LinkedHashSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -174,5 +176,46 @@ public interface Student extends EObject
    public Student withMotivation(int value);
 
    
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   public Student withUni(University value);
+
+   public University createUni();
+
+   
+   public static final StudentSet EMPTY_SET = new StudentSet();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+
+   boolean addToFriends(Student value);
+
+   boolean removeFromFriends(Student value);
+
+   public Student withFriends(Student... value);
+
+   public Student withoutFriends(Student... value);
+
+   public void removeAllFromFriends();
+
+   public Student createFriends();
 } // Student
 
