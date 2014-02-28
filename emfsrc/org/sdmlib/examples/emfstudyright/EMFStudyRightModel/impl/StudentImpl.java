@@ -18,7 +18,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +36,7 @@ import org.sdmlib.utils.PropertyChangeInterface;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

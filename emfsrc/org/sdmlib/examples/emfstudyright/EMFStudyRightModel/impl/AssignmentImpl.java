@@ -14,7 +14,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPa
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +30,7 @@ import org.sdmlib.utils.PropertyChangeInterface;
  *
  * @generated
  */
-public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment, PropertyChangeInterface
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
