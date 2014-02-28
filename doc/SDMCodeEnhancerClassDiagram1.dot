@@ -1,7 +1,7 @@
 
  digraph ClassDiagram {
-    node [shape = none, fontsize = 10, fontname = "Arial"]; 
-    edge [fontsize = 10, fontname = "Arial"];
+    node [shape = none, fontsize = 10]; 
+    edge [fontsize = 10];
     
     
     _University [label=<<table color='lightgrey' border='0' cellborder='1' cellspacing='0'> <tr> <td HREF="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/University.java">University</td> </tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td align='left'>name :String</td></tr>  </table></td></tr> <tr><td><table border='0' cellborder='0' cellspacing='0'> <tr><td> </td></tr> </table></td></tr> </table>>];
@@ -19,4 +19,8 @@
     _Room ->  _RoomImpl [dir = "back" arrowtail = "empty"];
     _Assignment ->  _AssignmentImpl [dir = "back" arrowtail = "empty"];
     _Student ->  _StudentImpl [dir = "back" arrowtail = "empty"];
+    _Room -> _University [headlabel = "uni" taillabel = "rooms *" arrowhead = "none" ];
+    _Student -> _University [headlabel = "uni" taillabel = "students *" arrowhead = "none" ];
+    _Assignment -> _Room [headlabel = "room" taillabel = "assignments *" arrowhead = "none" ];
+    _Student -> _Student [headlabel = "friends *" taillabel = "friends *" arrowhead = "none" ];
 }

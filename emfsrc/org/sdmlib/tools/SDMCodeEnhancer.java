@@ -1,33 +1,38 @@
 package org.sdmlib.tools;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.junit.Test;
 import org.sdmlib.codegen.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
+import org.sdmlib.models.classes.Role;
+import org.sdmlib.models.classes.Role.R;
 import org.sdmlib.models.classes.creators.ClazzSet;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.storyboards.Storyboard;
 
 public class SDMCodeEnhancer
 {
-   public static Storyboard storyboard = null;
+   public static Storyboard story = null;
    private EPackage epackage;
    
    @Test
    public void testSDMCodeEnhancer()
    {
-      storyboard = new Storyboard();
+      story = new Storyboard();
       
       main(new String[] {"emfsrc", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel"});
       
-      storyboard.dumpHTML();
+      story.dumpHTML();
    }
    
    public static void main(String[] args)
@@ -59,30 +64,70 @@ public class SDMCodeEnhancer
       // get class model from epackage
       ClassModel model = new ClassModel();
       
+      LinkedHashMap<EClass, Clazz> classMap = new LinkedHashMap<EClass, Clazz>();
+      
       for (EClassifier eclassifier : epackage.getEClassifiers())
       {
-         // add an interface and a class to the SDMModel
-         String fullClassName = eclassifier.getInstanceTypeName();
-         Clazz sdmClass = model.createClazz(fullClassName).withInterfaze(true);
-         
-         String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclassifier.getName() + "Impl";
-         Clazz implClass = model.createClazz(implClassName).withInterfaces(sdmClass);
-         
          if (eclassifier instanceof EClass)
          {
+            // add an interface and a class to the SDMModel
+            String fullClassName = eclassifier.getInstanceTypeName();
+            Clazz sdmClass = model.createClazz(fullClassName).withInterfaze(true);
+
+            String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclassifier.getName() + "Impl";
+            Clazz implClass = model.createClazz(implClassName).withInterfaces(sdmClass);
+         
             EClass eclass = (EClass) eclassifier;
+            
+            classMap.put(eclass, sdmClass);
+            
             // add attributes
             for (EAttribute eattr : eclass.getEAttributes())
             {
                sdmClass.withAttribute(eattr.getName(), CGUtil.shortClassName(eattr.getEType().getInstanceClassName()));
             }
-
          }
       }
+
       
-      if (storyboard != null)
+      LinkedHashSet<EReference> doneERefs = new LinkedHashSet<>();
+      
+      for (EClassifier eclassifier : epackage.getEClassifiers())
       {
-         storyboard.addClassDiagram(model);
+         if (eclassifier instanceof EClass)
+         {
+            EClass eclass = (EClass) eclassifier;
+            
+            for (EReference eref : eclass.getEReferences())
+            {
+               if (!doneERefs.contains(eref))
+               {
+                  EReference oppositeERef = eref.getEOpposite();
+                  
+                  // create assoc
+                  EClass srcEClass = (EClass) eref.getEType();
+                  EClass tgtEClass = (EClass) oppositeERef.getEType();
+                  
+                  Clazz srcSDMClass = classMap.get(srcEClass);
+                  Clazz tgtSDMClass = classMap.get(tgtEClass);
+                  
+                  Role.R tgtCard = (oppositeERef.getUpperBound() == 1 ? R.ONE : R.MANY);
+                  Role.R srcCard = (eref.getUpperBound() == 1 ? R.ONE : R.MANY);
+                  
+                  srcSDMClass.withAssoc(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
+                  
+                  doneERefs.add(eref);
+                  doneERefs.add(oppositeERef);
+               }
+            }
+         }
+
+
+      }
+      
+      if (story != null)
+      {
+         story.addClassDiagram(model);
       }
       
       model.generate(rootDir);

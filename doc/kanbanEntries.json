@@ -6,8 +6,7 @@
       "name":"Project",
       "phase":"active",
       "lastDeveloper":"zuendorf",
-      "hoursRemaining":22,
-      "hoursSpend":2,
+      "hoursSpend":4,
       "subentries":[
         {"id":"KE.K2"},
         {"id":"KE.K6"},
@@ -18,7 +17,8 @@
         {"id":"KE.L5"},
         {"id":"KE.L9"}
       ],
-      "oldNoOfLogEntries":2
+      "oldNoOfLogEntries":2,
+      "phases":"active, backlog, implementation, done, modeling"
     }
   },
   {
@@ -26,7 +26,7 @@
     "class":"org.sdmlib.storyboards.KanbanEntry",
     "prop":{
       "name":"EMFStudyRightClasses",
-      "phase":"modeling",
+      "phase":"backlog",
       "lastDeveloper":"zuendorf",
       "hoursSpend":1,
       "parent":{"id":"KE.K1"},
@@ -34,7 +34,8 @@
         {"id":"KE.L3"},
         {"id":"KE.L4"}
       ],
-      "oldNoOfLogEntries":2
+      "oldNoOfLogEntries":2,
+      "phases":"active, backlog, implementation, done, modeling"
     }
   },
   {
@@ -42,16 +43,16 @@
     "class":"org.sdmlib.storyboards.KanbanEntry",
     "prop":{
       "name":"LoadEcoreCreateClassModel",
-      "phase":"modeling",
+      "phase":"backlog",
       "lastDeveloper":"zuendorf",
-      "hoursRemaining":22,
       "hoursSpend":1,
       "parent":{"id":"KE.K1"},
       "logEntries":[
         {"id":"KE.L7"},
         {"id":"KE.L8"}
       ],
-      "oldNoOfLogEntries":2
+      "oldNoOfLogEntries":2,
+      "phases":"active, backlog, implementation, done, modeling"
     }
   },
   {
@@ -62,10 +63,8 @@
       "phase":"backlog",
       "lastDeveloper":"zuendorf",
       "parent":{"id":"KE.K1"},
-      "logEntries":[
-        {"id":"KE.L11"}
-      ],
-      "oldNoOfLogEntries":1
+      "oldNoOfLogEntries":1,
+      "phases":"active, backlog, implementation, done"
     }
   },
   {
@@ -79,7 +78,8 @@
       "logEntries":[
         {"id":"KE.L13"}
       ],
-      "oldNoOfLogEntries":1
+      "oldNoOfLogEntries":1,
+      "phases":"active, backlog, implementation, done"
     }
   },
   {
@@ -150,16 +150,6 @@
       "developer":"zuendorf",
       "phase":"active",
       "comment":"EMFStudyRightClasses: null"
-    }
-  },
-  {
-    "id":"KE.L11",
-    "class":"org.sdmlib.storyboards.LogEntry",
-    "prop":{
-      "date":"31.12.2013 12:00:00",
-      "kanbanEntry":{"id":"KE.K10"},
-      "developer":"zuendorf",
-      "phase":"backlog"
     }
   },
   {
