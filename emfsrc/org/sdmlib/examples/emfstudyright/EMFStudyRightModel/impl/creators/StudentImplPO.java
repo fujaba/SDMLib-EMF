@@ -253,10 +253,11 @@ public class StudentImplPO extends PatternObject<StudentImplPO, StudentImpl>
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((Student) this.getCurrentMatch()).getFriends();
+         return ((Student) this.getCurrentMatch()).getFriendsSet();
       }
       return null;
    }
 
 }
+
 

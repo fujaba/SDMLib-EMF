@@ -1,0 +1,46 @@
+<html>
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+<p>Storyboard <a href='../emfsrc/org/sdmlib/tools/SDMUsageOfEMFStudyRight.java' type='text/x-java'>SDMUsageOfEMFStudyRight</a></p>
+<p>SDMUsageOfEMFStudyRight</p>
+<p>Start: Create initial emf object structure</p>
+<pre>      
+      University uni = EMFStudyRightModelFactory.eINSTANCE.createUniversity()
+            .withName(&quot;Study Right EMF&quot;);
+      
+      Student karli = uni.createStudents()
+            .withName(&quot;Karli&quot;)
+            .withCredits(42);
+
+      Student eyse = uni.createStudents()
+            .withName(&quot;Eyse&quot;)
+            .withCredits(63);
+      
+      
+      Student abu = uni.createStudents()
+            .withName(&quot;Abu&quot;)
+            .withCredits(23);
+      
+      Room math = uni.createRooms()
+            .withTopic(&quot;Math&quot;);
+      
+      Assignment limes = math.createAssignments()
+            .withName(&quot;Limes&quot;);
+      
+      
+      Assignment equations = math.createAssignments()
+            .withName(&quot;Equations&quot;);
+      
+      
+      Room sports = uni.createRooms()
+            .withTopic(&quot;Sports&quot;);
+      
+      Assignment pushUps = sports.createAssignments()
+            .withName(&quot;Push-ups&quot;);
+      
+      
+</pre><embed type="image/svg+xml" src='SDMUsageOfEMFStudyRight4.svg'>
+
+</body>
+</html>

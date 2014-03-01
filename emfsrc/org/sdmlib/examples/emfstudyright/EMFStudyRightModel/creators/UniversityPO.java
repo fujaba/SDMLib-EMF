@@ -56,15 +56,6 @@ public class UniversityPO extends PatternObject<UniversityPO, University>
       return this.startCreate().hasRooms(tgt).endCreate();
    }
 
-   public RoomSet getRooms()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((University) this.getCurrentMatch()).getRooms();
-      }
-      return null;
-   }
-
    public StudentPO hasStudents()
    {
       StudentPO result = new StudentPO();
@@ -90,14 +81,24 @@ public class UniversityPO extends PatternObject<UniversityPO, University>
       return this.startCreate().hasStudents(tgt).endCreate();
    }
 
+   public RoomSet getRooms()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((University) this.getCurrentMatch()).getRoomsSet();
+      }
+      return null;
+   }
+
    public StudentSet getStudents()
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((University) this.getCurrentMatch()).getStudents();
+         return ((University) this.getCurrentMatch()).getStudentsSet();
       }
       return null;
    }
 
 }
+
 

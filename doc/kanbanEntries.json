@@ -11,7 +11,8 @@
     {"id":"KE.K2"},
       {"id":"KE.K6"},
       {"id":"KE.K10"},
-      {"id":"KE.K12"}
+      {"id":"KE.K12"},
+      {"id":"KE.K14"}
     ],
     "logEntries":[
     {"id":"KE.L5"},
@@ -74,6 +75,15 @@
     {"id":"KE.L13"}
     ],
     "oldNoOfLogEntries":1,
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.K14",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"SDMUsageOfEMFStudyRight",
+    "phase":"backlog",
+    "parent":{"id":"KE.K1"},
     "phases":"active, backlog, implementation, done"
   }
 },  {

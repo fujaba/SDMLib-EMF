@@ -90,10 +90,11 @@ public class StudentPO extends PatternObject<StudentPO, Student>
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((Student) this.getCurrentMatch()).getFriends();
+         return ((Student) this.getCurrentMatch()).getFriendsSet();
       }
       return null;
    }
 
 }
+
 

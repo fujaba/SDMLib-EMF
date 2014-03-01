@@ -1,0 +1,24 @@
+graph ObjectDiagram {
+   node [shape = none, fontsize = 10, fontname = "Arial"];
+   edge [fontsize = 10, fontname = "Arial"];
+   compound=true;
+
+u1 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/UniversityImpl.java"> <u>u1 :UniversityImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Study Right EMF"</td></tr></table></td></tr></table>>];
+r5 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/RoomImpl.java"> <u>r5 :RoomImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>credits = 0</td></tr><tr><td align='left'>topic = "Math"</td></tr></table></td></tr></table>>];
+a6 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/AssignmentImpl.java"> <u>a6 :AssignmentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Limes"</td></tr><tr><td align='left'>points = 0</td></tr></table></td></tr></table>>];
+a7 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/AssignmentImpl.java"> <u>a7 :AssignmentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Equations"</td></tr><tr><td align='left'>points = 0</td></tr></table></td></tr></table>>];
+r8 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/RoomImpl.java"> <u>r8 :RoomImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>credits = 0</td></tr><tr><td align='left'>topic = "Sports"</td></tr></table></td></tr></table>>];
+a9 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/AssignmentImpl.java"> <u>a9 :AssignmentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Push-ups"</td></tr><tr><td align='left'>points = 0</td></tr></table></td></tr></table>>];
+s10 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/StudentImpl.java"> <u>s10 :StudentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Karli"</td></tr><tr><td align='left'>motivation = 0</td></tr><tr><td align='left'>credits = 42</td></tr></table></td></tr></table>>];
+s11 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/StudentImpl.java"> <u>s11 :StudentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Eyse"</td></tr><tr><td align='left'>motivation = 0</td></tr><tr><td align='left'>credits = 63</td></tr></table></td></tr></table>>];
+s12 [label=<<table border='0' cellborder='1' cellspacing='0'> <tr> <td href="../emfsrc/org/sdmlib/examples/emfstudyright/EMFStudyRightModel/impl/StudentImpl.java"> <u>s12 :StudentImpl</u></td></tr><tr><td><table border='0' cellborder='0' cellspacing='0'><tr><td align='left'>name = "Abu"</td></tr><tr><td align='left'>motivation = 0</td></tr><tr><td align='left'>credits = 23</td></tr></table></td></tr></table>>];
+
+u1 -- r5 [headlabel = "roomsSet" taillabel = "uni"];
+u1 -- r8 [headlabel = "roomsSet" taillabel = "uni"];
+u1 -- s10 [headlabel = "studentsSet" taillabel = "uni"];
+u1 -- s11 [headlabel = "studentsSet" taillabel = "uni"];
+u1 -- s12 [headlabel = "studentsSet" taillabel = "uni"];
+r5 -- a6 [headlabel = "assignmentsSet" taillabel = "room"];
+r5 -- a7 [headlabel = "assignmentsSet" taillabel = "room"];
+r8 -- a9 [headlabel = "assignmentsSet" taillabel = "room"];
+}

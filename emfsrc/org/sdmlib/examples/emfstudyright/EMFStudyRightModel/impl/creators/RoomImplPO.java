@@ -201,10 +201,11 @@ public class RoomImplPO extends PatternObject<RoomImplPO, RoomImpl>
    {
       if (this.getPattern().getHasMatch())
       {
-         return ((Room) this.getCurrentMatch()).getAssignments();
+         return ((Room) this.getCurrentMatch()).getAssignmentsSet();
       }
       return null;
    }
 
 }
+
 
