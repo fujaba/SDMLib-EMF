@@ -467,9 +467,10 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       return this;
    } 
 
+
    public Room createRoom()
    {
-      Room value = new AssignmentImpl();
+      Room value = new RoomImpl();
       withRoom(value);
       return value;
    } 

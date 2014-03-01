@@ -535,14 +535,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       return this;
    } 
 
-   public University createUni()
-   {
-      University value = new RoomImpl();
-      withUni(value);
-      return value;
-   } 
-
-   
    /********************************************************************
     * <pre>
     *              one                       many
@@ -552,29 +544,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
     */
    
    public static final String PROPERTY_ASSIGNMENTS = "assignments";
-
-   public boolean addToAssignments(Assignment value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         if (this.assignments == null)
-         {
-            this.assignments = new AssignmentSet();
-         }
-         
-         changed = this.assignments.add (value);
-         
-         if (changed)
-         {
-            value.withRoom(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
 
    public boolean removeFromAssignments(Assignment value)
    {
@@ -622,11 +591,42 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       }
    }
 
+
    public Assignment createAssignments()
    {
-      Assignment value = new RoomImpl();
+      Assignment value = new AssignmentImpl();
       withAssignments(value);
       return value;
    } 
+
+   public University createUni()
+   {
+      University value = new UniversityImpl();
+      withUni(value);
+      return value;
+   } 
+
+   public boolean addToAssignments(Assignment value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getAssignments().add (value);
+         
+         if (changed)
+         {
+            value.withRoom(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+  public AssignmentSet getAssignmentsSet()
+  {
+     return new AssignmentSet().with(getAssignments());
+  }
+
 } //RoomImpl
 

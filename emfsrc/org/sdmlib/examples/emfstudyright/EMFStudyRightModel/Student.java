@@ -217,5 +217,7 @@ public interface Student extends EObject
    public void removeAllFromFriends();
 
    public Student createFriends();
+
+   public StudentSet getFriendsSet();
 } // Student
 

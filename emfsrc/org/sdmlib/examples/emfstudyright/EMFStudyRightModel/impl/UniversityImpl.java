@@ -152,6 +152,11 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
     }
     return students;
   }
+  
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
 
   /**
    * <!-- begin-user-doc -->
@@ -405,29 +410,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    
    public static final String PROPERTY_ROOMS = "rooms";
 
-   public boolean addToRooms(Room value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         if (this.rooms == null)
-         {
-            this.rooms = new RoomSet();
-         }
-         
-         changed = this.rooms.add (value);
-         
-         if (changed)
-         {
-            value.withUni(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
    public boolean removeFromRooms(Room value)
    {
       boolean changed = false;
@@ -474,14 +456,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       }
    }
 
-   public Room createRooms()
-   {
-      Room value = new UniversityImpl();
-      withRooms(value);
-      return value;
-   } 
-
-   
    /********************************************************************
     * <pre>
     *              one                       many
@@ -491,29 +465,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
     */
    
    public static final String PROPERTY_STUDENTS = "students";
-
-   public boolean addToStudents(Student value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         if (this.students == null)
-         {
-            this.students = new StudentSet();
-         }
-         
-         changed = this.students.add (value);
-         
-         if (changed)
-         {
-            value.withUni(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
 
    public boolean removeFromStudents(Student value)
    {
@@ -561,11 +512,60 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       }
    }
 
+
    public Student createStudents()
    {
-      Student value = new UniversityImpl();
+      Student value = new StudentImpl();
       withStudents(value);
       return value;
    } 
+
+   public boolean addToRooms(Room value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getRooms().add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Room createRooms()
+   {
+      Room value = new RoomImpl();
+      withRooms(value);
+      return value;
+   } 
+
+   public boolean addToStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getStudents().add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+  public RoomSet getRoomsSet()
+  {
+     return new RoomSet().with(getRooms());
+  }
+
 } //UniversityImpl
 

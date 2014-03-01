@@ -612,14 +612,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return this;
    } 
 
-   public University createUni()
-   {
-      University value = new StudentImpl();
-      withUni(value);
-      return value;
-   } 
-
-   
    /********************************************************************
     * <pre>
     *              many                       many
@@ -629,29 +621,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     */
    
    public static final String PROPERTY_FRIENDS = "friends";
-
-   public boolean addToFriends(Student value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         if (this.friends == null)
-         {
-            this.friends = new StudentSet();
-         }
-         
-         changed = this.friends.add (value);
-         
-         if (changed)
-         {
-            value.withFriends(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
 
    public boolean removeFromFriends(Student value)
    {
@@ -705,5 +674,35 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       withFriends(value);
       return value;
    } 
+
+   public University createUni()
+   {
+      University value = new UniversityImpl();
+      withUni(value);
+      return value;
+   } 
+
+   public boolean addToFriends(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getFriends().add (value);
+         
+         if (changed)
+         {
+            value.withFriends(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+  public StudentSet getFriendsSet()
+  {
+     return new StudentSet().with(getFriends());
+  }
+
 } //StudentImpl
 

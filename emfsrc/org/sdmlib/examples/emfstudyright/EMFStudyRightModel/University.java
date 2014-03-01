@@ -144,5 +144,9 @@ public interface University extends EObject
    public void removeAllFromStudents();
 
    public Student createStudents();
+
+   public RoomSet getRoomsSet();
+
+   public StudentSet getStudentsSet();
 } // University
 

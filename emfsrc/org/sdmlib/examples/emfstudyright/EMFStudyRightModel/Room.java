@@ -184,5 +184,7 @@ public interface Room extends EObject
    public void removeAllFromAssignments();
 
    public Assignment createAssignments();
+
+   public AssignmentSet getAssignmentsSet();
 } // Room
 
