@@ -79,6 +79,21 @@ public class EMFStudyRightModelSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EMFStudyRightModelPackage.STUDENT:
+      {
+        Student student = (Student)theEObject;
+        T result = caseStudent(student);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT:
+      {
+        TeachingAssistant teachingAssistant = (TeachingAssistant)theEObject;
+        T result = caseTeachingAssistant(teachingAssistant);
+        if (result == null) result = caseStudent(teachingAssistant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EMFStudyRightModelPackage.ROOM:
       {
         Room room = (Room)theEObject;
@@ -90,13 +105,6 @@ public class EMFStudyRightModelSwitch<T> extends Switch<T>
       {
         Assignment assignment = (Assignment)theEObject;
         T result = caseAssignment(assignment);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case EMFStudyRightModelPackage.STUDENT:
-      {
-        Student student = (Student)theEObject;
-        T result = caseStudent(student);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -164,6 +172,22 @@ public class EMFStudyRightModelSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStudent(Student object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Teaching Assistant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Teaching Assistant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTeachingAssistant(TeachingAssistant object)
   {
     return null;
   }

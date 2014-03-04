@@ -65,9 +65,10 @@ public class EMFStudyRightModelFactoryImpl extends EFactoryImpl implements EMFSt
     switch (eClass.getClassifierID())
     {
       case EMFStudyRightModelPackage.UNIVERSITY: return createUniversity();
+      case EMFStudyRightModelPackage.STUDENT: return createStudent();
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT: return createTeachingAssistant();
       case EMFStudyRightModelPackage.ROOM: return createRoom();
       case EMFStudyRightModelPackage.ASSIGNMENT: return createAssignment();
-      case EMFStudyRightModelPackage.STUDENT: return createStudent();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -115,6 +116,17 @@ public class EMFStudyRightModelFactoryImpl extends EFactoryImpl implements EMFSt
   {
     StudentImpl student = new StudentImpl();
     return student;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TeachingAssistant createTeachingAssistant()
+  {
+    TeachingAssistantImpl teachingAssistant = new TeachingAssistantImpl();
+    return teachingAssistant;
   }
 
   /**

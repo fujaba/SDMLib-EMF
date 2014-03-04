@@ -148,5 +148,7 @@ public interface University extends EObject
    public RoomSet getRoomsSet();
 
    public StudentSet getStudentsSet();
+
+   public TeachingAssistant createStudentsTeachingAssistant();
 } // University
 

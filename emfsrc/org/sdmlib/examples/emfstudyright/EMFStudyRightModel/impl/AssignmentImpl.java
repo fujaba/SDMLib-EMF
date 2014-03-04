@@ -4,17 +4,25 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import java.beans.PropertyChangeSupport;
+import java.util.Collection;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import java.util.LinkedHashSet;
+import org.sdmlib.serialization.json.JsonIdMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +34,7 @@ import org.sdmlib.utils.PropertyChangeInterface;
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl#getPoints <em>Points</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl#getRoom <em>Room</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl#getStudents <em>Students</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +81,16 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    * @ordered
    */
   protected int points = POINTS_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getStudents() <em>Students</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStudents()
+   * @generated
+   * @ordered
+   */
+  protected EList<Student> students;
 
   /**
    * <!-- begin-user-doc -->
@@ -201,6 +220,21 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Student> getStudents()
+  {
+    if (students == null)
+    {
+      students = new EObjectWithInverseResolvingEList.ManyInverse<Student>(Student.class, this, EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS, EMFStudyRightModelPackage.STUDENT__DONE);
+    }
+    return students;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -210,6 +244,8 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
         if (eInternalContainer() != null)
           msgs = eBasicRemoveFromContainer(msgs);
         return basicSetRoom((Room)otherEnd, msgs);
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getStudents()).basicAdd(otherEnd, msgs);
     }
     return super.eInverseAdd(otherEnd, featureID, msgs);
   }
@@ -226,6 +262,8 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
     {
       case EMFStudyRightModelPackage.ASSIGNMENT__ROOM:
         return basicSetRoom(null, msgs);
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        return ((InternalEList<?>)getStudents()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -263,6 +301,8 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       case EMFStudyRightModelPackage.ASSIGNMENT__ROOM:
         if (resolve) return getRoom();
         return basicGetRoom();
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        return getStudents();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -272,6 +312,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -285,6 +326,10 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
         return;
       case EMFStudyRightModelPackage.ASSIGNMENT__ROOM:
         setRoom((Room)newValue);
+        return;
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        getStudents().clear();
+        getStudents().addAll((Collection<? extends Student>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -309,6 +354,9 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       case EMFStudyRightModelPackage.ASSIGNMENT__ROOM:
         setRoom((Room)null);
         return;
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        getStudents().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -329,6 +377,8 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
         return points != POINTS_EDEFAULT;
       case EMFStudyRightModelPackage.ASSIGNMENT__ROOM:
         return basicGetRoom() != null;
+      case EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS:
+        return students != null && !students.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -373,6 +423,11 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
          return getRoom();
       }
 
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         return getStudents();
+      }
+
       return null;
    }
 
@@ -396,6 +451,18 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
       {
          setRoom((Room) value);
+         return true;
+      }
+
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         addToStudents((Student) value);
+         return true;
+      }
+      
+      if ((PROPERTY_STUDENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromStudents((Student) value);
          return true;
       }
 
@@ -423,6 +490,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    public void removeYou()
    {
       setRoom(null);
+      removeAllFromStudents();
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -472,6 +540,93 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    {
       Room value = new RoomImpl();
       withRoom(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
+
+
+   public boolean addToStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getStudents().add (value);
+         
+         if (changed)
+         {
+            value.withDone(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if ((this.students != null) && (value != null))
+      {
+         changed = this.students.remove (value);
+         
+         if (changed)
+         {
+            value.withoutDone(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Assignment withStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         addToStudents(item);
+      }
+      return this;
+   } 
+
+   public Assignment withoutStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         removeFromStudents(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromStudents()
+   {
+      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getStudents());
+   
+      for (Student value : tmpSet)
+      {
+         this.removeFromStudents(value);
+      }
+   }
+
+   public Student createStudents()
+   {
+      Student value = new StudentImpl();
+      withStudents(value);
       return value;
    } 
 } //AssignmentImpl

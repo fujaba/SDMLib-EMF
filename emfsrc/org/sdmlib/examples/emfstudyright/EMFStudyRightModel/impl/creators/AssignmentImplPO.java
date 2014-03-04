@@ -10,6 +10,9 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.models.pattern.LinkConstraint;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 
 public class AssignmentImplPO extends PatternObject<AssignmentImplPO, AssignmentImpl>
 {
@@ -169,5 +172,40 @@ public class AssignmentImplPO extends PatternObject<AssignmentImplPO, Assignment
       return null;
    }
 
+   public StudentPO hasStudents()
+   {
+      StudentPO result = new StudentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Assignment.PROPERTY_STUDENTS, result);
+      
+      return result;
+   }
+
+   public StudentPO createStudents()
+   {
+      return this.startCreate().hasStudents().endCreate();
+   }
+
+   public AssignmentImplPO hasStudents(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Assignment.PROPERTY_STUDENTS);
+   }
+
+   public AssignmentImplPO createStudents(StudentPO tgt)
+   {
+      return this.startCreate().hasStudents(tgt).endCreate();
+   }
+
+   public StudentSet getStudents()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Assignment) this.getCurrentMatch()).getStudentsSet();
+      }
+      return null;
+   }
+
 }
+
 

@@ -5,7 +5,9 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.utils.StrUtil;
 import java.util.LinkedHashSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,10 +18,14 @@ import java.util.LinkedHashSet;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getName <em>Name</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getStudId <em>Stud Id</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getCredits <em>Credits</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getMotivation <em>Motivation</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getAssignmentPoints <em>Assignment Points</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getUni <em>Uni</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn <em>In</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getFriends <em>Friends</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone <em>Done</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +60,32 @@ public interface Student extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Stud Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Stud Id</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Stud Id</em>' attribute.
+   * @see #setStudId(String)
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getStudent_StudId()
+   * @model unique="false"
+   * @generated
+   */
+  String getStudId();
+
+  /**
+   * Sets the value of the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getStudId <em>Stud Id</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Stud Id</em>' attribute.
+   * @see #getStudId()
+   * @generated
+   */
+  void setStudId(String value);
 
   /**
    * Returns the value of the '<em><b>Credits</b></em>' attribute.
@@ -108,6 +140,32 @@ public interface Student extends EObject
   void setMotivation(int value);
 
   /**
+   * Returns the value of the '<em><b>Assignment Points</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Assignment Points</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Assignment Points</em>' attribute.
+   * @see #setAssignmentPoints(int)
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getStudent_AssignmentPoints()
+   * @model unique="false"
+   * @generated
+   */
+  int getAssignmentPoints();
+
+  /**
+   * Sets the value of the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getAssignmentPoints <em>Assignment Points</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Assignment Points</em>' attribute.
+   * @see #getAssignmentPoints()
+   * @generated
+   */
+  void setAssignmentPoints(int value);
+
+  /**
    * Returns the value of the '<em><b>Uni</b></em>' container reference.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University#getStudents <em>Students</em>}'.
    * <!-- begin-user-doc -->
@@ -136,6 +194,34 @@ public interface Student extends EObject
   void setUni(University value);
 
   /**
+   * Returns the value of the '<em><b>In</b></em>' reference.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getStudents <em>Students</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>In</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>In</em>' reference.
+   * @see #setIn(Room)
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getStudent_In()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getStudents
+   * @model opposite="students"
+   * @generated
+   */
+  Room getIn();
+
+  /**
+   * Sets the value of the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn <em>In</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>In</em>' reference.
+   * @see #getIn()
+   * @generated
+   */
+  void setIn(Room value);
+
+  /**
    * Returns the value of the '<em><b>Friends</b></em>' reference list.
    * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student}.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getFriends <em>Friends</em>}'.
@@ -155,7 +241,27 @@ public interface Student extends EObject
 
 
    
-   //==========================================================================
+   /**
+   * Returns the value of the '<em><b>Done</b></em>' reference list.
+   * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment}.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents <em>Students</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Done</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Done</em>' reference list.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getStudent_Done()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents
+   * @model opposite="students"
+   * @generated
+   */
+  EList<Assignment> getDone();
+
+
+
+  //==========================================================================
    
    public static final String PROPERTY_NAME = "name";
    
@@ -219,5 +325,59 @@ public interface Student extends EObject
    public Student createFriends();
 
    public StudentSet getFriendsSet();
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_STUDID = "studId";
+   
+   public Student withStudId(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_ASSIGNMENTPOINTS = "assignmentPoints";
+   
+   public Student withAssignmentPoints(int value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
+   public Student withIn(Room value);
+
+   public Room createIn();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
+
+   public AssignmentSet getDoneSet();
+
+   boolean addToDone(Assignment value);
+
+   boolean removeFromDone(Assignment value);
+
+   public Student withDone(Assignment... value);
+
+   public Student withoutDone(Assignment... value);
+
+   public void removeAllFromDone();
+
+   public Assignment createDone();
 } // Student
 

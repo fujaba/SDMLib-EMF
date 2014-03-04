@@ -121,7 +121,244 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getRoom()
    * @generated
    */
-  int ROOM = 1;
+  int ROOM = 3;
+
+  /**
+   * The meta object id for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl <em>Assignment</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getAssignment()
+   * @generated
+   */
+  int ASSIGNMENT = 4;
+
+  /**
+   * The meta object id for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl <em>Student</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getStudent()
+   * @generated
+   */
+  int STUDENT = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Stud Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__STUD_ID = 1;
+
+  /**
+   * The feature id for the '<em><b>Credits</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__CREDITS = 2;
+
+  /**
+   * The feature id for the '<em><b>Motivation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__MOTIVATION = 3;
+
+  /**
+   * The feature id for the '<em><b>Assignment Points</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__ASSIGNMENT_POINTS = 4;
+
+  /**
+   * The feature id for the '<em><b>Uni</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__UNI = 5;
+
+  /**
+   * The feature id for the '<em><b>In</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__IN = 6;
+
+  /**
+   * The feature id for the '<em><b>Friends</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__FRIENDS = 7;
+
+  /**
+   * The feature id for the '<em><b>Done</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT__DONE = 8;
+
+  /**
+   * The number of structural features of the '<em>Student</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT_FEATURE_COUNT = 9;
+
+  /**
+   * The number of operations of the '<em>Student</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STUDENT_OPERATION_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl <em>Teaching Assistant</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getTeachingAssistant()
+   * @generated
+   */
+  int TEACHING_ASSISTANT = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__NAME = STUDENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Stud Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__STUD_ID = STUDENT__STUD_ID;
+
+  /**
+   * The feature id for the '<em><b>Credits</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__CREDITS = STUDENT__CREDITS;
+
+  /**
+   * The feature id for the '<em><b>Motivation</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__MOTIVATION = STUDENT__MOTIVATION;
+
+  /**
+   * The feature id for the '<em><b>Assignment Points</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__ASSIGNMENT_POINTS = STUDENT__ASSIGNMENT_POINTS;
+
+  /**
+   * The feature id for the '<em><b>Uni</b></em>' container reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__UNI = STUDENT__UNI;
+
+  /**
+   * The feature id for the '<em><b>In</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__IN = STUDENT__IN;
+
+  /**
+   * The feature id for the '<em><b>Friends</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__FRIENDS = STUDENT__FRIENDS;
+
+  /**
+   * The feature id for the '<em><b>Done</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__DONE = STUDENT__DONE;
+
+  /**
+   * The feature id for the '<em><b>Room</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__ROOM = STUDENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Teaching Assistant</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT_FEATURE_COUNT = STUDENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of operations of the '<em>Teaching Assistant</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT_OPERATION_COUNT = STUDENT_OPERATION_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Topic</b></em>' attribute.
@@ -151,13 +388,40 @@ public interface EMFStudyRightModelPackage extends EPackage
   int ROOM__UNI = 2;
 
   /**
+   * The feature id for the '<em><b>Doors</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM__DOORS = 3;
+
+  /**
    * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOM__ASSIGNMENTS = 3;
+  int ROOM__ASSIGNMENTS = 4;
+
+  /**
+   * The feature id for the '<em><b>Students</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM__STUDENTS = 5;
+
+  /**
+   * The feature id for the '<em><b>Tas</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM__TAS = 6;
 
   /**
    * The number of structural features of the '<em>Room</em>' class.
@@ -166,7 +430,7 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_FEATURE_COUNT = 4;
+  int ROOM_FEATURE_COUNT = 7;
 
   /**
    * The number of operations of the '<em>Room</em>' class.
@@ -176,16 +440,6 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @ordered
    */
   int ROOM_OPERATION_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl <em>Assignment</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl
-   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getAssignment()
-   * @generated
-   */
-  int ASSIGNMENT = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -215,13 +469,22 @@ public interface EMFStudyRightModelPackage extends EPackage
   int ASSIGNMENT__ROOM = 2;
 
   /**
+   * The feature id for the '<em><b>Students</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNMENT__STUDENTS = 3;
+
+  /**
    * The number of structural features of the '<em>Assignment</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSIGNMENT_FEATURE_COUNT = 3;
+  int ASSIGNMENT_FEATURE_COUNT = 4;
 
   /**
    * The number of operations of the '<em>Assignment</em>' class.
@@ -231,79 +494,6 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @ordered
    */
   int ASSIGNMENT_OPERATION_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl <em>Student</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl
-   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getStudent()
-   * @generated
-   */
-  int STUDENT = 3;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Credits</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT__CREDITS = 1;
-
-  /**
-   * The feature id for the '<em><b>Motivation</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT__MOTIVATION = 2;
-
-  /**
-   * The feature id for the '<em><b>Uni</b></em>' container reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT__UNI = 3;
-
-  /**
-   * The feature id for the '<em><b>Friends</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT__FRIENDS = 4;
-
-  /**
-   * The number of structural features of the '<em>Student</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT_FEATURE_COUNT = 5;
-
-  /**
-   * The number of operations of the '<em>Student</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STUDENT_OPERATION_COUNT = 0;
 
 
   /**
@@ -393,6 +583,17 @@ public interface EMFStudyRightModelPackage extends EPackage
   EReference getRoom_Uni();
 
   /**
+   * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getDoors <em>Doors</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Doors</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getDoors()
+   * @see #getRoom()
+   * @generated
+   */
+  EReference getRoom_Doors();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getAssignments <em>Assignments</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -402,6 +603,28 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @generated
    */
   EReference getRoom_Assignments();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getStudents <em>Students</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Students</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getStudents()
+   * @see #getRoom()
+   * @generated
+   */
+  EReference getRoom_Students();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getTas <em>Tas</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Tas</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getTas()
+   * @see #getRoom()
+   * @generated
+   */
+  EReference getRoom_Tas();
 
   /**
    * Returns the meta object for class '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment <em>Assignment</em>}'.
@@ -447,6 +670,17 @@ public interface EMFStudyRightModelPackage extends EPackage
   EReference getAssignment_Room();
 
   /**
+   * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents <em>Students</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Students</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents()
+   * @see #getAssignment()
+   * @generated
+   */
+  EReference getAssignment_Students();
+
+  /**
    * Returns the meta object for class '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student <em>Student</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -466,6 +700,17 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @generated
    */
   EAttribute getStudent_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getStudId <em>Stud Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Stud Id</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getStudId()
+   * @see #getStudent()
+   * @generated
+   */
+  EAttribute getStudent_StudId();
 
   /**
    * Returns the meta object for the attribute '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getCredits <em>Credits</em>}'.
@@ -490,6 +735,17 @@ public interface EMFStudyRightModelPackage extends EPackage
   EAttribute getStudent_Motivation();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getAssignmentPoints <em>Assignment Points</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Assignment Points</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getAssignmentPoints()
+   * @see #getStudent()
+   * @generated
+   */
+  EAttribute getStudent_AssignmentPoints();
+
+  /**
    * Returns the meta object for the container reference '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getUni <em>Uni</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -501,6 +757,17 @@ public interface EMFStudyRightModelPackage extends EPackage
   EReference getStudent_Uni();
 
   /**
+   * Returns the meta object for the reference '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn <em>In</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>In</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn()
+   * @see #getStudent()
+   * @generated
+   */
+  EReference getStudent_In();
+
+  /**
    * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getFriends <em>Friends</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -510,6 +777,38 @@ public interface EMFStudyRightModelPackage extends EPackage
    * @generated
    */
   EReference getStudent_Friends();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone <em>Done</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Done</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone()
+   * @see #getStudent()
+   * @generated
+   */
+  EReference getStudent_Done();
+
+  /**
+   * Returns the meta object for class '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant <em>Teaching Assistant</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Teaching Assistant</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant
+   * @generated
+   */
+  EClass getTeachingAssistant();
+
+  /**
+   * Returns the meta object for the reference '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getRoom <em>Room</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Room</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getRoom()
+   * @see #getTeachingAssistant()
+   * @generated
+   */
+  EReference getTeachingAssistant_Room();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -604,12 +903,36 @@ public interface EMFStudyRightModelPackage extends EPackage
     EReference ROOM__UNI = eINSTANCE.getRoom_Uni();
 
     /**
+     * The meta object literal for the '<em><b>Doors</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOM__DOORS = eINSTANCE.getRoom_Doors();
+
+    /**
      * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference ROOM__ASSIGNMENTS = eINSTANCE.getRoom_Assignments();
+
+    /**
+     * The meta object literal for the '<em><b>Students</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOM__STUDENTS = eINSTANCE.getRoom_Students();
+
+    /**
+     * The meta object literal for the '<em><b>Tas</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOM__TAS = eINSTANCE.getRoom_Tas();
 
     /**
      * The meta object literal for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -646,6 +969,14 @@ public interface EMFStudyRightModelPackage extends EPackage
     EReference ASSIGNMENT__ROOM = eINSTANCE.getAssignment_Room();
 
     /**
+     * The meta object literal for the '<em><b>Students</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSIGNMENT__STUDENTS = eINSTANCE.getAssignment_Students();
+
+    /**
      * The meta object literal for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl <em>Student</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -664,6 +995,14 @@ public interface EMFStudyRightModelPackage extends EPackage
     EAttribute STUDENT__NAME = eINSTANCE.getStudent_Name();
 
     /**
+     * The meta object literal for the '<em><b>Stud Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STUDENT__STUD_ID = eINSTANCE.getStudent_StudId();
+
+    /**
      * The meta object literal for the '<em><b>Credits</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -680,6 +1019,14 @@ public interface EMFStudyRightModelPackage extends EPackage
     EAttribute STUDENT__MOTIVATION = eINSTANCE.getStudent_Motivation();
 
     /**
+     * The meta object literal for the '<em><b>Assignment Points</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STUDENT__ASSIGNMENT_POINTS = eINSTANCE.getStudent_AssignmentPoints();
+
+    /**
      * The meta object literal for the '<em><b>Uni</b></em>' container reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -688,12 +1035,46 @@ public interface EMFStudyRightModelPackage extends EPackage
     EReference STUDENT__UNI = eINSTANCE.getStudent_Uni();
 
     /**
+     * The meta object literal for the '<em><b>In</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STUDENT__IN = eINSTANCE.getStudent_In();
+
+    /**
      * The meta object literal for the '<em><b>Friends</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference STUDENT__FRIENDS = eINSTANCE.getStudent_Friends();
+
+    /**
+     * The meta object literal for the '<em><b>Done</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STUDENT__DONE = eINSTANCE.getStudent_Done();
+
+    /**
+     * The meta object literal for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl <em>Teaching Assistant</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl
+     * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.EMFStudyRightModelPackageImpl#getTeachingAssistant()
+     * @generated
+     */
+    EClass TEACHING_ASSISTANT = eINSTANCE.getTeachingAssistant();
+
+    /**
+     * The meta object literal for the '<em><b>Room</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEACHING_ASSISTANT__ROOM = eINSTANCE.getTeachingAssistant_Room();
 
   }
 

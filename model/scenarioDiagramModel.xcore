@@ -11,14 +11,42 @@ class University
 	contains Student[] students opposite uni
 }
 
+class Student 
+{
+	String name
+	String studId
+	int credits
+	int motivation
+	int assignmentPoints
+	
+	container University uni opposite students
+	
+	refers Room in opposite students
+	
+	refers Student[] friends opposite friends
+	
+	refers Assignment[] done opposite students
+}
+
+class TeachingAssistant extends Student
+{
+	refers Room room opposite tas
+}
+
 class Room 
 {
 	String topic
 	int credits
 	
 	container University uni opposite rooms
+	
+	refers Room[] doors opposite doors
 
 	contains Assignment[] assignments opposite room	
+	
+	refers Student[] students opposite in
+	
+	refers TeachingAssistant[] tas opposite room
 }
 
 class Assignment
@@ -27,15 +55,7 @@ class Assignment
 	int points
 	
 	container Room room opposite assignments
+	
+	refers Student[] students opposite done
 }
 
-class Student 
-{
-	String name
-	int credits
-	int motivation
-	
-	container University uni opposite students
-	
-	refers Student[] friends opposite friends
-}

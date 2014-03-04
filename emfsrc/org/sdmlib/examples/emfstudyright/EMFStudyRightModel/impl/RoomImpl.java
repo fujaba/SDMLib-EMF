@@ -11,11 +11,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
@@ -23,6 +26,9 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentS
 import java.util.LinkedHashSet;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +40,10 @@ import org.sdmlib.utils.PropertyChangeInterface;
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getTopic <em>Topic</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getCredits <em>Credits</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getUni <em>Uni</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getStudents <em>Students</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl#getTas <em>Tas</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +92,16 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
   protected int credits = CREDITS_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getDoors() <em>Doors</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDoors()
+   * @generated
+   * @ordered
+   */
+  protected EList<Room> doors;
+
+  /**
    * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -91,6 +110,26 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
    * @ordered
    */
   protected EList<Assignment> assignments;
+
+  /**
+   * The cached value of the '{@link #getStudents() <em>Students</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStudents()
+   * @generated
+   * @ordered
+   */
+  protected EList<Student> students;
+
+  /**
+   * The cached value of the '{@link #getTas() <em>Tas</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTas()
+   * @generated
+   * @ordered
+   */
+  protected EList<TeachingAssistant> tas;
 
   /**
    * <!-- begin-user-doc -->
@@ -220,6 +259,20 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Room> getDoors()
+  {
+    if (doors == null)
+    {
+      doors = new EObjectWithInverseResolvingEList.ManyInverse<Room>(Room.class, this, EMFStudyRightModelPackage.ROOM__DOORS, EMFStudyRightModelPackage.ROOM__DOORS);
+    }
+    return doors;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Assignment> getAssignments()
   {
     if (assignments == null)
@@ -227,6 +280,34 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       assignments = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, EMFStudyRightModelPackage.ROOM__ASSIGNMENTS, EMFStudyRightModelPackage.ASSIGNMENT__ROOM);
     }
     return assignments;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Student> getStudents()
+  {
+    if (students == null)
+    {
+      students = new EObjectWithInverseResolvingEList<Student>(Student.class, this, EMFStudyRightModelPackage.ROOM__STUDENTS, EMFStudyRightModelPackage.STUDENT__IN);
+    }
+    return students;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<TeachingAssistant> getTas()
+  {
+    if (tas == null)
+    {
+      tas = new EObjectWithInverseResolvingEList<TeachingAssistant>(TeachingAssistant.class, this, EMFStudyRightModelPackage.ROOM__TAS, EMFStudyRightModelPackage.TEACHING_ASSISTANT__ROOM);
+    }
+    return tas;
   }
 
   /**
@@ -244,8 +325,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
         if (eInternalContainer() != null)
           msgs = eBasicRemoveFromContainer(msgs);
         return basicSetUni((University)otherEnd, msgs);
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getDoors()).basicAdd(otherEnd, msgs);
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignments()).basicAdd(otherEnd, msgs);
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getStudents()).basicAdd(otherEnd, msgs);
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getTas()).basicAdd(otherEnd, msgs);
     }
     return super.eInverseAdd(otherEnd, featureID, msgs);
   }
@@ -262,8 +349,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
     {
       case EMFStudyRightModelPackage.ROOM__UNI:
         return basicSetUni(null, msgs);
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        return ((InternalEList<?>)getDoors()).basicRemove(otherEnd, msgs);
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        return ((InternalEList<?>)getStudents()).basicRemove(otherEnd, msgs);
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        return ((InternalEList<?>)getTas()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -301,8 +394,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       case EMFStudyRightModelPackage.ROOM__UNI:
         if (resolve) return getUni();
         return basicGetUni();
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        return getDoors();
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         return getAssignments();
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        return getStudents();
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        return getTas();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -327,9 +426,21 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       case EMFStudyRightModelPackage.ROOM__UNI:
         setUni((University)newValue);
         return;
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        getDoors().clear();
+        getDoors().addAll((Collection<? extends Room>)newValue);
+        return;
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         getAssignments().clear();
         getAssignments().addAll((Collection<? extends Assignment>)newValue);
+        return;
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        getStudents().clear();
+        getStudents().addAll((Collection<? extends Student>)newValue);
+        return;
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        getTas().clear();
+        getTas().addAll((Collection<? extends TeachingAssistant>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -354,8 +465,17 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       case EMFStudyRightModelPackage.ROOM__UNI:
         setUni((University)null);
         return;
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        getDoors().clear();
+        return;
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         getAssignments().clear();
+        return;
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        getStudents().clear();
+        return;
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        getTas().clear();
         return;
     }
     super.eUnset(featureID);
@@ -377,8 +497,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
         return credits != CREDITS_EDEFAULT;
       case EMFStudyRightModelPackage.ROOM__UNI:
         return basicGetUni() != null;
+      case EMFStudyRightModelPackage.ROOM__DOORS:
+        return doors != null && !doors.isEmpty();
       case EMFStudyRightModelPackage.ROOM__ASSIGNMENTS:
         return assignments != null && !assignments.isEmpty();
+      case EMFStudyRightModelPackage.ROOM__STUDENTS:
+        return students != null && !students.isEmpty();
+      case EMFStudyRightModelPackage.ROOM__TAS:
+        return tas != null && !tas.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -428,6 +554,21 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          return getAssignments();
       }
 
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         return getStudents();
+      }
+
+      if (PROPERTY_TAS.equalsIgnoreCase(attrName))
+      {
+         return getTas();
+      }
+
+      if (PROPERTY_DOORS.equalsIgnoreCase(attrName))
+      {
+         return getDoors();
+      }
+
       return null;
    }
 
@@ -466,6 +607,42 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          return true;
       }
 
+      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
+      {
+         addToStudents((Student) value);
+         return true;
+      }
+      
+      if ((PROPERTY_STUDENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromStudents((Student) value);
+         return true;
+      }
+
+      if (PROPERTY_TAS.equalsIgnoreCase(attrName))
+      {
+         addToTas((TeachingAssistant) value);
+         return true;
+      }
+      
+      if ((PROPERTY_TAS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromTas((TeachingAssistant) value);
+         return true;
+      }
+
+      if (PROPERTY_DOORS.equalsIgnoreCase(attrName))
+      {
+         addToDoors((Room) value);
+         return true;
+      }
+      
+      if ((PROPERTY_DOORS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromDoors((Room) value);
+         return true;
+      }
+
       return false;
    }
 
@@ -491,6 +668,9 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
    {
       setUni(null);
       removeAllFromAssignments();
+      removeAllFromStudents();
+      removeAllFromTas();
+      removeAllFromDoors();
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -628,5 +808,266 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
      return new AssignmentSet().with(getAssignments());
   }
 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
+
+
+   public boolean addToStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getStudents().add (value);
+         
+         if (changed)
+         {
+            value.withIn(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if ((this.students != null) && (value != null))
+      {
+         changed = this.students.remove (value);
+         
+         if (changed)
+         {
+            value.setIn(null);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Room withStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         addToStudents(item);
+      }
+      return this;
+   } 
+
+   public Room withoutStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         removeFromStudents(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromStudents()
+   {
+      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getStudents());
+   
+      for (Student value : tmpSet)
+      {
+         this.removeFromStudents(value);
+      }
+   }
+
+   public Student createStudents()
+   {
+      Student value = new StudentImpl();
+      withStudents(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+  public TeachingAssistantSet getTasSet()
+  {
+     return new TeachingAssistantSet().with(getTas());
+  }
+
+
+   public boolean addToTas(TeachingAssistant value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getTas().add (value);
+         
+         if (changed)
+         {
+            value.withRoom(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromTas(TeachingAssistant value)
+   {
+      boolean changed = false;
+      
+      if ((this.tas != null) && (value != null))
+      {
+         changed = this.tas.remove (value);
+         
+         if (changed)
+         {
+            value.setRoom(null);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Room withTas(TeachingAssistant... value)
+   {
+      for (TeachingAssistant item : value)
+      {
+         addToTas(item);
+      }
+      return this;
+   } 
+
+   public Room withoutTas(TeachingAssistant... value)
+   {
+      for (TeachingAssistant item : value)
+      {
+         removeFromTas(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromTas()
+   {
+      LinkedHashSet<TeachingAssistant> tmpSet = new LinkedHashSet<TeachingAssistant>(this.getTas());
+   
+      for (TeachingAssistant value : tmpSet)
+      {
+         this.removeFromTas(value);
+      }
+   }
+
+   public TeachingAssistant createTas()
+   {
+      TeachingAssistant value = new TeachingAssistantImpl();
+      withTas(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+  public RoomSet getDoorsSet()
+  {
+     return new RoomSet().with(getDoors());
+  }
+
+
+   public boolean addToDoors(Room value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getDoors().add (value);
+         
+         if (changed)
+         {
+            value.withDoors(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromDoors(Room value)
+   {
+      boolean changed = false;
+      
+      if ((this.doors != null) && (value != null))
+      {
+         changed = this.doors.remove (value);
+         
+         if (changed)
+         {
+            value.withoutDoors(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Room withDoors(Room... value)
+   {
+      for (Room item : value)
+      {
+         addToDoors(item);
+      }
+      return this;
+   } 
+
+   public Room withoutDoors(Room... value)
+   {
+      for (Room item : value)
+      {
+         removeFromDoors(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromDoors()
+   {
+      LinkedHashSet<Room> tmpSet = new LinkedHashSet<Room>(this.getDoors());
+   
+      for (Room value : tmpSet)
+      {
+         this.removeFromDoors(value);
+      }
+   }
+
+   public Room createDoors()
+   {
+      Room value = new RoomImpl();
+      withDoors(value);
+      return value;
+   } 
 } //RoomImpl
 

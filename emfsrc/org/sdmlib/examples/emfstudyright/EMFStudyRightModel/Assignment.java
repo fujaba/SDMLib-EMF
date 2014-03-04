@@ -2,8 +2,11 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import java.util.LinkedHashSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +19,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentS
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getName <em>Name</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getPoints <em>Points</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getRoom <em>Room</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents <em>Students</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,7 +111,27 @@ public interface Assignment extends EObject
 
 
    
-   //==========================================================================
+   /**
+   * Returns the value of the '<em><b>Students</b></em>' reference list.
+   * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student}.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone <em>Done</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Students</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Students</em>' reference list.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getAssignment_Students()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone
+   * @model opposite="done"
+   * @generated
+   */
+  EList<Student> getStudents();
+
+
+
+  //==========================================================================
    
    public static final String PROPERTY_NAME = "name";
    
@@ -139,5 +163,30 @@ public interface Assignment extends EObject
 
    
    public static final AssignmentSet EMPTY_SET = new AssignmentSet();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   public StudentSet getStudentsSet();
+
+   boolean addToStudents(Student value);
+
+   boolean removeFromStudents(Student value);
+
+   public Assignment withStudents(Student... value);
+
+   public Assignment withoutStudents(Student... value);
+
+   public void removeAllFromStudents();
+
+   public Student createStudents();
 } // Assignment
 

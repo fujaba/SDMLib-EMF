@@ -12,6 +12,11 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.Studen
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 public class StudentImplPO extends PatternObject<StudentImplPO, StudentImpl>
 {
@@ -258,6 +263,183 @@ public class StudentImplPO extends PatternObject<StudentImplPO, StudentImpl>
       return null;
    }
 
+   public StudentImplPO hasStudId(String value)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(StudentImpl.PROPERTY_STUDID)
+      .withTgtValue(value)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public StudentImplPO hasStudId(String lower, String upper)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(StudentImpl.PROPERTY_STUDID)
+      .withTgtValue(lower)
+      .withUpperTgtValue(upper)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public StudentImplPO createStudId(String value)
+   {
+      this.startCreate().hasStudId(value).endCreate();
+      return this;
+   }
+   
+   public String getStudId()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((StudentImpl) getCurrentMatch()).getStudId();
+      }
+      return null;
+   }
+   
+   public StudentImplPO withStudId(String value)
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         ((StudentImpl) getCurrentMatch()).setStudId(value);
+      }
+      return this;
+   }
+   
+   public StudentImplPO hasAssignmentPoints(int value)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(StudentImpl.PROPERTY_ASSIGNMENTPOINTS)
+      .withTgtValue(value)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public StudentImplPO hasAssignmentPoints(int lower, int upper)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(StudentImpl.PROPERTY_ASSIGNMENTPOINTS)
+      .withTgtValue(lower)
+      .withUpperTgtValue(upper)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public StudentImplPO createAssignmentPoints(int value)
+   {
+      this.startCreate().hasAssignmentPoints(value).endCreate();
+      return this;
+   }
+   
+   public int getAssignmentPoints()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((StudentImpl) getCurrentMatch()).getAssignmentPoints();
+      }
+      return 0;
+   }
+   
+   public StudentImplPO withAssignmentPoints(int value)
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         ((StudentImpl) getCurrentMatch()).setAssignmentPoints(value);
+      }
+      return this;
+   }
+   
+   public RoomPO hasIn()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_IN, result);
+      
+      return result;
+   }
+
+   public RoomPO createIn()
+   {
+      return this.startCreate().hasIn().endCreate();
+   }
+
+   public StudentImplPO hasIn(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_IN);
+   }
+
+   public StudentImplPO createIn(RoomPO tgt)
+   {
+      return this.startCreate().hasIn(tgt).endCreate();
+   }
+
+   public AssignmentPO hasDone()
+   {
+      AssignmentPO result = new AssignmentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_DONE, result);
+      
+      return result;
+   }
+
+   public AssignmentPO createDone()
+   {
+      return this.startCreate().hasDone().endCreate();
+   }
+
+   public StudentImplPO hasDone(AssignmentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_DONE);
+   }
+
+   public StudentImplPO createDone(AssignmentPO tgt)
+   {
+      return this.startCreate().hasDone(tgt).endCreate();
+   }
+
+   public Room getIn()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getIn();
+      }
+      return null;
+   }
+
+   public AssignmentSet getDone()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getDoneSet();
+      }
+      return null;
+   }
+
 }
+
+
+
 
 

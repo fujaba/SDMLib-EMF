@@ -31,6 +31,8 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 
 public class AssignmentImplSet extends SDMSet<AssignmentImpl>
 {
@@ -230,5 +232,64 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       return this;
    }
 
+   public StudentSet getStudents()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (AssignmentImpl obj : this)
+      {
+         result.with(obj.getStudents());
+      }
+      
+      return result;
+   }
+
+   public AssignmentImplSet hasStudents(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      AssignmentImplSet answer = new AssignmentImplSet();
+      
+      for (AssignmentImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getStudents()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public AssignmentImplSet withStudents(Student value)
+   {
+      for (AssignmentImpl obj : this)
+      {
+         obj.withStudents(value);
+      }
+      
+      return this;
+   }
+
+   public AssignmentImplSet withoutStudents(Student value)
+   {
+      for (AssignmentImpl obj : this)
+      {
+         obj.withoutStudents(value);
+      }
+      
+      return this;
+   }
+
 }
+
 

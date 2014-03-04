@@ -12,6 +12,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.models.pattern.AttributeConstraint;
 
 public class UniversityPO extends PatternObject<UniversityPO, University>
 {
@@ -99,6 +100,60 @@ public class UniversityPO extends PatternObject<UniversityPO, University>
       return null;
    }
 
+   public UniversityPO hasName(String value)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(University.PROPERTY_NAME)
+      .withTgtValue(value)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public UniversityPO hasName(String lower, String upper)
+   {
+      AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
+      .withAttrName(University.PROPERTY_NAME)
+      .withTgtValue(lower)
+      .withUpperTgtValue(upper)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public UniversityPO createName(String value)
+   {
+      this.startCreate().hasName(value).endCreate();
+      return this;
+   }
+   
+   public String getName()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((University) getCurrentMatch()).getName();
+      }
+      return null;
+   }
+   
+   public UniversityPO withName(String value)
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         ((University) getCurrentMatch()).setName(value);
+      }
+      return this;
+   }
+   
 }
+
 
 

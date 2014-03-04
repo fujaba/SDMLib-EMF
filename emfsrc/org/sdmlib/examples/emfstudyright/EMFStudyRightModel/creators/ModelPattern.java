@@ -17,6 +17,10 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 
 public class ModelPattern extends Pattern
 {
@@ -223,6 +227,55 @@ public class ModelPattern extends Pattern
       return value;
    } 
 
+   public TeachingAssistantPO hasElementTeachingAssistantPO()
+   {
+      TeachingAssistantPO value = new TeachingAssistantPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public TeachingAssistantPO hasElementTeachingAssistantPO(TeachingAssistant hostGraphObject)
+   {
+      TeachingAssistantPO value = new TeachingAssistantPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+   public TeachingAssistantImplPO hasElementTeachingAssistantImplPO()
+   {
+      TeachingAssistantImplPO value = new TeachingAssistantImplPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public TeachingAssistantImplPO hasElementTeachingAssistantImplPO(TeachingAssistantImpl hostGraphObject)
+   {
+      TeachingAssistantImplPO value = new TeachingAssistantImplPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
 }
+
 
 

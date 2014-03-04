@@ -59,6 +59,15 @@ public interface EMFStudyRightModelFactory extends EFactory
   Student createStudent();
 
   /**
+   * Returns a new object of class '<em>Teaching Assistant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Teaching Assistant</em>'.
+   * @generated
+   */
+  TeachingAssistant createTeachingAssistant();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

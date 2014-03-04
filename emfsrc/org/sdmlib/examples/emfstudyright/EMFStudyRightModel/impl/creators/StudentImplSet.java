@@ -33,6 +33,10 @@ import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class StudentImplSet extends SDMSet<StudentImpl>
 {
@@ -342,5 +346,216 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       return this;
    }
 
+   public StringList getStudId()
+   {
+      StringList result = new StringList();
+      
+      for (StudentImpl obj : this)
+      {
+         result.add(obj.getStudId());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasStudId(String value)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (value.equals(obj.getStudId()))
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasStudId(String lower, String upper)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet withStudId(String value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.setStudId(value);
+      }
+      
+      return this;
+   }
+
+   public intList getAssignmentPoints()
+   {
+      intList result = new intList();
+      
+      for (StudentImpl obj : this)
+      {
+         result.add(obj.getAssignmentPoints());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasAssignmentPoints(int value)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (value == obj.getAssignmentPoints())
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasAssignmentPoints(int lower, int upper)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (lower <= obj.getAssignmentPoints() && obj.getAssignmentPoints() <= upper)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet withAssignmentPoints(int value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.setAssignmentPoints(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet getIn()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (StudentImpl obj : this)
+      {
+         result.with(obj.getIn());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasIn(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentImplSet answer = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (neighbors.contains(obj.getIn()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentImplSet withIn(Room value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withIn(value);
+      }
+      
+      return this;
+   }
+
+   public AssignmentSet getDone()
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (StudentImpl obj : this)
+      {
+         result.with(obj.getDone());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasDone(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentImplSet answer = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getDone()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentImplSet withDone(Assignment value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withDone(value);
+      }
+      
+      return this;
+   }
+
+   public StudentImplSet withoutDone(Assignment value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withoutDone(value);
+      }
+      
+      return this;
+   }
+
 }
+
 

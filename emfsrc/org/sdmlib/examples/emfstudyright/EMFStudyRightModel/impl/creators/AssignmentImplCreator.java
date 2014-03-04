@@ -13,6 +13,7 @@ public class AssignmentImplCreator extends EntityFactory
       Assignment.PROPERTY_NAME,
       Assignment.PROPERTY_POINTS,
       Assignment.PROPERTY_ROOM,
+      Assignment.PROPERTY_STUDENTS,
    };
    
    public String[] getProperties()
@@ -53,6 +54,18 @@ public class AssignmentImplCreator extends EntityFactory
       ((AssignmentImpl) entity).removeYou();
    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

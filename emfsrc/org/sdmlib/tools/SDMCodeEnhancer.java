@@ -70,15 +70,15 @@ public class SDMCodeEnhancer
       {
          if (eclassifier instanceof EClass)
          {
-            // add an interface and a class to the SDMModel
-            String fullClassName = eclassifier.getInstanceTypeName();
-            Clazz sdmClass = model.createClazz(fullClassName).withInterfaze(true);
-
-            String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclassifier.getName() + "Impl";
-            Clazz implClass = model.createClazz(implClassName).withInterfaces(sdmClass);
-         
             EClass eclass = (EClass) eclassifier;
             
+            // add an interface and a class to the SDMModel
+            String fullClassName = eclass.getInstanceTypeName();
+            Clazz sdmClass = model.createClazz(fullClassName).withInterfaze(true);
+
+            String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclass.getName() + "Impl";
+            Clazz implClass = model.createClazz(implClassName).withInterfaces(sdmClass);
+         
             classMap.put(eclass, sdmClass);
             
             // add attributes
@@ -98,6 +98,14 @@ public class SDMCodeEnhancer
          {
             EClass eclass = (EClass) eclassifier;
             
+            if ( ! eclass.getESuperTypes().isEmpty())
+            {
+               EClass eSuperClass = eclass.getESuperTypes().get(0);
+               Clazz sdmSuperClass = classMap.get(eSuperClass);
+               Clazz sdmClass = classMap.get(eclass);
+               sdmClass.withSuperClass(sdmSuperClass);
+            }
+               
             for (EReference eref : eclass.getEReferences())
             {
                if (!doneERefs.contains(eref))

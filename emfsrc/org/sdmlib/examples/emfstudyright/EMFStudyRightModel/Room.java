@@ -6,7 +6,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import java.util.LinkedHashSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +21,10 @@ import java.util.LinkedHashSet;
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getTopic <em>Topic</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getCredits <em>Credits</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getUni <em>Uni</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getDoors <em>Doors</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getStudents <em>Students</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getTas <em>Tas</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +115,24 @@ public interface Room extends EObject
   void setUni(University value);
 
   /**
+   * Returns the value of the '<em><b>Doors</b></em>' reference list.
+   * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room}.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getDoors <em>Doors</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Doors</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Doors</em>' reference list.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getRoom_Doors()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room#getDoors
+   * @model opposite="doors"
+   * @generated
+   */
+  EList<Room> getDoors();
+
+  /**
    * Returns the value of the '<em><b>Assignments</b></em>' containment reference list.
    * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment}.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getRoom <em>Room</em>}'.
@@ -129,7 +152,45 @@ public interface Room extends EObject
 
 
    
-   //==========================================================================
+   /**
+   * Returns the value of the '<em><b>Students</b></em>' reference list.
+   * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student}.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn <em>In</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Students</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Students</em>' reference list.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getRoom_Students()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn
+   * @model opposite="in"
+   * @generated
+   */
+  EList<Student> getStudents();
+
+  /**
+   * Returns the value of the '<em><b>Tas</b></em>' reference list.
+   * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant}.
+   * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getRoom <em>Room</em>}'.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Tas</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tas</em>' reference list.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getRoom_Tas()
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getRoom
+   * @model opposite="room"
+   * @generated
+   */
+  EList<TeachingAssistant> getTas();
+
+
+
+  //==========================================================================
    
    public static final String PROPERTY_TOPIC = "topic";
    
@@ -186,5 +247,80 @@ public interface Room extends EObject
    public Assignment createAssignments();
 
    public AssignmentSet getAssignmentsSet();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   public StudentSet getStudentsSet();
+
+   boolean addToStudents(Student value);
+
+   boolean removeFromStudents(Student value);
+
+   public Room withStudents(Student... value);
+
+   public Room withoutStudents(Student... value);
+
+   public void removeAllFromStudents();
+
+   public Student createStudents();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+
+   public TeachingAssistantSet getTasSet();
+
+   boolean addToTas(TeachingAssistant value);
+
+   boolean removeFromTas(TeachingAssistant value);
+
+   public Room withTas(TeachingAssistant... value);
+
+   public Room withoutTas(TeachingAssistant... value);
+
+   public void removeAllFromTas();
+
+   public TeachingAssistant createTas();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+
+   public RoomSet getDoorsSet();
+
+   boolean addToDoors(Room value);
+
+   boolean removeFromDoors(Room value);
+
+   public Room withDoors(Room... value);
+
+   public Room withoutDoors(Room... value);
+
+   public void removeAllFromDoors();
+
+   public Room createDoors();
 } // Room
 

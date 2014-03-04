@@ -13,6 +13,14 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 
 public class RoomImplPO extends PatternObject<RoomImplPO, RoomImpl>
 {
@@ -206,6 +214,109 @@ public class RoomImplPO extends PatternObject<RoomImplPO, RoomImpl>
       return null;
    }
 
+   public StudentPO hasStudents()
+   {
+      StudentPO result = new StudentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Room.PROPERTY_STUDENTS, result);
+      
+      return result;
+   }
+
+   public StudentPO createStudents()
+   {
+      return this.startCreate().hasStudents().endCreate();
+   }
+
+   public RoomImplPO hasStudents(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Room.PROPERTY_STUDENTS);
+   }
+
+   public RoomImplPO createStudents(StudentPO tgt)
+   {
+      return this.startCreate().hasStudents(tgt).endCreate();
+   }
+
+   public StudentSet getStudents()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Room) this.getCurrentMatch()).getStudentsSet();
+      }
+      return null;
+   }
+
+   public TeachingAssistantPO hasTas()
+   {
+      TeachingAssistantPO result = new TeachingAssistantPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Room.PROPERTY_TAS, result);
+      
+      return result;
+   }
+
+   public TeachingAssistantPO createTas()
+   {
+      return this.startCreate().hasTas().endCreate();
+   }
+
+   public RoomImplPO hasTas(TeachingAssistantPO tgt)
+   {
+      return hasLinkConstraint(tgt, Room.PROPERTY_TAS);
+   }
+
+   public RoomImplPO createTas(TeachingAssistantPO tgt)
+   {
+      return this.startCreate().hasTas(tgt).endCreate();
+   }
+
+   public TeachingAssistantSet getTas()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Room) this.getCurrentMatch()).getTasSet();
+      }
+      return null;
+   }
+
+   public RoomPO hasDoors()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Room.PROPERTY_DOORS, result);
+      
+      return result;
+   }
+
+   public RoomPO createDoors()
+   {
+      return this.startCreate().hasDoors().endCreate();
+   }
+
+   public RoomImplPO hasDoors(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Room.PROPERTY_DOORS);
+   }
+
+   public RoomImplPO createDoors(RoomPO tgt)
+   {
+      return this.startCreate().hasDoors(tgt).endCreate();
+   }
+
+   public RoomSet getDoors()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Room) this.getCurrentMatch()).getDoorsSet();
+      }
+      return null;
+   }
+
 }
+
 
 

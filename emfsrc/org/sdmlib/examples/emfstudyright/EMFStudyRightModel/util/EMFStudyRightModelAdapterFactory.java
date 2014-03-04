@@ -80,6 +80,16 @@ public class EMFStudyRightModelAdapterFactory extends AdapterFactoryImpl
         return createUniversityAdapter();
       }
       @Override
+      public Adapter caseStudent(Student object)
+      {
+        return createStudentAdapter();
+      }
+      @Override
+      public Adapter caseTeachingAssistant(TeachingAssistant object)
+      {
+        return createTeachingAssistantAdapter();
+      }
+      @Override
       public Adapter caseRoom(Room object)
       {
         return createRoomAdapter();
@@ -88,11 +98,6 @@ public class EMFStudyRightModelAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
-      }
-      @Override
-      public Adapter caseStudent(Student object)
-      {
-        return createStudentAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -172,6 +177,21 @@ public class EMFStudyRightModelAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStudentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant <em>Teaching Assistant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant
+   * @generated
+   */
+  public Adapter createTeachingAssistantAdapter()
   {
     return null;
   }

@@ -31,6 +31,13 @@ import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import java.util.List;
+import org.sdmlib.models.modelsets.intList;
 
 public class RoomSet extends SDMSet<Room>
 {
@@ -184,7 +191,297 @@ public class RoomSet extends SDMSet<Room>
       return this;
    }
 
+   public StudentSet getStudents()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (Room obj : this)
+      {
+         result.with(obj.getStudents());
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasStudents(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      RoomSet answer = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getStudents()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public RoomSet withStudents(Student value)
+   {
+      for (Room obj : this)
+      {
+         obj.withStudents(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet withoutStudents(Student value)
+   {
+      for (Room obj : this)
+      {
+         obj.withoutStudents(value);
+      }
+      
+      return this;
+   }
+
+   public TeachingAssistantSet getTas()
+   {
+      TeachingAssistantSet result = new TeachingAssistantSet();
+      
+      for (Room obj : this)
+      {
+         result.with(obj.getTas());
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasTas(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      RoomSet answer = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getTas()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public RoomSet withTas(TeachingAssistant value)
+   {
+      for (Room obj : this)
+      {
+         obj.withTas(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet withoutTas(TeachingAssistant value)
+   {
+      for (Room obj : this)
+      {
+         obj.withoutTas(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet getDoors()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         result.with(obj.getDoors());
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasDoors(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      RoomSet answer = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getDoors()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public RoomSet withDoors(Room value)
+   {
+      for (Room obj : this)
+      {
+         obj.withDoors(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet withoutDoors(Room value)
+   {
+      for (Room obj : this)
+      {
+         obj.withoutDoors(value);
+      }
+      
+      return this;
+   }
+
+   public StringList getTopic()
+   {
+      StringList result = new StringList();
+      
+      for (Room obj : this)
+      {
+         result.add(obj.getTopic());
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasTopic(String value)
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if (value.equals(obj.getTopic()))
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasTopic(String lower, String upper)
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if (lower.compareTo(obj.getTopic()) <= 0 && obj.getTopic().compareTo(upper) <= 0)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public RoomSet withTopic(String value)
+   {
+      for (Room obj : this)
+      {
+         obj.setTopic(value);
+      }
+      
+      return this;
+   }
+
+   public intList getCredits()
+   {
+      intList result = new intList();
+      
+      for (Room obj : this)
+      {
+         result.add(obj.getCredits());
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasCredits(int value)
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if (value == obj.getCredits())
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public RoomSet hasCredits(int lower, int upper)
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Room obj : this)
+      {
+         if (lower <= obj.getCredits() && obj.getCredits() <= upper)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public RoomSet withCredits(int value)
+   {
+      for (Room obj : this)
+      {
+         obj.setCredits(value);
+      }
+      
+      return this;
+   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

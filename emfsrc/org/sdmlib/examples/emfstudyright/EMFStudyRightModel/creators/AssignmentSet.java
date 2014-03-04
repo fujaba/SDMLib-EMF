@@ -29,6 +29,10 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import java.util.List;
+import org.sdmlib.models.modelsets.intList;
 
 public class AssignmentSet extends SDMSet<Assignment>
 {
@@ -124,7 +128,181 @@ public class AssignmentSet extends SDMSet<Assignment>
       return this;
    }
 
+   public StudentSet getStudents()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (Assignment obj : this)
+      {
+         result.with(obj.getStudents());
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet hasStudents(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      AssignmentSet answer = new AssignmentSet();
+      
+      for (Assignment obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getStudents()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public AssignmentSet withStudents(Student value)
+   {
+      for (Assignment obj : this)
+      {
+         obj.withStudents(value);
+      }
+      
+      return this;
+   }
+
+   public AssignmentSet withoutStudents(Student value)
+   {
+      for (Assignment obj : this)
+      {
+         obj.withoutStudents(value);
+      }
+      
+      return this;
+   }
+
+   public StringList getName()
+   {
+      StringList result = new StringList();
+      
+      for (Assignment obj : this)
+      {
+         result.add(obj.getName());
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet hasName(String value)
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (Assignment obj : this)
+      {
+         if (value.equals(obj.getName()))
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet hasName(String lower, String upper)
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (Assignment obj : this)
+      {
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet withName(String value)
+   {
+      for (Assignment obj : this)
+      {
+         obj.setName(value);
+      }
+      
+      return this;
+   }
+
+   public intList getPoints()
+   {
+      intList result = new intList();
+      
+      for (Assignment obj : this)
+      {
+         result.add(obj.getPoints());
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet hasPoints(int value)
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (Assignment obj : this)
+      {
+         if (value == obj.getPoints())
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet hasPoints(int lower, int upper)
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (Assignment obj : this)
+      {
+         if (lower <= obj.getPoints() && obj.getPoints() <= upper)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public AssignmentSet withPoints(int value)
+   {
+      for (Assignment obj : this)
+      {
+         obj.setPoints(value);
+      }
+      
+      return this;
+   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

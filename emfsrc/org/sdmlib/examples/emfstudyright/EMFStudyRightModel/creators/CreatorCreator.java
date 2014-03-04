@@ -22,6 +22,8 @@ public class CreatorCreator
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPOCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPOCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPOCreator());
          creatorSet.addAll(org.sdmlib.models.pattern.creators.CreatorCreator.getCreatorSet());
       }
       
@@ -37,4 +39,5 @@ public class CreatorCreator
       return jsonIdMap;
    }
 }
+
 

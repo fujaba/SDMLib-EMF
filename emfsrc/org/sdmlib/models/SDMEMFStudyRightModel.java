@@ -1,4 +1,4 @@
-package org.sdmlib.examples.emfstudyright;
+package org.sdmlib.models;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,11 +28,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.eclipse.swt.widgets.Monitor;
 import org.junit.Test;
 import org.sdmlib.codegen.CGUtil;
-import org.sdmlib.models.EMFTool;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role.R;
 import org.sdmlib.storyboards.Storyboard;
+import org.sdmlib.tools.EMFTool;
 import org.sdmlib.utils.StrUtil;
 
 public class SDMEMFStudyRightModel
@@ -44,7 +44,7 @@ public class SDMEMFStudyRightModel
 
       storyboard.add("We build some example classes and then turn them into an Ecore model ", Storyboard.MODELING, "zuendorf", "03.07.2013 13:19:42", 1, 0);
 
-      ClassModel model = new ClassModel("org.sdmlib.examples.emfstudyright");
+      ClassModel model = new ClassModel("org.sdmlib.examples.sdmmodel_emfcode.studyright");
 
       Clazz uniClazz = model.createClazz("University", "name", R.STRING);
       

@@ -15,6 +15,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFa
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 
 /**
@@ -52,6 +53,13 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * @generated
    */
   private EClass studentEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass teachingAssistantEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -204,9 +212,39 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoom_Assignments()
+  public EReference getRoom_Doors()
   {
     return (EReference)roomEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoom_Assignments()
+  {
+    return (EReference)roomEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoom_Students()
+  {
+    return (EReference)roomEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRoom_Tas()
+  {
+    return (EReference)roomEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -254,6 +292,16 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getAssignment_Students()
+  {
+    return (EReference)assignmentEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getStudent()
   {
     return studentEClass;
@@ -274,7 +322,7 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStudent_Credits()
+  public EAttribute getStudent_StudId()
   {
     return (EAttribute)studentEClass.getEStructuralFeatures().get(1);
   }
@@ -284,7 +332,7 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStudent_Motivation()
+  public EAttribute getStudent_Credits()
   {
     return (EAttribute)studentEClass.getEStructuralFeatures().get(2);
   }
@@ -294,9 +342,39 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getStudent_Motivation()
+  {
+    return (EAttribute)studentEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStudent_AssignmentPoints()
+  {
+    return (EAttribute)studentEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getStudent_Uni()
   {
-    return (EReference)studentEClass.getEStructuralFeatures().get(3);
+    return (EReference)studentEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStudent_In()
+  {
+    return (EReference)studentEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -306,7 +384,37 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    */
   public EReference getStudent_Friends()
   {
-    return (EReference)studentEClass.getEStructuralFeatures().get(4);
+    return (EReference)studentEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStudent_Done()
+  {
+    return (EReference)studentEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTeachingAssistant()
+  {
+    return teachingAssistantEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTeachingAssistant_Room()
+  {
+    return (EReference)teachingAssistantEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -344,23 +452,34 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
     createEReference(universityEClass, UNIVERSITY__ROOMS);
     createEReference(universityEClass, UNIVERSITY__STUDENTS);
 
+    studentEClass = createEClass(STUDENT);
+    createEAttribute(studentEClass, STUDENT__NAME);
+    createEAttribute(studentEClass, STUDENT__STUD_ID);
+    createEAttribute(studentEClass, STUDENT__CREDITS);
+    createEAttribute(studentEClass, STUDENT__MOTIVATION);
+    createEAttribute(studentEClass, STUDENT__ASSIGNMENT_POINTS);
+    createEReference(studentEClass, STUDENT__UNI);
+    createEReference(studentEClass, STUDENT__IN);
+    createEReference(studentEClass, STUDENT__FRIENDS);
+    createEReference(studentEClass, STUDENT__DONE);
+
+    teachingAssistantEClass = createEClass(TEACHING_ASSISTANT);
+    createEReference(teachingAssistantEClass, TEACHING_ASSISTANT__ROOM);
+
     roomEClass = createEClass(ROOM);
     createEAttribute(roomEClass, ROOM__TOPIC);
     createEAttribute(roomEClass, ROOM__CREDITS);
     createEReference(roomEClass, ROOM__UNI);
+    createEReference(roomEClass, ROOM__DOORS);
     createEReference(roomEClass, ROOM__ASSIGNMENTS);
+    createEReference(roomEClass, ROOM__STUDENTS);
+    createEReference(roomEClass, ROOM__TAS);
 
     assignmentEClass = createEClass(ASSIGNMENT);
     createEAttribute(assignmentEClass, ASSIGNMENT__NAME);
     createEAttribute(assignmentEClass, ASSIGNMENT__POINTS);
     createEReference(assignmentEClass, ASSIGNMENT__ROOM);
-
-    studentEClass = createEClass(STUDENT);
-    createEAttribute(studentEClass, STUDENT__NAME);
-    createEAttribute(studentEClass, STUDENT__CREDITS);
-    createEAttribute(studentEClass, STUDENT__MOTIVATION);
-    createEReference(studentEClass, STUDENT__UNI);
-    createEReference(studentEClass, STUDENT__FRIENDS);
+    createEReference(assignmentEClass, ASSIGNMENT__STUDENTS);
   }
 
   /**
@@ -395,6 +514,7 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    teachingAssistantEClass.getESuperTypes().add(this.getStudent());
 
     // Initialize classes, features, and operations; add parameters
     initEClass(universityEClass, University.class, "University", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -402,23 +522,34 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
     initEReference(getUniversity_Rooms(), this.getRoom(), this.getRoom_Uni(), "rooms", null, 0, -1, University.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getUniversity_Students(), this.getStudent(), this.getStudent_Uni(), "students", null, 0, -1, University.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(studentEClass, Student.class, "Student", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStudent_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStudent_StudId(), theEcorePackage.getEString(), "studId", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStudent_Credits(), theEcorePackage.getEInt(), "credits", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStudent_Motivation(), theEcorePackage.getEInt(), "motivation", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStudent_AssignmentPoints(), theEcorePackage.getEInt(), "assignmentPoints", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStudent_Uni(), this.getUniversity(), this.getUniversity_Students(), "uni", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStudent_In(), this.getRoom(), this.getRoom_Students(), "in", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStudent_Friends(), this.getStudent(), this.getStudent_Friends(), "friends", null, 0, -1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStudent_Done(), this.getAssignment(), this.getAssignment_Students(), "done", null, 0, -1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(teachingAssistantEClass, TeachingAssistant.class, "TeachingAssistant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTeachingAssistant_Room(), this.getRoom(), this.getRoom_Tas(), "room", null, 0, 1, TeachingAssistant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(roomEClass, Room.class, "Room", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRoom_Topic(), theEcorePackage.getEString(), "topic", null, 0, 1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRoom_Credits(), theEcorePackage.getEInt(), "credits", null, 0, 1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoom_Uni(), this.getUniversity(), this.getUniversity_Rooms(), "uni", null, 0, 1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoom_Doors(), this.getRoom(), this.getRoom_Doors(), "doors", null, 0, -1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoom_Assignments(), this.getAssignment(), this.getAssignment_Room(), "assignments", null, 0, -1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoom_Students(), this.getStudent(), this.getStudent_In(), "students", null, 0, -1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoom_Tas(), this.getTeachingAssistant(), this.getTeachingAssistant_Room(), "tas", null, 0, -1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAssignment_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAssignment_Points(), theEcorePackage.getEInt(), "points", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssignment_Room(), this.getRoom(), this.getRoom_Assignments(), "room", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(studentEClass, Student.class, "Student", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStudent_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getStudent_Credits(), theEcorePackage.getEInt(), "credits", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getStudent_Motivation(), theEcorePackage.getEInt(), "motivation", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStudent_Uni(), this.getUniversity(), this.getUniversity_Students(), "uni", null, 0, 1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStudent_Friends(), this.getStudent(), this.getStudent_Friends(), "friends", null, 0, -1, Student.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssignment_Students(), this.getStudent(), this.getStudent_Done(), "students", null, 0, -1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);
