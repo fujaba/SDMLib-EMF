@@ -5,8 +5,6 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.utils.StrUtil;
-import java.util.LinkedHashSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 /**

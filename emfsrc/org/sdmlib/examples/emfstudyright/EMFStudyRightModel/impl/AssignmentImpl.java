@@ -19,7 +19,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.PropertyChangeInterface;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import java.util.LinkedHashSet;
 import org.sdmlib.serialization.json.JsonIdMap;
@@ -40,7 +39,7 @@ import org.sdmlib.serialization.json.JsonIdMap;
  *
  * @generated
  */
-public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment, PropertyChangeInterface
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

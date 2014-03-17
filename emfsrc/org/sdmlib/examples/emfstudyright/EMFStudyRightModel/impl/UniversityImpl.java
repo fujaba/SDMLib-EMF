@@ -3,7 +3,6 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -18,17 +17,12 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
-
 import java.util.LinkedHashSet;
-
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.utils.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +39,7 @@ import org.sdmlib.utils.PropertyChangeInterface;
  *
  * @generated
  */
-public class UniversityImpl extends MinimalEObjectImpl.Container implements University, PropertyChangeInterface
+public class UniversityImpl extends MinimalEObjectImpl.Container implements University
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
