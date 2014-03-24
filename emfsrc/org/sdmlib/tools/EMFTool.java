@@ -129,6 +129,14 @@ public class EMFTool
       
       String ecoreFileName = genModel.getForeignModel().get(0);
       
+      return ecoreModelToClassModel(packageName, ecoreFileName);
+   }
+
+
+   public ClassModel ecoreModelToClassModel(String packageName, String ecoreFileName)
+   {
+      ResourceSet resSet = new ResourceSetImpl();
+      
       URI ecoreModelURI = URI.createFileURI(ecoreFileName);
       
       resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMLResourceFactoryImpl());
