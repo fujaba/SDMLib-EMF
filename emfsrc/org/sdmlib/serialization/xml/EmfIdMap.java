@@ -1,6 +1,8 @@
 package org.sdmlib.serialization.xml;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -45,7 +47,17 @@ public class EmfIdMap extends SDMLibJsonIdMap
          }
       }
       
-      Object rootObject = rootFactory.getSendableInstance(false);
+      Object rootObject = null; 
+      
+      if (rootFactory != null)
+      {
+         rootObject = rootFactory.getSendableInstance(false);
+      }
+      else
+      {
+         // just use a ArrayList
+         rootObject = new ArrayList();
+      }
       
       addXMIIds(xmlEntity);
       
@@ -75,7 +87,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
          if( ! kid.getTag().startsWith(firstTag))
          {
             i = 0;
-            firstTag = "t";
+            firstTag = kid.getTag().substring(0,1);
          }
          kid.put(XMI_ID, "$"  + firstTag + i); 
          i++;
@@ -85,6 +97,10 @@ public class EmfIdMap extends SDMLibJsonIdMap
    private void addValues(EntityFactory rootFactory, XMLEntity xmlEntity,
          Object rootObject)
    {
+      if (rootFactory == null)
+      {
+         return;
+      }
       // add to map
       String id = (String) xmlEntity.get(XMI_ID);
       
@@ -101,11 +117,24 @@ public class EmfIdMap extends SDMLibJsonIdMap
          String key = iter.next();
          String value = ((String) xmlEntity.get(key)).trim();
          
-         if (value == null || "".equals(value))
+         if (value == null || "".equals(value) || XMI_ID.equals(key))
          {
             continue;
          }
-         else if (value.indexOf('_') > 0 )
+         
+         if (value.startsWith("/"))
+         {
+            // maybe multiple separated by blanks
+            String tagChar = xmlEntity.getTag().substring(0, 1);
+            for (String ref : value.split(" "))
+            {
+               ref = "_" + tagChar + ref.substring(1);
+               if (getObject(ref) != null)
+               {
+                  rootFactory.setValue(rootObject, key, getObject(ref), "");
+               }
+            }
+         }else if (value.indexOf('_') > 0 )
          {
             // maybe multiple separated by blanks
             for (String ref : value.split(" "))
@@ -121,7 +150,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
             for (String ref : value.split(" "))
             {
                String myRef = "_" + ref.substring(1);
-               if (getObject(myRef) != null)
+               if (getObject(myRef) != null && rootFactory != null)
                {
                   rootFactory.setValue(rootObject, key, getObject(myRef), "");
                }
@@ -141,7 +170,10 @@ public class EmfIdMap extends SDMLibJsonIdMap
          }
          else
          {
-            rootFactory.setValue(rootObject, key, value, "");
+            if (rootFactory != null)
+            {
+               rootFactory.setValue(rootObject, key, value, "");
+            }
          }
       }
    }
@@ -152,29 +184,50 @@ public class EmfIdMap extends SDMLibJsonIdMap
       for (XMLEntity kidEntity : xmlEntity.getChildren())
       {
          String tag = kidEntity.getTag();
+         Method getMethod = null;
+         String typeName = null;
          
+         Collection rootCollection = null;
          // identify kid type
          try
          {
-            Method getMethod = rootObject.getClass().getMethod("get" + StrUtil.upFirstChar(tag));
-            String typeName = getMethod.getReturnType().getName();
+            if (rootObject instanceof Collection)
+            {
+               rootCollection = (Collection) rootObject;
+               
+               // take the type name from the tag
+               typeName = tag.split(":")[1];
+            }
+            else
+            {
+               getMethod = rootObject.getClass().getMethod("get" + StrUtil.upFirstChar(tag));
+               typeName = getMethod.getReturnType().getName();
             
-            typeName = CGUtil.baseClassName(typeName, "Set");
+               typeName = CGUtil.baseClassName(typeName, "Set");
+            }
             
             if (kidEntity.has(XSI_TYPE))
             {
                typeName = kidEntity.getString(XSI_TYPE);
                typeName = typeName.replaceAll(":", ".");
             }
+            
             if (typeName != null)
             {
-               EntityFactory kidFactory = (EntityFactory) getCreatorClasses(typeName);
+               EntityFactory kidFactory = (EntityFactory) getCreatorClassesByShortName(typeName);
                
                Object kidObject = kidFactory.create();
                
                addValues(kidFactory, kidEntity, kidObject);
                
-               rootFactory.setValue(rootObject, tag, kidObject, "");
+               if (rootCollection != null)
+               {
+                  rootCollection.add(kidObject);
+               }
+               else
+               {
+                  rootFactory.setValue(rootObject, tag, kidObject, "");
+               }
                
                addChildren(kidEntity, kidFactory, kidObject);
             }
@@ -185,6 +238,24 @@ public class EmfIdMap extends SDMLibJsonIdMap
          }         
       }
       
+   }
+
+   private EntityFactory getCreatorClassesByShortName(String typeName)
+   {
+      EntityFactory kidFactory = (EntityFactory) getCreatorClasses(typeName);
+      
+      if (kidFactory == null)
+      {
+         for (String creatorName : getCreatorsMap().keySet())
+         {
+            if (creatorName.endsWith(typeName))
+            {
+               return (EntityFactory) getCreatorClasses(creatorName);
+            }
+         }
+      }
+      
+      return null;
    }
 
    public EmfIdMap withCreators(LinkedHashSet<SendableEntityCreator> creatorSet)
