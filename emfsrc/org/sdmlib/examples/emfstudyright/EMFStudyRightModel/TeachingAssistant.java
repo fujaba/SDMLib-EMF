@@ -2,8 +2,6 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -51,23 +49,4 @@ public interface TeachingAssistant extends Student
    */
   void setRoom(Room value);
 
-
-   
-   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet();
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * TeachingAssistant ----------------------------------- Room
-    *              tas                   room
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ROOM = "room";
-
-   public TeachingAssistant withRoom(Room value);
-
-   public Room createRoom();
 } // TeachingAssistant
-

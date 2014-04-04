@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 
@@ -131,7 +131,7 @@ public class KarliDrawCardsAction implements PropertyChangeListener
            
             // story.setStepDoneCounter(story.getStepDoneCounter() + 1);
             BoardTask task = (BoardTask) evt.getSource();
-            TaskFlowBoard board = task.getLane().getBoard();
+            RemoteTaskBoard board = task.getLane().getBoard();
             board.startTask(Play7WorkFlow.PLAY7_WORK_FLOW_LANE, Play7WorkFlow.DUMP_HTML_AND_TERMINATE_TEST);
          }
          finally

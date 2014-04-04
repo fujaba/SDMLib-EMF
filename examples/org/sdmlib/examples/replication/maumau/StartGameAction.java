@@ -10,7 +10,7 @@ import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.replication.creators.LanePO;
 import org.sdmlib.replication.creators.ModelPattern;
 import org.sdmlib.storyboards.Storyboard;
@@ -49,7 +49,7 @@ public class StartGameAction implements PropertyChangeListener
             
             BoardTask task = (BoardTask) evt.getSource();
             Lane lane = task.getLane();
-            TaskFlowBoard taskFlowBoard = lane.getBoard();
+            RemoteTaskBoard taskFlowBoard = lane.getBoard();
             
             MauMau mauMau = (MauMau) sharedSpace.getMap().getObject(sharedSpace.getSpaceId() + "_root");
             

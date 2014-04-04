@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 
 public class ClickStartButtonAction implements PropertyChangeListener
@@ -61,7 +61,7 @@ public class ClickStartButtonAction implements PropertyChangeListener
 
                BoardTask task = (BoardTask) evt.getSource();
                
-               TaskFlowBoard board = task.getLane().getBoard();
+               RemoteTaskBoard board = task.getLane().getBoard();
 
                board.startTask("AbuLane", Play7WorkFlow.CARDS_ARE_DELT_SCREEN_DUMP);
             }
