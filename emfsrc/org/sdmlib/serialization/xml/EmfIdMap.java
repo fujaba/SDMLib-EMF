@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.sdmlib.codegen.CGUtil;
+import org.sdmlib.serialization.IdMapEncoder;
 import org.sdmlib.serialization.interfaces.EntityFactory;
 import org.sdmlib.serialization.interfaces.SendableEntityCreator;
 import org.sdmlib.serialization.json.SDMLibJsonIdMap;
@@ -246,7 +248,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
       
       if (kidFactory == null)
       {
-         for (String creatorName : getCreatorsMap().keySet())
+         for (String creatorName : getCreatorsKeySet())
          {
             if (creatorName.endsWith(typeName))
             {
@@ -256,6 +258,11 @@ public class EmfIdMap extends SDMLibJsonIdMap
       }
       
       return null;
+   }
+
+   private Set<String> getCreatorsKeySet()
+   {
+      return this.creators.keySet();
    }
 
    public EmfIdMap withCreators(LinkedHashSet<SendableEntityCreator> creatorSet)
