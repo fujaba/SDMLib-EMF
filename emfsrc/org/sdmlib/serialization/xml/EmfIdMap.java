@@ -26,6 +26,8 @@ public class EmfIdMap extends SDMLibJsonIdMap
       StringBuilderBuffer buffer = new StringBuilderBuffer().withValue(fileText);
 
       buffer.withPosition(pos);
+      
+      
 
       XMLEntity xmlEntity = new XMLEntity().withValue(new XMLTokener().withBuffer(buffer));
 
