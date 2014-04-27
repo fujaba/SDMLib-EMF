@@ -72,9 +72,6 @@
     "phase":"backlog",
     "lastDeveloper":"zuendorf",
     "parent":{"id":"KE.K1"},
-    "logEntries":[
-    {"id":"KE.L13"}
-    ],
     "oldNoOfLogEntries":1,
     "phases":"active, backlog, implementation, done"
   }
@@ -145,15 +142,6 @@
     "developer":"zuendorf",
     "phase":"active",
     "comment":"EMFStudyRightClasses: null"
-  }
-},  {
-  "id":"KE.L13",
-  "class":"org.sdmlib.storyboards.LogEntry",
-  "prop":{
-    "date":"31.01.2014 12:00:00",
-    "kanbanEntry":{"id":"KE.K12"},
-    "developer":"zuendorf",
-    "phase":"backlog"
   }
 },  {
   "id":"KE.L16",
