@@ -139,7 +139,7 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
    Process startClient(String name)
    {
       String abuClientComand = "\"C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\javaw.exe\" "
-            // + "-agentlib:jdwp=transport=dt_socket,suspend=n,address=localhost:" + (debugSocket++) 
+            + "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:" + (debugSocket++) 
             + " -Dfile.encoding=UTF-8 "
             + "-classpath \"" + System.getProperty("java.class.path")
             + "\" " + MultiMauMauClientGui.class.getName() + " "
