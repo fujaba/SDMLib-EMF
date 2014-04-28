@@ -40,7 +40,7 @@ import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 import org.sdmlib.utils.PropertyChangeInterface;
@@ -127,9 +127,9 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
 
    private int debugSocket = 12900;
 
-   private TaskFlowBoard taskFlowBoard;
+   private RemoteTaskBoard taskFlowBoard;
    
-   public TaskFlowBoard getTaskFlowBoard()
+   public RemoteTaskBoard getTaskFlowBoard()
    {
       return taskFlowBoard;
    }
@@ -245,7 +245,7 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
       return child;
    }
 
-   public Play7WorkFlowLaneManager withTaskFlowBoard(TaskFlowBoard taskFlowBoard)
+   public Play7WorkFlowLaneManager withTaskFlowBoard(RemoteTaskBoard taskFlowBoard)
    {
       this.taskFlowBoard = taskFlowBoard;
       return this;

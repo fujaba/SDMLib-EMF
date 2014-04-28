@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 
@@ -66,7 +66,7 @@ public class ShowStartGameButtonAction implements PropertyChangeListener
                   + "'s player lane manager detects the showStartGameButton task and triggers the responsible action. "
                   + "The showStartGameButton action creates a label and adds a mouse listener to it:");
 
-               TaskFlowBoard board = task.getLane().getBoard();
+               RemoteTaskBoard board = task.getLane().getBoard();
                story.addObjectDiagram(
                   nodeId + "Node", "icons/node.png", new Node(),
                   "icons/worker.png", this, 
