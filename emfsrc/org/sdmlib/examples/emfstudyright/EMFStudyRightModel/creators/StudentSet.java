@@ -25,17 +25,17 @@ import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.models.modelsets.StringList;
 import java.util.Collection;
+import java.util.List;
+import org.sdmlib.models.modelsets.intList;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversitySet;
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import java.util.List;
-import org.sdmlib.models.modelsets.intList;
 
 public class StudentSet extends SDMSet<Student>
 {
@@ -80,218 +80,6 @@ public class StudentSet extends SDMSet<Student>
    public StudentSet without(Student value)
    {
       this.remove(value);
-      return this;
-   }
-
-   public UniversitySet getUni()
-   {
-      UniversitySet result = new UniversitySet();
-      
-      for (Student obj : this)
-      {
-         result.with(obj.getUni());
-      }
-      
-      return result;
-   }
-
-   public StudentSet hasUni(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentSet answer = new StudentSet();
-      
-      for (Student obj : this)
-      {
-         if (neighbors.contains(obj.getUni()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentSet withUni(University value)
-   {
-      for (Student obj : this)
-      {
-         obj.withUni(value);
-      }
-      
-      return this;
-   }
-
-   public StudentSet getFriends()
-   {
-      StudentSet result = new StudentSet();
-      
-      for (Student obj : this)
-      {
-         result.with(obj.getFriends());
-      }
-      
-      return result;
-   }
-
-   public StudentSet hasFriends(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentSet answer = new StudentSet();
-      
-      for (Student obj : this)
-      {
-         if ( ! Collections.disjoint(neighbors, obj.getFriends()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentSet withFriends(Student value)
-   {
-      for (Student obj : this)
-      {
-         obj.withFriends(value);
-      }
-      
-      return this;
-   }
-
-   public StudentSet withoutFriends(Student value)
-   {
-      for (Student obj : this)
-      {
-         obj.withoutFriends(value);
-      }
-      
-      return this;
-   }
-
-   public RoomSet getIn()
-   {
-      RoomSet result = new RoomSet();
-      
-      for (Student obj : this)
-      {
-         result.with(obj.getIn());
-      }
-      
-      return result;
-   }
-
-   public StudentSet hasIn(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentSet answer = new StudentSet();
-      
-      for (Student obj : this)
-      {
-         if (neighbors.contains(obj.getIn()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentSet withIn(Room value)
-   {
-      for (Student obj : this)
-      {
-         obj.withIn(value);
-      }
-      
-      return this;
-   }
-
-   public AssignmentSet getDone()
-   {
-      AssignmentSet result = new AssignmentSet();
-      
-      for (Student obj : this)
-      {
-         result.with(obj.getDone());
-      }
-      
-      return result;
-   }
-
-   public StudentSet hasDone(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentSet answer = new StudentSet();
-      
-      for (Student obj : this)
-      {
-         if ( ! Collections.disjoint(neighbors, obj.getDone()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentSet withDone(Assignment value)
-   {
-      for (Student obj : this)
-      {
-         obj.withDone(value);
-      }
-      
-      return this;
-   }
-
-   public StudentSet withoutDone(Assignment value)
-   {
-      for (Student obj : this)
-      {
-         obj.withoutDone(value);
-      }
-      
       return this;
    }
 
@@ -555,20 +343,243 @@ public class StudentSet extends SDMSet<Student>
       return this;
    }
 
+   public UniversitySet getUni()
+   {
+      UniversitySet result = new UniversitySet();
+      
+      for (Student obj : this)
+      {
+         result.with(obj.getUni());
+      }
+      
+      return result;
+   }
+
+   public StudentSet hasUni(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentSet answer = new StudentSet();
+      
+      for (Student obj : this)
+      {
+         if (neighbors.contains(obj.getUni()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentSet withUni(University value)
+   {
+      for (Student obj : this)
+      {
+         obj.withUni(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet getIn()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (Student obj : this)
+      {
+         result.with(obj.getIn());
+      }
+      
+      return result;
+   }
+
+   public StudentSet hasIn(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentSet answer = new StudentSet();
+      
+      for (Student obj : this)
+      {
+         if (neighbors.contains(obj.getIn()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentSet withIn(Room value)
+   {
+      for (Student obj : this)
+      {
+         obj.withIn(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet getFriends()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (Student obj : this)
+      {
+         result.with(obj.getFriends());
+      }
+      
+      return result;
+   }
+
+   public StudentSet hasFriends(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentSet answer = new StudentSet();
+      
+      for (Student obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getFriends()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet todo = new StudentSet().with(this);
+      
+      StudentSet result = new StudentSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Student current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getFriendsSet().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentSet withFriends(Student value)
+   {
+      for (Student obj : this)
+      {
+         obj.withFriends(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet withoutFriends(Student value)
+   {
+      for (Student obj : this)
+      {
+         obj.withoutFriends(value);
+      }
+      
+      return this;
+   }
+
+   public AssignmentSet getDone()
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (Student obj : this)
+      {
+         result.with(obj.getDone());
+      }
+      
+      return result;
+   }
+
+   public StudentSet hasDone(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentSet answer = new StudentSet();
+      
+      for (Student obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getDone()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentSet withDone(Assignment value)
+   {
+      for (Student obj : this)
+      {
+         obj.withDone(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet withoutDone(Assignment value)
+   {
+      for (Student obj : this)
+      {
+         obj.withoutDone(value);
+      }
+      
+      return this;
+   }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -4,8 +4,8 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,9 +108,7 @@ public interface Assignment extends EObject
    */
   void setRoom(Room value);
 
-
-   
-   /**
+  /**
    * Returns the value of the '<em><b>Students</b></em>' reference list.
    * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student}.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getDone <em>Done</em>}'.
@@ -129,8 +127,8 @@ public interface Assignment extends EObject
   EList<Student> getStudents();
 
 
-
-  //==========================================================================
+   
+   //==========================================================================
    
    public static final String PROPERTY_NAME = "name";
    
@@ -142,37 +140,6 @@ public interface Assignment extends EObject
    public static final String PROPERTY_POINTS = "points";
    
    public Assignment withPoints(int value);
-
-   
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Assignment ----------------------------------- Room
-    *              assignments                   room
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ROOM = "room";
-
-   public Assignment withRoom(Room value);
-
-   public Room createRoom();
-
-   
-   public static final AssignmentSet EMPTY_SET = new AssignmentSet();
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Assignment ----------------------------------- Student
-    *              done                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
 
    public StudentSet getStudentsSet();
 
@@ -187,5 +154,34 @@ public interface Assignment extends EObject
    public void removeAllFromStudents();
 
    public Student createStudents();
+
+   
+   public static final AssignmentSet EMPTY_SET = new AssignmentSet();
+
+   public Assignment withRoom(Room value);
+
+   public Room createRoom();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Assignment ----------------------------------- Room
+    *              assignments                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
 } // Assignment
 

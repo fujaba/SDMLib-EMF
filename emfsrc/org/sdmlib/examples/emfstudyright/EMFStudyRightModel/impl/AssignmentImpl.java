@@ -2,6 +2,7 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -17,7 +18,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPa
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import java.beans.PropertyChangeSupport;
-import java.util.Collection;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import java.util.LinkedHashSet;
@@ -417,14 +417,14 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
          return getPoints();
       }
 
-      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
-      {
-         return getRoom();
-      }
-
       if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
       {
          return getStudents();
+      }
+
+      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
+      {
+         return getRoom();
       }
 
       return null;
@@ -447,12 +447,6 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
          return true;
       }
 
-      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
-      {
-         setRoom((Room) value);
-         return true;
-      }
-
       if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
       {
          addToStudents((Student) value);
@@ -462,6 +456,12 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       if ((PROPERTY_STUDENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
       {
          removeFromStudents((Student) value);
+         return true;
+      }
+
+      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
+      {
+         setRoom((Room) value);
          return true;
       }
 
@@ -486,18 +486,6 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    
    //==========================================================================
    
-   public void removeYou()
-   {
-      setRoom(null);
-      removeAllFromStudents();
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
-   }
-
-   
-   //==========================================================================
-   
-   public static final String PROPERTY_NAME = "name";
-   
    public Assignment withName(String value)
    {
       setName(value);
@@ -507,8 +495,6 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    
    //==========================================================================
    
-   public static final String PROPERTY_POINTS = "points";
-   
    public Assignment withPoints(int value)
    {
       setPoints(value);
@@ -516,42 +502,14 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    } 
 
    
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Assignment ----------------------------------- Room
-    *              assignments                   room
-    * </pre>
-    */
+   //==========================================================================
    
-   public static final String PROPERTY_ROOM = "room";
-
-   private Room room = null;
-
-   public Assignment withRoom(Room value)
+   public void removeYou()
    {
-      setRoom(value);
-      return this;
-   } 
-
-
-   public Room createRoom()
-   {
-      Room value = new RoomImpl();
-      withRoom(value);
-      return value;
-   } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Assignment ----------------------------------- Student
-    *              done                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
+      removeAllFromStudents();
+      setRoom(null);
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
   public StudentSet getStudentsSet()
   {
      return new StudentSet().with(getStudents());
@@ -628,5 +586,42 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       withStudents(value);
       return value;
    } 
+
+   private Room room = null;
+
+   public Assignment withRoom(Room value)
+   {
+      setRoom(value);
+      return this;
+   } 
+
+   public Room createRoom()
+   {
+      Room value = new RoomImpl();
+      withRoom(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Assignment ----------------------------------- Room
+    *              assignments                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
 } //AssignmentImpl
 

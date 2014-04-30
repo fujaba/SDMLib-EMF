@@ -2,7 +2,10 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -20,14 +23,11 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeListener;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import java.util.LinkedHashSet;
-import org.sdmlib.serialization.json.JsonIdMap;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.serialization.json.JsonIdMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -548,11 +548,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
          return getUni();
       }
 
-      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
-      {
-         return getAssignments();
-      }
-
       if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
       {
          return getStudents();
@@ -566,6 +561,11 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       if (PROPERTY_DOORS.equalsIgnoreCase(attrName))
       {
          return getDoors();
+      }
+
+      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
+      {
+         return getAssignments();
       }
 
       return null;
@@ -591,18 +591,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       if (PROPERTY_UNI.equalsIgnoreCase(attrName))
       {
          setUni((University) value);
-         return true;
-      }
-
-      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
-      {
-         addToAssignments((Assignment) value);
-         return true;
-      }
-      
-      if ((PROPERTY_ASSIGNMENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromAssignments((Assignment) value);
          return true;
       }
 
@@ -642,6 +630,18 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
          return true;
       }
 
+      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
+      {
+         addToAssignments((Assignment) value);
+         return true;
+      }
+      
+      if ((PROPERTY_ASSIGNMENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromAssignments((Assignment) value);
+         return true;
+      }
+
       return false;
    }
 
@@ -663,21 +663,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    
    //==========================================================================
    
-   public void removeYou()
-   {
-      setUni(null);
-      removeAllFromAssignments();
-      removeAllFromStudents();
-      removeAllFromTas();
-      removeAllFromDoors();
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
-   }
-
-   
-   //==========================================================================
-   
-   public static final String PROPERTY_TOPIC = "topic";
-   
    public Room withTopic(String value)
    {
       setTopic(value);
@@ -687,8 +672,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    
    //==========================================================================
    
-   public static final String PROPERTY_CREDITS = "credits";
-   
    public Room withCredits(int value)
    {
       setCredits(value);
@@ -696,15 +679,17 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    } 
 
    
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Room ----------------------------------- University
-    *              rooms                   uni
-    * </pre>
-    */
+   //==========================================================================
    
-   public static final String PROPERTY_UNI = "uni";
+   public void removeYou()
+   {
+      setUni(null);
+      removeAllFromStudents();
+      removeAllFromTas();
+      removeAllFromDoors();
+      removeAllFromAssignments();
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
 
    private University uni = null;
 
@@ -714,110 +699,12 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       return this;
    } 
 
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Assignment
-    *              room                   assignments
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ASSIGNMENTS = "assignments";
-
-   public boolean removeFromAssignments(Assignment value)
-   {
-      boolean changed = false;
-      
-      if ((this.assignments != null) && (value != null))
-      {
-         changed = this.assignments.remove (value);
-         
-         if (changed)
-         {
-            value.setRoom(null);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public Room withAssignments(Assignment... value)
-   {
-      for (Assignment item : value)
-      {
-         addToAssignments(item);
-      }
-      return this;
-   } 
-
-   public Room withoutAssignments(Assignment... value)
-   {
-      for (Assignment item : value)
-      {
-         removeFromAssignments(item);
-      }
-      return this;
-   }
-
-   public void removeAllFromAssignments()
-   {
-      LinkedHashSet<Assignment> tmpSet = new LinkedHashSet<Assignment>(this.getAssignments());
-   
-      for (Assignment value : tmpSet)
-      {
-         this.removeFromAssignments(value);
-      }
-   }
-
-
-   public Assignment createAssignments()
-   {
-      Assignment value = new AssignmentImpl();
-      withAssignments(value);
-      return value;
-   } 
-
    public University createUni()
    {
       University value = new UniversityImpl();
       withUni(value);
       return value;
    } 
-
-   public boolean addToAssignments(Assignment value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getAssignments().add (value);
-         
-         if (changed)
-         {
-            value.withRoom(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-  public AssignmentSet getAssignmentsSet()
-  {
-     return new AssignmentSet().with(getAssignments());
-  }
-
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Student
-    *              in                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
   public StudentSet getStudentsSet()
   {
      return new StudentSet().with(getStudents());
@@ -894,17 +781,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       withStudents(value);
       return value;
    } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- TeachingAssistant
-    *              room                   tas
-    * </pre>
-    */
-   
-   public static final String PROPERTY_TAS = "tas";
   public TeachingAssistantSet getTasSet()
   {
      return new TeachingAssistantSet().with(getTas());
@@ -981,21 +857,17 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       withTas(value);
       return value;
    } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Room ----------------------------------- Room
-    *              doors                   doors
-    * </pre>
-    */
-   
-   public static final String PROPERTY_DOORS = "doors";
   public RoomSet getDoorsSet()
   {
      return new RoomSet().with(getDoors());
   }
+
+   public RoomSet getDoorsTransitive()
+   {
+      RoomSet result = new RoomSet().with(this);
+      RoomSet doorsTransitive = result.getDoorsTransitive();
+      return doorsTransitive;
+   }
 
 
    public boolean addToDoors(Room value)
@@ -1068,5 +940,136 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       withDoors(value);
       return value;
    } 
+  public AssignmentSet getAssignmentsSet()
+  {
+     return new AssignmentSet().with(getAssignments());
+  }
+
+
+   public boolean addToAssignments(Assignment value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getAssignments().add (value);
+         
+         if (changed)
+         {
+            value.withRoom(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public boolean removeFromAssignments(Assignment value)
+   {
+      boolean changed = false;
+      
+      if ((this.assignments != null) && (value != null))
+      {
+         changed = this.assignments.remove (value);
+         
+         if (changed)
+         {
+            value.setRoom(null);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, value, null);
+         }
+      }
+         
+      return changed;   
+   }
+
+   public Room withAssignments(Assignment... value)
+   {
+      for (Assignment item : value)
+      {
+         addToAssignments(item);
+      }
+      return this;
+   } 
+
+   public Room withoutAssignments(Assignment... value)
+   {
+      for (Assignment item : value)
+      {
+         removeFromAssignments(item);
+      }
+      return this;
+   }
+
+   public void removeAllFromAssignments()
+   {
+      LinkedHashSet<Assignment> tmpSet = new LinkedHashSet<Assignment>(this.getAssignments());
+   
+      for (Assignment value : tmpSet)
+      {
+         this.removeFromAssignments(value);
+      }
+   }
+
+   public Assignment createAssignments()
+   {
+      Assignment value = new AssignmentImpl();
+      withAssignments(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
 } //RoomImpl
 

@@ -25,13 +25,13 @@ import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.models.modelsets.StringList;
 import java.util.Collection;
+import java.util.List;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import java.util.List;
 
 public class UniversitySet extends SDMSet<University>
 {
@@ -76,6 +76,58 @@ public class UniversitySet extends SDMSet<University>
    public UniversitySet without(University value)
    {
       this.remove(value);
+      return this;
+   }
+
+   public StringList getName()
+   {
+      StringList result = new StringList();
+      
+      for (University obj : this)
+      {
+         result.add(obj.getName());
+      }
+      
+      return result;
+   }
+
+   public UniversitySet hasName(String value)
+   {
+      UniversitySet result = new UniversitySet();
+      
+      for (University obj : this)
+      {
+         if (value.equals(obj.getName()))
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public UniversitySet hasName(String lower, String upper)
+   {
+      UniversitySet result = new UniversitySet();
+      
+      for (University obj : this)
+      {
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public UniversitySet withName(String value)
+   {
+      for (University obj : this)
+      {
+         obj.setName(value);
+      }
+      
       return this;
    }
 
@@ -195,75 +247,7 @@ public class UniversitySet extends SDMSet<University>
       return this;
    }
 
-   public StringList getName()
-   {
-      StringList result = new StringList();
-      
-      for (University obj : this)
-      {
-         result.add(obj.getName());
-      }
-      
-      return result;
-   }
-
-   public UniversitySet hasName(String value)
-   {
-      UniversitySet result = new UniversitySet();
-      
-      for (University obj : this)
-      {
-         if (value.equals(obj.getName()))
-         {
-            result.add(obj);
-         }
-      }
-      
-      return result;
-   }
-
-   public UniversitySet hasName(String lower, String upper)
-   {
-      UniversitySet result = new UniversitySet();
-      
-      for (University obj : this)
-      {
-         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
-         {
-            result.add(obj);
-         }
-      }
-      
-      return result;
-   }
-
-   public UniversitySet withName(String value)
-   {
-      for (University obj : this)
-      {
-         obj.setName(value);
-      }
-      
-      return this;
-   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -11,13 +11,13 @@ public class StudentImplCreator extends EntityFactory
    private final String[] properties = new String[]
    {
       Student.PROPERTY_NAME,
+      Student.PROPERTY_STUDID,
       Student.PROPERTY_CREDITS,
       Student.PROPERTY_MOTIVATION,
-      Student.PROPERTY_UNI,
-      Student.PROPERTY_FRIENDS,
-      Student.PROPERTY_STUDID,
       Student.PROPERTY_ASSIGNMENTPOINTS,
+      Student.PROPERTY_UNI,
       Student.PROPERTY_IN,
+      Student.PROPERTY_FRIENDS,
       Student.PROPERTY_DONE,
    };
    
@@ -59,19 +59,6 @@ public class StudentImplCreator extends EntityFactory
       ((StudentImpl) entity).removeYou();
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

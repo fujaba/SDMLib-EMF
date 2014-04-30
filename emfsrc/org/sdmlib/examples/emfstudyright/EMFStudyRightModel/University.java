@@ -97,17 +97,21 @@ public interface University extends EObject
    
    public University withName(String value);
 
+   public StudentSet getStudentsSet();
 
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Room
-    *              uni                   rooms
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ROOMS = "rooms";
+   boolean addToStudents(Student value);
+
+   boolean removeFromStudents(Student value);
+
+   public University withStudents(Student... value);
+
+   public University withoutStudents(Student... value);
+
+   public void removeAllFromStudents();
+
+   public Student createStudents();
+
+   public RoomSet getRoomsSet();
 
    boolean addToRooms(Room value);
 
@@ -125,6 +129,17 @@ public interface University extends EObject
    /********************************************************************
     * <pre>
     *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
     * University ----------------------------------- Student
     *              uni                   students
     * </pre>
@@ -132,22 +147,6 @@ public interface University extends EObject
    
    public static final String PROPERTY_STUDENTS = "students";
 
-   boolean addToStudents(Student value);
-
-   boolean removeFromStudents(Student value);
-
-   public University withStudents(Student... value);
-
-   public University withoutStudents(Student... value);
-
-   public void removeAllFromStudents();
-
-   public Student createStudents();
-
-   public RoomSet getRoomsSet();
-
-   public StudentSet getStudentsSet();
-
-   public TeachingAssistant createStudentsTeachingAssistant();
+   Student createStudentsTeachingAssistant();
 } // University
 

@@ -31,10 +31,10 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityS
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
@@ -131,6 +131,58 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       for (StudentImpl obj : this)
       {
          obj.setName(value);
+      }
+      
+      return this;
+   }
+
+   public StringList getStudId()
+   {
+      StringList result = new StringList();
+      
+      for (StudentImpl obj : this)
+      {
+         result.add(obj.getStudId());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasStudId(String value)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (value.equals(obj.getStudId()))
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasStudId(String lower, String upper)
+   {
+      StudentImplSet result = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet withStudId(String value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.setStudId(value);
       }
       
       return this;
@@ -240,164 +292,6 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       return this;
    }
 
-   public UniversitySet getUni()
-   {
-      UniversitySet result = new UniversitySet();
-      
-      for (StudentImpl obj : this)
-      {
-         result.with(obj.getUni());
-      }
-      
-      return result;
-   }
-
-   public StudentImplSet hasUni(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentImplSet answer = new StudentImplSet();
-      
-      for (StudentImpl obj : this)
-      {
-         if (neighbors.contains(obj.getUni()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentImplSet withUni(University value)
-   {
-      for (StudentImpl obj : this)
-      {
-         obj.withUni(value);
-      }
-      
-      return this;
-   }
-
-   public StudentSet getFriends()
-   {
-      StudentSet result = new StudentSet();
-      
-      for (StudentImpl obj : this)
-      {
-         result.with(obj.getFriends());
-      }
-      
-      return result;
-   }
-
-   public StudentImplSet hasFriends(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      StudentImplSet answer = new StudentImplSet();
-      
-      for (StudentImpl obj : this)
-      {
-         if ( ! Collections.disjoint(neighbors, obj.getFriends()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public StudentImplSet withFriends(Student value)
-   {
-      for (StudentImpl obj : this)
-      {
-         obj.withFriends(value);
-      }
-      
-      return this;
-   }
-
-   public StudentImplSet withoutFriends(Student value)
-   {
-      for (StudentImpl obj : this)
-      {
-         obj.withoutFriends(value);
-      }
-      
-      return this;
-   }
-
-   public StringList getStudId()
-   {
-      StringList result = new StringList();
-      
-      for (StudentImpl obj : this)
-      {
-         result.add(obj.getStudId());
-      }
-      
-      return result;
-   }
-
-   public StudentImplSet hasStudId(String value)
-   {
-      StudentImplSet result = new StudentImplSet();
-      
-      for (StudentImpl obj : this)
-      {
-         if (value.equals(obj.getStudId()))
-         {
-            result.add(obj);
-         }
-      }
-      
-      return result;
-   }
-
-   public StudentImplSet hasStudId(String lower, String upper)
-   {
-      StudentImplSet result = new StudentImplSet();
-      
-      for (StudentImpl obj : this)
-      {
-         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
-         {
-            result.add(obj);
-         }
-      }
-      
-      return result;
-   }
-
-   public StudentImplSet withStudId(String value)
-   {
-      for (StudentImpl obj : this)
-      {
-         obj.setStudId(value);
-      }
-      
-      return this;
-   }
-
    public intList getAssignmentPoints()
    {
       intList result = new intList();
@@ -450,6 +344,54 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       return this;
    }
 
+   public UniversitySet getUni()
+   {
+      UniversitySet result = new UniversitySet();
+      
+      for (StudentImpl obj : this)
+      {
+         result.with(obj.getUni());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasUni(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentImplSet answer = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if (neighbors.contains(obj.getUni()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public StudentImplSet withUni(University value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withUni(value);
+      }
+      
+      return this;
+   }
+
    public RoomSet getIn()
    {
       RoomSet result = new RoomSet();
@@ -493,6 +435,88 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       for (StudentImpl obj : this)
       {
          obj.withIn(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet getFriends()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (StudentImpl obj : this)
+      {
+         result.with(obj.getFriends());
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet hasFriends(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      StudentImplSet answer = new StudentImplSet();
+      
+      for (StudentImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getFriends()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet todo = new StudentSet().with(this);
+      
+      StudentSet result = new StudentSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Student current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getFriendsSet().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
+   public StudentImplSet withFriends(Student value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withFriends(value);
+      }
+      
+      return this;
+   }
+
+   public StudentImplSet withoutFriends(Student value)
+   {
+      for (StudentImpl obj : this)
+      {
+         obj.withoutFriends(value);
       }
       
       return this;
@@ -557,5 +581,6 @@ public class StudentImplSet extends SDMSet<StudentImpl>
    }
 
 }
+
 
 

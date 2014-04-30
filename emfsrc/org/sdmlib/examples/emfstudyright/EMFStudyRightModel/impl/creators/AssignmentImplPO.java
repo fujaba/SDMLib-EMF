@@ -5,14 +5,14 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplSet;
 import org.sdmlib.models.pattern.AttributeConstraint;
 import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.models.pattern.LinkConstraint;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 
 public class AssignmentImplPO extends PatternObject<AssignmentImplPO, AssignmentImpl>
 {
@@ -138,40 +138,6 @@ public class AssignmentImplPO extends PatternObject<AssignmentImplPO, Assignment
       return this;
    }
    
-   public RoomPO hasRoom()
-   {
-      RoomPO result = new RoomPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Assignment.PROPERTY_ROOM, result);
-      
-      return result;
-   }
-
-   public RoomPO createRoom()
-   {
-      return this.startCreate().hasRoom().endCreate();
-   }
-
-   public AssignmentImplPO hasRoom(RoomPO tgt)
-   {
-      return hasLinkConstraint(tgt, Assignment.PROPERTY_ROOM);
-   }
-
-   public AssignmentImplPO createRoom(RoomPO tgt)
-   {
-      return this.startCreate().hasRoom(tgt).endCreate();
-   }
-
-   public Room getRoom()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Assignment) this.getCurrentMatch()).getRoom();
-      }
-      return null;
-   }
-
    public StudentPO hasStudents()
    {
       StudentPO result = new StudentPO();
@@ -206,6 +172,39 @@ public class AssignmentImplPO extends PatternObject<AssignmentImplPO, Assignment
       return null;
    }
 
-}
+   public RoomPO hasRoom()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Assignment.PROPERTY_ROOM, result);
+      
+      return result;
+   }
 
+   public RoomPO createRoom()
+   {
+      return this.startCreate().hasRoom().endCreate();
+   }
+
+   public AssignmentImplPO hasRoom(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Assignment.PROPERTY_ROOM);
+   }
+
+   public AssignmentImplPO createRoom(RoomPO tgt)
+   {
+      return this.startCreate().hasRoom(tgt).endCreate();
+   }
+
+   public Room getRoom()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Assignment) this.getCurrentMatch()).getRoom();
+      }
+      return null;
+   }
+
+}
 

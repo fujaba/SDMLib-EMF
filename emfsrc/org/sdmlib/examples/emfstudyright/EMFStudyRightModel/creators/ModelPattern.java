@@ -5,14 +5,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityP
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPO;
@@ -21,6 +13,14 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAss
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 
 public class ModelPattern extends Pattern
 {
@@ -73,102 +73,6 @@ public class ModelPattern extends Pattern
    public UniversityImplPO hasElementUniversityImplPO(UniversityImpl hostGraphObject)
    {
       UniversityImplPO value = new UniversityImplPO();
-      this.addToElements(value);
-      value.setModifier(Pattern.BOUND);
-      
-      value.setCurrentMatch(hostGraphObject);
-      
-      this.findMatch();
-      
-      return value;
-   } 
-
-   public RoomPO hasElementRoomPO()
-   {
-      RoomPO value = new RoomPO();
-      this.addToElements(value);
-      value.setModifier(this.getModifier());
-      
-      this.findMatch();
-      
-      return value;
-   }
-   
-   public RoomPO hasElementRoomPO(Room hostGraphObject)
-   {
-      RoomPO value = new RoomPO();
-      this.addToElements(value);
-      value.setModifier(Pattern.BOUND);
-      
-      value.setCurrentMatch(hostGraphObject);
-      
-      this.findMatch();
-      
-      return value;
-   } 
-
-   public RoomImplPO hasElementRoomImplPO()
-   {
-      RoomImplPO value = new RoomImplPO();
-      this.addToElements(value);
-      value.setModifier(this.getModifier());
-      
-      this.findMatch();
-      
-      return value;
-   }
-   
-   public RoomImplPO hasElementRoomImplPO(RoomImpl hostGraphObject)
-   {
-      RoomImplPO value = new RoomImplPO();
-      this.addToElements(value);
-      value.setModifier(Pattern.BOUND);
-      
-      value.setCurrentMatch(hostGraphObject);
-      
-      this.findMatch();
-      
-      return value;
-   } 
-
-   public AssignmentPO hasElementAssignmentPO()
-   {
-      AssignmentPO value = new AssignmentPO();
-      this.addToElements(value);
-      value.setModifier(this.getModifier());
-      
-      this.findMatch();
-      
-      return value;
-   }
-   
-   public AssignmentPO hasElementAssignmentPO(Assignment hostGraphObject)
-   {
-      AssignmentPO value = new AssignmentPO();
-      this.addToElements(value);
-      value.setModifier(Pattern.BOUND);
-      
-      value.setCurrentMatch(hostGraphObject);
-      
-      this.findMatch();
-      
-      return value;
-   } 
-
-   public AssignmentImplPO hasElementAssignmentImplPO()
-   {
-      AssignmentImplPO value = new AssignmentImplPO();
-      this.addToElements(value);
-      value.setModifier(this.getModifier());
-      
-      this.findMatch();
-      
-      return value;
-   }
-   
-   public AssignmentImplPO hasElementAssignmentImplPO(AssignmentImpl hostGraphObject)
-   {
-      AssignmentImplPO value = new AssignmentImplPO();
       this.addToElements(value);
       value.setModifier(Pattern.BOUND);
       
@@ -275,7 +179,102 @@ public class ModelPattern extends Pattern
       return value;
    } 
 
-}
+   public RoomPO hasElementRoomPO()
+   {
+      RoomPO value = new RoomPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public RoomPO hasElementRoomPO(Room hostGraphObject)
+   {
+      RoomPO value = new RoomPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
 
+   public RoomImplPO hasElementRoomImplPO()
+   {
+      RoomImplPO value = new RoomImplPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public RoomImplPO hasElementRoomImplPO(RoomImpl hostGraphObject)
+   {
+      RoomImplPO value = new RoomImplPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+   public AssignmentPO hasElementAssignmentPO()
+   {
+      AssignmentPO value = new AssignmentPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public AssignmentPO hasElementAssignmentPO(Assignment hostGraphObject)
+   {
+      AssignmentPO value = new AssignmentPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+   public AssignmentImplPO hasElementAssignmentImplPO()
+   {
+      AssignmentImplPO value = new AssignmentImplPO();
+      this.addToElements(value);
+      value.setModifier(this.getModifier());
+      
+      this.findMatch();
+      
+      return value;
+   }
+   
+   public AssignmentImplPO hasElementAssignmentImplPO(AssignmentImpl hostGraphObject)
+   {
+      AssignmentImplPO value = new AssignmentImplPO();
+      this.addToElements(value);
+      value.setModifier(Pattern.BOUND);
+      
+      value.setCurrentMatch(hostGraphObject);
+      
+      this.findMatch();
+      
+      return value;
+   } 
+
+}
 
 

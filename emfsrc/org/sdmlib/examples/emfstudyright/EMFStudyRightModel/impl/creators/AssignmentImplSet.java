@@ -27,12 +27,12 @@ import org.sdmlib.models.modelsets.StringList;
 import java.util.Collection;
 import java.util.List;
 import org.sdmlib.models.modelsets.intList;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 
 public class AssignmentImplSet extends SDMSet<AssignmentImpl>
 {
@@ -184,54 +184,6 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       return this;
    }
 
-   public RoomSet getRoom()
-   {
-      RoomSet result = new RoomSet();
-      
-      for (AssignmentImpl obj : this)
-      {
-         result.with(obj.getRoom());
-      }
-      
-      return result;
-   }
-
-   public AssignmentImplSet hasRoom(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      AssignmentImplSet answer = new AssignmentImplSet();
-      
-      for (AssignmentImpl obj : this)
-      {
-         if (neighbors.contains(obj.getRoom()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public AssignmentImplSet withRoom(Room value)
-   {
-      for (AssignmentImpl obj : this)
-      {
-         obj.withRoom(value);
-      }
-      
-      return this;
-   }
-
    public StudentSet getStudents()
    {
       StudentSet result = new StudentSet();
@@ -290,6 +242,55 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       return this;
    }
 
+   public RoomSet getRoom()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (AssignmentImpl obj : this)
+      {
+         result.with(obj.getRoom());
+      }
+      
+      return result;
+   }
+
+   public AssignmentImplSet hasRoom(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      AssignmentImplSet answer = new AssignmentImplSet();
+      
+      for (AssignmentImpl obj : this)
+      {
+         if (neighbors.contains(obj.getRoom()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public AssignmentImplSet withRoom(Room value)
+   {
+      for (AssignmentImpl obj : this)
+      {
+         obj.withRoom(value);
+      }
+      
+      return this;
+   }
+
 }
+
 
 

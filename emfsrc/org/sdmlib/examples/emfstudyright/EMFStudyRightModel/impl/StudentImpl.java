@@ -48,312 +48,312 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentS
  */
 public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 {
-   /**
+  /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getName()
    * @generated
    * @ordered
    */
-   protected static final String NAME_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
-   /**
+  /**
    * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getName()
    * @generated
    * @ordered
    */
-   protected String name = NAME_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
-   /**
+  /**
    * The default value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getStudId()
    * @generated
    * @ordered
    */
-   protected static final String STUD_ID_EDEFAULT = null;
+  protected static final String STUD_ID_EDEFAULT = null;
 
-   /**
+  /**
    * The cached value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getStudId()
    * @generated
    * @ordered
    */
-   protected String studId = STUD_ID_EDEFAULT;
+  protected String studId = STUD_ID_EDEFAULT;
 
-   /**
+  /**
    * The default value of the '{@link #getCredits() <em>Credits</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getCredits()
    * @generated
    * @ordered
    */
-   protected static final int CREDITS_EDEFAULT = 0;
+  protected static final int CREDITS_EDEFAULT = 0;
 
-   /**
+  /**
    * The cached value of the '{@link #getCredits() <em>Credits</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getCredits()
    * @generated
    * @ordered
    */
-   protected int credits = CREDITS_EDEFAULT;
+  protected int credits = CREDITS_EDEFAULT;
 
-   /**
+  /**
    * The default value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getMotivation()
    * @generated
    * @ordered
    */
-   protected static final int MOTIVATION_EDEFAULT = 0;
+  protected static final int MOTIVATION_EDEFAULT = 0;
 
-   /**
+  /**
    * The cached value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getMotivation()
    * @generated
    * @ordered
    */
-   protected int motivation = MOTIVATION_EDEFAULT;
+  protected int motivation = MOTIVATION_EDEFAULT;
 
-   /**
+  /**
    * The default value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getAssignmentPoints()
    * @generated
    * @ordered
    */
-   protected static final int ASSIGNMENT_POINTS_EDEFAULT = 0;
+  protected static final int ASSIGNMENT_POINTS_EDEFAULT = 0;
 
-   /**
+  /**
    * The cached value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getAssignmentPoints()
    * @generated
    * @ordered
    */
-   protected int assignmentPoints = ASSIGNMENT_POINTS_EDEFAULT;
+  protected int assignmentPoints = ASSIGNMENT_POINTS_EDEFAULT;
 
-   /**
+  /**
    * The cached value of the '{@link #getIn() <em>In</em>}' reference.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getIn()
    * @generated
    * @ordered
    */
-   protected Room in;
+  protected Room in;
 
-   /**
+  /**
    * The cached value of the '{@link #getFriends() <em>Friends</em>}' reference list.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getFriends()
    * @generated
    * @ordered
    */
-   protected EList<Student> friends;
+  protected EList<Student> friends;
 
-   /**
+  /**
    * The cached value of the '{@link #getDone() <em>Done</em>}' reference list.
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getDone()
    * @generated
    * @ordered
    */
-   protected EList<Assignment> done;
+  protected EList<Assignment> done;
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   protected StudentImpl()
-   {
+  protected StudentImpl()
+  {
     super();
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   protected EClass eStaticClass()
-   {
+  @Override
+  protected EClass eStaticClass()
+  {
     return EMFStudyRightModelPackage.Literals.STUDENT;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public String getName()
-   {
+  public String getName()
+  {
     return name;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setName(String newName)
-   {
+  public void setName(String newName)
+  {
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__NAME, oldName, name));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public String getStudId()
-   {
+  public String getStudId()
+  {
     return studId;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setStudId(String newStudId)
-   {
+  public void setStudId(String newStudId)
+  {
     String oldStudId = studId;
     studId = newStudId;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__STUD_ID, oldStudId, studId));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public int getCredits()
-   {
+  public int getCredits()
+  {
     return credits;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setCredits(int newCredits)
-   {
+  public void setCredits(int newCredits)
+  {
     int oldCredits = credits;
     credits = newCredits;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__CREDITS, oldCredits, credits));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public int getMotivation()
-   {
+  public int getMotivation()
+  {
     return motivation;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setMotivation(int newMotivation)
-   {
+  public void setMotivation(int newMotivation)
+  {
     int oldMotivation = motivation;
     motivation = newMotivation;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__MOTIVATION, oldMotivation, motivation));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public int getAssignmentPoints()
-   {
+  public int getAssignmentPoints()
+  {
     return assignmentPoints;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setAssignmentPoints(int newAssignmentPoints)
-   {
+  public void setAssignmentPoints(int newAssignmentPoints)
+  {
     int oldAssignmentPoints = assignmentPoints;
     assignmentPoints = newAssignmentPoints;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS, oldAssignmentPoints, assignmentPoints));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public University getUni()
-   {
+  public University getUni()
+  {
     if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
     return (University)eContainer();
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public University basicGetUni()
-   {
+  public University basicGetUni()
+  {
     if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
     return (University)eInternalContainer();
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public NotificationChain basicSetUni(University newUni, NotificationChain msgs)
-   {
+  public NotificationChain basicSetUni(University newUni, NotificationChain msgs)
+  {
     msgs = eBasicSetContainer((InternalEObject)newUni, EMFStudyRightModelPackage.STUDENT__UNI, msgs);
     return msgs;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setUni(University newUni)
-   {
+  public void setUni(University newUni)
+  {
     if (newUni != eInternalContainer() || (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI && newUni != null))
     {
       if (EcoreUtil.isAncestor(this, newUni))
@@ -370,13 +370,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__UNI, newUni, newUni));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public Room getIn()
-   {
+  public Room getIn()
+  {
     if (in != null && in.eIsProxy())
     {
       InternalEObject oldIn = (InternalEObject)in;
@@ -390,23 +390,23 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return in;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public Room basicGetIn()
-   {
+  public Room basicGetIn()
+  {
     return in;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public NotificationChain basicSetIn(Room newIn, NotificationChain msgs)
-   {
+  public NotificationChain basicSetIn(Room newIn, NotificationChain msgs)
+  {
     Room oldIn = in;
     in = newIn;
     if (eNotificationRequired())
@@ -417,13 +417,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return msgs;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public void setIn(Room newIn)
-   {
+  public void setIn(Room newIn)
+  {
     if (newIn != in)
     {
       NotificationChain msgs = null;
@@ -438,13 +438,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__IN, newIn, newIn));
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public EList<Student> getFriends()
-   {
+  public EList<Student> getFriends()
+  {
     if (friends == null)
     {
       friends = new EObjectWithInverseResolvingEList.ManyInverse<Student>(Student.class, this, EMFStudyRightModelPackage.STUDENT__FRIENDS, EMFStudyRightModelPackage.STUDENT__FRIENDS);
@@ -452,13 +452,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return friends;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   public EList<Assignment> getDone()
-   {
+  public EList<Assignment> getDone()
+  {
     if (done == null)
     {
       done = new EObjectWithInverseResolvingEList.ManyInverse<Assignment>(Assignment.class, this, EMFStudyRightModelPackage.STUDENT__DONE, EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS);
@@ -466,15 +466,15 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return done;
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @SuppressWarnings("unchecked")
-   @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
+  @SuppressWarnings("unchecked")
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__UNI:
@@ -493,14 +493,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return super.eInverseAdd(otherEnd, featureID, msgs);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__UNI:
@@ -515,14 +515,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-   {
+  @Override
+  public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+  {
     switch (eContainerFeatureID())
     {
       case EMFStudyRightModelPackage.STUDENT__UNI:
@@ -531,14 +531,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__NAME:
@@ -565,15 +565,15 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return super.eGet(featureID, resolve, coreType);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @SuppressWarnings("unchecked")
-   @Override
-   public void eSet(int featureID, Object newValue)
-   {
+  @SuppressWarnings("unchecked")
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__NAME:
@@ -609,14 +609,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     super.eSet(featureID, newValue);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public void eUnset(int featureID)
-   {
+  @Override
+  public void eUnset(int featureID)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__NAME:
@@ -650,14 +650,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     super.eUnset(featureID);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public boolean eIsSet(int featureID)
-   {
+  @Override
+  public boolean eIsSet(int featureID)
+  {
     switch (featureID)
     {
       case EMFStudyRightModelPackage.STUDENT__NAME:
@@ -682,14 +682,14 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
     return super.eIsSet(featureID);
   }
 
-   /**
+  /**
    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-   @Override
-   public String toString()
-   {
+  @Override
+  public String toString()
+  {
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
@@ -708,14 +708,19 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
   }
 
 
-
+   
    //==========================================================================
-
+   
    public Object get(String attrName)
    {
       if (PROPERTY_NAME.equalsIgnoreCase(attrName))
       {
          return getName();
+      }
+
+      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
+      {
+         return getStudId();
       }
 
       if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
@@ -728,29 +733,24 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          return getMotivation();
       }
 
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         return getUni();
-      }
-
-      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         return getFriends();
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         return getStudId();
-      }
-
       if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
       {
          return getAssignmentPoints();
       }
 
+      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
+      {
+         return getUni();
+      }
+
       if (PROPERTY_IN.equalsIgnoreCase(attrName))
       {
          return getIn();
+      }
+
+      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
+      {
+         return getFriends();
       }
 
       if (PROPERTY_DONE.equalsIgnoreCase(attrName))
@@ -761,14 +761,20 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return null;
    }
 
-
+   
    //==========================================================================
-
+   
    public boolean set(String attrName, Object value)
    {
       if (PROPERTY_NAME.equalsIgnoreCase(attrName))
       {
          setName((String) value);
+         return true;
+      }
+
+      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
+      {
+         setStudId((String) value);
          return true;
       }
 
@@ -784,33 +790,15 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          return true;
       }
 
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         setUni((University) value);
-         return true;
-      }
-
-      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         addToFriends((Student) value);
-         return true;
-      }
-
-      if ((PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromFriends((Student) value);
-         return true;
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         setStudId((String) value);
-         return true;
-      }
-
       if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
       {
          setAssignmentPoints(Integer.parseInt(value.toString()));
+         return true;
+      }
+
+      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
+      {
+         setUni((University) value);
          return true;
       }
 
@@ -820,12 +808,24 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          return true;
       }
 
+      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
+      {
+         addToFriends((Student) value);
+         return true;
+      }
+      
+      if ((PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         removeFromFriends((Student) value);
+         return true;
+      }
+
       if (PROPERTY_DONE.equalsIgnoreCase(attrName))
       {
          addToDone((Assignment) value);
          return true;
       }
-
+      
       if ((PROPERTY_DONE + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
       {
          removeFromDone((Assignment) value);
@@ -835,51 +835,77 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return false;
    }
 
-
+   
    //==========================================================================
-
+   
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-
+   
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;
    }
-
+   
    public void addPropertyChangeListener(PropertyChangeListener listener) 
    {
       getPropertyChangeSupport().addPropertyChangeListener(listener);
    }
 
-
+   
    //==========================================================================
-
-   public void removeYou()
+   
+   public Student withName(String value)
    {
-      setUni(null);
-      removeAllFromFriends();
-      setIn(null);
-      removeAllFromDone();
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
-   }
+      setName(value);
+      return this;
+   } 
 
-
+   
    //==========================================================================
+   
+   public Student withStudId(String value)
+   {
+      setStudId(value);
+      return this;
+   } 
 
+   
+   //==========================================================================
+   
    public Student withCredits(int value)
    {
       setCredits(value);
       return this;
    } 
 
-
+   
    //==========================================================================
-
+   
    public Student withMotivation(int value)
    {
       setMotivation(value);
       return this;
    } 
 
+   
+   //==========================================================================
+   
+   public Student withAssignmentPoints(int value)
+   {
+      setAssignmentPoints(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public void removeYou()
+   {
+      setUni(null);
+      setIn(null);
+      removeAllFromFriends();
+      removeAllFromDone();
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
 
    private University uni = null;
 
@@ -889,21 +915,70 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return this;
    } 
 
+   public University createUni()
+   {
+      University value = new UniversityImpl();
+      withUni(value);
+      return value;
+   } 
+
+   public Student withIn(Room value)
+   {
+      setIn(value);
+      return this;
+   } 
+
+   public Room createIn()
+   {
+      Room value = new RoomImpl();
+      withIn(value);
+      return value;
+   } 
+  public StudentSet getFriendsSet()
+  {
+     return new StudentSet().with(getFriends());
+  }
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet result = new StudentSet().with(this);
+      return result.getFriendsTransitive();
+   }
+
+
+   public boolean addToFriends(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getFriends().add (value);
+         
+         if (changed)
+         {
+            value.withFriends(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
+
    public boolean removeFromFriends(Student value)
    {
       boolean changed = false;
-
+      
       if ((this.friends != null) && (value != null))
       {
          changed = this.friends.remove (value);
-
+         
          if (changed)
          {
             value.withoutFriends(this);
             getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, value, null);
          }
       }
-
+         
       return changed;   
    }
 
@@ -928,7 +1003,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    public void removeAllFromFriends()
    {
       LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getFriends());
-
+   
       for (Student value : tmpSet)
       {
          this.removeFromFriends(value);
@@ -941,110 +1016,45 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       withFriends(value);
       return value;
    } 
-
-   public University createUni()
-   {
-      University value = new UniversityImpl();
-      withUni(value);
-      return value;
-   } 
-
-   public boolean addToFriends(Student value)
-   {
-      boolean changed = false;
-
-      if (value != null)
-      {
-         changed = this.getFriends().add (value);
-
-         if (changed)
-         {
-            value.withFriends(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
-         }
-      }
-
-      return changed;   
-   }
-   public StudentSet getFriendsSet()
-   {
-      return new StudentSet().with(getFriends());
-   }
-
-
-
-   //==========================================================================
-
-
-   public Student withStudId(String value)
-   {
-      setStudId(value);
-      return this;
-   } 
-
-
-   //==========================================================================
-
-   public Student withAssignmentPoints(int value)
-   {
-      setAssignmentPoints(value);
-      return this;
-   } 
-
-
-  public Student withIn(Room value)
-   {
-      setIn(value);
-      return this;
-   } 
-
-   public Room createIn()
-   {
-      Room value = new RoomImpl();
-      withIn(value);
-      return value;
-   } 
-
-
-   public AssignmentSet getDoneSet()
-   {
-      return new AssignmentSet().with(getDone());
-   }
+  public AssignmentSet getDoneSet()
+  {
+     return new AssignmentSet().with(getDone());
+  }
 
 
    public boolean addToDone(Assignment value)
    {
       boolean changed = false;
-
+      
       if (value != null)
       {
          changed = this.getDone().add (value);
-
+         
          if (changed)
          {
             value.withStudents(this);
             getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, null, value);
          }
       }
-
+         
       return changed;   
    }
 
    public boolean removeFromDone(Assignment value)
    {
       boolean changed = false;
-
+      
       if ((this.done != null) && (value != null))
       {
          changed = this.done.remove (value);
-
+         
          if (changed)
          {
             value.withoutStudents(this);
             getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, value, null);
          }
       }
-
+         
       return changed;   
    }
 
@@ -1069,7 +1079,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    public void removeAllFromDone()
    {
       LinkedHashSet<Assignment> tmpSet = new LinkedHashSet<Assignment>(this.getDone());
-
+   
       for (Assignment value : tmpSet)
       {
          this.removeFromDone(value);
@@ -1083,15 +1093,40 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return value;
    } 
 
-
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
 
    
-   //==========================================================================
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
    
-   public Student withName(String value)
-   {
-      setName(value);
-      return this;
-   } 
+   public static final String PROPERTY_IN = "in";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+
+   
+
 } //StudentImpl
 

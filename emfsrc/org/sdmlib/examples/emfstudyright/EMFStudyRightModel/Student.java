@@ -237,9 +237,7 @@ public interface Student extends EObject
    */
   EList<Student> getFriends();
 
-
-   
-   /**
+  /**
    * Returns the value of the '<em><b>Done</b></em>' reference list.
    * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment}.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment#getStudents <em>Students</em>}'.
@@ -258,12 +256,19 @@ public interface Student extends EObject
   EList<Assignment> getDone();
 
 
-
-  //==========================================================================
+   
+   //==========================================================================
    
    public static final String PROPERTY_NAME = "name";
    
    public Student withName(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_STUDID = "studId";
+   
+   public Student withStudId(String value);
 
    
    //==========================================================================
@@ -280,17 +285,11 @@ public interface Student extends EObject
    public Student withMotivation(int value);
 
    
-
+   //==========================================================================
    
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- University
-    *              students                   uni
-    * </pre>
-    */
+   public static final String PROPERTY_ASSIGNMENTPOINTS = "assignmentPoints";
    
-   public static final String PROPERTY_UNI = "uni";
+   public Student withAssignmentPoints(int value);
 
    public Student withUni(University value);
 
@@ -299,16 +298,13 @@ public interface Student extends EObject
    
    public static final StudentSet EMPTY_SET = new StudentSet();
 
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Student ----------------------------------- Student
-    *              friends                   friends
-    * </pre>
-    */
-   
-   public static final String PROPERTY_FRIENDS = "friends";
+   public Student withIn(Room value);
+
+   public Room createIn();
+
+   public StudentSet getFriendsSet();
+
+   public StudentSet getFriendsTransitive();
 
    boolean addToFriends(Student value);
 
@@ -321,48 +317,6 @@ public interface Student extends EObject
    public void removeAllFromFriends();
 
    public Student createFriends();
-
-   public StudentSet getFriendsSet();
-
-   
-   //==========================================================================
-   
-   public static final String PROPERTY_STUDID = "studId";
-   
-   public Student withStudId(String value);
-
-   
-   //==========================================================================
-   
-   public static final String PROPERTY_ASSIGNMENTPOINTS = "assignmentPoints";
-   
-   public Student withAssignmentPoints(int value);
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- Room
-    *              students                   in
-    * </pre>
-    */
-   
-   public static final String PROPERTY_IN = "in";
-
-   public Student withIn(Room value);
-
-   public Room createIn();
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Student ----------------------------------- Assignment
-    *              students                   done
-    * </pre>
-    */
-   
-   public static final String PROPERTY_DONE = "done";
 
    public AssignmentSet getDoneSet();
 
@@ -377,5 +331,49 @@ public interface Student extends EObject
    public void removeAllFromDone();
 
    public Assignment createDone();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
 } // Student
 

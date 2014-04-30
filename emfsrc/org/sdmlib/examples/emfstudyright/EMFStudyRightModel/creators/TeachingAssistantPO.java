@@ -3,15 +3,15 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators;
 import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
-import org.sdmlib.models.pattern.LinkConstraint;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternLink;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.models.pattern.LinkConstraint;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
@@ -36,40 +36,6 @@ public class TeachingAssistantPO extends PatternObject<TeachingAssistantPO, Teac
       return matches;
    }
    
-   public RoomPO hasRoom()
-   {
-      RoomPO result = new RoomPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(TeachingAssistant.PROPERTY_ROOM, result);
-      
-      return result;
-   }
-
-   public RoomPO createRoom()
-   {
-      return this.startCreate().hasRoom().endCreate();
-   }
-
-   public TeachingAssistantPO hasRoom(RoomPO tgt)
-   {
-      return hasLinkConstraint(tgt, TeachingAssistant.PROPERTY_ROOM);
-   }
-
-   public TeachingAssistantPO createRoom(RoomPO tgt)
-   {
-      return this.startCreate().hasRoom(tgt).endCreate();
-   }
-
-   public Room getRoom()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((TeachingAssistant) this.getCurrentMatch()).getRoom();
-      }
-      return null;
-   }
-
    public TeachingAssistantPO hasName(String value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
@@ -471,7 +437,39 @@ public class TeachingAssistantPO extends PatternObject<TeachingAssistantPO, Teac
       return null;
    }
 
+   public RoomPO hasRoom()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(TeachingAssistant.PROPERTY_ROOM, result);
+      
+      return result;
+   }
+
+   public RoomPO createRoom()
+   {
+      return this.startCreate().hasRoom().endCreate();
+   }
+
+   public TeachingAssistantPO hasRoom(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, TeachingAssistant.PROPERTY_ROOM);
+   }
+
+   public TeachingAssistantPO createRoom(RoomPO tgt)
+   {
+      return this.startCreate().hasRoom(tgt).endCreate();
+   }
+
+   public Room getRoom()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((TeachingAssistant) this.getCurrentMatch()).getRoom();
+      }
+      return null;
+   }
+
 }
-
-
 

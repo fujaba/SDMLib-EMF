@@ -31,14 +31,14 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityS
 import java.util.Collections;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class RoomImplSet extends SDMSet<RoomImpl>
 {
@@ -238,64 +238,6 @@ public class RoomImplSet extends SDMSet<RoomImpl>
       return this;
    }
 
-   public AssignmentSet getAssignments()
-   {
-      AssignmentSet result = new AssignmentSet();
-      
-      for (RoomImpl obj : this)
-      {
-         result.with(obj.getAssignments());
-      }
-      
-      return result;
-   }
-
-   public RoomImplSet hasAssignments(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      RoomImplSet answer = new RoomImplSet();
-      
-      for (RoomImpl obj : this)
-      {
-         if ( ! Collections.disjoint(neighbors, obj.getAssignments()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public RoomImplSet withAssignments(Assignment value)
-   {
-      for (RoomImpl obj : this)
-      {
-         obj.withAssignments(value);
-      }
-      
-      return this;
-   }
-
-   public RoomImplSet withoutAssignments(Assignment value)
-   {
-      for (RoomImpl obj : this)
-      {
-         obj.withoutAssignments(value);
-      }
-      
-      return this;
-   }
-
    public StudentSet getStudents()
    {
       StudentSet result = new StudentSet();
@@ -450,6 +392,30 @@ public class RoomImplSet extends SDMSet<RoomImpl>
       return answer;
    }
 
+
+   public RoomSet getDoorsTransitive()
+   {
+      RoomSet todo = new RoomSet().with(this);
+      
+      RoomSet result = new RoomSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Room current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getDoorsSet().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
    public RoomImplSet withDoors(Room value)
    {
       for (RoomImpl obj : this)
@@ -470,6 +436,65 @@ public class RoomImplSet extends SDMSet<RoomImpl>
       return this;
    }
 
+   public AssignmentSet getAssignments()
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (RoomImpl obj : this)
+      {
+         result.with(obj.getAssignments());
+      }
+      
+      return result;
+   }
+
+   public RoomImplSet hasAssignments(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      RoomImplSet answer = new RoomImplSet();
+      
+      for (RoomImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getAssignments()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public RoomImplSet withAssignments(Assignment value)
+   {
+      for (RoomImpl obj : this)
+      {
+         obj.withAssignments(value);
+      }
+      
+      return this;
+   }
+
+   public RoomImplSet withoutAssignments(Assignment value)
+   {
+      for (RoomImpl obj : this)
+      {
+         obj.withoutAssignments(value);
+      }
+      
+      return this;
+   }
+
 }
+
 
 
