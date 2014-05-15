@@ -180,8 +180,11 @@ public class EmfIdMap extends SDMLibJsonIdMap
 
    private void addChildren(XMLEntity xmlEntity, EntityFactory rootFactory, Object rootObject)
    {
-      for (XMLEntity kidEntity : xmlEntity.getChildren())
+      
+      Iterator<XMLEntity> iterator = xmlEntity.getChildren().iterator();
+      while (iterator.hasNext())
       {
+         XMLEntity kidEntity = iterator.next();
          String tag = kidEntity.getTag();
          Method getMethod = null;
          String typeName = null;
