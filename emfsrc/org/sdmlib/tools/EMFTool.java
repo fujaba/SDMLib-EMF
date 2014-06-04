@@ -193,7 +193,7 @@ public class EMFTool
                Clazz kidClazz = model.getClazz(eclass.getName());
                Clazz superClazz = model.getClazz(eclass.getESuperTypes().get(0).getName());
                
-               kidClazz.withSuperClass(superClazz);
+               kidClazz.withSuperClazzes(superClazz);
             }
             
          }

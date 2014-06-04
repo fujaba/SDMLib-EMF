@@ -103,7 +103,7 @@ public class SDMCodeEnhancer
                EClass eSuperClass = eclass.getESuperTypes().get(0);
                Clazz sdmSuperClass = classMap.get(eSuperClass);
                Clazz sdmClass = classMap.get(eclass);
-               sdmClass.withSuperClass(sdmSuperClass);
+               sdmClass.withSuperClazzes(sdmSuperClass);
             }
                
             for (EReference eref : eclass.getEReferences())

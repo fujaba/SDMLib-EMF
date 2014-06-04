@@ -52,7 +52,7 @@ public class SDMEMFStudyRightModel
       
       Clazz studClazz = uniClazz.createClassAndAssoc("Student", "students", R.MANY, "uni", R.ONE)
             .withAttributes("studId", R.STRING)
-            .withSuperClass(persClazz);
+            .withSuperClazzes(persClazz);
       
       storyboard.addSVGImage(model.dumpClassDiagram("examples", "EMFStudyRightClassDiag"));
       

@@ -31,7 +31,7 @@ public class PeerToServerChatTest
 
       model.createClazz("TestChatMessageFlow", 
          "msg", String.class.getSimpleName())
-         .withSuperClass(taskFlowClazz)
+         .withSuperClazzes(taskFlowClazz)
          .withMethods("run()", "void")
          .withMethods("getTaskNames()", "Object[]");
 

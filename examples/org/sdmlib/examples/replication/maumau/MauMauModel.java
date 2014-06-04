@@ -38,7 +38,7 @@ public class MauMauModel
       mauMauClass.withAssoc(holderClass, "stack", R.ONE, "stackOwner", R.ONE);
 
       Clazz playerClass = mauMauClass.createClassAndAssoc("Player", "players", MANY, "game", ONE)
-            .withSuperClass(holderClass)
+            .withSuperClazzes(holderClass)
             .withAttributes("name", STRING);
       
       playerClass.withAssoc(playerClass, "next", ONE, "prev", ONE);
