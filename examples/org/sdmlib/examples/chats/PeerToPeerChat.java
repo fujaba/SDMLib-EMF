@@ -21,6 +21,12 @@
    
 package org.sdmlib.examples.chats;
 
+import java.awt.Button;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,34 +36,15 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.TreeSet;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.sdmlib.examples.chats.creators.CreatorCreator;
-import org.sdmlib.model.taskflows.Logger;
-import org.sdmlib.model.taskflows.PeerProxy;
-import org.sdmlib.model.taskflows.SocketThread;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.serialization.json.JsonObject;
-import org.sdmlib.serialization.json.SDMLibJsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.logger.PeerProxy;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import org.sdmlib.serialization.SDMLibJsonIdMap;
+
+import sun.java2d.pipe.SpanShapeRenderer.Composite;
+import sun.misc.GC;
+import de.uniks.networkparser.json.JsonIdMap;
+import de.uniks.networkparser.json.JsonObject;
 
 public class PeerToPeerChat extends Shell implements PropertyChangeInterface
 {

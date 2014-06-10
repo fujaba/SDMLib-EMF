@@ -23,9 +23,9 @@ package org.sdmlib.examples.chats;
 
 import java.beans.PropertyChangeSupport;
 
-import org.sdmlib.model.taskflows.PeerProxy;
-import org.sdmlib.model.taskflows.TaskFlow;
-import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.logger.PeerProxy;
+import org.sdmlib.logger.TaskFlow;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class CSDrawPointFlow extends TaskFlow implements PropertyChangeInterface
 {

@@ -21,17 +21,15 @@
    
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators;
 
-import org.sdmlib.models.modelsets.SDMSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.models.modelsets.StringList;
 import java.util.Collection;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import java.util.Collections;
-import org.sdmlib.models.modelsets.ObjectSet;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import java.util.List;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.models.modelsets.ObjectSet;
+import org.sdmlib.models.modelsets.SDMSet;
+import org.sdmlib.models.modelsets.StringList;
 
 public class UniversitySet extends SDMSet<University>
 {

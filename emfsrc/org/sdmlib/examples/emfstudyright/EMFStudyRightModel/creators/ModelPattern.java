@@ -1,26 +1,21 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators;
 
-import org.sdmlib.models.pattern.Pattern;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplPO;
+import org.sdmlib.models.pattern.Pattern;
 
 public class ModelPattern extends Pattern
 {

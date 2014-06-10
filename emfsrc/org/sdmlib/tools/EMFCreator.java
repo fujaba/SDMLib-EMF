@@ -5,7 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.serialization.interfaces.EntityFactory;
+import org.sdmlib.serialization.EntityFactory;
 
 public class EMFCreator extends EntityFactory
 {

@@ -5,12 +5,15 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.*;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 
 /**
  * <!-- begin-user-doc -->

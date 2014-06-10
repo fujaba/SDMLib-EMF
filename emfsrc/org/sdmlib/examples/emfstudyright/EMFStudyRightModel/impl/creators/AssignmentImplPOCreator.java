@@ -1,6 +1,6 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators;
 
-import org.sdmlib.models.pattern.creators.PatternObjectCreator;
+import org.sdmlib.models.pattern.util.PatternObjectCreator;
 
 public class AssignmentImplPOCreator extends PatternObjectCreator
 {

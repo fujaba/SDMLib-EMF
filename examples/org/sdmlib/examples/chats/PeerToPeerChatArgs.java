@@ -21,9 +21,10 @@
    
 package org.sdmlib.examples.chats;
 
-import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
-import org.sdmlib.utils.StrUtil;
+
+import org.sdmlib.StrUtil;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class PeerToPeerChatArgs implements PropertyChangeInterface
 {

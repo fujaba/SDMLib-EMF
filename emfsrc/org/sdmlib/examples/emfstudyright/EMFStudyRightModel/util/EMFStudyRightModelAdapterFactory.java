@@ -2,14 +2,15 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.*;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 
 /**
  * <!-- begin-user-doc -->

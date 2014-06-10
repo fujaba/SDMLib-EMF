@@ -1,26 +1,19 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplSet;
-import org.sdmlib.models.pattern.AttributeConstraint;
-import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.models.pattern.LinkConstraint;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversityPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class RoomImplPO extends PatternObject<RoomImplPO, RoomImpl>
 {

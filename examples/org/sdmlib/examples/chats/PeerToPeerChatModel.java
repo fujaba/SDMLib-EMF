@@ -1,17 +1,15 @@
 package org.sdmlib.examples.chats;
 
-import static org.sdmlib.models.classes.Role.R.ONE;
-
 import org.junit.Test;
-import org.sdmlib.model.taskflows.PeerProxy;
-import org.sdmlib.model.taskflows.TaskFlow;
-import org.sdmlib.model.taskflows.creators.PeerProxySet;
+import org.sdmlib.logger.PeerProxy;
+import org.sdmlib.logger.TaskFlow;
+import org.sdmlib.logger.util.PeerProxySet;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.Role.R;
+import org.sdmlib.serialization.SDMLibJsonIdMap;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.serialization.json.SDMLibJsonIdMap;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class PeerToPeerChatModel
 {

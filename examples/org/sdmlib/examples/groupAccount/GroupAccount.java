@@ -26,8 +26,9 @@ import java.util.LinkedHashSet;
 
 import org.sdmlib.examples.groupAccount.creators.ItemSet;
 import org.sdmlib.examples.groupAccount.creators.PersonSet;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.serialization.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class GroupAccount implements PropertyChangeInterface
 {

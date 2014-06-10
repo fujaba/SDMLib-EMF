@@ -21,19 +21,15 @@
    
 package org.sdmlib.examples.groupAccount;
    
-import static org.sdmlib.models.classes.Role.R.DOUBLE;
-import static org.sdmlib.models.classes.Role.R.MANY;
-import static org.sdmlib.models.classes.Role.R.ONE;
-import static org.sdmlib.models.classes.Role.R.STRING;
+import java.beans.PropertyChangeSupport;
 
 import org.junit.Test;
 import org.sdmlib.models.classes.Association;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardManager;
-import org.sdmlib.utils.PropertyChangeInterface;
-import java.beans.PropertyChangeSupport;
    
 public class GroupAccountTests implements PropertyChangeInterface 
 {

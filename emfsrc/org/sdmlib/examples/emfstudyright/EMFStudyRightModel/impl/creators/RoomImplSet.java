@@ -21,24 +21,24 @@
    
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators;
 
-import org.sdmlib.models.modelsets.SDMSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
-import org.sdmlib.models.modelsets.StringList;
 import java.util.Collection;
-import java.util.List;
-import org.sdmlib.models.modelsets.intList;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversitySet;
 import java.util.Collections;
-import org.sdmlib.models.modelsets.ObjectSet;
+
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversitySet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.models.modelsets.ObjectSet;
+import org.sdmlib.models.modelsets.SDMSet;
+import org.sdmlib.models.modelsets.StringList;
+import org.sdmlib.models.modelsets.intList;
 
 public class RoomImplSet extends SDMSet<RoomImpl>
 {

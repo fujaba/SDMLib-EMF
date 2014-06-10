@@ -1,7 +1,7 @@
 package org.sdmlib.models;
 
 import org.junit.Test;
-import org.sdmlib.codegen.CGUtil;
+import org.sdmlib.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
@@ -13,10 +13,8 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplCreator;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.Role.R;
 import org.sdmlib.models.pattern.Match;
 import org.sdmlib.storyboards.Storyboard;
 

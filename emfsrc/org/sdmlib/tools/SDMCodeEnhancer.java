@@ -4,21 +4,19 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.junit.Test;
-import org.sdmlib.codegen.CGUtil;
+import org.sdmlib.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.Role;
-import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.models.classes.creators.ClazzSet;
-import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.storyboards.Storyboard;
+
+import sun.font.EAttribute;
 
 public class SDMCodeEnhancer
 {
@@ -74,10 +72,10 @@ public class SDMCodeEnhancer
             
             // add an interface and a class to the SDMModel
             String fullClassName = eclass.getInstanceTypeName();
-            Clazz sdmClass = model.createClazz(fullClassName).withInterfaze(true);
+            Clazz sdmClass = model.createClazz(fullClassName).withInterface(true);
 
             String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclass.getName() + "Impl";
-            Clazz implClass = model.createClazz(implClassName).withInterfaces(sdmClass);
+            Clazz implClass = model.createClazz(implClassName).withSuperClazz(sdmClass);
          
             classMap.put(eclass, sdmClass);
             
@@ -103,7 +101,7 @@ public class SDMCodeEnhancer
                EClass eSuperClass = eclass.getESuperTypes().get(0);
                Clazz sdmSuperClass = classMap.get(eSuperClass);
                Clazz sdmClass = classMap.get(eclass);
-               sdmClass.withSuperClazzes(sdmSuperClass);
+               sdmClass.withSuperClazz(sdmSuperClass);
             }
                
             for (EReference eref : eclass.getEReferences())

@@ -7,18 +7,24 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.sdmlib.codegen.CGUtil;
+import org.sdmlib.CGUtil;
+import org.sdmlib.StrUtil;
+import org.sdmlib.serialization.EntityFactory;
+import org.sdmlib.serialization.SDMLibJsonIdMap;
 import org.sdmlib.serialization.StringBuilderBuffer;
-import org.sdmlib.serialization.interfaces.EntityFactory;
-import org.sdmlib.serialization.interfaces.SendableEntityCreator;
-import org.sdmlib.serialization.json.SDMLibJsonIdMap;
-import org.sdmlib.utils.StrUtil;
+
+import de.uniks.networkparser.interfaces.SendableEntityCreator;
+import de.uniks.networkparser.xml.XMLEntity;
+import de.uniks.networkparser.xml.XMLTokener;
 
 public class EmfIdMap extends SDMLibJsonIdMap
 {
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
 
+   public EmfIdMap() {
+}
+   
    public Object decode(StringBuilder fileText)
    {
       int pos = fileText.indexOf("\n");
@@ -42,7 +48,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
       {
          if (CGUtil.shortClassName(fullName).equals(className))
          {
-            rootFactory = (EntityFactory) getCreatorClasses(fullName);
+            rootFactory = (EntityFactory) getCreator(fullName, true);
             break;
          }
       }
@@ -70,7 +76,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
 
    private void addXMIIds(XMLEntity xmlEntity)
    {
-      if (xmlEntity.has(XMI_ID))
+      if (xmlEntity.contains(XMI_ID))
       {
          return;
       }
@@ -80,7 +86,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
       String firstTag = "p";
       for (XMLEntity kid : xmlEntity.getChildren())
       {
-         if (kid.has(XMI_ID))
+         if (kid.contains(XMI_ID))
          {
             continue;
          }
@@ -205,7 +211,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
                typeName = CGUtil.baseClassName(typeName, "Set");
             }
 
-            if (kidEntity.has(XSI_TYPE))
+            if (kidEntity.contains(XSI_TYPE))
             {
                typeName = kidEntity.getString(XSI_TYPE);
                typeName = typeName.replaceAll(":", ".");
@@ -241,7 +247,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
 
    private EntityFactory getCreatorClassesByShortName(String typeName)
    {
-      EntityFactory kidFactory = (EntityFactory) getCreatorClasses(typeName);
+      EntityFactory kidFactory = (EntityFactory) getCreator(typeName, true);
 
       if (kidFactory == null)
       {
@@ -249,7 +255,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
          {
             if (creatorName.endsWith(typeName))
             {
-               return (EntityFactory) getCreatorClasses(creatorName);
+               return (EntityFactory) getCreator(creatorName, true);
             }
          }
       }

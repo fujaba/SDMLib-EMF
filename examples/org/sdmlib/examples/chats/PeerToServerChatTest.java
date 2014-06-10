@@ -6,16 +6,16 @@ import java.net.UnknownHostException;
 import java.util.LinkedHashSet;
 
 import org.junit.Test;
-import org.sdmlib.codegen.CGUtil;
+import org.sdmlib.CGUtil;
 import org.sdmlib.examples.chats.creators.CreatorCreator;
-import org.sdmlib.model.taskflows.PeerProxy;
-import org.sdmlib.model.taskflows.SocketThread;
-import org.sdmlib.model.taskflows.TaskFlow;
+import org.sdmlib.logger.PeerProxy;
+import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
+import org.sdmlib.serialization.SDMLibJsonIdMap;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.serialization.json.SDMLibJsonIdMap;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class PeerToServerChatTest
 {

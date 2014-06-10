@@ -1,10 +1,11 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators;
 
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.CreatorCreator;
-import org.sdmlib.serialization.interfaces.EntityFactory;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.CreatorCreator;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.serialization.EntityFactory;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class AssignmentImplCreator extends EntityFactory
 {

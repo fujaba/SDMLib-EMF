@@ -24,11 +24,12 @@ package org.sdmlib.examples.groupAccount;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedHashSet;
 
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.groupAccount.creators.ItemSet;
 import org.sdmlib.examples.groupAccount.creators.PersonSet;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
-import org.sdmlib.utils.StrUtil;
+import org.sdmlib.serialization.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class Person implements PropertyChangeInterface
 {

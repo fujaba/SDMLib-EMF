@@ -23,12 +23,11 @@ package org.sdmlib.examples.chats;
 
 import java.beans.PropertyChangeSupport;
 
-import org.sdmlib.model.taskflows.Logger;
-import org.sdmlib.model.taskflows.PeerProxy;
-import org.sdmlib.model.taskflows.TaskFlow;
-import org.sdmlib.serialization.json.SDMLibJsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
-import org.sdmlib.utils.StrUtil;
+import org.sdmlib.StrUtil;
+import org.sdmlib.logger.PeerProxy;
+import org.sdmlib.logger.TaskFlow;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import org.sdmlib.serialization.SDMLibJsonIdMap;
 
 public class TestChatMessageFlow extends TaskFlow implements PropertyChangeInterface
 {

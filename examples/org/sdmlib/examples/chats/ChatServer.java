@@ -23,13 +23,12 @@ package org.sdmlib.examples.chats;
 
 import java.beans.PropertyChangeSupport;
 
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.chats.creators.CreatorCreator;
-import org.sdmlib.model.taskflows.SDMThread;
-import org.sdmlib.model.taskflows.SocketThread;
-import org.sdmlib.model.taskflows.creators.PeerProxySet;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
-import org.sdmlib.utils.StrUtil;
+import org.sdmlib.logger.util.PeerProxySet;
+import org.sdmlib.serialization.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class ChatServer implements PropertyChangeInterface
 {

@@ -2,20 +2,21 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeListener;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 /**
  * <!-- begin-user-doc -->

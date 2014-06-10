@@ -2,13 +2,16 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -16,12 +19,9 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import java.beans.PropertyChangeSupport;
-import java.util.Collection;
-import java.beans.PropertyChangeListener;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import java.util.LinkedHashSet;
-import org.sdmlib.serialization.json.JsonIdMap;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 /**
  * <!-- begin-user-doc -->
