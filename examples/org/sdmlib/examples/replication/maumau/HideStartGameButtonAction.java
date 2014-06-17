@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.BoardTask;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 

@@ -14,7 +14,7 @@ import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.serialization.json.JsonObject;
 import org.sdmlib.storyboards.Storyboard;
@@ -75,7 +75,7 @@ public class SharedSpaceMauMauStoryboards
       mauMau = new MauMau();
       map.put(gameSpace.getSpaceId() + "_root", mauMau);
 
-      taskFlowBoard = new TaskFlowBoard();
+      taskFlowBoard = new RemoteTaskBoard();
       map.put(gameSpace.getSpaceId() + "taskBoard", taskFlowBoard);
 
       Lane play7WorkFlowLane = taskFlowBoard.createLanes(Play7WorkFlow.PLAY7_WORK_FLOW_LANE);
@@ -104,7 +104,7 @@ public class SharedSpaceMauMauStoryboards
    }
 
 
-   private TaskFlowBoard taskFlowBoard;
+   private RemoteTaskBoard taskFlowBoard;
 
 
 }

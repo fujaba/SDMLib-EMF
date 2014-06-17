@@ -18,7 +18,7 @@ import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.ReplicationServer;
 import org.sdmlib.replication.SharedModelRoot;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.serialization.json.JsonObject;
 import org.sdmlib.storyboards.Storyboard;
@@ -108,7 +108,7 @@ public class MultiMauMauClientInitTask implements Runnable
       mauMau.withPlayers(me);
       
       // create task board 
-      TaskFlowBoard taskFlowBoard = new TaskFlowBoard();
+      RemoteTaskBoard taskFlowBoard = new RemoteTaskBoard();
       map.put(gameSpace.getSpaceId() + "taskBoard", taskFlowBoard);
       
       Lane myLane = new Lane().withName(nodeId + "Lane");

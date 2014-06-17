@@ -6,7 +6,7 @@ import java.util.Random;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 
 public class ServerStartGameHandler 
@@ -36,7 +36,7 @@ public class ServerStartGameHandler
          
          // remove init tasks
 
-         TaskFlowBoard taskFlowBoard = (TaskFlowBoard) sharedSpace.getMap().getObject(sharedSpace.getSpaceId() + "taskBoard");
+         RemoteTaskBoard taskFlowBoard = (RemoteTaskBoard) sharedSpace.getMap().getObject(sharedSpace.getSpaceId() + "taskBoard");
          taskFlowBoard.getLanes().getTasks().removeYou();
          
          MauMau mauMau = (MauMau) sharedSpace.getMap().getObject(sharedSpace.getSpaceId() + "_root");

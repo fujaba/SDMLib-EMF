@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Label;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 
 public class StartGameMouseAdapter extends MouseAdapter
@@ -35,7 +35,7 @@ public class StartGameMouseAdapter extends MouseAdapter
    public void mouseUp(MouseEvent e)
    {
       // move start game task to server lane
-      TaskFlowBoard board = t.getLane().getBoard();
+      RemoteTaskBoard board = t.getLane().getBoard();
 
       BoardTask task = board.createTask(MultiMauMau.SERVER, MultiMauMau.START_GAME);
 

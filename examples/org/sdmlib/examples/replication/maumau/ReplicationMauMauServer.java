@@ -33,7 +33,7 @@ import org.sdmlib.replication.Node;
 import org.sdmlib.replication.ReplicationNode;
 import org.sdmlib.replication.ServerSocketAcceptThread;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardWall;
@@ -44,7 +44,7 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
 {
    public class TaskBoardLanesListener implements  PropertyChangeListener
    {
-      public TaskFlowBoard getTaskFlowBoard()
+      public RemoteTaskBoard getTaskFlowBoard()
       {
          return taskFlowBoard;
       }
@@ -87,10 +87,10 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
    }
 
    public static final int REPLICATION_SERVER_PORT = 11144;
-   private TaskFlowBoard taskFlowBoard;
+   private RemoteTaskBoard taskFlowBoard;
    private MauMau mauMau;
 
-   public TaskFlowBoard getTaskFlowBoard()
+   public RemoteTaskBoard getTaskFlowBoard()
    {
       return taskFlowBoard;
    }
@@ -148,7 +148,7 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
          map.put(spaceId + "_root", mauMau);
 
          // add taskflow board
-         taskFlowBoard = new TaskFlowBoard();
+         taskFlowBoard = new RemoteTaskBoard();
          map.put(spaceId + "taskBoard", taskFlowBoard);
 
          Lane serverLane = new Lane().withName(MultiMauMau.SERVER);
@@ -156,7 +156,7 @@ public class ReplicationMauMauServer extends ReplicationNode implements Property
          taskFlowBoard.addToLanes(serverLane);
 
          TaskBoardLanesListener taskBoardLanesListener = new TaskBoardLanesListener();
-         taskFlowBoard.getPropertyChangeSupport().addPropertyChangeListener(TaskFlowBoard.PROPERTY_LANES, taskBoardLanesListener);
+         taskFlowBoard.getPropertyChangeSupport().addPropertyChangeListener(RemoteTaskBoard.PROPERTY_LANES, taskBoardLanesListener);
 
          ServerLaneManager serverLaneManager = new ServerLaneManager(sharedSpace);
          serverLane.getPropertyChangeSupport().addPropertyChangeListener(serverLaneManager.withSource(serverLane));

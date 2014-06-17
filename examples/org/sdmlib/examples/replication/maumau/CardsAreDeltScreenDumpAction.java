@@ -12,7 +12,7 @@ import org.sdmlib.examples.replication.maumau.creators.LabelSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 
@@ -141,7 +141,7 @@ public class CardsAreDeltScreenDumpAction implements PropertyChangeListener
                // story.setStepDoneCounter(story.getStepDoneCounter() + 1);
                story.addStep("testPlay7 asks Karli to do a screen dump and to draw cards.");
                BoardTask task = (BoardTask) evt.getSource();
-               TaskFlowBoard board = task.getLane().getBoard();
+               RemoteTaskBoard board = task.getLane().getBoard();
                board.startTask("KarliLane", Play7WorkFlow.KARLI_DRAW_CARDS);
             }
          }

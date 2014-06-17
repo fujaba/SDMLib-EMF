@@ -40,7 +40,7 @@ import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.TaskFlowBoard;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.swt.ScreenShotRunnable;
 import org.sdmlib.utils.PropertyChangeInterface;
@@ -125,11 +125,11 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
       return this;
    }
 
-   private int debugSocket = 8900;
+   private int debugSocket = 12900;
 
-   private TaskFlowBoard taskFlowBoard;
+   private RemoteTaskBoard taskFlowBoard;
    
-   public TaskFlowBoard getTaskFlowBoard()
+   public RemoteTaskBoard getTaskFlowBoard()
    {
       return taskFlowBoard;
    }
@@ -138,10 +138,9 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
 
    Process startClient(String name)
    {
-      String abuClientComand = "java "
-            + "-Xdebug -Xrunjdwp:transport=dt_socket,address=" + (debugSocket++) 
-            + ",server=y,suspend=n "
-            + "-Dfile.encoding=UTF-8 "
+      String abuClientComand = "\"C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\javaw.exe\" "
+            + "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:" + (debugSocket++) 
+            + " -Dfile.encoding=UTF-8 "
             + "-classpath \"" + System.getProperty("java.class.path")
             + "\" " + MultiMauMauClientGui.class.getName() + " "
             + name
@@ -175,6 +174,11 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
                   {
                      String text = buf.readLine();
                      System.out.println(text);
+                     
+                     if (text == null)
+                     {
+                        break;
+                     }
                   }
                   catch (IOException e)
                   {
@@ -200,6 +204,10 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
                   {
                      String text = errbuf.readLine();
                      System.out.println(text);
+                     if (text == null)
+                     {
+                        break;
+                     }
                   }
                   catch (IOException e)
                   {
@@ -237,7 +245,7 @@ public class Play7WorkFlowLaneManager  implements PropertyChangeListener, Proper
       return child;
    }
 
-   public Play7WorkFlowLaneManager withTaskFlowBoard(TaskFlowBoard taskFlowBoard)
+   public Play7WorkFlowLaneManager withTaskFlowBoard(RemoteTaskBoard taskFlowBoard)
    {
       this.taskFlowBoard = taskFlowBoard;
       return this;
