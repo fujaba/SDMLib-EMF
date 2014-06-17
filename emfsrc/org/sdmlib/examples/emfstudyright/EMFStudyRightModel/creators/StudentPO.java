@@ -24,142 +24,6 @@ public class StudentPO extends PatternObject<StudentPO, Student>
       return matches;
    }
    
-   public UniversityPO hasUni()
-   {
-      UniversityPO result = new UniversityPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Student.PROPERTY_UNI, result);
-      
-      return result;
-   }
-
-   public UniversityPO createUni()
-   {
-      return this.startCreate().hasUni().endCreate();
-   }
-
-   public StudentPO hasUni(UniversityPO tgt)
-   {
-      return hasLinkConstraint(tgt, Student.PROPERTY_UNI);
-   }
-
-   public StudentPO createUni(UniversityPO tgt)
-   {
-      return this.startCreate().hasUni(tgt).endCreate();
-   }
-
-   public University getUni()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Student) this.getCurrentMatch()).getUni();
-      }
-      return null;
-   }
-
-   public StudentPO hasFriends()
-   {
-      StudentPO result = new StudentPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Student.PROPERTY_FRIENDS, result);
-      
-      return result;
-   }
-
-   public StudentPO createFriends()
-   {
-      return this.startCreate().hasFriends().endCreate();
-   }
-
-   public StudentPO hasFriends(StudentPO tgt)
-   {
-      return hasLinkConstraint(tgt, Student.PROPERTY_FRIENDS);
-   }
-
-   public StudentPO createFriends(StudentPO tgt)
-   {
-      return this.startCreate().hasFriends(tgt).endCreate();
-   }
-
-   public StudentSet getFriends()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Student) this.getCurrentMatch()).getFriendsSet();
-      }
-      return null;
-   }
-
-   public RoomPO hasIn()
-   {
-      RoomPO result = new RoomPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Student.PROPERTY_IN, result);
-      
-      return result;
-   }
-
-   public RoomPO createIn()
-   {
-      return this.startCreate().hasIn().endCreate();
-   }
-
-   public StudentPO hasIn(RoomPO tgt)
-   {
-      return hasLinkConstraint(tgt, Student.PROPERTY_IN);
-   }
-
-   public StudentPO createIn(RoomPO tgt)
-   {
-      return this.startCreate().hasIn(tgt).endCreate();
-   }
-
-   public AssignmentPO hasDone()
-   {
-      AssignmentPO result = new AssignmentPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Student.PROPERTY_DONE, result);
-      
-      return result;
-   }
-
-   public AssignmentPO createDone()
-   {
-      return this.startCreate().hasDone().endCreate();
-   }
-
-   public StudentPO hasDone(AssignmentPO tgt)
-   {
-      return hasLinkConstraint(tgt, Student.PROPERTY_DONE);
-   }
-
-   public StudentPO createDone(AssignmentPO tgt)
-   {
-      return this.startCreate().hasDone(tgt).endCreate();
-   }
-
-   public AssignmentSet getDone()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Student) this.getCurrentMatch()).getDoneSet();
-      }
-      return null;
-   }
-
-   public Room getIn()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Student) this.getCurrentMatch()).getIn();
-      }
-      return null;
-   }
-
    public StudentPO hasName(String value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
@@ -425,9 +289,141 @@ public class StudentPO extends PatternObject<StudentPO, Student>
       return this;
    }
    
+   public UniversityPO hasUni()
+   {
+      UniversityPO result = new UniversityPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_UNI, result);
+      
+      return result;
+   }
+
+   public UniversityPO createUni()
+   {
+      return this.startCreate().hasUni().endCreate();
+   }
+
+   public StudentPO hasUni(UniversityPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_UNI);
+   }
+
+   public StudentPO createUni(UniversityPO tgt)
+   {
+      return this.startCreate().hasUni(tgt).endCreate();
+   }
+
+   public University getUni()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getUni();
+      }
+      return null;
+   }
+
+   public RoomPO hasIn()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_IN, result);
+      
+      return result;
+   }
+
+   public RoomPO createIn()
+   {
+      return this.startCreate().hasIn().endCreate();
+   }
+
+   public StudentPO hasIn(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_IN);
+   }
+
+   public StudentPO createIn(RoomPO tgt)
+   {
+      return this.startCreate().hasIn(tgt).endCreate();
+   }
+
+   public Room getIn()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getIn();
+      }
+      return null;
+   }
+
+   public StudentPO hasFriends()
+   {
+      StudentPO result = new StudentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_FRIENDS, result);
+      
+      return result;
+   }
+
+   public StudentPO createFriends()
+   {
+      return this.startCreate().hasFriends().endCreate();
+   }
+
+   public StudentPO hasFriends(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_FRIENDS);
+   }
+
+   public StudentPO createFriends(StudentPO tgt)
+   {
+      return this.startCreate().hasFriends(tgt).endCreate();
+   }
+
+   public StudentSet getFriends()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getFriendsSet();
+      }
+      return null;
+   }
+
+   public AssignmentPO hasDone()
+   {
+      AssignmentPO result = new AssignmentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Student.PROPERTY_DONE, result);
+      
+      return result;
+   }
+
+   public AssignmentPO createDone()
+   {
+      return this.startCreate().hasDone().endCreate();
+   }
+
+   public StudentPO hasDone(AssignmentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_DONE);
+   }
+
+   public StudentPO createDone(AssignmentPO tgt)
+   {
+      return this.startCreate().hasDone(tgt).endCreate();
+   }
+
+   public AssignmentSet getDone()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getDoneSet();
+      }
+      return null;
+   }
+
 }
-
-
-
-
 

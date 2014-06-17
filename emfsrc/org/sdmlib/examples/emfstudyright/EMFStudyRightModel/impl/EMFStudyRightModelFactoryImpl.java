@@ -93,28 +93,6 @@ public class EMFStudyRightModelFactoryImpl extends EFactoryImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
-  public Room createRoom()
-  {
-    RoomImpl room = new RoomImpl();
-    return room;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Assignment createAssignment()
-  {
-    AssignmentImpl assignment = new AssignmentImpl();
-    return assignment;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Student createStudent()
   {
     StudentImpl student = new StudentImpl();
@@ -130,6 +108,28 @@ public class EMFStudyRightModelFactoryImpl extends EFactoryImpl implements EMFSt
   {
     TeachingAssistantImpl teachingAssistant = new TeachingAssistantImpl();
     return teachingAssistant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Room createRoom()
+  {
+    RoomImpl room = new RoomImpl();
+    return room;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Assignment createAssignment()
+  {
+    AssignmentImpl assignment = new AssignmentImpl();
+    return assignment;
   }
 
   /**

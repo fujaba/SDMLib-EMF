@@ -33,24 +33,6 @@ public interface EMFStudyRightModelFactory extends EFactory
   University createUniversity();
 
   /**
-   * Returns a new object of class '<em>Room</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Room</em>'.
-   * @generated
-   */
-  Room createRoom();
-
-  /**
-   * Returns a new object of class '<em>Assignment</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assignment</em>'.
-   * @generated
-   */
-  Assignment createAssignment();
-
-  /**
    * Returns a new object of class '<em>Student</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +49,24 @@ public interface EMFStudyRightModelFactory extends EFactory
    * @generated
    */
   TeachingAssistant createTeachingAssistant();
+
+  /**
+   * Returns a new object of class '<em>Room</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Room</em>'.
+   * @generated
+   */
+  Room createRoom();
+
+  /**
+   * Returns a new object of class '<em>Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assignment</em>'.
+   * @generated
+   */
+  Assignment createAssignment();
 
   /**
    * Returns the package supported by this factory.

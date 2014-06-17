@@ -14,10 +14,10 @@ public class RoomImplCreator extends EntityFactory
       Room.PROPERTY_TOPIC,
       Room.PROPERTY_CREDITS,
       Room.PROPERTY_UNI,
-      Room.PROPERTY_ASSIGNMENTS,
       Room.PROPERTY_STUDENTS,
       Room.PROPERTY_TAS,
       Room.PROPERTY_DOORS,
+      Room.PROPERTY_ASSIGNMENTS,
    };
    
    public String[] getProperties()
@@ -58,18 +58,6 @@ public class RoomImplCreator extends EntityFactory
       ((RoomImpl) entity).removeYou();
    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

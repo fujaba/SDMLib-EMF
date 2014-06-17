@@ -18,14 +18,14 @@ public class CreatorCreator
          creatorSet = new LinkedHashSet<SendableEntityCreator>();
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.UniversityImplPOCreator());
-         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplCreator());
-         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPOCreator());
-         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplCreator());
-         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPOCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.StudentImplPOCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplCreator());
          creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.TeachingAssistantImplPOCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.RoomImplPOCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplCreator());
+         creatorSet.add(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.creators.AssignmentImplPOCreator());
          creatorSet.addAll(org.sdmlib.models.pattern.creators.CreatorCreator.getCreatorSet());
       }
       
@@ -41,5 +41,4 @@ public class CreatorCreator
       return jsonIdMap;
    }
 }
-
 

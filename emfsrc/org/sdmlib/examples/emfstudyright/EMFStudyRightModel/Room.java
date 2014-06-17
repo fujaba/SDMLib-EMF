@@ -4,9 +4,10 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,9 +149,7 @@ public interface Room extends EObject
    */
   EList<Assignment> getAssignments();
 
-
-   
-   /**
+  /**
    * Returns the value of the '<em><b>Students</b></em>' reference list.
    * The list contents are of type {@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student}.
    * It is bidirectional and its opposite is '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student#getIn <em>In</em>}'.
@@ -187,8 +186,8 @@ public interface Room extends EObject
   EList<TeachingAssistant> getTas();
 
 
-
-  //==========================================================================
+   
+   //==========================================================================
    
    public static final String PROPERTY_TOPIC = "topic";
    
@@ -201,61 +200,12 @@ public interface Room extends EObject
    
    public Room withCredits(int value);
 
-   
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Room ----------------------------------- University
-    *              rooms                   uni
-    * </pre>
-    */
-   
-   public static final String PROPERTY_UNI = "uni";
-
    public Room withUni(University value);
 
    public University createUni();
 
    
    public static final RoomSet EMPTY_SET = new RoomSet();
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Assignment
-    *              room                   assignments
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ASSIGNMENTS = "assignments";
-
-   boolean addToAssignments(Assignment value);
-
-   boolean removeFromAssignments(Assignment value);
-
-   public Room withAssignments(Assignment... value);
-
-   public Room withoutAssignments(Assignment... value);
-
-   public void removeAllFromAssignments();
-
-   public Assignment createAssignments();
-
-   public AssignmentSet getAssignmentsSet();
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Student
-    *              in                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
 
    public StudentSet getStudentsSet();
 
@@ -271,17 +221,6 @@ public interface Room extends EObject
 
    public Student createStudents();
 
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- TeachingAssistant
-    *              room                   tas
-    * </pre>
-    */
-   
-   public static final String PROPERTY_TAS = "tas";
-
    public TeachingAssistantSet getTasSet();
 
    boolean addToTas(TeachingAssistant value);
@@ -296,18 +235,9 @@ public interface Room extends EObject
 
    public TeachingAssistant createTas();
 
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Room ----------------------------------- Room
-    *              doors                   doors
-    * </pre>
-    */
-   
-   public static final String PROPERTY_DOORS = "doors";
-
    public RoomSet getDoorsSet();
+
+   public RoomSet getDoorsTransitive();
 
    boolean addToDoors(Room value);
 
@@ -320,5 +250,74 @@ public interface Room extends EObject
    public void removeAllFromDoors();
 
    public Room createDoors();
+
+   public AssignmentSet getAssignmentsSet();
+
+   boolean addToAssignments(Assignment value);
+
+   boolean removeFromAssignments(Assignment value);
+
+   public Room withAssignments(Assignment... value);
+
+   public Room withoutAssignments(Assignment... value);
+
+   public void removeAllFromAssignments();
+
+   public Assignment createAssignments();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
 } // Room
 

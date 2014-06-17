@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
@@ -153,11 +152,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       students = new EObjectContainmentWithInverseEList<Student>(Student.class, this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, EMFStudyRightModelPackage.STUDENT__UNI);
     }
     return students;
-  }
-  
-  public StudentSet getStudentsSet()
-  {
-     return new StudentSet().with(getStudents());
   }
 
   /**
@@ -383,18 +377,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    
    //==========================================================================
    
-   public void removeYou()
-   {
-      removeAllFromRooms();
-      removeAllFromStudents();
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
-   }
-
-   
-   //==========================================================================
-   
-   public static final String PROPERTY_NAME = "name";
-   
    public University withName(String value)
    {
       setName(value);
@@ -402,15 +384,37 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    } 
 
    
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Room
-    *              uni                   rooms
-    * </pre>
-    */
+   //==========================================================================
    
-   public static final String PROPERTY_ROOMS = "rooms";
+   public void removeYou()
+   {
+      removeAllFromRooms();
+      removeAllFromStudents();
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+  public RoomSet getRoomsSet()
+  {
+     return new RoomSet().with(getRooms());
+  }
+
+
+   public boolean addToRooms(Room value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getRooms().add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
 
    public boolean removeFromRooms(Room value)
    {
@@ -458,15 +462,35 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       }
    }
 
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Student
-    *              uni                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
+   public Room createRooms()
+   {
+      Room value = new RoomImpl();
+      withRooms(value);
+      return value;
+   } 
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
+
+
+   public boolean addToStudents(Student value)
+   {
+      boolean changed = false;
+      
+      if (value != null)
+      {
+         changed = this.getStudents().add (value);
+         
+         if (changed)
+         {
+            value.withUni(this);
+            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
+         }
+      }
+         
+      return changed;   
+   }
 
    public boolean removeFromStudents(Student value)
    {
@@ -514,7 +538,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       }
    }
 
-
    public Student createStudents()
    {
       Student value = new StudentImpl();
@@ -522,60 +545,36 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       return value;
    } 
 
-   public boolean addToRooms(Room value)
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Student
+    *              uni                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   @Override
+   public Student createStudentsTeachingAssistant()
    {
-      boolean changed = false;
+      StudentImpl studentImpl = new TeachingAssistantImpl();
       
-      if (value != null)
-      {
-         changed = this.getRooms().add (value);
-         
-         if (changed)
-         {
-            value.withUni(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public Room createRooms()
-   {
-      Room value = new RoomImpl();
-      withRooms(value);
-      return value;
-   } 
-
-   public boolean addToStudents(Student value)
-   {
-      boolean changed = false;
+      this.addToStudents(studentImpl);
       
-      if (value != null)
-      {
-         changed = this.getStudents().add (value);
-         
-         if (changed)
-         {
-            value.withUni(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
-         }
-      }
-         
-      return changed;   
+      return studentImpl;
    }
-  public RoomSet getRoomsSet()
-  {
-     return new RoomSet().with(getRooms());
-  }
-
-@Override
-public TeachingAssistant createStudentsTeachingAssistant()
-{
-   TeachingAssistantImpl ta = new TeachingAssistantImpl();
-   this.addToStudents(ta);
-   return ta;
-}
-
 } //UniversityImpl
 

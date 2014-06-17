@@ -21,18 +21,22 @@
    
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.models.modelsets.SDMSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.models.modelsets.StringList;
+import java.util.Collection;
+import java.util.List;
 import org.sdmlib.models.modelsets.intList;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.UniversitySet;
+import java.util.Collections;
+import org.sdmlib.models.modelsets.ObjectSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
 {
@@ -77,54 +81,6 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
    public TeachingAssistantSet without(TeachingAssistant value)
    {
       this.remove(value);
-      return this;
-   }
-
-   public RoomSet getRoom()
-   {
-      RoomSet result = new RoomSet();
-      
-      for (TeachingAssistant obj : this)
-      {
-         result.with(obj.getRoom());
-      }
-      
-      return result;
-   }
-
-   public TeachingAssistantSet hasRoom(Object value)
-   {
-      ObjectSet neighbors = new ObjectSet();
-
-      if (value instanceof Collection)
-      {
-         neighbors.addAll((Collection) value);
-      }
-      else
-      {
-         neighbors.add(value);
-      }
-      
-      TeachingAssistantSet answer = new TeachingAssistantSet();
-      
-      for (TeachingAssistant obj : this)
-      {
-         if (neighbors.contains(obj.getRoom()))
-         {
-            answer.add(obj);
-         }
-      }
-      
-      return answer;
-   }
-
-   public TeachingAssistantSet withRoom(Room value)
-   {
-      for (TeachingAssistant obj : this)
-      {
-         obj.withRoom(value);
-      }
-      
       return this;
    }
 
@@ -522,6 +478,30 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       return answer;
    }
 
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet todo = new StudentSet().with(this);
+      
+      StudentSet result = new StudentSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Student current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getFriendsSet().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
    public TeachingAssistantSet withFriends(Student value)
    {
       for (TeachingAssistant obj : this)
@@ -600,6 +580,55 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       return this;
    }
 
+   public RoomSet getRoom()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (TeachingAssistant obj : this)
+      {
+         result.with(obj.getRoom());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantSet hasRoom(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantSet answer = new TeachingAssistantSet();
+      
+      for (TeachingAssistant obj : this)
+      {
+         if (neighbors.contains(obj.getRoom()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public TeachingAssistantSet withRoom(Room value)
+   {
+      for (TeachingAssistant obj : this)
+      {
+         obj.withRoom(value);
+      }
+      
+      return this;
+   }
+
 }
+
 
 

@@ -1,9 +1,17 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators;
 
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.models.pattern.AttributeConstraint;
 import org.sdmlib.models.pattern.PatternObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternLink;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentPO;
+import org.sdmlib.models.pattern.LinkConstraint;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 
 public class AssignmentPO extends PatternObject<AssignmentPO, Assignment>
 {
@@ -23,74 +31,6 @@ public class AssignmentPO extends PatternObject<AssignmentPO, Assignment>
       return matches;
    }
    
-   public RoomPO hasRoom()
-   {
-      RoomPO result = new RoomPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Assignment.PROPERTY_ROOM, result);
-      
-      return result;
-   }
-
-   public RoomPO createRoom()
-   {
-      return this.startCreate().hasRoom().endCreate();
-   }
-
-   public AssignmentPO hasRoom(RoomPO tgt)
-   {
-      return hasLinkConstraint(tgt, Assignment.PROPERTY_ROOM);
-   }
-
-   public AssignmentPO createRoom(RoomPO tgt)
-   {
-      return this.startCreate().hasRoom(tgt).endCreate();
-   }
-
-   public Room getRoom()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Assignment) this.getCurrentMatch()).getRoom();
-      }
-      return null;
-   }
-
-   public StudentPO hasStudents()
-   {
-      StudentPO result = new StudentPO();
-      result.setModifier(this.getPattern().getModifier());
-      
-      super.hasLink(Assignment.PROPERTY_STUDENTS, result);
-      
-      return result;
-   }
-
-   public StudentPO createStudents()
-   {
-      return this.startCreate().hasStudents().endCreate();
-   }
-
-   public AssignmentPO hasStudents(StudentPO tgt)
-   {
-      return hasLinkConstraint(tgt, Assignment.PROPERTY_STUDENTS);
-   }
-
-   public AssignmentPO createStudents(StudentPO tgt)
-   {
-      return this.startCreate().hasStudents(tgt).endCreate();
-   }
-
-   public StudentSet getStudents()
-   {
-      if (this.getPattern().getHasMatch())
-      {
-         return ((Assignment) this.getCurrentMatch()).getStudentsSet();
-      }
-      return null;
-   }
-
    public AssignmentPO hasName(String value)
    {
       AttributeConstraint constr = (AttributeConstraint) new AttributeConstraint()
@@ -197,7 +137,73 @@ public class AssignmentPO extends PatternObject<AssignmentPO, Assignment>
       return this;
    }
    
+   public StudentPO hasStudents()
+   {
+      StudentPO result = new StudentPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Assignment.PROPERTY_STUDENTS, result);
+      
+      return result;
+   }
+
+   public StudentPO createStudents()
+   {
+      return this.startCreate().hasStudents().endCreate();
+   }
+
+   public AssignmentPO hasStudents(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Assignment.PROPERTY_STUDENTS);
+   }
+
+   public AssignmentPO createStudents(StudentPO tgt)
+   {
+      return this.startCreate().hasStudents(tgt).endCreate();
+   }
+
+   public StudentSet getStudents()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Assignment) this.getCurrentMatch()).getStudentsSet();
+      }
+      return null;
+   }
+
+   public RoomPO hasRoom()
+   {
+      RoomPO result = new RoomPO();
+      result.setModifier(this.getPattern().getModifier());
+      
+      super.hasLink(Assignment.PROPERTY_ROOM, result);
+      
+      return result;
+   }
+
+   public RoomPO createRoom()
+   {
+      return this.startCreate().hasRoom().endCreate();
+   }
+
+   public AssignmentPO hasRoom(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Assignment.PROPERTY_ROOM);
+   }
+
+   public AssignmentPO createRoom(RoomPO tgt)
+   {
+      return this.startCreate().hasRoom(tgt).endCreate();
+   }
+
+   public Room getRoom()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Assignment) this.getCurrentMatch()).getRoom();
+      }
+      return null;
+   }
+
 }
-
-
 
