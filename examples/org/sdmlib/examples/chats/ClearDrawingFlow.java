@@ -25,6 +25,8 @@ import java.beans.PropertyChangeSupport;
 
 import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.examples.chats.PeerToPeerChat;
 
 public class ClearDrawingFlow extends TaskFlow implements PropertyChangeInterface
 {
@@ -195,5 +197,24 @@ public class ClearDrawingFlow extends TaskFlow implements PropertyChangeInterfac
       return _.substring(1);
    }
 
+
+   
+   //==========================================================================
+   
+   public void setGui(PeerToPeerChat value)
+   {
+      if (this.gui != value)
+      {
+         PeerToPeerChat oldValue = this.gui;
+         this.gui = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_GUI, oldValue, value);
+      }
+   }
+   
+   public ClearDrawingFlow withGui(PeerToPeerChat value)
+   {
+      setGui(value);
+      return this;
+   } 
 }
 

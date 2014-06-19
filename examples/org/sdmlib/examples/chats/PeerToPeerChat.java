@@ -36,7 +36,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.TreeSet;
 
-import org.sdmlib.examples.chats.creators.CreatorCreator;
+import org.eclipse.swt.widgets.Shell;
 import org.sdmlib.logger.PeerProxy;
 import org.sdmlib.serialization.PropertyChangeInterface;
 import org.sdmlib.serialization.SDMLibJsonIdMap;
@@ -45,6 +45,8 @@ import sun.java2d.pipe.SpanShapeRenderer.Composite;
 import sun.misc.GC;
 import de.uniks.networkparser.json.JsonIdMap;
 import de.uniks.networkparser.json.JsonObject;
+
+import java.beans.PropertyChangeListener;
 
 public class PeerToPeerChat extends Shell implements PropertyChangeInterface
 {

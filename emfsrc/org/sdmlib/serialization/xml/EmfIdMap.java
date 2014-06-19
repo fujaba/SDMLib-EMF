@@ -11,7 +11,6 @@ import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
 import org.sdmlib.serialization.EntityFactory;
 import org.sdmlib.serialization.SDMLibJsonIdMap;
-import org.sdmlib.serialization.StringBuilderBuffer;
 
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import de.uniks.networkparser.xml.XMLEntity;

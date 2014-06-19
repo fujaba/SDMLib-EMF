@@ -27,10 +27,7 @@ Require-Bundle: org.eclipse.swt,
  SDMLib
 Bundle-ActivationPolicy: lazy
 Import-Package: org.junit
-Export-Package: org.sdmlib.examples.chats,
- org.sdmlib.examples.chats.creators,
- org.sdmlib.examples.emfstudyright.EMFStudyRightModel,
+Export-Package: org.sdmlib.examples.emfstudyright.EMFStudyRightModel,
  org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl,
  org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util,
- org.sdmlib.examples.groupAccount,
- org.sdmlib.examples.groupAccount.creators
+ org.sdmlib.examples.groupAccount

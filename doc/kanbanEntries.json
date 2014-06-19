@@ -4,175 +4,81 @@
   "prop":{
     "name":"Project",
     "phase":"active",
-    "lastDeveloper":"zuendorf",
-    "hoursRemaining":22,
-    "hoursSpend":48,
+    "hoursRemaining":8,
+    "hoursSpend":2,
     "subentries":[
     {"id":"KE.K2"},
-      {"id":"KE.K6"},
-      {"id":"KE.K10"},
-      {"id":"KE.K12"},
-      {"id":"KE.K14"},
-      {"id":"KE.K15"}
+      {"id":"KE.K5"},
+      {"id":"KE.K7"}
     ],
-    "logEntries":[
-    {"id":"KE.L5"},
-      {"id":"KE.L9"}
-    ],
-    "oldNoOfLogEntries":2,
-    "phases":"active, backlog, implementation, done, modeling"
+    "phases":"active, backlog, implementation, done"
   }
 },  {
   "id":"KE.K2",
   "class":"org.sdmlib.storyboards.KanbanEntry",
   "prop":{
-    "name":"EMFStudyRightClasses",
-    "phase":"modeling",
-    "lastDeveloper":"zuendorf",
-    "hoursSpend":1,
-    "parent":{"id":"KE.K1"},
-    "logEntries":[
-    {"id":"KE.L3"}
-    ],
-    "oldNoOfLogEntries":2,
-    "phases":"active, backlog, implementation, done, modeling"
-  }
-},  {
-  "id":"KE.K6",
-  "class":"org.sdmlib.storyboards.KanbanEntry",
-  "prop":{
-    "name":"LoadEcoreCreateClassModel",
-    "phase":"modeling",
-    "lastDeveloper":"zuendorf",
-    "hoursRemaining":22,
-    "hoursSpend":1,
-    "parent":{"id":"KE.K1"},
-    "logEntries":[
-    {"id":"KE.L7"}
-    ],
-    "oldNoOfLogEntries":2,
-    "phases":"active, backlog, implementation, done, modeling"
-  }
-},  {
-  "id":"KE.K10",
-  "class":"org.sdmlib.storyboards.KanbanEntry",
-  "prop":{
-    "name":"SDMCodeEnhancer",
-    "phase":"backlog",
-    "lastDeveloper":"zuendorf",
-    "parent":{"id":"KE.K1"},
-    "oldNoOfLogEntries":1,
-    "phases":"active, backlog, implementation, done"
-  }
-},  {
-  "id":"KE.K12",
-  "class":"org.sdmlib.storyboards.KanbanEntry",
-  "prop":{
-    "name":"Play7",
-    "phase":"backlog",
-    "lastDeveloper":"zuendorf",
-    "parent":{"id":"KE.K1"},
-    "oldNoOfLogEntries":1,
-    "phases":"active, backlog, implementation, done"
-  }
-},  {
-  "id":"KE.K14",
-  "class":"org.sdmlib.storyboards.KanbanEntry",
-  "prop":{
-    "name":"SDMUsageOfEMFStudyRight",
-    "phase":"backlog",
-    "parent":{"id":"KE.K1"},
-    "phases":"active, backlog, implementation, done"
-  }
-},  {
-  "id":"KE.K15",
-  "class":"org.sdmlib.storyboards.KanbanEntry",
-  "prop":{
-    "name":"StudyRightObjectModelNavigationAndQueries",
+    "name":"GroupAccountCodegen",
     "phase":"done",
-    "hoursSpend":44,
+    "hoursSpend":2,
     "parent":{"id":"KE.K1"},
     "logEntries":[
-    {"id":"KE.L16"},
-      {"id":"KE.L17"},
-      {"id":"KE.L18"}
+    {"id":"KE.L3"},
+      {"id":"KE.L4"}
     ],
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.K5",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"we should build attr.remove",
+    "phase":"backlog",
+    "lastDeveloper":"zuendorf",
+    "hoursRemaining":8,
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L6"}
+    ],
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.K7",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"peerToPeerChatModel",
+    "phase":"backlog",
+    "parent":{"id":"KE.K1"},
     "phases":"active, backlog, implementation, done"
   }
 },  {
   "id":"KE.L3",
-  "class":"org.sdmlib.storyboards.LogEntry",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
   "prop":{
-    "date":"03.07.2013 13:19:42",
+    "date":"04.04.2012 00:11:32",
     "hoursSpend":1,
     "kanbanEntry":{"id":"KE.K2"},
-    "developer":"zuendorf",
-    "phase":"modeling"
-  }
-},  {
-  "id":"KE.L5",
-  "class":"org.sdmlib.storyboards.LogEntry",
-  "prop":{
-    "date":"30.12.2013 12:00:00",
-    "hoursSpend":1,
-    "kanbanEntry":{"id":"KE.K1"},
-    "developer":"zuendorf",
-    "phase":"active",
-    "comment":"EMFStudyRightClasses: null"
-  }
-},  {
-  "id":"KE.L7",
-  "class":"org.sdmlib.storyboards.LogEntry",
-  "prop":{
-    "date":"03.07.2013 13:20:42",
-    "hoursSpend":1,
-    "hoursRemainingInTotal":22,
-    "kanbanEntry":{"id":"KE.K6"},
-    "developer":"zuendorf",
-    "phase":"modeling"
-  }
-},  {
-  "id":"KE.L9",
-  "class":"org.sdmlib.storyboards.LogEntry",
-  "prop":{
-    "date":"30.12.2013 12:00:00",
-    "hoursSpend":1,
-    "hoursRemainingInTotal":22,
-    "kanbanEntry":{"id":"KE.K1"},
-    "developer":"zuendorf",
-    "phase":"active",
-    "comment":"EMFStudyRightClasses: null"
-  }
-},  {
-  "id":"KE.L16",
-  "class":"org.sdmlib.storyboards.LogEntry",
-  "prop":{
-    "date":"17.01.2014 16:35:42",
-    "hoursSpend":40,
-    "kanbanEntry":{"id":"KE.K15"},
     "developer":"zuendorf",
     "phase":"done"
   }
 },  {
-  "id":"KE.L17",
-  "class":"org.sdmlib.storyboards.LogEntry",
+  "id":"KE.L4",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
   "prop":{
-    "date":"24.02.2014 20:03:42 EST",
-    "hoursSpend":2,
-    "kanbanEntry":{"id":"KE.K15"},
+    "date":"24.05.2012 00:16:18",
+    "hoursSpend":1,
+    "kanbanEntry":{"id":"KE.K2"},
     "developer":"zuendorf",
     "phase":"done",
-    "comment":"added createXY shortcuts for patterns"
+    "comment":"Achieved: Resolved Bug: creatorcreator class is no longer growing on each run. "
   }
 },  {
-  "id":"KE.L18",
-  "class":"org.sdmlib.storyboards.LogEntry",
+  "id":"KE.L6",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
   "prop":{
-    "date":"25.02.2014 22:11:42 EST",
-    "hoursSpend":2,
-    "kanbanEntry":{"id":"KE.K15"},
+    "date":"04.10.2012 12:50:42",
+    "hoursRemainingInTotal":8,
+    "kanbanEntry":{"id":"KE.K5"},
     "developer":"zuendorf",
-    "phase":"done",
-    "comment":"switched to roomSet.hasRoomPO()"
+    "phase":"backlog"
   }
 }]

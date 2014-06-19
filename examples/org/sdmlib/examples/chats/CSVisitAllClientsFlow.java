@@ -26,6 +26,7 @@ import java.beans.PropertyChangeSupport;
 import org.sdmlib.logger.PeerProxy;
 import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeListener;
 
 public class CSVisitAllClientsFlow extends TaskFlow implements PropertyChangeInterface
 {
@@ -247,5 +248,12 @@ public class CSVisitAllClientsFlow extends TaskFlow implements PropertyChangeInt
       return _.substring(1);
    }
 
+
+   public CSClientTask createTgtTask()
+   {
+      CSClientTask value = new CSClientTask();
+      withTgtTask(value);
+      return value;
+   } 
 }
 

@@ -25,49 +25,51 @@ import java.beans.PropertyChangeSupport;
 
 import org.junit.Test;
 import org.sdmlib.models.classes.Association;
+import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.serialization.PropertyChangeInterface;
+import org.sdmlib.models.classes.DataType;
+import org.sdmlib.models.classes.Parameter;
+import org.sdmlib.storyboards.Kanban;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardManager;
    
-public class GroupAccountTests implements PropertyChangeInterface 
+public class GroupAccountTests 
 {
 
    @Test
    public void testGroupAccountCodegen()
    {
-      Storyboard storyboard = new Storyboard("examples");
+      Storyboard storyboard = new Storyboard();
       
       storyboard.add("Start situation: Nothing here yet. Generated classes",
-         DONE, "zuendorf", "04.04.2012 00:11:32", 1, 0);
+         Kanban.DONE, "zuendorf", "04.04.2012 00:11:32", 1, 0);
       
-      ClassModel model = new ClassModel("org.sdmlib.examples.groupAccount");
+      ClassModel model = new ClassModel("org.sdmlib.examples.groupAccount.model");
       
-      Clazz groupAccountClass = new Clazz("GroupAccount")
-      .withMethods("initAccounts(double,String)", DOUBLE)
-      .withMethods("updateBalances()", "void");
+      Clazz groupAccountClass = model.createClazz("GroupAccount")
+            .withMethod("initAccounts", DataType.DOUBLE, new Parameter("num", DataType.DOUBLE), new Parameter("str", DataType.STRING))
+            .withMethod("updateBalances", DataType.VOID);
       
       //      groupAccountClass.withRunningConstants("RED", "YELLOW", "GREEN");
       //      groupAccountClass.withConstant("NORTH", "north");
       //      groupAccountClass.withConstant("CARD", 3);
       
-      Clazz personClass = new Clazz(
-         "Person",
-         "name", STRING,
-         "balance", DOUBLE);
+      Clazz personClass = model.createClazz("Person")
+            .withAttribute("name", DataType.STRING)
+            .withAttribute("balance", DataType.DOUBLE);
       
-      groupAccountClass.withAssoc(personClass, "persons", MANY, "parent", ONE);
+      groupAccountClass.withAssoc(personClass, "persons", Card.MANY, "parent", Card.ONE);
       
-      Clazz itemClass = new Clazz("Item", 
-         "description", STRING, 
-         "value", DOUBLE);
+      Clazz itemClass = model.createClazz("Item") 
+      .withAttribute("description", DataType.STRING) 
+      .withAttribute("value", DataType.DOUBLE);
       
-      groupAccountClass.withAssoc(itemClass, "items", MANY, "parent", ONE);
+      groupAccountClass.withAssoc(itemClass, "items", Card.MANY, "parent", Card.ONE);
       
       new Association()
-      .withSource("buyer", personClass, ONE)
-      .withTarget("items", itemClass, MANY);
+      .withSource(personClass, "buyer", Card.ONE)
+      .withTarget(itemClass, "items", Card.MANY);
 
       // model.updateFromCode("examples", "examples", "org.sdmlib.examples.groupAccount");
       
@@ -75,56 +77,16 @@ public class GroupAccountTests implements PropertyChangeInterface
       
       // model.removeAllGeneratedCode("examples", "examples", "examples");
       
-      model.generate("examples", "examples");
+      model.generate("examples");
       
-      storyboard.addSVGImage(model.dumpClassDiagram("examples", "GroupAccountClassDiag01"));
+      storyboard.addClassDiagram(model, "examples");
 
       storyboard.add("Resolved Bug: creatorcreator class is no longer growing on each run. ",
-         DONE, "zuendorf", "24.05.2012 00:16:18", 1, 0);
+         Kanban.DONE, "zuendorf", "24.05.2012 00:16:18", 1, 0);
       
       StoryboardManager.get()
       .add(storyboard)
       .dumpHTML();
-   }
-
-   private static final String MODELING = "modeling";
-   private static final String ACTIVE = "active";
-   private static final String DONE = "done";
-   private static final String IMPLEMENTATION = "implementation";
-   private static final String BACKLOG = "backlog";
-
-   
-   //==========================================================================
-   
-   public Object get(String attrName)
-   {
-      return null;
-   }
-
-   
-   //==========================================================================
-   
-   public boolean set(String attrName, Object value)
-   {
-      return false;
-   }
-
-   
-   //==========================================================================
-   
-   protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-   
-   public PropertyChangeSupport getPropertyChangeSupport()
-   {
-      return listeners;
-   }
-
-   
-   //==========================================================================
-   
-   public void removeYou()
-   {
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 }
 

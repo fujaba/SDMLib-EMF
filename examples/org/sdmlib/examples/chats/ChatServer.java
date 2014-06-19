@@ -29,6 +29,7 @@ import org.sdmlib.logger.util.PeerProxySet;
 import org.sdmlib.serialization.PropertyChangeInterface;
 
 import de.uniks.networkparser.json.JsonIdMap;
+import java.beans.PropertyChangeListener;
 
 public class ChatServer implements PropertyChangeInterface
 {
@@ -181,5 +182,24 @@ public class ChatServer implements PropertyChangeInterface
       return _.substring(1);
    }
 
+
+   
+   //==========================================================================
+   
+   public void setAllPeers(PeerProxySet value)
+   {
+      if (this.allPeers != value)
+      {
+         PeerProxySet oldValue = this.allPeers;
+         this.allPeers = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_ALLPEERS, oldValue, value);
+      }
+   }
+   
+   public ChatServer withAllPeers(PeerProxySet value)
+   {
+      setAllPeers(value);
+      return this;
+   } 
 }
 

@@ -27,6 +27,8 @@ import org.sdmlib.StrUtil;
 import org.sdmlib.logger.PeerProxy;
 import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.logger.util.PeerProxySet;
 
 public class P2PNetworkLoginFlow extends TaskFlow implements PropertyChangeInterface
 {   
@@ -399,6 +401,63 @@ public class P2PNetworkLoginFlow extends TaskFlow implements PropertyChangeInter
    public P2PNetworkLoginFlow withAllMessages(String value)
    {
       setAllMessages(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public void setFirstPeer(PeerProxySet value)
+   {
+      if (this.firstPeer != value)
+      {
+         PeerProxySet oldValue = this.firstPeer;
+         this.firstPeer = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_FIRSTPEER, oldValue, value);
+      }
+   }
+   
+   public P2PNetworkLoginFlow withFirstPeer(PeerProxySet value)
+   {
+      setFirstPeer(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public void setClientPeer(PeerProxySet value)
+   {
+      if (this.clientPeer != value)
+      {
+         PeerProxySet oldValue = this.clientPeer;
+         this.clientPeer = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_CLIENTPEER, oldValue, value);
+      }
+   }
+   
+   public P2PNetworkLoginFlow withClientPeer(PeerProxySet value)
+   {
+      setClientPeer(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public void setPeerList(PeerProxySet value)
+   {
+      if (this.peerList != value)
+      {
+         PeerProxySet oldValue = this.peerList;
+         this.peerList = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_PEERLIST, oldValue, value);
+      }
+   }
+   
+   public P2PNetworkLoginFlow withPeerList(PeerProxySet value)
+   {
+      setPeerList(value);
       return this;
    } 
 }

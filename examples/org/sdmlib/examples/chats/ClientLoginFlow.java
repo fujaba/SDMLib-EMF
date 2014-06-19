@@ -27,6 +27,8 @@ import org.sdmlib.StrUtil;
 import org.sdmlib.logger.PeerProxy;
 import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.logger.util.PeerProxySet;
 
 public class ClientLoginFlow extends TaskFlow implements PropertyChangeInterface
 {
@@ -335,5 +337,24 @@ public class ClientLoginFlow extends TaskFlow implements PropertyChangeInterface
       return _.substring(1);
    }
 
+
+   
+   //==========================================================================
+   
+   public void setServer(PeerProxySet value)
+   {
+      if (this.server != value)
+      {
+         PeerProxySet oldValue = this.server;
+         this.server = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_SERVER, oldValue, value);
+      }
+   }
+   
+   public ClientLoginFlow withServer(PeerProxySet value)
+   {
+      setServer(value);
+      return this;
+   } 
 }
 

@@ -25,6 +25,7 @@ import java.beans.PropertyChangeSupport;
 
 import org.sdmlib.logger.TaskFlow;
 import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeListener;
 
 public abstract class CSClientTask extends TaskFlow implements PropertyChangeInterface
 {

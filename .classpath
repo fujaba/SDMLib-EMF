@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="swtsrc"/>
-	<classpathentry kind="src" path="examples"/>
+	<classpathentry excluding="org/sdmlib/examples/chats/|org/sdmlib/examples/replication/" kind="src" path="examples"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
