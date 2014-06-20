@@ -4,12 +4,15 @@ import java.util.LinkedHashSet;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
@@ -17,11 +20,11 @@ import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
 import org.sdmlib.models.classes.Association;
 import org.sdmlib.models.classes.Attribute;
+import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
+import org.sdmlib.models.classes.DataType;
 import org.sdmlib.models.classes.Role;
-
-import sun.font.EAttribute;
 
 public class EMFTool
 {
@@ -33,9 +36,9 @@ public class EMFTool
       
       // first we need a package
       EPackage ePackage = ecoreFactory.createEPackage();
-      ePackage.setName(StrUtil.upFirstChar(CGUtil.shortClassName(model.getPackageName()))+"Package");
-      ePackage.setNsPrefix(CGUtil.shortClassName(model.getPackageName()));
-      ePackage.setNsURI("http:///" + model.getPackageName() + ".ecore");
+      ePackage.setName(StrUtil.upFirstChar(CGUtil.shortClassName(model.getName()))+"Package");
+      ePackage.setNsPrefix(CGUtil.shortClassName(model.getName()));
+      ePackage.setNsURI("http:///" + model.getName() + ".ecore");
       
       
       for (Clazz c : model.getClasses())
@@ -79,7 +82,7 @@ public class EMFTool
          fwdRef.setName(tgtRole.getName());
          EClass tgtEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(tgtRole.getClazz().getName()));
          fwdRef.setEType(tgtEClass);
-         if (R.MANY.toString().equals(tgtRole.getCard()))
+         if (Card.MANY.toString().equals(tgtRole.getCard()))
          {
             fwdRef.setUpperBound(-1);
          }
@@ -88,7 +91,7 @@ public class EMFTool
          bwdRef.setName(srcRole.getName());
          EClass srcEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(srcRole.getClazz().getName()));
          bwdRef.setEType(srcEClass);
-         if (R.MANY.toString().equals(srcRole.getCard()))
+         if (Card.MANY.toString().equals(srcRole.getCard()))
          {
             bwdRef.setUpperBound(-1);
          }
@@ -156,7 +159,7 @@ public class EMFTool
             
             for (EAttribute eattr : eclass.getEAttributes())
             {
-               clazz.withAttribute(eattr.getName(), eattr.getEType().getName().substring(1));
+               clazz.withAttribute(eattr.getName(), DataType.ref(eattr.getEType().getName().substring(1)));
             }
             
             for (EReference eref : eclass.getEReferences())
@@ -165,7 +168,7 @@ public class EMFTool
                {
                   if (eref.getEOpposite() == null)
                   {
-                     clazz.withAttribute(eref.getName(), eref.getEReferenceType().getName());
+                     clazz.withAttribute(eref.getName(), DataType.ref(eref.getEReferenceType().getName()));
                   }
                   else if ( ! refs.contains(eref.getEOpposite()))
                   {
@@ -188,7 +191,7 @@ public class EMFTool
                Clazz kidClazz = model.getClazz(eclass.getName());
                Clazz superClazz = model.getClazz(eclass.getESuperTypes().get(0).getName());
                
-               kidClazz.withSuperClazzes(superClazz);
+               kidClazz.withSuperClazz(superClazz);
             }
             
          }
@@ -199,19 +202,19 @@ public class EMFTool
       {
          String tgtClassName = eref.getEReferenceType().getName();
          String tgtRoleName = eref.getName();
-         R tgtCard = R.ONE;
+         Card tgtCard = Card.ONE;
          if (eref.getUpperBound() != 1)
          {
-            tgtCard = R.MANY;
+            tgtCard = Card.MANY;
          }
 
          eref = eref.getEOpposite();
          String srcClassName = eref.getEReferenceType().getName();
          String srcRoleName = eref.getName();
-         R srcCard = R.ONE;
+         Card srcCard = Card.ONE;
          if (eref.getUpperBound() != 1)
          {
-            srcCard = R.MANY;
+            srcCard = Card.MANY;
          }
          
          Clazz tgtClazz = model.getClazz(tgtClassName);

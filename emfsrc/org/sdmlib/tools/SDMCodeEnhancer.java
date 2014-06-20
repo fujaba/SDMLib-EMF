@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -11,12 +12,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.junit.Test;
 import org.sdmlib.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
+import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.Role;
+import org.sdmlib.models.classes.DataType;
 import org.sdmlib.storyboards.Storyboard;
-
-import sun.font.EAttribute;
 
 public class SDMCodeEnhancer
 {
@@ -82,7 +82,7 @@ public class SDMCodeEnhancer
             // add attributes
             for (EAttribute eattr : eclass.getEAttributes())
             {
-               sdmClass.withAttribute(eattr.getName(), CGUtil.shortClassName(eattr.getEType().getInstanceClassName()));
+               sdmClass.withAttribute(eattr.getName(), DataType.ref(CGUtil.shortClassName(eattr.getEType().getInstanceClassName())));
             }
          }
       }
@@ -117,8 +117,8 @@ public class SDMCodeEnhancer
                   Clazz srcSDMClass = classMap.get(srcEClass);
                   Clazz tgtSDMClass = classMap.get(tgtEClass);
                   
-                  Role.R tgtCard = (oppositeERef.getUpperBound() == 1 ? R.ONE : R.MANY);
-                  Role.R srcCard = (eref.getUpperBound() == 1 ? R.ONE : R.MANY);
+                  Card tgtCard = (oppositeERef.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+                  Card srcCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
                   
                   srcSDMClass.withAssoc(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
                   
