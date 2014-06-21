@@ -12,6 +12,7 @@ import org.sdmlib.StrUtil;
 import org.sdmlib.serialization.EntityFactory;
 import org.sdmlib.serialization.SDMLibJsonIdMap;
 
+import de.uniks.networkparser.StringBuffer;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import de.uniks.networkparser.xml.XMLEntity;
 import de.uniks.networkparser.xml.XMLTokener;
@@ -28,7 +29,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
    {
       int pos = fileText.indexOf("\n");
 
-      StringBuilderBuffer buffer = new StringBuilderBuffer().withValue(fileText);
+      StringBuffer buffer = new StringBuffer().withValue(fileText.toString());
 
       buffer.withPosition(pos);
       
