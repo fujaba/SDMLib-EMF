@@ -4,16 +4,12 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.StrUtil;
@@ -31,7 +27,7 @@ import org.sdmlib.StrUtil;
  *
  * @generated
  */
-public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant, PropertyChangeInterface
+public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant
 {
   /**
    * The cached value of the '{@link #getRoom() <em>Room</em>}' reference.
