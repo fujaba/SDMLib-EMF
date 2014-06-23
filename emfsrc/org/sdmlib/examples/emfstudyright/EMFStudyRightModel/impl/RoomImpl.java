@@ -2,32 +2,42 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.Collection;
-import java.util.LinkedHashSet;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.serialization.json.JsonIdMap;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +58,7 @@ import org.sdmlib.serialization.json.JsonIdMap;
  *
  * @generated
  */
-public class RoomImpl extends MinimalEObjectImpl.Container implements Room
+public class RoomImpl extends MinimalEObjectImpl.Container implements Room, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getTopic() <em>Topic</em>}' attribute.
@@ -531,125 +541,9 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    
    //==========================================================================
    
-   public Object get(String attrName)
-   {
-      if (PROPERTY_TOPIC.equalsIgnoreCase(attrName))
-      {
-         return getTopic();
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         return getCredits();
-      }
-
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         return getUni();
-      }
-
-      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
-      {
-         return getStudents();
-      }
-
-      if (PROPERTY_TAS.equalsIgnoreCase(attrName))
-      {
-         return getTas();
-      }
-
-      if (PROPERTY_DOORS.equalsIgnoreCase(attrName))
-      {
-         return getDoors();
-      }
-
-      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
-      {
-         return getAssignments();
-      }
-
-      return null;
-   }
-
-   
-   //==========================================================================
-   
-   public boolean set(String attrName, Object value)
-   {
-      if (PROPERTY_TOPIC.equalsIgnoreCase(attrName))
-      {
-         setTopic((String) value);
-         return true;
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         setCredits(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         setUni((University) value);
-         return true;
-      }
-
-      if (PROPERTY_STUDENTS.equalsIgnoreCase(attrName))
-      {
-         addToStudents((Student) value);
-         return true;
-      }
-      
-      if ((PROPERTY_STUDENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromStudents((Student) value);
-         return true;
-      }
-
-      if (PROPERTY_TAS.equalsIgnoreCase(attrName))
-      {
-         addToTas((TeachingAssistant) value);
-         return true;
-      }
-      
-      if ((PROPERTY_TAS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromTas((TeachingAssistant) value);
-         return true;
-      }
-
-      if (PROPERTY_DOORS.equalsIgnoreCase(attrName))
-      {
-         addToDoors((Room) value);
-         return true;
-      }
-      
-      if ((PROPERTY_DOORS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromDoors((Room) value);
-         return true;
-      }
-
-      if (PROPERTY_ASSIGNMENTS.equalsIgnoreCase(attrName))
-      {
-         addToAssignments((Assignment) value);
-         return true;
-      }
-      
-      if ((PROPERTY_ASSIGNMENTS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromAssignments((Assignment) value);
-         return true;
-      }
-
-      return false;
-   }
-
-   
-   //==========================================================================
-   
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
+   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;
@@ -681,13 +575,14 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    
    //==========================================================================
    
+   
    public void removeYou()
    {
       setUni(null);
-      removeAllFromStudents();
-      removeAllFromTas();
-      removeAllFromDoors();
-      removeAllFromAssignments();
+      withoutStudents(this.getStudents().toArray(new Student[this.getStudents().size()]));
+      withoutTas(this.getTas().toArray(new TeachingAssistant[this.getTas().size()]));
+      withoutDoors(this.getDoors().toArray(new Room[this.getDoors().size()]));
+      withoutAssignments(this.getAssignments().toArray(new Assignment[this.getAssignments().size()]));
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -698,60 +593,34 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       setUni(value);
       return this;
    } 
-
-   public University createUni()
-   {
-      University value = new UniversityImpl();
-      withUni(value);
-      return value;
-   } 
   public StudentSet getStudentsSet()
   {
      return new StudentSet().with(getStudents());
   }
 
 
-   public boolean addToStudents(Student value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getStudents().add (value);
-         
-         if (changed)
-         {
-            value.withIn(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromStudents(Student value)
-   {
-      boolean changed = false;
-      
-      if ((this.students != null) && (value != null))
-      {
-         changed = this.students.remove (value);
-         
-         if (changed)
-         {
-            value.setIn(null);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
    public Room withStudents(Student... value)
    {
+      if(value==null){
+         return this;
+      }
       for (Student item : value)
       {
-         addToStudents(item);
+         if (item != null)
+         {
+            if (this.students == null)
+            {
+               this.students = new StudentSet();
+            }
+            
+            boolean changed = this.students.add (item);
+
+            if (changed)
+            {
+               item.withIn(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -760,24 +629,36 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    {
       for (Student item : value)
       {
-         removeFromStudents(item);
+         if ((this.students != null) && (item != null))
+         {
+            if (this.students.remove(item))
+            {
+               item.setIn(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
+            }
+         }
+         withoutStudents(item);
       }
       return this;
    }
 
-   public void removeAllFromStudents()
-   {
-      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getStudents());
-   
-      for (Student value : tmpSet)
-      {
-         this.removeFromStudents(value);
-      }
-   }
-
    public Student createStudents()
    {
-      Student value = new StudentImpl();
+      Student value = new TeachingAssistant();
+      withStudents(value);
+      return value;
+   } 
+
+   public StudentImpl createStudentsStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withStudents(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
       withStudents(value);
       return value;
    } 
@@ -787,47 +668,28 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
   }
 
 
-   public boolean addToTas(TeachingAssistant value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getTas().add (value);
-         
-         if (changed)
-         {
-            value.withRoom(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromTas(TeachingAssistant value)
-   {
-      boolean changed = false;
-      
-      if ((this.tas != null) && (value != null))
-      {
-         changed = this.tas.remove (value);
-         
-         if (changed)
-         {
-            value.setRoom(null);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
    public Room withTas(TeachingAssistant... value)
    {
+      if(value==null){
+         return this;
+      }
       for (TeachingAssistant item : value)
       {
-         addToTas(item);
+         if (item != null)
+         {
+            if (this.tas == null)
+            {
+               this.tas = new TeachingAssistantSet();
+            }
+            
+            boolean changed = this.tas.add (item);
+
+            if (changed)
+            {
+               item.withRoom(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -836,24 +698,22 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    {
       for (TeachingAssistant item : value)
       {
-         removeFromTas(item);
+         if ((this.tas != null) && (item != null))
+         {
+            if (this.tas.remove(item))
+            {
+               item.setRoom(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, item, null);
+            }
+         }
+         withoutTas(item);
       }
       return this;
    }
 
-   public void removeAllFromTas()
+   public TeachingAssistantImpl createTasTeachingAssistantImpl()
    {
-      LinkedHashSet<TeachingAssistant> tmpSet = new LinkedHashSet<TeachingAssistant>(this.getTas());
-   
-      for (TeachingAssistant value : tmpSet)
-      {
-         this.removeFromTas(value);
-      }
-   }
-
-   public TeachingAssistant createTas()
-   {
-      TeachingAssistant value = new TeachingAssistantImpl();
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
       withTas(value);
       return value;
    } 
@@ -865,52 +725,32 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    public RoomSet getDoorsTransitive()
    {
       RoomSet result = new RoomSet().with(this);
-      RoomSet doorsTransitive = result.getDoorsTransitive();
-      return doorsTransitive;
+      return result.getDoorsTransitive();
    }
 
-
-   public boolean addToDoors(Room value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getDoors().add (value);
-         
-         if (changed)
-         {
-            value.withDoors(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromDoors(Room value)
-   {
-      boolean changed = false;
-      
-      if ((this.doors != null) && (value != null))
-      {
-         changed = this.doors.remove (value);
-         
-         if (changed)
-         {
-            value.withoutDoors(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
 
    public Room withDoors(Room... value)
    {
+      if(value==null){
+         return this;
+      }
       for (Room item : value)
       {
-         addToDoors(item);
+         if (item != null)
+         {
+            if (this.doors == null)
+            {
+               this.doors = new RoomSet();
+            }
+            
+            boolean changed = this.doors.add (item);
+
+            if (changed)
+            {
+               item.withDoors(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -919,24 +759,22 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    {
       for (Room item : value)
       {
-         removeFromDoors(item);
+         if ((this.doors != null) && (item != null))
+         {
+            if (this.doors.remove(item))
+            {
+               item.withoutDoors(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, item, null);
+            }
+         }
+         withoutDoors(item);
       }
       return this;
    }
 
-   public void removeAllFromDoors()
+   public RoomImpl createDoorsRoomImpl()
    {
-      LinkedHashSet<Room> tmpSet = new LinkedHashSet<Room>(this.getDoors());
-   
-      for (Room value : tmpSet)
-      {
-         this.removeFromDoors(value);
-      }
-   }
-
-   public Room createDoors()
-   {
-      Room value = new RoomImpl();
+      RoomImpl value = new RoomImpl();
       withDoors(value);
       return value;
    } 
@@ -946,47 +784,28 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
   }
 
 
-   public boolean addToAssignments(Assignment value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getAssignments().add (value);
-         
-         if (changed)
-         {
-            value.withRoom(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromAssignments(Assignment value)
-   {
-      boolean changed = false;
-      
-      if ((this.assignments != null) && (value != null))
-      {
-         changed = this.assignments.remove (value);
-         
-         if (changed)
-         {
-            value.setRoom(null);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
    public Room withAssignments(Assignment... value)
    {
+      if(value==null){
+         return this;
+      }
       for (Assignment item : value)
       {
-         addToAssignments(item);
+         if (item != null)
+         {
+            if (this.assignments == null)
+            {
+               this.assignments = new AssignmentSet();
+            }
+            
+            boolean changed = this.assignments.add (item);
+
+            if (changed)
+            {
+               item.withRoom(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -995,24 +814,22 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    {
       for (Assignment item : value)
       {
-         removeFromAssignments(item);
+         if ((this.assignments != null) && (item != null))
+         {
+            if (this.assignments.remove(item))
+            {
+               item.setRoom(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, item, null);
+            }
+         }
+         withoutAssignments(item);
       }
       return this;
    }
 
-   public void removeAllFromAssignments()
+   public AssignmentImpl createAssignmentsAssignmentImpl()
    {
-      LinkedHashSet<Assignment> tmpSet = new LinkedHashSet<Assignment>(this.getAssignments());
-   
-      for (Assignment value : tmpSet)
-      {
-         this.removeFromAssignments(value);
-      }
-   }
-
-   public Assignment createAssignments()
-   {
-      Assignment value = new AssignmentImpl();
+      AssignmentImpl value = new AssignmentImpl();
       withAssignments(value);
       return value;
    } 
@@ -1072,4 +889,3 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
    
    public static final String PROPERTY_ASSIGNMENTS = "assignments";
 } //RoomImpl
-

@@ -4,18 +4,19 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import org.sdmlib.StrUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
  *
  * @generated
  */
-public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant
+public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant, PropertyChangeInterface
 {
   /**
    * The cached value of the '{@link #getRoom() <em>Room</em>}' reference.
@@ -236,146 +237,9 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    
    //==========================================================================
    
-   public Object get(String attrName)
-   {
-      if (PROPERTY_NAME.equalsIgnoreCase(attrName))
-      {
-         return getName();
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         return getStudId();
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         return getCredits();
-      }
-
-      if (PROPERTY_MOTIVATION.equalsIgnoreCase(attrName))
-      {
-         return getMotivation();
-      }
-
-      if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
-      {
-         return getAssignmentPoints();
-      }
-
-      if (TeachingAssistant.PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         return getUni();
-      }
-
-      if (TeachingAssistant.PROPERTY_IN.equalsIgnoreCase(attrName))
-      {
-         return getIn();
-      }
-
-      if (TeachingAssistant.PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         return getFriends();
-      }
-
-      if (TeachingAssistant.PROPERTY_DONE.equalsIgnoreCase(attrName))
-      {
-         return getDone();
-      }
-
-      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
-      {
-         return getRoom();
-      }
-
-      return null;
-   }
-
-   
-   //==========================================================================
-   
-   public boolean set(String attrName, Object value)
-   {
-      if (PROPERTY_NAME.equalsIgnoreCase(attrName))
-      {
-         setName((String) value);
-         return true;
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         setStudId((String) value);
-         return true;
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         setCredits(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_MOTIVATION.equalsIgnoreCase(attrName))
-      {
-         setMotivation(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
-      {
-         setAssignmentPoints(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (TeachingAssistant.PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         setUni((University) value);
-         return true;
-      }
-
-      if (TeachingAssistant.PROPERTY_IN.equalsIgnoreCase(attrName))
-      {
-         setIn((Room) value);
-         return true;
-      }
-
-      if (TeachingAssistant.PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         addToFriends((Student) value);
-         return true;
-      }
-      
-      if ((TeachingAssistant.PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromFriends((Student) value);
-         return true;
-      }
-
-      if (TeachingAssistant.PROPERTY_DONE.equalsIgnoreCase(attrName))
-      {
-         addToDone((Assignment) value);
-         return true;
-      }
-      
-      if ((TeachingAssistant.PROPERTY_DONE + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromDone((Assignment) value);
-         return true;
-      }
-
-      if (PROPERTY_ROOM.equalsIgnoreCase(attrName))
-      {
-         setRoom((Room) value);
-         return true;
-      }
-
-      return false;
-   }
-
-   
-   //==========================================================================
-   
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
+   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;
@@ -389,16 +253,31 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    
    //==========================================================================
    
-   public void removeYou()
-   {
-      setUni(null);
-      setIn(null);
-      removeAllFromFriends();
-      removeAllFromDone();
-      setRoom(null);
-      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
-   }
+   private String name;
 
+   public String getName()
+   {
+      return this.name;
+   }
+   
+   public void setName(String value)
+   {
+      if ( ! StrUtil.stringEquals(this.name, value))
+      {
+         String oldValue = this.name;
+         this.name = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_NAME, oldValue, value);
+      }
+   }
+   
+   public Student withName(String value)
+   {
+      setName(value);
+      return this;
+   } 
+
+
+   @Override
    public String toString()
    {
       StringBuilder _ = new StringBuilder();
@@ -412,17 +291,124 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    }
 
 
+   
+   //==========================================================================
+   
+   private String studId;
+
+   public String getStudId()
+   {
+      return this.studId;
+   }
+   
+   public void setStudId(String value)
+   {
+      if ( ! StrUtil.stringEquals(this.studId, value))
+      {
+         String oldValue = this.studId;
+         this.studId = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDID, oldValue, value);
+      }
+   }
+   
+   public Student withStudId(String value)
+   {
+      setStudId(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int credits;
+
+   public int getCredits()
+   {
+      return this.credits;
+   }
+   
+   public void setCredits(int value)
+   {
+      if (this.credits != value)
+      {
+         int oldValue = this.credits;
+         this.credits = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_CREDITS, oldValue, value);
+      }
+   }
+   
+   public Student withCredits(int value)
+   {
+      setCredits(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int motivation;
+
+   public int getMotivation()
+   {
+      return this.motivation;
+   }
+   
+   public void setMotivation(int value)
+   {
+      if (this.motivation != value)
+      {
+         int oldValue = this.motivation;
+         this.motivation = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_MOTIVATION, oldValue, value);
+      }
+   }
+   
+   public Student withMotivation(int value)
+   {
+      setMotivation(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int assignmentPoints;
+
+   public int getAssignmentPoints()
+   {
+      return this.assignmentPoints;
+   }
+   
+   public void setAssignmentPoints(int value)
+   {
+      if (this.assignmentPoints != value)
+      {
+         int oldValue = this.assignmentPoints;
+         this.assignmentPoints = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTPOINTS, oldValue, value);
+      }
+   }
+   
+   public Student withAssignmentPoints(int value)
+   {
+      setAssignmentPoints(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   
+   public void removeYou()
+   {
+      setRoom(null);
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+
    public TeachingAssistant withRoom(Room value)
    {
       setRoom(value);
       return this;
-   } 
-
-   public Room createRoom()
-   {
-      Room value = new RoomImpl();
-      withRoom(value);
-      return value;
    } 
 
    
@@ -436,4 +422,3 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    
    public static final String PROPERTY_ROOM = "room";
 } //TeachingAssistantImpl
-

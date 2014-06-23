@@ -4,15 +4,10 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.*;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 
-import com.sun.java.util.jar.pack.Instruction.Switch;
+import org.eclipse.emf.ecore.util.Switch;
+
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.*;
 
 /**
  * <!-- begin-user-doc -->

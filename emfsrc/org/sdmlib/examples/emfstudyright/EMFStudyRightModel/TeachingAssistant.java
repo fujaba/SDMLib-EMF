@@ -2,7 +2,7 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
 
 
 /**
@@ -53,11 +53,9 @@ public interface TeachingAssistant extends Student
 
 
    
-   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet();
+   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadonly(true);
 
    public TeachingAssistant withRoom(Room value);
-
-   public Room createRoom();
 
    
    /********************************************************************
@@ -70,4 +68,3 @@ public interface TeachingAssistant extends Student
    
    public static final String PROPERTY_ROOM = "room";
 } // TeachingAssistant
-

@@ -11,7 +11,7 @@ class University
 	contains Student[] students opposite uni
 }
 
-class Student 
+class Student
 {
 	String name
 	String studId

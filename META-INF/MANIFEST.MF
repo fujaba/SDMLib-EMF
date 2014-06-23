@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.emf.ant,
  org.eclipse.xsd,
  org.junit,
- SDMLib
+ SDMLib,
+ org.eclipse.emf.common
 Bundle-ActivationPolicy: lazy
 Import-Package: org.junit
 Export-Package: org.sdmlib.examples.emfstudyright.EMFStudyRightModel,

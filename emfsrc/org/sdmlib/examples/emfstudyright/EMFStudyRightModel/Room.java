@@ -3,11 +3,18 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.TeachingAssistantSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -202,68 +209,46 @@ public interface Room extends EObject
 
    public Room withUni(University value);
 
-   public University createUni();
-
    
-   public static final RoomSet EMPTY_SET = new RoomSet();
+   public static final RoomSet EMPTY_SET = new RoomSet().withReadonly(true);
 
    public StudentSet getStudentsSet();
-
-   boolean addToStudents(Student value);
-
-   boolean removeFromStudents(Student value);
 
    public Room withStudents(Student... value);
 
    public Room withoutStudents(Student... value);
 
-   public void removeAllFromStudents();
-
    public Student createStudents();
 
+   public StudentImpl createStudentsStudentImpl();
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
+
    public TeachingAssistantSet getTasSet();
-
-   boolean addToTas(TeachingAssistant value);
-
-   boolean removeFromTas(TeachingAssistant value);
 
    public Room withTas(TeachingAssistant... value);
 
    public Room withoutTas(TeachingAssistant... value);
 
-   public void removeAllFromTas();
-
-   public TeachingAssistant createTas();
+   public TeachingAssistantImpl createTasTeachingAssistantImpl();
 
    public RoomSet getDoorsSet();
 
-   public RoomSet getDoorsTransitive();
-
-   boolean addToDoors(Room value);
-
-   boolean removeFromDoors(Room value);
+   public Room getDoorsTransitive();
 
    public Room withDoors(Room... value);
 
    public Room withoutDoors(Room... value);
 
-   public void removeAllFromDoors();
-
-   public Room createDoors();
+   public RoomImpl createDoorsRoomImpl();
 
    public AssignmentSet getAssignmentsSet();
-
-   boolean addToAssignments(Assignment value);
-
-   boolean removeFromAssignments(Assignment value);
 
    public Room withAssignments(Assignment... value);
 
    public Room withoutAssignments(Assignment... value);
 
-   public void removeAllFromAssignments();
-
-   public Assignment createAssignments();
+   public AssignmentImpl createAssignmentsAssignmentImpl();
 
    
    /********************************************************************
@@ -320,4 +305,3 @@ public interface Room extends EObject
    
    public static final String PROPERTY_ASSIGNMENTS = "assignments";
 } // Room
-

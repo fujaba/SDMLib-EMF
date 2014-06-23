@@ -3,9 +3,15 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -293,44 +299,32 @@ public interface Student extends EObject
 
    public Student withUni(University value);
 
-   public University createUni();
-
    
-   public static final StudentSet EMPTY_SET = new StudentSet();
+   public static final StudentSet EMPTY_SET = new StudentSet().withReadonly(true);
 
    public Student withIn(Room value);
 
-   public Room createIn();
-
    public StudentSet getFriendsSet();
 
-   public StudentSet getFriendsTransitive();
-
-   boolean addToFriends(Student value);
-
-   boolean removeFromFriends(Student value);
+   public Student getFriendsTransitive();
 
    public Student withFriends(Student... value);
 
    public Student withoutFriends(Student... value);
 
-   public void removeAllFromFriends();
-
    public Student createFriends();
 
+   public StudentImpl createFriendsStudentImpl();
+
+   public TeachingAssistantImpl createFriendsTeachingAssistantImpl();
+
    public AssignmentSet getDoneSet();
-
-   boolean addToDone(Assignment value);
-
-   boolean removeFromDone(Assignment value);
 
    public Student withDone(Assignment... value);
 
    public Student withoutDone(Assignment... value);
 
-   public void removeAllFromDone();
-
-   public Assignment createDone();
+   public AssignmentImpl createDoneAssignmentImpl();
 
    
    /********************************************************************
@@ -376,4 +370,3 @@ public interface Student extends EObject
    
    public static final String PROPERTY_DONE = "done";
 } // Student
-

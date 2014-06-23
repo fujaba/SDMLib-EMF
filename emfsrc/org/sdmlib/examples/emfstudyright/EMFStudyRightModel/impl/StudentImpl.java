@@ -2,30 +2,38 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-
-import de.uniks.networkparser.json.JsonIdMap;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +56,7 @@ import de.uniks.networkparser.json.JsonIdMap;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -713,135 +721,9 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    
    //==========================================================================
    
-   public Object get(String attrName)
-   {
-      if (PROPERTY_NAME.equalsIgnoreCase(attrName))
-      {
-         return getName();
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         return getStudId();
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         return getCredits();
-      }
-
-      if (PROPERTY_MOTIVATION.equalsIgnoreCase(attrName))
-      {
-         return getMotivation();
-      }
-
-      if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
-      {
-         return getAssignmentPoints();
-      }
-
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         return getUni();
-      }
-
-      if (PROPERTY_IN.equalsIgnoreCase(attrName))
-      {
-         return getIn();
-      }
-
-      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         return getFriends();
-      }
-
-      if (PROPERTY_DONE.equalsIgnoreCase(attrName))
-      {
-         return getDone();
-      }
-
-      return null;
-   }
-
-   
-   //==========================================================================
-   
-   public boolean set(String attrName, Object value)
-   {
-      if (PROPERTY_NAME.equalsIgnoreCase(attrName))
-      {
-         setName((String) value);
-         return true;
-      }
-
-      if (PROPERTY_STUDID.equalsIgnoreCase(attrName))
-      {
-         setStudId((String) value);
-         return true;
-      }
-
-      if (PROPERTY_CREDITS.equalsIgnoreCase(attrName))
-      {
-         setCredits(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_MOTIVATION.equalsIgnoreCase(attrName))
-      {
-         setMotivation(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_ASSIGNMENTPOINTS.equalsIgnoreCase(attrName))
-      {
-         setAssignmentPoints(Integer.parseInt(value.toString()));
-         return true;
-      }
-
-      if (PROPERTY_UNI.equalsIgnoreCase(attrName))
-      {
-         setUni((University) value);
-         return true;
-      }
-
-      if (PROPERTY_IN.equalsIgnoreCase(attrName))
-      {
-         setIn((Room) value);
-         return true;
-      }
-
-      if (PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
-      {
-         addToFriends((Student) value);
-         return true;
-      }
-      
-      if ((PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromFriends((Student) value);
-         return true;
-      }
-
-      if (PROPERTY_DONE.equalsIgnoreCase(attrName))
-      {
-         addToDone((Assignment) value);
-         return true;
-      }
-      
-      if ((PROPERTY_DONE + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
-      {
-         removeFromDone((Assignment) value);
-         return true;
-      }
-
-      return false;
-   }
-
-   
-   //==========================================================================
-   
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
+   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;
@@ -900,12 +782,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    
    //==========================================================================
    
+   
    public void removeYou()
    {
       setUni(null);
       setIn(null);
-      removeAllFromFriends();
-      removeAllFromDone();
+      withoutFriends(this.getFriends().toArray(new Student[this.getFriends().size()]));
+      withoutDone(this.getDone().toArray(new Assignment[this.getDone().size()]));
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
@@ -917,24 +800,10 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return this;
    } 
 
-   public University createUni()
-   {
-      University value = new UniversityImpl();
-      withUni(value);
-      return value;
-   } 
-
    public Student withIn(Room value)
    {
       setIn(value);
       return this;
-   } 
-
-   public Room createIn()
-   {
-      Room value = new RoomImpl();
-      withIn(value);
-      return value;
    } 
   public StudentSet getFriendsSet()
   {
@@ -948,47 +817,28 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    }
 
 
-   public boolean addToFriends(Student value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getFriends().add (value);
-         
-         if (changed)
-         {
-            value.withFriends(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromFriends(Student value)
-   {
-      boolean changed = false;
-      
-      if ((this.friends != null) && (value != null))
-      {
-         changed = this.friends.remove (value);
-         
-         if (changed)
-         {
-            value.withoutFriends(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
    public Student withFriends(Student... value)
    {
+      if(value==null){
+         return this;
+      }
       for (Student item : value)
       {
-         addToFriends(item);
+         if (item != null)
+         {
+            if (this.friends == null)
+            {
+               this.friends = new StudentSet();
+            }
+            
+            boolean changed = this.friends.add (item);
+
+            if (changed)
+            {
+               item.withFriends(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -997,24 +847,36 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    {
       for (Student item : value)
       {
-         removeFromFriends(item);
+         if ((this.friends != null) && (item != null))
+         {
+            if (this.friends.remove(item))
+            {
+               item.withoutFriends(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, item, null);
+            }
+         }
+         withoutFriends(item);
       }
       return this;
    }
 
-   public void removeAllFromFriends()
-   {
-      LinkedHashSet<Student> tmpSet = new LinkedHashSet<Student>(this.getFriends());
-   
-      for (Student value : tmpSet)
-      {
-         this.removeFromFriends(value);
-      }
-   }
-
    public Student createFriends()
    {
-      Student value = new StudentImpl();
+      Student value = new TeachingAssistant();
+      withFriends(value);
+      return value;
+   } 
+
+   public StudentImpl createFriendsStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withFriends(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createFriendsTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
       withFriends(value);
       return value;
    } 
@@ -1024,47 +886,28 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
   }
 
 
-   public boolean addToDone(Assignment value)
-   {
-      boolean changed = false;
-      
-      if (value != null)
-      {
-         changed = this.getDone().add (value);
-         
-         if (changed)
-         {
-            value.withStudents(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, null, value);
-         }
-      }
-         
-      return changed;   
-   }
-
-   public boolean removeFromDone(Assignment value)
-   {
-      boolean changed = false;
-      
-      if ((this.done != null) && (value != null))
-      {
-         changed = this.done.remove (value);
-         
-         if (changed)
-         {
-            value.withoutStudents(this);
-            getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, value, null);
-         }
-      }
-         
-      return changed;   
-   }
-
    public Student withDone(Assignment... value)
    {
+      if(value==null){
+         return this;
+      }
       for (Assignment item : value)
       {
-         addToDone(item);
+         if (item != null)
+         {
+            if (this.done == null)
+            {
+               this.done = new AssignmentSet();
+            }
+            
+            boolean changed = this.done.add (item);
+
+            if (changed)
+            {
+               item.withStudents(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, null, item);
+            }
+         }
       }
       return this;
    } 
@@ -1073,24 +916,22 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    {
       for (Assignment item : value)
       {
-         removeFromDone(item);
+         if ((this.done != null) && (item != null))
+         {
+            if (this.done.remove(item))
+            {
+               item.withoutStudents(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, item, null);
+            }
+         }
+         withoutDone(item);
       }
       return this;
    }
 
-   public void removeAllFromDone()
+   public AssignmentImpl createDoneAssignmentImpl()
    {
-      LinkedHashSet<Assignment> tmpSet = new LinkedHashSet<Assignment>(this.getDone());
-   
-      for (Assignment value : tmpSet)
-      {
-         this.removeFromDone(value);
-      }
-   }
-
-   public Assignment createDone()
-   {
-      Assignment value = new AssignmentImpl();
+      AssignmentImpl value = new AssignmentImpl();
       withDone(value);
       return value;
    } 
@@ -1129,6 +970,13 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    public static final String PROPERTY_FRIENDS = "friends";
 
    
-
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
 } //StudentImpl
-

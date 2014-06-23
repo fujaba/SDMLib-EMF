@@ -5,13 +5,15 @@
     "name":"Project",
     "phase":"active",
     "hoursRemaining":8,
-    "hoursSpend":2,
+    "hoursSpend":3,
     "subentries":[
     {"id":"KE.K2"},
       {"id":"KE.K5"},
-      {"id":"KE.K7"}
+      {"id":"KE.K7"},
+      {"id":"KE.K8"},
+      {"id":"KE.K10"}
     ],
-    "phases":"active, backlog, implementation, done"
+    "phases":"active, backlog, implementation, done, modeling"
   }
 },  {
   "id":"KE.K2",
@@ -51,6 +53,28 @@
     "phases":"active, backlog, implementation, done"
   }
 },  {
+  "id":"KE.K8",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"EMFStudyRightClasses",
+    "phase":"modeling",
+    "hoursSpend":1,
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L9"}
+    ],
+    "phases":"active, backlog, implementation, done, modeling"
+  }
+},  {
+  "id":"KE.K10",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"SDMCodeEnhancer",
+    "phase":"backlog",
+    "parent":{"id":"KE.K1"},
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
   "id":"KE.L3",
   "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
   "prop":{
@@ -80,5 +104,15 @@
     "kanbanEntry":{"id":"KE.K5"},
     "developer":"zuendorf",
     "phase":"backlog"
+  }
+},  {
+  "id":"KE.L9",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
+  "prop":{
+    "date":"03.07.2013 13:19:42",
+    "hoursSpend":1,
+    "kanbanEntry":{"id":"KE.K8"},
+    "developer":"zuendorf",
+    "phase":"modeling"
   }
 }]

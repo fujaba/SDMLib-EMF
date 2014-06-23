@@ -3,9 +3,15 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.RoomSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,33 +103,25 @@ public interface University extends EObject
    
    public University withName(String value);
 
-   public StudentSet getStudentsSet();
-
-   boolean addToStudents(Student value);
-
-   boolean removeFromStudents(Student value);
-
-   public University withStudents(Student... value);
-
-   public University withoutStudents(Student... value);
-
-   public void removeAllFromStudents();
-
-   public Student createStudents();
-
    public RoomSet getRoomsSet();
-
-   boolean addToRooms(Room value);
-
-   boolean removeFromRooms(Room value);
 
    public University withRooms(Room... value);
 
    public University withoutRooms(Room... value);
 
-   public void removeAllFromRooms();
+   public RoomImpl createRoomsRoomImpl();
 
-   public Room createRooms();
+   public StudentSet getStudentsSet();
+
+   public University withStudents(Student... value);
+
+   public University withoutStudents(Student... value);
+
+   public Student createStudents();
+
+   public StudentImpl createStudentsStudentImpl();
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
 
    
    /********************************************************************
@@ -146,7 +144,4 @@ public interface University extends EObject
     */
    
    public static final String PROPERTY_STUDENTS = "students";
-
-   Student createStudentsTeachingAssistant();
 } // University
-

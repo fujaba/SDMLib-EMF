@@ -8,14 +8,18 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.junit.Test;
 import org.sdmlib.CGUtil;
+import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
+import org.sdmlib.models.classes.DataType;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.tools.EMFTool;
 
@@ -28,17 +32,22 @@ public class SDMEMFStudyRightModel
 
       storyboard.add("We build some example classes and then turn them into an Ecore model ", Storyboard.MODELING, "zuendorf", "03.07.2013 13:19:42", 1, 0);
 
-      ClassModel model = new ClassModel("org.sdmlib.examples.sdmmodel_emfcode.studyright");
+      ClassModel model = new ClassModel("org.sdmlib.examples.emfstudyright.EMFStudyRightModel");
 
-      Clazz uniClazz = model.createClazz("University", "name", R.STRING);
+      Clazz uniClazz = model.createClazz("University")
+            .withAttribute("name", DataType.STRING);
       
-      Clazz persClazz = model.createClazz("Person", "name", R.STRING);
+      Clazz persClazz = model.createClazz("Person")
+         .withAttribute( "name", DataType.STRING);
       
-      Clazz studClazz = uniClazz.createClassAndAssoc("Student", "students", R.MANY, "uni", R.ONE)
-            .withAttributes("studId", R.STRING)
-            .withSuperClazzes(persClazz);
+      Clazz studClazz = model.createClazz("Student")
+            .withAttribute("studId", DataType.STRING)
+            .withSuperClazz(persClazz);
+            
+      uniClazz.withAssoc(studClazz, "students", Card.MANY, "uni", Card.ONE);
+            
       
-      storyboard.addSVGImage(model.dumpClassDiagram("examples", "EMFStudyRightClassDiag"));
+      storyboard.addClassDiagram(model, "emfsrc");
       
       EMFTool emfTool = new EMFTool();
       
@@ -92,8 +101,8 @@ public class SDMEMFStudyRightModel
       
       genModel.setModelName(genModelURI.trimFileExtension().lastSegment());
 
-      genPackage.setPrefix(CGUtil.shortClassName(model.getPackageName()) + "genmodel");
-      genPackage.setBasePackage(model.getPackageName());
+      genPackage.setPrefix(CGUtil.shortClassName(model.getName()) + "genmodel");
+      genPackage.setBasePackage(model.getName());
 
       try
       {
@@ -109,31 +118,7 @@ public class SDMEMFStudyRightModel
       if (!status.isOK())
       {
         System.out.println(status);
-      }
-      
-      
-      
-      // now generate Java
-      // org.eclipse.xsd
-      //      JETEmitter e;
-      //      CodeGenEcorePlugin codeGenPlugin = CodeGenEcorePlugin.INSTANCE;
-      //      
-      //      genModel.setCanGenerate(true);
-      //      
-      //      org.eclipse.emf.codegen.ecore.generator.Generator gen = new org.eclipse.emf.codegen.ecore.generator.Generator();
-      //      
-      //      gen.setInput(genModel);
-      //      
-      //      boolean flag = gen.canGenerate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE);
-      //      
-      //      if (!flag)
-      //      {
-      //         System.out.println("Cannot generate");
-      //      }
-      //      
-      //      BasicMonitor basicMonitor = new BasicMonitor();
-      //      gen.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE, basicMonitor);
-      
+      }      
       
       storyboard.dumpHTML();
    }
@@ -150,7 +135,7 @@ public class SDMEMFStudyRightModel
       
       ClassModel model = emfTool.genModelToClassModel("./EMFStudyRight.genmodel");
       
-      storyboard.addSVGImage(model.dumpClassDiagram("StudyRighLoadedFromECore"));
+      storyboard.addClassDiagram(model);
       
       storyboard.dumpHTML();
       

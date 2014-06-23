@@ -3,9 +3,14 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.creators.AssignmentSet;
+import org.sdmlib.StrUtil;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,24 +148,20 @@ public interface Assignment extends EObject
 
    public StudentSet getStudentsSet();
 
-   boolean addToStudents(Student value);
-
-   boolean removeFromStudents(Student value);
-
    public Assignment withStudents(Student... value);
 
    public Assignment withoutStudents(Student... value);
 
-   public void removeAllFromStudents();
-
    public Student createStudents();
 
+   public StudentImpl createStudentsStudentImpl();
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
+
    
-   public static final AssignmentSet EMPTY_SET = new AssignmentSet();
+   public static final AssignmentSet EMPTY_SET = new AssignmentSet().withReadonly(true);
 
    public Assignment withRoom(Room value);
-
-   public Room createRoom();
 
    
    /********************************************************************
@@ -184,4 +185,3 @@ public interface Assignment extends EObject
    
    public static final String PROPERTY_STUDENTS = "students";
 } // Assignment
-
