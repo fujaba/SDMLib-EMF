@@ -13,6 +13,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.StrUtil;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ import org.sdmlib.StrUtil;
  *
  * @generated
  */
-public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant
+public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant, PropertyChangeInterface
 {
   /**
    * The cached value of the '{@link #getRoom() <em>Room</em>}' reference.

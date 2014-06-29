@@ -9,6 +9,155 @@
 </head><body onload="init();">
 <p>Storyboard <a href='../emfsrc/org/sdmlib/tools/SDMCodeEnhancer.java' type='text/x-java'>SDMCodeEnhancer</a></p>
 <p>SDMCodeEnhancer</p>
-<embed type="image/svg+xml" src='SDMCodeEnhancerClassDiagram1.svg'>
+<script>
+   var json = {
+   "typ":"class",
+   "value":{
+      "nodes":[
+      {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University",
+            "attributes":[
+            "name : String"
+            ]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl",
+            "attributes":[]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
+            "attributes":[
+            "name : String",
+               "studId : String",
+               "credits : int",
+               "motivation : int",
+               "assignmentPoints : int"
+            ]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl",
+            "attributes":[]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant",
+            "attributes":[]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl",
+            "attributes":[]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "attributes":[
+            "topic : String",
+               "credits : int"
+            ]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl",
+            "attributes":[]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
+            "attributes":[
+            "name : String",
+               "points : int"
+            ]
+         },
+         {
+            "typ":"node",
+            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl",
+            "attributes":[]
+         }
+      ],
+      "edges":[
+      {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"one",
+            "sourceproperty":"rooms",
+            "targetproperty":"uni",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"one",
+            "sourceproperty":"students",
+            "targetproperty":"uni",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"one",
+            "targetcardinality":"many",
+            "sourceproperty":"in",
+            "targetproperty":"students",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"many",
+            "sourceproperty":"friends",
+            "targetproperty":"friends",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"many",
+            "sourceproperty":"done",
+            "targetproperty":"students",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"one",
+            "targetcardinality":"many",
+            "sourceproperty":"room",
+            "targetproperty":"tas",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"many",
+            "sourceproperty":"doors",
+            "targetproperty":"doors",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room"
+         },
+         {
+            "typ":"edge",
+            "sourcecardinality":"many",
+            "targetcardinality":"one",
+            "sourceproperty":"assignments",
+            "targetproperty":"room",
+            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
+            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room"
+         }
+      ]
+   }
+}   ;
+   json["options"]={"canvasid":"canvasSDMCodeEnhancerClassDiagram1", "display":"html", "fontsize":10,"bar":true};   var g = new Graph(json);
+   g.layout(100,100);
+</script>
+
 </body>
 </html>

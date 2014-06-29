@@ -30,6 +30,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +51,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
  *
  * @generated
  */
-public class RoomImpl extends MinimalEObjectImpl.Container implements Room
+public class RoomImpl extends MinimalEObjectImpl.Container implements Room, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getTopic() <em>Topic</em>}' attribute.

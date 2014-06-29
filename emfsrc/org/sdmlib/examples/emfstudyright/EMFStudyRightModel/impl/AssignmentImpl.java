@@ -22,6 +22,8 @@ import java.beans.PropertyChangeListener;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +41,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
  *
  * @generated
  */
-public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

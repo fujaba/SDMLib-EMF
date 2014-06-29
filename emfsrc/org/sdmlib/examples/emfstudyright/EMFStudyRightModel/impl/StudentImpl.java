@@ -26,6 +26,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssista
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +49,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

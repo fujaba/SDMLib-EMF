@@ -89,7 +89,7 @@ public class RoomSet extends SDMSet<Room>
       
       for (Room obj : this)
       {
-         if (value == obj.getTopic())
+         if (value.equals(obj.getTopic()))
          {
             result.add(obj);
          }
@@ -104,7 +104,7 @@ public class RoomSet extends SDMSet<Room>
       
       for (Room obj : this)
       {
-         if (lower <= obj.getTopic() && obj.getTopic() <= upper)
+         if (lower.compareTo(obj.getTopic()) <= 0 && obj.getTopic().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
@@ -394,7 +394,7 @@ public class RoomSet extends SDMSet<Room>
          {
             result.add(current);
             
-            todo.with(current.getDoors().minus(result));
+            todo.with(current.getDoorsSet().minus(result));
          }
       }
       

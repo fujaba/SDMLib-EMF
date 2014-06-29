@@ -85,7 +85,7 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       
       for (TeachingAssistant obj : this)
       {
-         if (value == obj.getName())
+         if (value.equals(obj.getName()))
          {
             result.add(obj);
          }
@@ -100,7 +100,7 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       
       for (TeachingAssistant obj : this)
       {
-         if (lower <= obj.getName() && obj.getName() <= upper)
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
@@ -137,7 +137,7 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       
       for (TeachingAssistant obj : this)
       {
-         if (value == obj.getStudId())
+         if (value.equals(obj.getStudId()))
          {
             result.add(obj);
          }
@@ -152,7 +152,7 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       
       for (TeachingAssistant obj : this)
       {
-         if (lower <= obj.getStudId() && obj.getStudId() <= upper)
+         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
          {
             result.add(obj);
          }

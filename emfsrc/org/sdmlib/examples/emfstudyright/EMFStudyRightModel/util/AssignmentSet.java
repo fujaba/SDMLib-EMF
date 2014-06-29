@@ -87,7 +87,7 @@ public class AssignmentSet extends SDMSet<Assignment>
       
       for (Assignment obj : this)
       {
-         if (value == obj.getName())
+         if (value.equals(obj.getName()))
          {
             result.add(obj);
          }
