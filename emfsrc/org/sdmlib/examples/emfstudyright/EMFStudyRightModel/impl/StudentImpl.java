@@ -848,7 +848,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
                getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, item, null);
             }
          }
-         withoutFriends(item);
+         
       }
       return this;
    }
@@ -917,7 +917,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
                getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, item, null);
             }
          }
-         withoutDone(item);
+         
       }
       return this;
    }

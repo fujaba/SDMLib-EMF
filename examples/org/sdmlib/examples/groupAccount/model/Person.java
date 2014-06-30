@@ -249,7 +249,7 @@ public class Person implements PropertyChangeInterface
                getPropertyChangeSupport().firePropertyChange(PROPERTY_ITEMS, item, null);
             }
          }
-         withoutItems(item);
+         
       }
       return this;
    }

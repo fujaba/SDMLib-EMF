@@ -492,7 +492,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
                getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
             }
          }
-         withoutStudents(item);
+         
       }
       return this;
    }

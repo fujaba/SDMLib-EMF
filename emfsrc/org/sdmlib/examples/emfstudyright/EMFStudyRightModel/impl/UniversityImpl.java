@@ -378,7 +378,7 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
                getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, item, null);
             }
          }
-         withoutRooms(item);
+         
       }
       return this;
    }
@@ -433,7 +433,7 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
                getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
             }
          }
-         withoutStudents(item);
+         
       }
       return this;
    }
