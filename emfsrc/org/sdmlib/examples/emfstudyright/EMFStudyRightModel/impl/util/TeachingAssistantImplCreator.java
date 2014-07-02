@@ -24,14 +24,15 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.util;
 import org.sdmlib.serialization.EntityFactory;
 import de.uniks.networkparser.json.JsonIdMap;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 public class TeachingAssistantImplCreator extends EntityFactory
 {
    private final String[] properties = new String[]
    {
+      TeachingAssistant.PROPERTY_NOOFHOURS,
       Student.PROPERTY_NAME,
       Student.PROPERTY_STUDID,
       Student.PROPERTY_CREDITS,
@@ -61,6 +62,11 @@ public class TeachingAssistantImplCreator extends EntityFactory
       if (pos > 0)
       {
          attribute = attrName.substring(0, pos);
+      }
+
+      if (TeachingAssistant.PROPERTY_NOOFHOURS.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistant) target).getNoOfHours();
       }
 
       if (Student.PROPERTY_NAME.equalsIgnoreCase(attribute))
@@ -102,6 +108,12 @@ public class TeachingAssistantImplCreator extends EntityFactory
       if (JsonIdMap.REMOVE.equals(type) && value != null)
       {
          attrName = attrName + type;
+      }
+
+      if (TeachingAssistant.PROPERTY_NOOFHOURS.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistant) target).withNoOfHours(Integer.parseInt(value.toString()));
+         return true;
       }
 
       if (Student.PROPERTY_NAME.equalsIgnoreCase(attrName))

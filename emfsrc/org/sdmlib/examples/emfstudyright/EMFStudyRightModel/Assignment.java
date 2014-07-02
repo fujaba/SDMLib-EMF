@@ -3,12 +3,14 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -144,6 +146,17 @@ public interface Assignment extends EObject
    
    public Assignment withPoints(int value);
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
    public StudentSet getStudentsSet();
 
    public Assignment withStudents(Student... value);
@@ -159,8 +172,6 @@ public interface Assignment extends EObject
    
    public static final AssignmentSet EMPTY_SET = new AssignmentSet().withReadonly(true);
 
-   public Assignment withRoom(Room value);
-
    
    /********************************************************************
     * <pre>
@@ -172,14 +183,5 @@ public interface Assignment extends EObject
    
    public static final String PROPERTY_ROOM = "room";
 
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Assignment ----------------------------------- Student
-    *              done                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
+   public Assignment withRoom(Room value);
 } // Assignment

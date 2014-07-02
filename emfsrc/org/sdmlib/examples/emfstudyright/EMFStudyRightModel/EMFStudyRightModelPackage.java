@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/SDMLibEMF/emfsrc' basePackage='org.sdmlib.examples.emfstudyright'"
+ *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/SDMLib-EMF/emfsrc' basePackage='org.sdmlib.examples.emfstudyright'"
  * @generated
  */
 public interface EMFStudyRightModelPackage extends EPackage
@@ -323,13 +323,22 @@ public interface EMFStudyRightModelPackage extends EPackage
   int TEACHING_ASSISTANT__ROOM = STUDENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>No Of Hours</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEACHING_ASSISTANT__NO_OF_HOURS = STUDENT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Teaching Assistant</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEACHING_ASSISTANT_FEATURE_COUNT = STUDENT_FEATURE_COUNT + 1;
+  int TEACHING_ASSISTANT_FEATURE_COUNT = STUDENT_FEATURE_COUNT + 2;
 
   /**
    * The number of operations of the '<em>Teaching Assistant</em>' class.
@@ -670,6 +679,17 @@ public interface EMFStudyRightModelPackage extends EPackage
   EReference getTeachingAssistant_Room();
 
   /**
+   * Returns the meta object for the attribute '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getNoOfHours <em>No Of Hours</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>No Of Hours</em>'.
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getNoOfHours()
+   * @see #getTeachingAssistant()
+   * @generated
+   */
+  EAttribute getTeachingAssistant_NoOfHours();
+
+  /**
    * Returns the meta object for class '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room <em>Room</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -967,6 +987,14 @@ public interface EMFStudyRightModelPackage extends EPackage
      * @generated
      */
     EReference TEACHING_ASSISTANT__ROOM = eINSTANCE.getTeachingAssistant_Room();
+
+    /**
+     * The meta object literal for the '<em><b>No Of Hours</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TEACHING_ASSISTANT__NO_OF_HOURS = eINSTANCE.getTeachingAssistant_NoOfHours();
 
     /**
      * The meta object literal for the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl <em>Room</em>}' class.

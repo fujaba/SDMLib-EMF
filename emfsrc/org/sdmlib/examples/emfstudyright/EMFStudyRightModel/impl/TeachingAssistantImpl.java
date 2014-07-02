@@ -4,16 +4,19 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.StrUtil;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +26,7 @@ import org.sdmlib.serialization.PropertyChangeInterface;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl#getRoom <em>Room</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl#getNoOfHours <em>No Of Hours</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,6 +43,26 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    * @ordered
    */
   protected Room room;
+
+  /**
+   * The default value of the '{@link #getNoOfHours() <em>No Of Hours</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNoOfHours()
+   * @generated
+   * @ordered
+   */
+  protected static final int NO_OF_HOURS_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getNoOfHours() <em>No Of Hours</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNoOfHours()
+   * @generated
+   * @ordered
+   */
+  protected int noOfHours = NO_OF_HOURS_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -134,6 +158,29 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    * <!-- end-user-doc -->
    * @generated
    */
+  public int getNoOfHours()
+  {
+    return noOfHours;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setNoOfHours(int newNoOfHours)
+  {
+    int oldNoOfHours = noOfHours;
+    noOfHours = newNoOfHours;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.TEACHING_ASSISTANT__NO_OF_HOURS, oldNoOfHours, noOfHours));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -176,6 +223,8 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       case EMFStudyRightModelPackage.TEACHING_ASSISTANT__ROOM:
         if (resolve) return getRoom();
         return basicGetRoom();
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT__NO_OF_HOURS:
+        return getNoOfHours();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -192,6 +241,9 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
     {
       case EMFStudyRightModelPackage.TEACHING_ASSISTANT__ROOM:
         setRoom((Room)newValue);
+        return;
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT__NO_OF_HOURS:
+        setNoOfHours((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -210,6 +262,9 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       case EMFStudyRightModelPackage.TEACHING_ASSISTANT__ROOM:
         setRoom((Room)null);
         return;
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT__NO_OF_HOURS:
+        setNoOfHours(NO_OF_HOURS_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -226,8 +281,32 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
     {
       case EMFStudyRightModelPackage.TEACHING_ASSISTANT__ROOM:
         return room != null;
+      case EMFStudyRightModelPackage.TEACHING_ASSISTANT__NO_OF_HOURS:
+        return noOfHours != NO_OF_HOURS_EDEFAULT;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) _.append(" ").append(this.getName());
+      _.append(" ").append(this.getStudId());
+      _.append(" ").append(this.getCredits());
+      _.append(" ").append(this.getMotivation());
+      _.append(" ").append(this.getAssignmentPoints());
+      return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (noOfHours: ");
+    result.append(noOfHours);
+    result.append(')');
+    return result.toString();
   }
 
 
@@ -246,6 +325,15 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    {
       getPropertyChangeSupport().addPropertyChangeListener(listener);
    }
+
+   
+   //==========================================================================
+   
+   public TeachingAssistant withNoOfHours(int value)
+   {
+      setNoOfHours(value);
+      return this;
+   } 
 
    
    //==========================================================================
@@ -272,21 +360,6 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       setName(value);
       return this;
    } 
-
-
-   @Override
-   public String toString()
-   {
-      StringBuilder _ = new StringBuilder();
-      
-      _.append(" ").append(this.getName());
-      _.append(" ").append(this.getStudId());
-      _.append(" ").append(this.getCredits());
-      _.append(" ").append(this.getMotivation());
-      _.append(" ").append(this.getAssignmentPoints());
-      return _.substring(1);
-   }
-
 
    
    //==========================================================================
@@ -402,12 +475,6 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
-   public TeachingAssistant withRoom(Room value)
-   {
-      setRoom(value);
-      return this;
-   } 
-
    
    /********************************************************************
     * <pre>
@@ -418,4 +485,10 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
     */
    
    public static final String PROPERTY_ROOM = "room";
+
+   public TeachingAssistant withRoom(Room value)
+   {
+      setRoom(value);
+      return this;
+   } 
 } //TeachingAssistantImpl

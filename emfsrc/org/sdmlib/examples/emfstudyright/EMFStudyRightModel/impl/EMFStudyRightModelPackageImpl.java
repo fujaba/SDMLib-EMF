@@ -292,6 +292,16 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTeachingAssistant_NoOfHours()
+  {
+    return (EAttribute)teachingAssistantEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getRoom()
   {
     return roomEClass;
@@ -465,6 +475,7 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
 
     teachingAssistantEClass = createEClass(TEACHING_ASSISTANT);
     createEReference(teachingAssistantEClass, TEACHING_ASSISTANT__ROOM);
+    createEAttribute(teachingAssistantEClass, TEACHING_ASSISTANT__NO_OF_HOURS);
 
     roomEClass = createEClass(ROOM);
     createEAttribute(roomEClass, ROOM__TOPIC);
@@ -535,6 +546,7 @@ public class EMFStudyRightModelPackageImpl extends EPackageImpl implements EMFSt
 
     initEClass(teachingAssistantEClass, TeachingAssistant.class, "TeachingAssistant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTeachingAssistant_Room(), this.getRoom(), this.getRoom_Tas(), "room", null, 0, 1, TeachingAssistant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTeachingAssistant_NoOfHours(), theEcorePackage.getEInt(), "noOfHours", null, 0, 1, TeachingAssistant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(roomEClass, Room.class, "Room", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRoom_Topic(), theEcorePackage.getEString(), "topic", null, 0, 1, Room.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

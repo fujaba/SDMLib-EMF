@@ -24,8 +24,8 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import java.util.Collection;
-import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
+import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 
@@ -64,6 +64,58 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
    public TeachingAssistantSet without(TeachingAssistant value)
    {
       this.remove(value);
+      return this;
+   }
+
+   public intList getNoOfHours()
+   {
+      intList result = new intList();
+      
+      for (TeachingAssistant obj : this)
+      {
+         result.add(obj.getNoOfHours());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantSet hasNoOfHours(int value)
+   {
+      TeachingAssistantSet result = new TeachingAssistantSet();
+      
+      for (TeachingAssistant obj : this)
+      {
+         if (value == obj.getNoOfHours())
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantSet hasNoOfHours(int lower, int upper)
+   {
+      TeachingAssistantSet result = new TeachingAssistantSet();
+      
+      for (TeachingAssistant obj : this)
+      {
+         if (lower <= obj.getNoOfHours() && obj.getNoOfHours() <= upper)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantSet withNoOfHours(int value)
+   {
+      for (TeachingAssistant obj : this)
+      {
+         obj.setNoOfHours(value);
+      }
+      
       return this;
    }
 

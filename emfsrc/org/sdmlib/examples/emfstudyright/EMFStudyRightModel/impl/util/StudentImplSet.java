@@ -89,7 +89,7 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       
       for (StudentImpl obj : this)
       {
-         if (value == obj.getName())
+         if (value.equals(obj.getName()))
          {
             result.add(obj);
          }
@@ -104,7 +104,7 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       
       for (StudentImpl obj : this)
       {
-         if (lower <= obj.getName() && obj.getName() <= upper)
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
@@ -141,7 +141,7 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       
       for (StudentImpl obj : this)
       {
-         if (value == obj.getStudId())
+         if (value.equals(obj.getStudId()))
          {
             result.add(obj);
          }
@@ -156,7 +156,7 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       
       for (StudentImpl obj : this)
       {
-         if (lower <= obj.getStudId() && obj.getStudId() <= upper)
+         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
@@ -482,7 +482,7 @@ public class StudentImplSet extends SDMSet<StudentImpl>
          {
             result.add(current);
             
-            todo.with(current.getFriends().minus(result));
+            todo.with(current.getFriendsSet().minus(result));
          }
       }
       

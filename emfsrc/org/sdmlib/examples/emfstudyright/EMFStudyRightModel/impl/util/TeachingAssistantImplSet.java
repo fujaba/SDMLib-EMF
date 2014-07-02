@@ -24,8 +24,8 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.util;
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import java.util.Collection;
-import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
+import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 
@@ -67,6 +67,58 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       return this;
    }
 
+   public intList getNoOfHours()
+   {
+      intList result = new intList();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.add(obj.getNoOfHours());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasNoOfHours(int value)
+   {
+      TeachingAssistantImplSet result = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if (value == obj.getNoOfHours())
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasNoOfHours(int lower, int upper)
+   {
+      TeachingAssistantImplSet result = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if (lower <= obj.getNoOfHours() && obj.getNoOfHours() <= upper)
+         {
+            result.add(obj);
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet withNoOfHours(int value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.setNoOfHours(value);
+      }
+      
+      return this;
+   }
+
    public StringList getName()
    {
       StringList result = new StringList();
@@ -85,7 +137,7 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       
       for (TeachingAssistantImpl obj : this)
       {
-         if (value == obj.getName())
+         if (value.equals(obj.getName()))
          {
             result.add(obj);
          }
@@ -100,7 +152,7 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       
       for (TeachingAssistantImpl obj : this)
       {
-         if (lower <= obj.getName() && obj.getName() <= upper)
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
@@ -137,7 +189,7 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       
       for (TeachingAssistantImpl obj : this)
       {
-         if (value == obj.getStudId())
+         if (value.equals(obj.getStudId()))
          {
             result.add(obj);
          }
@@ -152,7 +204,7 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       
       for (TeachingAssistantImpl obj : this)
       {
-         if (lower <= obj.getStudId() && obj.getStudId() <= upper)
+         if (lower.compareTo(obj.getStudId()) <= 0 && obj.getStudId().compareTo(upper) <= 0)
          {
             result.add(obj);
          }

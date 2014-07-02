@@ -3,25 +3,33 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
@@ -30,7 +38,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -579,6 +586,17 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
    private University uni = null;
 
    public Room withUni(University value)
@@ -586,9 +604,20 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       setUni(value);
       return this;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
   public StudentSet getStudentsSet()
   {
-     return new StudentSet().with(getStudents());
+     return this.getStudents().with(getStudents());
   }
 
 
@@ -603,7 +632,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          {
             if (this.students == null)
             {
-               this.students = new StudentSet();
+               this.students = this.getStudents();
             }
             
             boolean changed = this.students.add (item);
@@ -630,7 +659,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
                getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -655,9 +683,20 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       withStudents(value);
       return value;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
   public TeachingAssistantSet getTasSet()
   {
-     return new TeachingAssistantSet().with(getTas());
+     return this.getTas().with(getTas());
   }
 
 
@@ -672,7 +711,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          {
             if (this.tas == null)
             {
-               this.tas = new TeachingAssistantSet();
+               this.tas = this.getTas();
             }
             
             boolean changed = this.tas.add (item);
@@ -699,7 +738,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
                getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -710,9 +748,20 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       withTas(value);
       return value;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
   public RoomSet getDoorsSet()
   {
-     return new RoomSet().with(getDoors());
+     return this.getDoors().with(getDoors());
   }
 
    public RoomSet getDoorsTransitive()
@@ -733,7 +782,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          {
             if (this.doors == null)
             {
-               this.doors = new RoomSet();
+               this.doors = this.getDoors();
             }
             
             boolean changed = this.doors.add (item);
@@ -760,7 +809,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
                getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -771,9 +819,20 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       withDoors(value);
       return value;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
   public AssignmentSet getAssignmentsSet()
   {
-     return new AssignmentSet().with(getAssignments());
+     return this.getAssignments().with(getAssignments());
   }
 
 
@@ -788,7 +847,7 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
          {
             if (this.assignments == null)
             {
-               this.assignments = new AssignmentSet();
+               this.assignments = this.getAssignments();
             }
             
             boolean changed = this.assignments.add (item);
@@ -815,7 +874,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
                getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -826,59 +884,4 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
       withAssignments(value);
       return value;
    } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Room ----------------------------------- University
-    *              rooms                   uni
-    * </pre>
-    */
-   
-   public static final String PROPERTY_UNI = "uni";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Student
-    *              in                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- TeachingAssistant
-    *              room                   tas
-    * </pre>
-    */
-   
-   public static final String PROPERTY_TAS = "tas";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Room ----------------------------------- Room
-    *              doors                   doors
-    * </pre>
-    */
-   
-   public static final String PROPERTY_DOORS = "doors";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Assignment
-    *              room                   assignments
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ASSIGNMENTS = "assignments";
 } //RoomImpl

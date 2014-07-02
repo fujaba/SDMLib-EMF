@@ -38,6 +38,59 @@ public class TeachingAssistantImplPO extends PatternObject<TeachingAssistantImpl
       }
       newInstance(CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
    }
+   public TeachingAssistantImplPO hasNoOfHours(int value)
+   {
+      new AttributeConstraint()
+      .withAttrName(TeachingAssistantImpl.PROPERTY_NOOFHOURS)
+      .withTgtValue(value)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public TeachingAssistantImplPO hasNoOfHours(int lower, int upper)
+   {
+      new AttributeConstraint()
+      .withAttrName(TeachingAssistantImpl.PROPERTY_NOOFHOURS)
+      .withTgtValue(lower)
+      .withUpperTgtValue(upper)
+      .withSrc(this)
+      .withModifier(this.getPattern().getModifier())
+      .withPattern(this.getPattern());
+      
+      this.getPattern().findMatch();
+      
+      return this;
+   }
+   
+   public TeachingAssistantImplPO createNoOfHours(int value)
+   {
+      this.startCreate().hasNoOfHours(value).endCreate();
+      return this;
+   }
+   
+   public int getNoOfHours()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((TeachingAssistantImpl) getCurrentMatch()).getNoOfHours();
+      }
+      return 0;
+   }
+   
+   public TeachingAssistantImplPO withNoOfHours(int value)
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         ((TeachingAssistantImpl) getCurrentMatch()).setNoOfHours(value);
+      }
+      return this;
+   }
+   
    public TeachingAssistantImplPO hasName(String value)
    {
       new AttributeConstraint()

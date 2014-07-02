@@ -3,13 +3,15 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -295,12 +297,45 @@ public interface Student extends EObject
    
    public Student withAssignmentPoints(int value);
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
    public Student withUni(University value);
 
    
    public static final StudentSet EMPTY_SET = new StudentSet().withReadonly(true);
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
    public Student withIn(Room value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
 
    public StudentSet getFriendsSet();
 
@@ -316,47 +351,6 @@ public interface Student extends EObject
 
    public TeachingAssistantImpl createFriendsTeachingAssistantImpl();
 
-   public AssignmentSet getDoneSet();
-
-   public Student withDone(Assignment... value);
-
-   public Student withoutDone(Assignment... value);
-
-   public AssignmentImpl createDoneAssignmentImpl();
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- University
-    *              students                   uni
-    * </pre>
-    */
-   
-   public static final String PROPERTY_UNI = "uni";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- Room
-    *              students                   in
-    * </pre>
-    */
-   
-   public static final String PROPERTY_IN = "in";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Student ----------------------------------- Student
-    *              friends                   friends
-    * </pre>
-    */
-   
-   public static final String PROPERTY_FRIENDS = "friends";
-
    
    /********************************************************************
     * <pre>
@@ -367,4 +361,12 @@ public interface Student extends EObject
     */
    
    public static final String PROPERTY_DONE = "done";
+
+   public AssignmentSet getDoneSet();
+
+   public Student withDone(Assignment... value);
+
+   public Student withoutDone(Assignment... value);
+
+   public AssignmentImpl createDoneAssignmentImpl();
 } // Student

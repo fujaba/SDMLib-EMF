@@ -3,27 +3,34 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -448,9 +455,20 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       setRoom(null);
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
   public StudentSet getStudentsSet()
   {
-     return new StudentSet().with(getStudents());
+     return this.getStudents().with(getStudents());
   }
 
 
@@ -465,7 +483,7 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
          {
             if (this.students == null)
             {
-               this.students = new StudentSet();
+               this.students = this.getStudents();
             }
             
             boolean changed = this.students.add (item);
@@ -492,14 +510,13 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
                getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
             }
          }
-         
       }
       return this;
    }
 
    public Student createStudents()
    {
-      Student value = new StudentImpl();
+      Student value = new TeachingAssistant();
       withStudents(value);
       return value;
    } 
@@ -518,14 +535,6 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
       return value;
    } 
 
-   private Room room = null;
-
-   public Assignment withRoom(Room value)
-   {
-      setRoom(value);
-      return this;
-   } 
-
    
    /********************************************************************
     * <pre>
@@ -537,14 +546,11 @@ public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assi
    
    public static final String PROPERTY_ROOM = "room";
 
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Assignment ----------------------------------- Student
-    *              done                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
+   private Room room = null;
+
+   public Assignment withRoom(Room value)
+   {
+      setRoom(value);
+      return this;
+   } 
 } //AssignmentImpl

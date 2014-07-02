@@ -14,6 +14,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssista
  * The following features are supported:
  * <ul>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getRoom <em>Room</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getNoOfHours <em>No Of Hours</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,11 +52,42 @@ public interface TeachingAssistant extends Student
    */
   void setRoom(Room value);
 
+  /**
+   * Returns the value of the '<em><b>No Of Hours</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>No Of Hours</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>No Of Hours</em>' attribute.
+   * @see #setNoOfHours(int)
+   * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage#getTeachingAssistant_NoOfHours()
+   * @model unique="false"
+   * @generated
+   */
+  int getNoOfHours();
+
+  /**
+   * Sets the value of the '{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant#getNoOfHours <em>No Of Hours</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>No Of Hours</em>' attribute.
+   * @see #getNoOfHours()
+   * @generated
+   */
+  void setNoOfHours(int value);
+
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_NOOFHOURS = "noOfHours";
+   
+   public TeachingAssistant withNoOfHours(int value);
 
    
    public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadonly(true);
-
-   public TeachingAssistant withRoom(Room value);
 
    
    /********************************************************************
@@ -67,4 +99,6 @@ public interface TeachingAssistant extends Student
     */
    
    public static final String PROPERTY_ROOM = "room";
+
+   public TeachingAssistant withRoom(Room value);
 } // TeachingAssistant

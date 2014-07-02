@@ -3,28 +3,35 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -334,9 +341,20 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       withoutStudents(this.getStudents().toArray(new Student[this.getStudents().size()]));
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
   public RoomSet getRoomsSet()
   {
-     return new RoomSet().with(getRooms());
+     return this.getRooms().with(getRooms());
   }
 
 
@@ -351,7 +369,7 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
          {
             if (this.rooms == null)
             {
-               this.rooms = new RoomSet();
+               this.rooms = this.getRooms();
             }
             
             boolean changed = this.rooms.add (item);
@@ -378,7 +396,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
                getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -389,9 +406,20 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       withRooms(value);
       return value;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Student
+    *              uni                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
   public StudentSet getStudentsSet()
   {
-     return new StudentSet().with(getStudents());
+     return this.getStudents().with(getStudents());
   }
 
 
@@ -406,7 +434,7 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
          {
             if (this.students == null)
             {
-               this.students = new StudentSet();
+               this.students = this.getStudents();
             }
             
             boolean changed = this.students.add (item);
@@ -433,7 +461,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
                getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -458,26 +485,4 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       withStudents(value);
       return value;
    } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Room
-    *              uni                   rooms
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ROOMS = "rooms";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Student
-    *              uni                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
 } //UniversityImpl

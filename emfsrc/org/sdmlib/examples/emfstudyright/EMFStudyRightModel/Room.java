@@ -3,7 +3,9 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
@@ -205,10 +207,32 @@ public interface Room extends EObject
    
    public Room withCredits(int value);
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
    public Room withUni(University value);
 
    
    public static final RoomSet EMPTY_SET = new RoomSet().withReadonly(true);
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
 
    public StudentSet getStudentsSet();
 
@@ -222,54 +246,6 @@ public interface Room extends EObject
 
    public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
 
-   public TeachingAssistantSet getTasSet();
-
-   public Room withTas(TeachingAssistant... value);
-
-   public Room withoutTas(TeachingAssistant... value);
-
-   public TeachingAssistantImpl createTasTeachingAssistantImpl();
-
-   public RoomSet getDoorsSet();
-
-   public Room getDoorsTransitive();
-
-   public Room withDoors(Room... value);
-
-   public Room withoutDoors(Room... value);
-
-   public RoomImpl createDoorsRoomImpl();
-
-   public AssignmentSet getAssignmentsSet();
-
-   public Room withAssignments(Assignment... value);
-
-   public Room withoutAssignments(Assignment... value);
-
-   public AssignmentImpl createAssignmentsAssignmentImpl();
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Room ----------------------------------- University
-    *              rooms                   uni
-    * </pre>
-    */
-   
-   public static final String PROPERTY_UNI = "uni";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * Room ----------------------------------- Student
-    *              in                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
-
    
    /********************************************************************
     * <pre>
@@ -280,6 +256,14 @@ public interface Room extends EObject
     */
    
    public static final String PROPERTY_TAS = "tas";
+
+   public TeachingAssistantSet getTasSet();
+
+   public Room withTas(TeachingAssistant... value);
+
+   public Room withoutTas(TeachingAssistant... value);
+
+   public TeachingAssistantImpl createTasTeachingAssistantImpl();
 
    
    /********************************************************************
@@ -292,6 +276,16 @@ public interface Room extends EObject
    
    public static final String PROPERTY_DOORS = "doors";
 
+   public RoomSet getDoorsSet();
+
+   public Room getDoorsTransitive();
+
+   public Room withDoors(Room... value);
+
+   public Room withoutDoors(Room... value);
+
+   public RoomImpl createDoorsRoomImpl();
+
    
    /********************************************************************
     * <pre>
@@ -302,4 +296,12 @@ public interface Room extends EObject
     */
    
    public static final String PROPERTY_ASSIGNMENTS = "assignments";
+
+   public AssignmentSet getAssignmentsSet();
+
+   public Room withAssignments(Assignment... value);
+
+   public Room withoutAssignments(Assignment... value);
+
+   public AssignmentImpl createAssignmentsAssignmentImpl();
 } // Room

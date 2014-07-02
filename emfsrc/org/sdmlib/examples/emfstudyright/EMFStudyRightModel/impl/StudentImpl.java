@@ -3,30 +3,37 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -785,6 +792,17 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
    private University uni = null;
 
    public Student withUni(University value)
@@ -793,14 +811,36 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return this;
    } 
 
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
    public Student withIn(Room value)
    {
       setIn(value);
       return this;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
   public StudentSet getFriendsSet()
   {
-     return new StudentSet().with(getFriends());
+     return this.getFriends().with(getFriends());
   }
 
    public StudentSet getFriendsTransitive()
@@ -821,7 +861,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          {
             if (this.friends == null)
             {
-               this.friends = new StudentSet();
+               this.friends = this.getFriends();
             }
             
             boolean changed = this.friends.add (item);
@@ -848,7 +888,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
                getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -873,9 +912,20 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       withFriends(value);
       return value;
    } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
   public AssignmentSet getDoneSet()
   {
-     return new AssignmentSet().with(getDone());
+     return this.getDone().with(getDone());
   }
 
 
@@ -890,7 +940,7 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
          {
             if (this.done == null)
             {
-               this.done = new AssignmentSet();
+               this.done = this.getDone();
             }
             
             boolean changed = this.done.add (item);
@@ -917,7 +967,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
                getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, item, null);
             }
          }
-         
       }
       return this;
    }
@@ -928,48 +977,4 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       withDone(value);
       return value;
    } 
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- University
-    *              students                   uni
-    * </pre>
-    */
-   
-   public static final String PROPERTY_UNI = "uni";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       one
-    * Student ----------------------------------- Room
-    *              students                   in
-    * </pre>
-    */
-   
-   public static final String PROPERTY_IN = "in";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Student ----------------------------------- Student
-    *              friends                   friends
-    * </pre>
-    */
-   
-   public static final String PROPERTY_FRIENDS = "friends";
-
-   
-   /********************************************************************
-    * <pre>
-    *              many                       many
-    * Student ----------------------------------- Assignment
-    *              students                   done
-    * </pre>
-    */
-   
-   public static final String PROPERTY_DONE = "done";
 } //StudentImpl

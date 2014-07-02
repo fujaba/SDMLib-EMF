@@ -3,13 +3,15 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,6 +103,17 @@ public interface University extends EObject
    
    public University withName(String value);
 
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
+
    public RoomSet getRoomsSet();
 
    public University withRooms(Room... value);
@@ -108,6 +121,17 @@ public interface University extends EObject
    public University withoutRooms(Room... value);
 
    public RoomImpl createRoomsRoomImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Student
+    *              uni                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
 
    public StudentSet getStudentsSet();
 
@@ -120,26 +144,4 @@ public interface University extends EObject
    public StudentImpl createStudentsStudentImpl();
 
    public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Room
-    *              uni                   rooms
-    * </pre>
-    */
-   
-   public static final String PROPERTY_ROOMS = "rooms";
-
-   
-   /********************************************************************
-    * <pre>
-    *              one                       many
-    * University ----------------------------------- Student
-    *              uni                   students
-    * </pre>
-    */
-   
-   public static final String PROPERTY_STUDENTS = "students";
 } // University

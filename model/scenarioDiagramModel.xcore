@@ -1,4 +1,4 @@
-@GenModel(modelDirectory="/SDMLibEMF/emfsrc")
+@GenModel(modelDirectory="/SDMLib-EMF/emfsrc")
 
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel
 
@@ -28,9 +28,10 @@ class Student
 	refers Assignment[] done opposite students
 }
 
-class TeachingAssistant extends Student
+class TeachingAssistant extends Student 
 {
 	refers Room room opposite tas
+	int noOfHours
 }
 
 class Room 

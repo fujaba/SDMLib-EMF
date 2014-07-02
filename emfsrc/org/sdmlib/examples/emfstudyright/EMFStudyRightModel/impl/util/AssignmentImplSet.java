@@ -87,7 +87,7 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       
       for (AssignmentImpl obj : this)
       {
-         if (value == obj.getName())
+         if (value.equals(obj.getName()))
          {
             result.add(obj);
          }
@@ -102,7 +102,7 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       
       for (AssignmentImpl obj : this)
       {
-         if (lower <= obj.getName() && obj.getName() <= upper)
+         if (lower.compareTo(obj.getName()) <= 0 && obj.getName().compareTo(upper) <= 0)
          {
             result.add(obj);
          }
