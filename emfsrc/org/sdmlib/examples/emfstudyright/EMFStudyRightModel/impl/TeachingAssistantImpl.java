@@ -295,19 +295,21 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
   @Override
   public String toString()
   {
-    if (eIsProxy()) _.append(" ").append(this.getName());
-      _.append(" ").append(this.getStudId());
-      _.append(" ").append(this.getCredits());
-      _.append(" ").append(this.getMotivation());
-      _.append(" ").append(this.getAssignmentPoints());
-      return super.toString();
+    if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (noOfHours: ");
     result.append(noOfHours);
     result.append(')');
-    return result.toString();
+    result.append(" ").append(this.getName());
+      result.append(" ").append(this.getStudId());
+      result.append(" ").append(this.getCredits());
+      result.append(" ").append(this.getMotivation());
+      result.append(" ").append(this.getAssignmentPoints());
+      return result.toString();
   }
+
+
 
 
    
@@ -329,7 +331,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    
    //==========================================================================
    
-   public TeachingAssistant withNoOfHours(int value)
+   public TeachingAssistantImpl withNoOfHours(int value)
    {
       setNoOfHours(value);
       return this;
@@ -355,7 +357,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       }
    }
    
-   public Student withName(String value)
+   public TeachingAssistantImpl withName(String value)
    {
       setName(value);
       return this;
@@ -381,7 +383,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       }
    }
    
-   public Student withStudId(String value)
+   public TeachingAssistantImpl withStudId(String value)
    {
       setStudId(value);
       return this;
@@ -407,7 +409,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       }
    }
    
-   public Student withCredits(int value)
+   public TeachingAssistantImpl withCredits(int value)
    {
       setCredits(value);
       return this;
@@ -433,7 +435,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       }
    }
    
-   public Student withMotivation(int value)
+   public TeachingAssistantImpl withMotivation(int value)
    {
       setMotivation(value);
       return this;
@@ -459,7 +461,7 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       }
    }
    
-   public Student withAssignmentPoints(int value)
+   public TeachingAssistantImpl withAssignmentPoints(int value)
    {
       setAssignmentPoints(value);
       return this;

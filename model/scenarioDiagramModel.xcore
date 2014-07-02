@@ -6,7 +6,7 @@ class University
 {
 	String name
 	
-	contains Room[] rooms opposite uni
+	contains Room[] rooms opposite uni 
 	
 	contains Student[] students opposite uni
 }

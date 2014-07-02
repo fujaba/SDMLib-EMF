@@ -3,9 +3,7 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-import org.sdmlib.StrUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
@@ -240,8 +238,6 @@ public interface Room extends EObject
 
    public Room withoutStudents(Student... value);
 
-   public Student createStudents();
-
    public StudentImpl createStudentsStudentImpl();
 
    public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
@@ -278,7 +274,7 @@ public interface Room extends EObject
 
    public RoomSet getDoorsSet();
 
-   public Room getDoorsTransitive();
+   public RoomSet getDoorsTransitive();
 
    public Room withDoors(Room... value);
 
