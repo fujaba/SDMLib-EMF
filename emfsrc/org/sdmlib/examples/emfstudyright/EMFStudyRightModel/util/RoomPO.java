@@ -35,14 +35,14 @@ public class RoomPO extends PatternObject<RoomPO, Room>
 
 
    public RoomPO(){
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"));
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"));
    }
 
    public RoomPO(Room... hostGraphObject) {
       if(hostGraphObject==null || hostGraphObject.length<1){
          return ;
       }
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
    }
    public RoomPO hasTopic(String value)
    {

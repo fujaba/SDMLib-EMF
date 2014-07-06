@@ -31,14 +31,14 @@ public class UniversityImplPO extends PatternObject<UniversityImplPO, University
 
 
    public UniversityImplPO(){
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"));
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"));
    }
 
    public UniversityImplPO(UniversityImpl... hostGraphObject) {
       if(hostGraphObject==null || hostGraphObject.length<1){
          return ;
       }
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
    }
    public UniversityImplPO hasName(String value)
    {

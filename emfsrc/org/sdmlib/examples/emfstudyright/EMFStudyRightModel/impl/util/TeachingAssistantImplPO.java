@@ -29,14 +29,14 @@ public class TeachingAssistantImplPO extends PatternObject<TeachingAssistantImpl
 
 
    public TeachingAssistantImplPO(){
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"));
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"));
    }
 
    public TeachingAssistantImplPO(TeachingAssistantImpl... hostGraphObject) {
       if(hostGraphObject==null || hostGraphObject.length<1){
          return ;
       }
-      newInstance(CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
+      newInstance(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap("PatternObjectType"), hostGraphObject);
    }
    public TeachingAssistantImplPO hasNoOfHours(int value)
    {

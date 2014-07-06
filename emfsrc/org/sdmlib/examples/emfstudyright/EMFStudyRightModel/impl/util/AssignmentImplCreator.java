@@ -126,7 +126,7 @@ public class AssignmentImplCreator extends EntityFactory
    }
    public static JsonIdMap createIdMap(String sessionID)
    {
-      return CreatorCreator.createIdMap(sessionID);
+      return org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.CreatorCreator.createIdMap(sessionID);
    }
    
    //==========================================================================

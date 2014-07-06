@@ -27,10 +27,15 @@ import java.util.Collection;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
 import org.sdmlib.models.modelsets.ObjectSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversitySet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import java.util.Collections;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class RoomSet extends SDMSet<Room>
