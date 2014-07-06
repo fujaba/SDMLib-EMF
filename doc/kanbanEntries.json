@@ -5,13 +5,14 @@
     "name":"Project",
     "phase":"active",
     "hoursRemaining":8,
-    "hoursSpend":3,
+    "hoursSpend":55,
     "subentries":[
     {"id":"KE.K2"},
       {"id":"KE.K5"},
       {"id":"KE.K7"},
       {"id":"KE.K8"},
-      {"id":"KE.K10"}
+      {"id":"KE.K10"},
+      {"id":"KE.K11"}
     ],
     "phases":"active, backlog, implementation, done, modeling"
   }
@@ -75,6 +76,22 @@
     "phases":"active, backlog, implementation, done"
   }
 },  {
+  "id":"KE.K11",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"StudyRightObjectModelNavigationAndQueries",
+    "phase":"done",
+    "hoursSpend":52,
+    "parent":{"id":"KE.K1"},
+    "logEntries":[
+    {"id":"KE.L12"},
+      {"id":"KE.L13"},
+      {"id":"KE.L14"},
+      {"id":"KE.L15"}
+    ],
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
   "id":"KE.L3",
   "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
   "prop":{
@@ -114,5 +131,48 @@
     "kanbanEntry":{"id":"KE.K8"},
     "developer":"zuendorf",
     "phase":"modeling"
+  }
+},  {
+  "id":"KE.L12",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
+  "prop":{
+    "date":"17.01.2014 16:35:42",
+    "hoursSpend":40,
+    "kanbanEntry":{"id":"KE.K11"},
+    "developer":"zuendorf",
+    "phase":"done"
+  }
+},  {
+  "id":"KE.L13",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
+  "prop":{
+    "date":"24.02.2014 20:03:42 EST",
+    "hoursSpend":2,
+    "kanbanEntry":{"id":"KE.K11"},
+    "developer":"zuendorf",
+    "phase":"done",
+    "comment":"added createXY shortcuts for patterns"
+  }
+},  {
+  "id":"KE.L14",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
+  "prop":{
+    "date":"25.02.2014 22:11:42 EST",
+    "hoursSpend":2,
+    "kanbanEntry":{"id":"KE.K11"},
+    "developer":"zuendorf",
+    "phase":"done",
+    "comment":"switched to roomSet.hasRoomPO()"
+  }
+},  {
+  "id":"KE.L15",
+  "class":"org.sdmlib.storyboards.LogEntryStoryBoard",
+  "prop":{
+    "date":"06.07.2014 23:51:42 EST",
+    "hoursSpend":8,
+    "kanbanEntry":{"id":"KE.K11"},
+    "developer":"zuendorf",
+    "phase":"done",
+    "comment":"port to refactored version and enhanced code generation works"
   }
 }]
