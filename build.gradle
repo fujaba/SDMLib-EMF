@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: 'gradle/ide.gradle'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+// apply plugins/external files only on jenkins build
+// jenkins needs -Pjenkins switch
+
+
+//sourceSets.main.java.srcDirs += ['src/main/replication']
+
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+
+    // NetworkParser
+     maven { url "https://se.cs.uni-kassel.de/artifactory/libs-snapshot-local" }
+}
+
+dependencies {
+    compile group: "junit", name: "junit", version: "4.+"
+    compile 'de.uniks:Networkparser:4.2+'
+    compile 'org.sdmlib:SDMLib:1.1+'
+	runtime 'org.eclipse.core:runtime:3.9+'
+	runtime 'org.eclipse.emf:common:2.3+'
+	runtime 'org.eclipse.emf:ecore:2.2+'
+	//compile 'org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:1.1+'
+	//compile 'org.eclipse.emf:edit:2.3+'
+	//compile 'org.eclipse.emf:org.eclipse.emf.mapping.ecore2xml:2.5+'
+	//compile 'org.eclipse.emf:org.eclipse.emf.codegen.ecore:2.10+'
+	//compile 'org.eclipse.xsd:xsd:2.2+'
+	compile 'org.eclipse.equinox:app:1.3+'
+    
+}
+
+
+
