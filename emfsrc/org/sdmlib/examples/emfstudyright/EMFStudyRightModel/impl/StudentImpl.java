@@ -25,8 +25,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssista
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,672 +41,712 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl#getUni <em>Uni</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl#getIn <em>In</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl#getFriends <em>Friends</em>}</li>
+ *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl#getFriendsRev <em>Friends Rev</em>}</li>
  *   <li>{@link org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl#getDone <em>Done</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+    * @see #getName()
+    * @generated
+    * @ordered
+    */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+    * @see #getName()
+    * @generated
+    * @ordered
+    */
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStudId()
-   * @generated
-   * @ordered
-   */
+    * @see #getStudId()
+    * @generated
+    * @ordered
+    */
   protected static final String STUD_ID_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getStudId() <em>Stud Id</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStudId()
-   * @generated
-   * @ordered
-   */
+    * @see #getStudId()
+    * @generated
+    * @ordered
+    */
   protected String studId = STUD_ID_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getCredits() <em>Credits</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getCredits() <em>Credits</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCredits()
-   * @generated
-   * @ordered
-   */
+    * @see #getCredits()
+    * @generated
+    * @ordered
+    */
   protected static final int CREDITS_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getCredits() <em>Credits</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getCredits() <em>Credits</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCredits()
-   * @generated
-   * @ordered
-   */
+    * @see #getCredits()
+    * @generated
+    * @ordered
+    */
   protected int credits = CREDITS_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMotivation()
-   * @generated
-   * @ordered
-   */
+    * @see #getMotivation()
+    * @generated
+    * @ordered
+    */
   protected static final int MOTIVATION_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getMotivation() <em>Motivation</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMotivation()
-   * @generated
-   * @ordered
-   */
+    * @see #getMotivation()
+    * @generated
+    * @ordered
+    */
   protected int motivation = MOTIVATION_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAssignmentPoints()
-   * @generated
-   * @ordered
-   */
+    * @see #getAssignmentPoints()
+    * @generated
+    * @ordered
+    */
   protected static final int ASSIGNMENT_POINTS_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getAssignmentPoints() <em>Assignment Points</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAssignmentPoints()
-   * @generated
-   * @ordered
-   */
+    * @see #getAssignmentPoints()
+    * @generated
+    * @ordered
+    */
   protected int assignmentPoints = ASSIGNMENT_POINTS_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getIn() <em>In</em>}' reference.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getIn() <em>In</em>}' reference.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIn()
-   * @generated
-   * @ordered
-   */
+    * @see #getIn()
+    * @generated
+    * @ordered
+    */
   protected Room in;
 
   /**
-   * The cached value of the '{@link #getFriends() <em>Friends</em>}' reference list.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getFriends() <em>Friends</em>}' reference list.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFriends()
-   * @generated
-   * @ordered
-   */
+    * @see #getFriends()
+    * @generated
+    * @ordered
+    */
   protected EList<Student> friends;
 
   /**
-   * The cached value of the '{@link #getDone() <em>Done</em>}' reference list.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getFriendsRev() <em>Friends Rev</em>}' reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @see #getFriendsRev()
+    * @generated
+    * @ordered
+    */
+   protected EList<Student> friendsRev;
+
+/**
+    * The cached value of the '{@link #getDone() <em>Done</em>}' reference list.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDone()
-   * @generated
-   * @ordered
-   */
+    * @see #getDone()
+    * @generated
+    * @ordered
+    */
   protected EList<Assignment> done;
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   protected StudentImpl()
   {
-    super();
-  }
+      super();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   protected EClass eStaticClass()
   {
-    return EMFStudyRightModelPackage.Literals.STUDENT;
-  }
+      return EMFStudyRightModelPackage.Literals.STUDENT;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public String getName()
   {
-    return name;
-  }
+      return name;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setName(String newName)
   {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__NAME, oldName, name));
-  }
+      String oldName = name;
+      name = newName;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__NAME, oldName, name));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public String getStudId()
   {
-    return studId;
-  }
+      return studId;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setStudId(String newStudId)
   {
-    String oldStudId = studId;
-    studId = newStudId;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__STUD_ID, oldStudId, studId));
-  }
+      String oldStudId = studId;
+      studId = newStudId;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__STUD_ID, oldStudId, studId));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public int getCredits()
   {
-    return credits;
-  }
+      return credits;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setCredits(int newCredits)
   {
-    int oldCredits = credits;
-    credits = newCredits;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__CREDITS, oldCredits, credits));
-  }
+      int oldCredits = credits;
+      credits = newCredits;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__CREDITS, oldCredits, credits));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public int getMotivation()
   {
-    return motivation;
-  }
+      return motivation;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setMotivation(int newMotivation)
   {
-    int oldMotivation = motivation;
-    motivation = newMotivation;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__MOTIVATION, oldMotivation, motivation));
-  }
+      int oldMotivation = motivation;
+      motivation = newMotivation;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__MOTIVATION, oldMotivation, motivation));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public int getAssignmentPoints()
   {
-    return assignmentPoints;
-  }
+      return assignmentPoints;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setAssignmentPoints(int newAssignmentPoints)
   {
-    int oldAssignmentPoints = assignmentPoints;
-    assignmentPoints = newAssignmentPoints;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS, oldAssignmentPoints, assignmentPoints));
-  }
+      int oldAssignmentPoints = assignmentPoints;
+      assignmentPoints = newAssignmentPoints;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS, oldAssignmentPoints, assignmentPoints));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public University getUni()
   {
-    if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
-    return (University)eContainer();
-  }
+      if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
+      return (University)eContainer();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public University basicGetUni()
   {
-    if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
-    return (University)eInternalContainer();
-  }
+      if (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI) return null;
+      return (University)eInternalContainer();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public NotificationChain basicSetUni(University newUni, NotificationChain msgs)
   {
-    msgs = eBasicSetContainer((InternalEObject)newUni, EMFStudyRightModelPackage.STUDENT__UNI, msgs);
-    return msgs;
-  }
+      msgs = eBasicSetContainer((InternalEObject)newUni, EMFStudyRightModelPackage.STUDENT__UNI, msgs);
+      return msgs;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setUni(University newUni)
   {
-    if (newUni != eInternalContainer() || (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI && newUni != null))
-    {
-      if (EcoreUtil.isAncestor(this, newUni))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-      NotificationChain msgs = null;
-      if (eInternalContainer() != null)
-        msgs = eBasicRemoveFromContainer(msgs);
-      if (newUni != null)
-        msgs = ((InternalEObject)newUni).eInverseAdd(this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, University.class, msgs);
-      msgs = basicSetUni(newUni, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__UNI, newUni, newUni));
-  }
+      if (newUni != eInternalContainer() || (eContainerFeatureID() != EMFStudyRightModelPackage.STUDENT__UNI && newUni != null))
+      {
+         if (EcoreUtil.isAncestor(this, newUni))
+            throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+         NotificationChain msgs = null;
+         if (eInternalContainer() != null)
+            msgs = eBasicRemoveFromContainer(msgs);
+         if (newUni != null)
+            msgs = ((InternalEObject)newUni).eInverseAdd(this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, University.class, msgs);
+         msgs = basicSetUni(newUni, msgs);
+         if (msgs != null) msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__UNI, newUni, newUni));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public Room getIn()
   {
-    if (in != null && in.eIsProxy())
-    {
-      InternalEObject oldIn = (InternalEObject)in;
-      in = (Room)eResolveProxy(oldIn);
-      if (in != oldIn)
+      if (in != null && in.eIsProxy())
       {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, EMFStudyRightModelPackage.STUDENT__IN, oldIn, in));
+         InternalEObject oldIn = (InternalEObject)in;
+         in = (Room)eResolveProxy(oldIn);
+         if (in != oldIn)
+         {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE, EMFStudyRightModelPackage.STUDENT__IN, oldIn, in));
+         }
       }
-    }
-    return in;
-  }
+      return in;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public Room basicGetIn()
   {
-    return in;
-  }
+      return in;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public NotificationChain basicSetIn(Room newIn, NotificationChain msgs)
   {
-    Room oldIn = in;
-    in = newIn;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__IN, oldIn, newIn);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+      Room oldIn = in;
+      in = newIn;
+      if (eNotificationRequired())
+      {
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__IN, oldIn, newIn);
+         if (msgs == null) msgs = notification; else msgs.add(notification);
+      }
+      return msgs;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setIn(Room newIn)
   {
-    if (newIn != in)
-    {
-      NotificationChain msgs = null;
-      if (in != null)
-        msgs = ((InternalEObject)in).eInverseRemove(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
-      if (newIn != null)
-        msgs = ((InternalEObject)newIn).eInverseAdd(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
-      msgs = basicSetIn(newIn, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__IN, newIn, newIn));
-  }
+      if (newIn != in)
+      {
+         NotificationChain msgs = null;
+         if (in != null)
+            msgs = ((InternalEObject)in).eInverseRemove(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
+         if (newIn != null)
+            msgs = ((InternalEObject)newIn).eInverseAdd(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
+         msgs = basicSetIn(newIn, msgs);
+         if (msgs != null) msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.STUDENT__IN, newIn, newIn));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EList<Student> getFriends()
   {
-    if (friends == null)
-    {
-      friends = new EObjectWithInverseResolvingEList.ManyInverse<Student>(Student.class, this, EMFStudyRightModelPackage.STUDENT__FRIENDS, EMFStudyRightModelPackage.STUDENT__FRIENDS);
-    }
-    return friends;
-  }
+      if (friends == null)
+      {
+         friends = new EObjectWithInverseResolvingEList.ManyInverse<Student>(Student.class, this, EMFStudyRightModelPackage.STUDENT__FRIENDS, EMFStudyRightModelPackage.STUDENT__FRIENDS_REV);
+      }
+      return friends;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @generated
+    */
+   public EList<Student> getFriendsRev()
+   {
+      if (friendsRev == null)
+      {
+         friendsRev = new EObjectWithInverseResolvingEList.ManyInverse<Student>(Student.class, this, EMFStudyRightModelPackage.STUDENT__FRIENDS_REV, EMFStudyRightModelPackage.STUDENT__FRIENDS);
+      }
+      return friendsRev;
+   }
+
+/**
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EList<Assignment> getDone()
   {
-    if (done == null)
-    {
-      done = new EObjectWithInverseResolvingEList.ManyInverse<Assignment>(Assignment.class, this, EMFStudyRightModelPackage.STUDENT__DONE, EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS);
-    }
-    return done;
-  }
+      if (done == null)
+      {
+         done = new EObjectWithInverseResolvingEList.ManyInverse<Assignment>(Assignment.class, this, EMFStudyRightModelPackage.STUDENT__DONE, EMFStudyRightModelPackage.ASSIGNMENT__STUDENTS);
+      }
+      return done;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @SuppressWarnings("unchecked")
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        if (eInternalContainer() != null)
-          msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetUni((University)otherEnd, msgs);
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        if (in != null)
-          msgs = ((InternalEObject)in).eInverseRemove(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
-        return basicSetIn((Room)otherEnd, msgs);
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        return ((InternalEList<InternalEObject>)(InternalEList<?>)getFriends()).basicAdd(otherEnd, msgs);
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        return ((InternalEList<InternalEObject>)(InternalEList<?>)getDone()).basicAdd(otherEnd, msgs);
-    }
-    return super.eInverseAdd(otherEnd, featureID, msgs);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            if (eInternalContainer() != null)
+               msgs = eBasicRemoveFromContainer(msgs);
+            return basicSetUni((University)otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            if (in != null)
+               msgs = ((InternalEObject)in).eInverseRemove(this, EMFStudyRightModelPackage.ROOM__STUDENTS, Room.class, msgs);
+            return basicSetIn((Room)otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getFriends()).basicAdd(otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getFriendsRev()).basicAdd(otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getDone()).basicAdd(otherEnd, msgs);
+      }
+      return super.eInverseAdd(otherEnd, featureID, msgs);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        return basicSetUni(null, msgs);
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        return basicSetIn(null, msgs);
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        return ((InternalEList<?>)getFriends()).basicRemove(otherEnd, msgs);
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        return ((InternalEList<?>)getDone()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            return basicSetUni(null, msgs);
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            return basicSetIn(null, msgs);
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            return ((InternalEList<?>)getFriends()).basicRemove(otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            return ((InternalEList<?>)getFriendsRev()).basicRemove(otherEnd, msgs);
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            return ((InternalEList<?>)getDone()).basicRemove(otherEnd, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
   {
-    switch (eContainerFeatureID())
-    {
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        return eInternalContainer().eInverseRemove(this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, University.class, msgs);
-    }
-    return super.eBasicRemoveFromContainerFeature(msgs);
-  }
+      switch (eContainerFeatureID())
+      {
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            return eInternalContainer().eInverseRemove(this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, University.class, msgs);
+      }
+      return super.eBasicRemoveFromContainerFeature(msgs);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__NAME:
-        return getName();
-      case EMFStudyRightModelPackage.STUDENT__STUD_ID:
-        return getStudId();
-      case EMFStudyRightModelPackage.STUDENT__CREDITS:
-        return getCredits();
-      case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
-        return getMotivation();
-      case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
-        return getAssignmentPoints();
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        if (resolve) return getUni();
-        return basicGetUni();
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        if (resolve) return getIn();
-        return basicGetIn();
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        return getFriends();
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        return getDone();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__NAME:
+            return getName();
+         case EMFStudyRightModelPackage.STUDENT__STUD_ID:
+            return getStudId();
+         case EMFStudyRightModelPackage.STUDENT__CREDITS:
+            return getCredits();
+         case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
+            return getMotivation();
+         case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
+            return getAssignmentPoints();
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            if (resolve) return getUni();
+            return basicGetUni();
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            if (resolve) return getIn();
+            return basicGetIn();
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            return getFriends();
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            return getFriendsRev();
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            return getDone();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__NAME:
-        setName((String)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__STUD_ID:
-        setStudId((String)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__CREDITS:
-        setCredits((Integer)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
-        setMotivation((Integer)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
-        setAssignmentPoints((Integer)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        setUni((University)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        setIn((Room)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        getFriends().clear();
-        getFriends().addAll((Collection<? extends Student>)newValue);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        getDone().clear();
-        getDone().addAll((Collection<? extends Assignment>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__NAME:
+            setName((String)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__STUD_ID:
+            setStudId((String)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__CREDITS:
+            setCredits((Integer)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
+            setMotivation((Integer)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
+            setAssignmentPoints((Integer)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            setUni((University)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            setIn((Room)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            getFriends().clear();
+            getFriends().addAll((Collection<? extends Student>)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            getFriendsRev().clear();
+            getFriendsRev().addAll((Collection<? extends Student>)newValue);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            getDone().clear();
+            getDone().addAll((Collection<? extends Assignment>)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__STUD_ID:
-        setStudId(STUD_ID_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__CREDITS:
-        setCredits(CREDITS_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
-        setMotivation(MOTIVATION_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
-        setAssignmentPoints(ASSIGNMENT_POINTS_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        setUni((University)null);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        setIn((Room)null);
-        return;
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        getFriends().clear();
-        return;
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        getDone().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__NAME:
+            setName(NAME_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__STUD_ID:
+            setStudId(STUD_ID_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__CREDITS:
+            setCredits(CREDITS_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
+            setMotivation(MOTIVATION_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
+            setAssignmentPoints(ASSIGNMENT_POINTS_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            setUni((University)null);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            setIn((Room)null);
+            return;
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            getFriends().clear();
+            return;
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            getFriendsRev().clear();
+            return;
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            getDone().clear();
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.STUDENT__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case EMFStudyRightModelPackage.STUDENT__STUD_ID:
-        return STUD_ID_EDEFAULT == null ? studId != null : !STUD_ID_EDEFAULT.equals(studId);
-      case EMFStudyRightModelPackage.STUDENT__CREDITS:
-        return credits != CREDITS_EDEFAULT;
-      case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
-        return motivation != MOTIVATION_EDEFAULT;
-      case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
-        return assignmentPoints != ASSIGNMENT_POINTS_EDEFAULT;
-      case EMFStudyRightModelPackage.STUDENT__UNI:
-        return basicGetUni() != null;
-      case EMFStudyRightModelPackage.STUDENT__IN:
-        return in != null;
-      case EMFStudyRightModelPackage.STUDENT__FRIENDS:
-        return friends != null && !friends.isEmpty();
-      case EMFStudyRightModelPackage.STUDENT__DONE:
-        return done != null && !done.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.STUDENT__NAME:
+            return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+         case EMFStudyRightModelPackage.STUDENT__STUD_ID:
+            return STUD_ID_EDEFAULT == null ? studId != null : !STUD_ID_EDEFAULT.equals(studId);
+         case EMFStudyRightModelPackage.STUDENT__CREDITS:
+            return credits != CREDITS_EDEFAULT;
+         case EMFStudyRightModelPackage.STUDENT__MOTIVATION:
+            return motivation != MOTIVATION_EDEFAULT;
+         case EMFStudyRightModelPackage.STUDENT__ASSIGNMENT_POINTS:
+            return assignmentPoints != ASSIGNMENT_POINTS_EDEFAULT;
+         case EMFStudyRightModelPackage.STUDENT__UNI:
+            return basicGetUni() != null;
+         case EMFStudyRightModelPackage.STUDENT__IN:
+            return in != null;
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS:
+            return friends != null && !friends.isEmpty();
+         case EMFStudyRightModelPackage.STUDENT__FRIENDS_REV:
+            return friendsRev != null && !friendsRev.isEmpty();
+         case EMFStudyRightModelPackage.STUDENT__DONE:
+            return done != null && !done.isEmpty();
+      }
+      return super.eIsSet(featureID);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+      if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", studId: ");
-    result.append(studId);
-    result.append(", credits: ");
-    result.append(credits);
-    result.append(", motivation: ");
-    result.append(motivation);
-    result.append(", assignmentPoints: ");
-    result.append(assignmentPoints);
-    result.append(')');
-    return result.toString();
-  }
+      StringBuffer result = new StringBuffer(super.toString());
+      result.append(" (name: ");
+      result.append(name);
+      result.append(", studId: ");
+      result.append(studId);
+      result.append(", credits: ");
+      result.append(credits);
+      result.append(", motivation: ");
+      result.append(motivation);
+      result.append(", assignmentPoints: ");
+      result.append(assignmentPoints);
+      result.append(')');
+      return result.toString();
+   }
 
 
    
@@ -716,7 +754,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
-   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;

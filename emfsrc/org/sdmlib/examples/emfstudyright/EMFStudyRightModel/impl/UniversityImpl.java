@@ -23,8 +23,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,262 +39,262 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
  *
  * @generated
  */
-public class UniversityImpl extends MinimalEObjectImpl.Container implements University, PropertyChangeInterface
+public class UniversityImpl extends MinimalEObjectImpl.Container implements University
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+    * @see #getName()
+    * @generated
+    * @ordered
+    */
   protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
+    * @see #getName()
+    * @generated
+    * @ordered
+    */
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRooms() <em>Rooms</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getRooms() <em>Rooms</em>}' containment reference list.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRooms()
-   * @generated
-   * @ordered
-   */
+    * @see #getRooms()
+    * @generated
+    * @ordered
+    */
   protected EList<Room> rooms;
 
   /**
-   * The cached value of the '{@link #getStudents() <em>Students</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+    * The cached value of the '{@link #getStudents() <em>Students</em>}' containment reference list.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStudents()
-   * @generated
-   * @ordered
-   */
+    * @see #getStudents()
+    * @generated
+    * @ordered
+    */
   protected EList<Student> students;
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   protected UniversityImpl()
   {
-    super();
-  }
+      super();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   protected EClass eStaticClass()
   {
-    return EMFStudyRightModelPackage.Literals.UNIVERSITY;
-  }
+      return EMFStudyRightModelPackage.Literals.UNIVERSITY;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public String getName()
   {
-    return name;
-  }
+      return name;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public void setName(String newName)
   {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.UNIVERSITY__NAME, oldName, name));
-  }
+      String oldName = name;
+      name = newName;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, EMFStudyRightModelPackage.UNIVERSITY__NAME, oldName, name));
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EList<Room> getRooms()
   {
-    if (rooms == null)
-    {
-      rooms = new EObjectContainmentWithInverseEList<Room>(Room.class, this, EMFStudyRightModelPackage.UNIVERSITY__ROOMS, EMFStudyRightModelPackage.ROOM__UNI);
-    }
-    return rooms;
-  }
+      if (rooms == null)
+      {
+         rooms = new EObjectContainmentWithInverseEList<Room>(Room.class, this, EMFStudyRightModelPackage.UNIVERSITY__ROOMS, EMFStudyRightModelPackage.ROOM__UNI);
+      }
+      return rooms;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EList<Student> getStudents()
   {
-    if (students == null)
-    {
-      students = new EObjectContainmentWithInverseEList<Student>(Student.class, this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, EMFStudyRightModelPackage.STUDENT__UNI);
-    }
-    return students;
-  }
+      if (students == null)
+      {
+         students = new EObjectContainmentWithInverseEList<Student>(Student.class, this, EMFStudyRightModelPackage.UNIVERSITY__STUDENTS, EMFStudyRightModelPackage.STUDENT__UNI);
+      }
+      return students;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @SuppressWarnings("unchecked")
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        return ((InternalEList<InternalEObject>)(InternalEList<?>)getRooms()).basicAdd(otherEnd, msgs);
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        return ((InternalEList<InternalEObject>)(InternalEList<?>)getStudents()).basicAdd(otherEnd, msgs);
-    }
-    return super.eInverseAdd(otherEnd, featureID, msgs);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getRooms()).basicAdd(otherEnd, msgs);
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getStudents()).basicAdd(otherEnd, msgs);
+      }
+      return super.eInverseAdd(otherEnd, featureID, msgs);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        return ((InternalEList<?>)getRooms()).basicRemove(otherEnd, msgs);
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        return ((InternalEList<?>)getStudents()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            return ((InternalEList<?>)getRooms()).basicRemove(otherEnd, msgs);
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            return ((InternalEList<?>)getStudents()).basicRemove(otherEnd, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__NAME:
-        return getName();
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        return getRooms();
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        return getStudents();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__NAME:
+            return getName();
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            return getRooms();
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            return getStudents();
+      }
+      return super.eGet(featureID, resolve, coreType);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__NAME:
-        setName((String)newValue);
-        return;
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        getRooms().clear();
-        getRooms().addAll((Collection<? extends Room>)newValue);
-        return;
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        getStudents().clear();
-        getStudents().addAll((Collection<? extends Student>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__NAME:
+            setName((String)newValue);
+            return;
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            getRooms().clear();
+            getRooms().addAll((Collection<? extends Room>)newValue);
+            return;
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            getStudents().clear();
+            getStudents().addAll((Collection<? extends Student>)newValue);
+            return;
+      }
+      super.eSet(featureID, newValue);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        getRooms().clear();
-        return;
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        getStudents().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__NAME:
+            setName(NAME_EDEFAULT);
+            return;
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            getRooms().clear();
+            return;
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            getStudents().clear();
+            return;
+      }
+      super.eUnset(featureID);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
-        return rooms != null && !rooms.isEmpty();
-      case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
-        return students != null && !students.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+      switch (featureID)
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY__NAME:
+            return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+         case EMFStudyRightModelPackage.UNIVERSITY__ROOMS:
+            return rooms != null && !rooms.isEmpty();
+         case EMFStudyRightModelPackage.UNIVERSITY__STUDENTS:
+            return students != null && !students.isEmpty();
+      }
+      return super.eIsSet(featureID);
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+      if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
-  }
+      StringBuffer result = new StringBuffer(super.toString());
+      result.append(" (name: ");
+      result.append(name);
+      result.append(')');
+      return result.toString();
+   }
 
 
    
@@ -304,7 +302,6 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
    
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
-   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;

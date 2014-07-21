@@ -21,134 +21,134 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.*;
 public class EMFStudyRightModelFactoryImpl extends EFactoryImpl implements EMFStudyRightModelFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+    * Creates the default factory implementation.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public static EMFStudyRightModelFactory init()
   {
-    try
-    {
-      EMFStudyRightModelFactory theEMFStudyRightModelFactory = (EMFStudyRightModelFactory)EPackage.Registry.INSTANCE.getEFactory(EMFStudyRightModelPackage.eNS_URI);
-      if (theEMFStudyRightModelFactory != null)
+      try
       {
-        return theEMFStudyRightModelFactory;
+         EMFStudyRightModelFactory theEMFStudyRightModelFactory = (EMFStudyRightModelFactory)EPackage.Registry.INSTANCE.getEFactory(EMFStudyRightModelPackage.eNS_URI);
+         if (theEMFStudyRightModelFactory != null)
+         {
+            return theEMFStudyRightModelFactory;
+         }
       }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new EMFStudyRightModelFactoryImpl();
-  }
+      catch (Exception exception)
+      {
+         EcorePlugin.INSTANCE.log(exception);
+      }
+      return new EMFStudyRightModelFactoryImpl();
+   }
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+    * Creates an instance of the factory.
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EMFStudyRightModelFactoryImpl()
   {
-    super();
-  }
+      super();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case EMFStudyRightModelPackage.UNIVERSITY: return createUniversity();
-      case EMFStudyRightModelPackage.STUDENT: return createStudent();
-      case EMFStudyRightModelPackage.TEACHING_ASSISTANT: return createTeachingAssistant();
-      case EMFStudyRightModelPackage.ROOM: return createRoom();
-      case EMFStudyRightModelPackage.ASSIGNMENT: return createAssignment();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+      switch (eClass.getClassifierID())
+      {
+         case EMFStudyRightModelPackage.UNIVERSITY: return createUniversity();
+         case EMFStudyRightModelPackage.STUDENT: return createStudent();
+         case EMFStudyRightModelPackage.TEACHING_ASSISTANT: return createTeachingAssistant();
+         case EMFStudyRightModelPackage.ROOM: return createRoom();
+         case EMFStudyRightModelPackage.ASSIGNMENT: return createAssignment();
+         default:
+            throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+      }
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public University createUniversity()
   {
-    UniversityImpl university = new UniversityImpl();
-    return university;
-  }
+      UniversityImpl university = new UniversityImpl();
+      return university;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public Student createStudent()
   {
-    StudentImpl student = new StudentImpl();
-    return student;
-  }
+      StudentImpl student = new StudentImpl();
+      return student;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public TeachingAssistant createTeachingAssistant()
   {
-    TeachingAssistantImpl teachingAssistant = new TeachingAssistantImpl();
-    return teachingAssistant;
-  }
+      TeachingAssistantImpl teachingAssistant = new TeachingAssistantImpl();
+      return teachingAssistant;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public Room createRoom()
   {
-    RoomImpl room = new RoomImpl();
-    return room;
-  }
+      RoomImpl room = new RoomImpl();
+      return room;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public Assignment createAssignment()
   {
-    AssignmentImpl assignment = new AssignmentImpl();
-    return assignment;
-  }
+      AssignmentImpl assignment = new AssignmentImpl();
+      return assignment;
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+    * @generated
+    */
   public EMFStudyRightModelPackage getEMFStudyRightModelPackage()
   {
-    return (EMFStudyRightModelPackage)getEPackage();
-  }
+      return (EMFStudyRightModelPackage)getEPackage();
+   }
 
   /**
-   * <!-- begin-user-doc -->
+    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+    * @deprecated
+    * @generated
+    */
   @Deprecated
   public static EMFStudyRightModelPackage getPackage()
   {
-    return EMFStudyRightModelPackage.eINSTANCE;
-  }
+      return EMFStudyRightModelPackage.eINSTANCE;
+   }
 
 } //EMFStudyRightModelFactoryImpl

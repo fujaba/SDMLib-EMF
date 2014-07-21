@@ -23,7 +23,8 @@ class Student
 	
 	refers Room in opposite students
 	
-	refers Student[] friends opposite friends
+	refers Student[] friends opposite friendsRev
+	refers Student[] friendsRev opposite friends
 	
 	refers Assignment[] done opposite students
 }
@@ -41,7 +42,8 @@ class Room
 	
 	container University uni opposite rooms
 	
-	refers Room[] doors opposite doors
+	refers Room[] doors opposite doorsRev
+	refers Room[] doorsRev opposite doors
 
 	contains Assignment[] assignments opposite room	
 	
