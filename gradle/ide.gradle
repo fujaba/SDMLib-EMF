@@ -1,7 +1,17 @@
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+idea {
+	project {
+		languageLevel = '1.7'
+		jdkName = '1.7'
+	}
+}
+
 eclipse {
 	project {
-		name = 'SDMLib'
+		name = 'SDMLib-EMF'
 		
-		referencedProjects 'NetworkParser'
+		referencedProjects 'NetworkParser', 'SDMLib'
 	}
 }
