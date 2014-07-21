@@ -271,7 +271,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
       return this.creators.keySet();
    }
 
-   public EmfIdMap withCreators(LinkedHashSet<SendableEntityCreator> creatorSet)
+   public EmfIdMap withCreators(Collection<SendableEntityCreator> creatorSet)
    {
       withCreator(creatorSet);
       return this;
