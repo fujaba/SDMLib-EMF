@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/SDMLib-EMF/emfsrc' basePackage='org.sdmlib.examples.emfstudyright'"
+ *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/SDMLib-EMF/src/main/java' basePackage='org.sdmlib.examples.emfstudyright'"
  * @generated
  */
 public interface EMFStudyRightModelPackage extends EPackage

@@ -3,8 +3,11 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,4 +128,55 @@ public interface Assignment extends EObject
     */
    EList<Student> getStudents();
 
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_NAME = "name";
+   
+   public Assignment withName(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_POINTS = "points";
+   
+   public Assignment withPoints(int value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Assignment ----------------------------------- Student
+    *              done                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   public StudentSet getStudentsSet();
+
+   public Assignment withStudents(Student... value);
+
+   public Assignment withoutStudents(Student... value);
+
+   public StudentImpl createStudentsStudentImpl();
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
+
+   
+   public static final AssignmentSet EMPTY_SET = new AssignmentSet().withReadonly(true);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Assignment ----------------------------------- Room
+    *              assignments                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   public Assignment withRoom(Room value);
 } // Assignment

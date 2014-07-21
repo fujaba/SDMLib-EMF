@@ -1,4 +1,4 @@
-@GenModel(modelDirectory="/SDMLib-EMF/emfsrc")
+@GenModel(modelDirectory="/SDMLib-EMF/src/main/java")
 
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel
 
@@ -8,10 +8,10 @@ class University
 	
 	contains Room[] rooms opposite uni 
 	
-	contains Student[] students opposite uni
+	contains Student[] students opposite uni 
 }
 
-class Student
+class Student 
 {
 	String name
 	String studId

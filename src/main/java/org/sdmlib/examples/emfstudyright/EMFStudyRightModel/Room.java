@@ -3,8 +3,16 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -201,4 +209,135 @@ public interface Room extends EObject
     */
    EList<TeachingAssistant> getTas();
 
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_TOPIC = "topic";
+   
+   public Room withTopic(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_CREDITS = "credits";
+   
+   public Room withCredits(int value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   public Room withUni(University value);
+
+   
+   public static final RoomSet EMPTY_SET = new RoomSet().withReadonly(true);
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+
+   public StudentSet getStudentsSet();
+
+   public Room withStudents(Student... value);
+
+   public Room withoutStudents(Student... value);
+
+   public StudentImpl createStudentsStudentImpl();
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+
+   public TeachingAssistantSet getTasSet();
+
+   public Room withTas(TeachingAssistant... value);
+
+   public Room withoutTas(TeachingAssistant... value);
+
+   public TeachingAssistantImpl createTasTeachingAssistantImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doorsRev
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORSREV = "doorsRev";
+
+   public RoomSet getDoorsRevSet();
+
+   public RoomSet getDoorsRevTransitive();
+
+   public Room withDoorsRev(Room... value);
+
+   public Room withoutDoorsRev(Room... value);
+
+   public RoomImpl createDoorsRevRoomImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doorsRev                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+
+   public RoomSet getDoorsSet();
+
+   public RoomSet getDoorsTransitive();
+
+   public Room withDoors(Room... value);
+
+   public Room withoutDoors(Room... value);
+
+   public RoomImpl createDoorsRoomImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
+
+   public AssignmentSet getAssignmentsSet();
+
+   public Room withAssignments(Assignment... value);
+
+   public Room withoutAssignments(Assignment... value);
+
+   public AssignmentImpl createAssignmentsAssignmentImpl();
 } // Room

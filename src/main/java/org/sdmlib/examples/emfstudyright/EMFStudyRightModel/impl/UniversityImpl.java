@@ -6,22 +6,27 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +43,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
  *
  * @generated
  */
-public class UniversityImpl extends MinimalEObjectImpl.Container implements University
+public class UniversityImpl extends MinimalEObjectImpl.Container implements University, PropertyChangeInterface
 {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -295,4 +300,177 @@ public class UniversityImpl extends MinimalEObjectImpl.Container implements Univ
       return result.toString();
    }
 
+
+   
+   //==========================================================================
+   
+   protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+   
+   @Override
+   public PropertyChangeSupport getPropertyChangeSupport()
+   {
+      return listeners;
+   }
+   
+   public void addPropertyChangeListener(PropertyChangeListener listener) 
+   {
+      getPropertyChangeSupport().addPropertyChangeListener(listener);
+   }
+
+   
+   //==========================================================================
+   
+   public UniversityImpl withName(String value)
+   {
+      setName(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   
+   public void removeYou()
+   {
+      withoutRooms(this.getRooms().toArray(new Room[this.getRooms().size()]));
+      withoutStudents(this.getStudents().toArray(new Student[this.getStudents().size()]));
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Room
+    *              uni                   rooms
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOMS = "rooms";
+  public RoomSet getRoomsSet()
+  {
+     return new RoomSet().with(getRooms());
+  }
+
+
+   public University withRooms(Room... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Room item : value)
+      {
+         if (item != null)
+         {
+            if (this.rooms == null)
+            {
+               this.rooms = this.getRooms();
+            }
+            
+            boolean changed = this.rooms.add (item);
+
+            if (changed)
+            {
+               item.withUni(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public University withoutRooms(Room... value)
+   {
+      for (Room item : value)
+      {
+         if ((this.rooms != null) && (item != null))
+         {
+            if (this.rooms.remove(item))
+            {
+               item.setUni(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ROOMS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public RoomImpl createRoomsRoomImpl()
+   {
+      RoomImpl value = new RoomImpl();
+      withRooms(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * University ----------------------------------- Student
+    *              uni                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
+
+
+   public University withStudents(Student... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Student item : value)
+      {
+         if (item != null)
+         {
+            if (this.students == null)
+            {
+               this.students = this.getStudents();
+            }
+            
+            boolean changed = this.students.add (item);
+
+            if (changed)
+            {
+               item.withUni(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public University withoutStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         if ((this.students != null) && (item != null))
+         {
+            if (this.students.remove(item))
+            {
+               item.setUni(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public StudentImpl createStudentsStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withStudents(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
+      withStudents(value);
+      return value;
+   } 
 } //UniversityImpl

@@ -6,24 +6,29 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +52,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
 {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -747,4 +752,336 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
       return result.toString();
    }
 
+
+   
+   //==========================================================================
+   
+   protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+   
+   @Override
+   public PropertyChangeSupport getPropertyChangeSupport()
+   {
+      return listeners;
+   }
+   
+   public void addPropertyChangeListener(PropertyChangeListener listener) 
+   {
+      getPropertyChangeSupport().addPropertyChangeListener(listener);
+   }
+
+   
+   //==========================================================================
+   
+   public StudentImpl withName(String value)
+   {
+      setName(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public StudentImpl withStudId(String value)
+   {
+      setStudId(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public StudentImpl withCredits(int value)
+   {
+      setCredits(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public StudentImpl withMotivation(int value)
+   {
+      setMotivation(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public StudentImpl withAssignmentPoints(int value)
+   {
+      setAssignmentPoints(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   
+   public void removeYou()
+   {
+      setUni(null);
+      setIn(null);
+      withoutFriendsRev(this.getFriendsRev().toArray(new Student[this.getFriendsRev().size()]));
+      withoutFriends(this.getFriends().toArray(new Student[this.getFriends().size()]));
+      withoutDone(this.getDone().toArray(new Assignment[this.getDone().size()]));
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   private University uni = null;
+
+   public Student withUni(University value)
+   {
+      setUni(value);
+      return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
+   public Student withIn(Room value)
+   {
+      setIn(value);
+      return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friendsRev
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDSREV = "friendsRev";
+  public StudentSet getFriendsRevSet()
+  {
+     return new StudentSet().with(getFriendsRev());
+  }
+
+   public StudentSet getFriendsRevTransitive()
+   {
+      StudentSet result = new StudentSet().with(this);
+      return result.getFriendsRevTransitive();
+   }
+
+
+   public Student withFriendsRev(Student... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Student item : value)
+      {
+         if (item != null)
+         {
+            if (this.friendsRev == null)
+            {
+               this.friendsRev = this.getFriendsRev();
+            }
+            
+            boolean changed = this.friendsRev.add (item);
+
+            if (changed)
+            {
+               item.withFriends(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDSREV, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Student withoutFriendsRev(Student... value)
+   {
+      for (Student item : value)
+      {
+         if ((this.friendsRev != null) && (item != null))
+         {
+            if (this.friendsRev.remove(item))
+            {
+               item.withoutFriends(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDSREV, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public StudentImpl createFriendsRevStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withFriendsRev(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createFriendsRevTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
+      withFriendsRev(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friendsRev                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+  public StudentSet getFriendsSet()
+  {
+     return new StudentSet().with(getFriends());
+  }
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet result = new StudentSet().with(this);
+      return result.getFriendsTransitive();
+   }
+
+
+   public Student withFriends(Student... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Student item : value)
+      {
+         if (item != null)
+         {
+            if (this.friends == null)
+            {
+               this.friends = this.getFriends();
+            }
+            
+            boolean changed = this.friends.add (item);
+
+            if (changed)
+            {
+               item.withFriendsRev(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Student withoutFriends(Student... value)
+   {
+      for (Student item : value)
+      {
+         if ((this.friends != null) && (item != null))
+         {
+            if (this.friends.remove(item))
+            {
+               item.withoutFriendsRev(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_FRIENDS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public StudentImpl createFriendsStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withFriends(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createFriendsTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
+      withFriends(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
+  public AssignmentSet getDoneSet()
+  {
+     return new AssignmentSet().with(getDone());
+  }
+
+
+   public Student withDone(Assignment... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Assignment item : value)
+      {
+         if (item != null)
+         {
+            if (this.done == null)
+            {
+               this.done = this.getDone();
+            }
+            
+            boolean changed = this.done.add (item);
+
+            if (changed)
+            {
+               item.withStudents(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Student withoutDone(Assignment... value)
+   {
+      for (Assignment item : value)
+      {
+         if ((this.done != null) && (item != null))
+         {
+            if (this.done.remove(item))
+            {
+               item.withoutStudents(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DONE, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public AssignmentImpl createDoneAssignmentImpl()
+   {
+      AssignmentImpl value = new AssignmentImpl();
+      withDone(value);
+      return value;
+   } 
 } //StudentImpl

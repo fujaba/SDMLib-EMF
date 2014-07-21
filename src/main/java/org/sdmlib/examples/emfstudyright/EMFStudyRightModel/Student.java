@@ -3,8 +3,12 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 /**
  * <!-- begin-user-doc -->
@@ -273,4 +277,133 @@ public interface Student extends EObject
     */
    EList<Assignment> getDone();
 
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_NAME = "name";
+   
+   public Student withName(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_STUDID = "studId";
+   
+   public Student withStudId(String value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_CREDITS = "credits";
+   
+   public Student withCredits(int value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_MOTIVATION = "motivation";
+   
+   public Student withMotivation(int value);
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_ASSIGNMENTPOINTS = "assignmentPoints";
+   
+   public Student withAssignmentPoints(int value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- University
+    *              students                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   public Student withUni(University value);
+
+   
+   public static final StudentSet EMPTY_SET = new StudentSet().withReadonly(true);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Student ----------------------------------- Room
+    *              students                   in
+    * </pre>
+    */
+   
+   public static final String PROPERTY_IN = "in";
+
+   public Student withIn(Room value);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friends                   friendsRev
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDSREV = "friendsRev";
+
+   public StudentSet getFriendsRevSet();
+
+   public StudentSet getFriendsRevTransitive();
+
+   public Student withFriendsRev(Student... value);
+
+   public Student withoutFriendsRev(Student... value);
+
+   public StudentImpl createFriendsRevStudentImpl();
+
+   public TeachingAssistantImpl createFriendsRevTeachingAssistantImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Student
+    *              friendsRev                   friends
+    * </pre>
+    */
+   
+   public static final String PROPERTY_FRIENDS = "friends";
+
+   public StudentSet getFriendsSet();
+
+   public StudentSet getFriendsTransitive();
+
+   public Student withFriends(Student... value);
+
+   public Student withoutFriends(Student... value);
+
+   public StudentImpl createFriendsStudentImpl();
+
+   public TeachingAssistantImpl createFriendsTeachingAssistantImpl();
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Student ----------------------------------- Assignment
+    *              students                   done
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DONE = "done";
+
+   public AssignmentSet getDoneSet();
+
+   public Student withDone(Assignment... value);
+
+   public Student withoutDone(Assignment... value);
+
+   public AssignmentImpl createDoneAssignmentImpl();
 } // Student

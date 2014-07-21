@@ -4,15 +4,15 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+import org.sdmlib.StrUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -300,4 +300,186 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       return result.toString();
    }
 
+
+   
+   //==========================================================================
+   
+   protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+   
+   @Override
+   public PropertyChangeSupport getPropertyChangeSupport()
+   {
+      return listeners;
+   }
+   
+   public void addPropertyChangeListener(PropertyChangeListener listener) 
+   {
+      getPropertyChangeSupport().addPropertyChangeListener(listener);
+   }
+
+   
+   //==========================================================================
+   
+   public TeachingAssistantImpl withNoOfHours(int value)
+   {
+      setNoOfHours(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private String name;
+
+   public String getName()
+   {
+      return this.name;
+   }
+   
+   public void setName(String value)
+   {
+      if ( ! StrUtil.stringEquals(this.name, value))
+      {
+         String oldValue = this.name;
+         this.name = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_NAME, oldValue, value);
+      }
+   }
+   
+   public TeachingAssistantImpl withName(String value)
+   {
+      setName(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private String studId;
+
+   public String getStudId()
+   {
+      return this.studId;
+   }
+   
+   public void setStudId(String value)
+   {
+      if ( ! StrUtil.stringEquals(this.studId, value))
+      {
+         String oldValue = this.studId;
+         this.studId = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDID, oldValue, value);
+      }
+   }
+   
+   public TeachingAssistantImpl withStudId(String value)
+   {
+      setStudId(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int credits;
+
+   public int getCredits()
+   {
+      return this.credits;
+   }
+   
+   public void setCredits(int value)
+   {
+      if (this.credits != value)
+      {
+         int oldValue = this.credits;
+         this.credits = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_CREDITS, oldValue, value);
+      }
+   }
+   
+   public TeachingAssistantImpl withCredits(int value)
+   {
+      setCredits(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int motivation;
+
+   public int getMotivation()
+   {
+      return this.motivation;
+   }
+   
+   public void setMotivation(int value)
+   {
+      if (this.motivation != value)
+      {
+         int oldValue = this.motivation;
+         this.motivation = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_MOTIVATION, oldValue, value);
+      }
+   }
+   
+   public TeachingAssistantImpl withMotivation(int value)
+   {
+      setMotivation(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   private int assignmentPoints;
+
+   public int getAssignmentPoints()
+   {
+      return this.assignmentPoints;
+   }
+   
+   public void setAssignmentPoints(int value)
+   {
+      if (this.assignmentPoints != value)
+      {
+         int oldValue = this.assignmentPoints;
+         this.assignmentPoints = value;
+         getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTPOINTS, oldValue, value);
+      }
+   }
+   
+   public TeachingAssistantImpl withAssignmentPoints(int value)
+   {
+      setAssignmentPoints(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   
+   public void removeYou()
+   {
+      setRoom(null);
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * TeachingAssistant ----------------------------------- Room
+    *              tas                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   public TeachingAssistant withRoom(Room value)
+   {
+      setRoom(value);
+      return this;
+   } 
 } //TeachingAssistantImpl

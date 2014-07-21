@@ -6,26 +6,34 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +55,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
  *
  * @generated
  */
-public class RoomImpl extends MinimalEObjectImpl.Container implements Room
+public class RoomImpl extends MinimalEObjectImpl.Container implements Room, PropertyChangeInterface
 {
    /**
     * The default value of the '{@link #getTopic() <em>Topic</em>}' attribute.
@@ -565,4 +573,416 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room
       return result.toString();
    }
 
+
+   
+   //==========================================================================
+   
+   protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+   
+   @Override
+   public PropertyChangeSupport getPropertyChangeSupport()
+   {
+      return listeners;
+   }
+   
+   public void addPropertyChangeListener(PropertyChangeListener listener) 
+   {
+      getPropertyChangeSupport().addPropertyChangeListener(listener);
+   }
+
+   
+   //==========================================================================
+   
+   public RoomImpl withTopic(String value)
+   {
+      setTopic(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   public RoomImpl withCredits(int value)
+   {
+      setCredits(value);
+      return this;
+   } 
+
+   
+   //==========================================================================
+   
+   
+   public void removeYou()
+   {
+      setUni(null);
+      withoutStudents(this.getStudents().toArray(new Student[this.getStudents().size()]));
+      withoutTas(this.getTas().toArray(new TeachingAssistant[this.getTas().size()]));
+      withoutDoorsRev(this.getDoorsRev().toArray(new Room[this.getDoorsRev().size()]));
+      withoutDoors(this.getDoors().toArray(new Room[this.getDoors().size()]));
+      withoutAssignments(this.getAssignments().toArray(new Assignment[this.getAssignments().size()]));
+      getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
+   }
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * Room ----------------------------------- University
+    *              rooms                   uni
+    * </pre>
+    */
+   
+   public static final String PROPERTY_UNI = "uni";
+
+   private University uni = null;
+
+   public Room withUni(University value)
+   {
+      setUni(value);
+      return this;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Student
+    *              in                   students
+    * </pre>
+    */
+   
+   public static final String PROPERTY_STUDENTS = "students";
+  public StudentSet getStudentsSet()
+  {
+     return new StudentSet().with(getStudents());
+  }
+
+
+   public Room withStudents(Student... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Student item : value)
+      {
+         if (item != null)
+         {
+            if (this.students == null)
+            {
+               this.students = this.getStudents();
+            }
+            
+            boolean changed = this.students.add (item);
+
+            if (changed)
+            {
+               item.withIn(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Room withoutStudents(Student... value)
+   {
+      for (Student item : value)
+      {
+         if ((this.students != null) && (item != null))
+         {
+            if (this.students.remove(item))
+            {
+               item.setIn(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_STUDENTS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public StudentImpl createStudentsStudentImpl()
+   {
+      StudentImpl value = new StudentImpl();
+      withStudents(value);
+      return value;
+   } 
+
+   public TeachingAssistantImpl createStudentsTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
+      withStudents(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- TeachingAssistant
+    *              room                   tas
+    * </pre>
+    */
+   
+   public static final String PROPERTY_TAS = "tas";
+  public TeachingAssistantSet getTasSet()
+  {
+     return new TeachingAssistantSet().with(getTas());
+  }
+
+
+   public Room withTas(TeachingAssistant... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (TeachingAssistant item : value)
+      {
+         if (item != null)
+         {
+            if (this.tas == null)
+            {
+               this.tas = this.getTas();
+            }
+            
+            boolean changed = this.tas.add (item);
+
+            if (changed)
+            {
+               item.withRoom(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Room withoutTas(TeachingAssistant... value)
+   {
+      for (TeachingAssistant item : value)
+      {
+         if ((this.tas != null) && (item != null))
+         {
+            if (this.tas.remove(item))
+            {
+               item.setRoom(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_TAS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public TeachingAssistantImpl createTasTeachingAssistantImpl()
+   {
+      TeachingAssistantImpl value = new TeachingAssistantImpl();
+      withTas(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doors                   doorsRev
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORSREV = "doorsRev";
+  public RoomSet getDoorsRevSet()
+  {
+     return new RoomSet().with(getDoorsRev());
+  }
+
+   public RoomSet getDoorsRevTransitive()
+   {
+      RoomSet result = new RoomSet().with(this);
+      return result.getDoorsRevTransitive();
+   }
+
+
+   public Room withDoorsRev(Room... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Room item : value)
+      {
+         if (item != null)
+         {
+            if (this.doorsRev == null)
+            {
+               this.doorsRev = this.getDoorsRev();
+            }
+            
+            boolean changed = this.doorsRev.add (item);
+
+            if (changed)
+            {
+               item.withDoors(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORSREV, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Room withoutDoorsRev(Room... value)
+   {
+      for (Room item : value)
+      {
+         if ((this.doorsRev != null) && (item != null))
+         {
+            if (this.doorsRev.remove(item))
+            {
+               item.withoutDoors(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORSREV, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public RoomImpl createDoorsRevRoomImpl()
+   {
+      RoomImpl value = new RoomImpl();
+      withDoorsRev(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       many
+    * Room ----------------------------------- Room
+    *              doorsRev                   doors
+    * </pre>
+    */
+   
+   public static final String PROPERTY_DOORS = "doors";
+  public RoomSet getDoorsSet()
+  {
+     return new RoomSet().with(getDoors());
+  }
+
+   public RoomSet getDoorsTransitive()
+   {
+      RoomSet result = new RoomSet().with(this);
+      return result.getDoorsTransitive();
+   }
+
+
+   public Room withDoors(Room... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Room item : value)
+      {
+         if (item != null)
+         {
+            if (this.doors == null)
+            {
+               this.doors = this.getDoors();
+            }
+            
+            boolean changed = this.doors.add (item);
+
+            if (changed)
+            {
+               item.withDoorsRev(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Room withoutDoors(Room... value)
+   {
+      for (Room item : value)
+      {
+         if ((this.doors != null) && (item != null))
+         {
+            if (this.doors.remove(item))
+            {
+               item.withoutDoorsRev(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_DOORS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public RoomImpl createDoorsRoomImpl()
+   {
+      RoomImpl value = new RoomImpl();
+      withDoors(value);
+      return value;
+   } 
+
+   
+   /********************************************************************
+    * <pre>
+    *              one                       many
+    * Room ----------------------------------- Assignment
+    *              room                   assignments
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ASSIGNMENTS = "assignments";
+  public AssignmentSet getAssignmentsSet()
+  {
+     return new AssignmentSet().with(getAssignments());
+  }
+
+
+   public Room withAssignments(Assignment... value)
+   {
+      if(value==null){
+         return this;
+      }
+      for (Assignment item : value)
+      {
+         if (item != null)
+         {
+            if (this.assignments == null)
+            {
+               this.assignments = this.getAssignments();
+            }
+            
+            boolean changed = this.assignments.add (item);
+
+            if (changed)
+            {
+               item.withRoom(this);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, null, item);
+            }
+         }
+      }
+      return this;
+   } 
+
+   public Room withoutAssignments(Assignment... value)
+   {
+      for (Assignment item : value)
+      {
+         if ((this.assignments != null) && (item != null))
+         {
+            if (this.assignments.remove(item))
+            {
+               item.setRoom(null);
+               getPropertyChangeSupport().firePropertyChange(PROPERTY_ASSIGNMENTS, item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+   public AssignmentImpl createAssignmentsAssignmentImpl()
+   {
+      AssignmentImpl value = new AssignmentImpl();
+      withAssignments(value);
+      return value;
+   } 
 } //RoomImpl

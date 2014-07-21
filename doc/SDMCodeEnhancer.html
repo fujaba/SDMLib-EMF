@@ -7,7 +7,7 @@
 <script src="includes/drawer.js"></script>
 <script src="includes/graph.js"></script>
 </head><body onload="init();">
-<p>Storyboard <a href='../emfsrc/org/sdmlib/tools/SDMCodeEnhancer.java' type='text/x-java'>SDMCodeEnhancer</a></p>
+<p>Storyboard <a href='org/sdmlib/tools/SDMCodeEnhancer.java' type='text/x-java'>SDMCodeEnhancer</a></p>
 <p>SDMCodeEnhancer</p>
 <script>
    var json = {
@@ -16,19 +16,19 @@
       "nodes":[
       {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University",
+            "id":"University",
             "attributes":[
             "name : String"
             ]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl",
+            "id":"UniversityImpl",
             "attributes":[]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
+            "id":"Student",
             "attributes":[
             "name : String",
                "studId : String",
@@ -39,24 +39,24 @@
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl",
+            "id":"StudentImpl",
             "attributes":[]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant",
+            "id":"TeachingAssistant",
             "attributes":[
             "noOfHours : int"
             ]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl",
+            "id":"TeachingAssistantImpl",
             "attributes":[]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
+            "id":"Room",
             "attributes":[
             "topic : String",
                "credits : int"
@@ -64,12 +64,12 @@
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl",
+            "id":"RoomImpl",
             "attributes":[]
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
+            "id":"Assignment",
             "attributes":[
             "name : String",
                "points : int"
@@ -77,7 +77,7 @@
          },
          {
             "typ":"node",
-            "id":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl",
+            "id":"AssignmentImpl",
             "attributes":[]
          }
       ],
@@ -88,8 +88,8 @@
             "targetcardinality":"one",
             "sourceproperty":"rooms",
             "targetproperty":"uni",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University"
+            "source":"Room",
+            "target":"University"
          },
          {
             "typ":"edge",
@@ -97,8 +97,8 @@
             "targetcardinality":"one",
             "sourceproperty":"students",
             "targetproperty":"uni",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University"
+            "source":"Student",
+            "target":"University"
          },
          {
             "typ":"edge",
@@ -106,17 +106,17 @@
             "targetcardinality":"many",
             "sourceproperty":"in",
             "targetproperty":"students",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+            "source":"Room",
+            "target":"Student"
          },
          {
             "typ":"edge",
             "sourcecardinality":"many",
             "targetcardinality":"many",
             "sourceproperty":"friends",
-            "targetproperty":"friends",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+            "targetproperty":"friendsRev",
+            "source":"Student",
+            "target":"Student"
          },
          {
             "typ":"edge",
@@ -124,8 +124,8 @@
             "targetcardinality":"many",
             "sourceproperty":"done",
             "targetproperty":"students",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student"
+            "source":"Assignment",
+            "target":"Student"
          },
          {
             "typ":"edge",
@@ -133,17 +133,17 @@
             "targetcardinality":"many",
             "sourceproperty":"room",
             "targetproperty":"tas",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant"
+            "source":"Room",
+            "target":"TeachingAssistant"
          },
          {
             "typ":"edge",
             "sourcecardinality":"many",
             "targetcardinality":"many",
             "sourceproperty":"doors",
-            "targetproperty":"doors",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room"
+            "targetproperty":"doorsRev",
+            "source":"Room",
+            "target":"Room"
          },
          {
             "typ":"edge",
@@ -151,8 +151,38 @@
             "targetcardinality":"one",
             "sourceproperty":"assignments",
             "targetproperty":"room",
-            "source":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment",
-            "target":"org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room"
+            "source":"Assignment",
+            "target":"Room"
+         },
+         {
+            "typ":"generalisation",
+            "source":"UniversityImpl",
+            "target":"University"
+         },
+         {
+            "typ":"generalisation",
+            "source":"StudentImpl",
+            "target":"Student"
+         },
+         {
+            "typ":"generalisation",
+            "source":"TeachingAssistant",
+            "target":"Student"
+         },
+         {
+            "typ":"generalisation",
+            "source":"TeachingAssistantImpl",
+            "target":"TeachingAssistant"
+         },
+         {
+            "typ":"generalisation",
+            "source":"RoomImpl",
+            "target":"Room"
+         },
+         {
+            "typ":"generalisation",
+            "source":"AssignmentImpl",
+            "target":"Assignment"
          }
       ]
    }

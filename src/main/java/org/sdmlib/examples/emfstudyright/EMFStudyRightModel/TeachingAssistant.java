@@ -2,6 +2,8 @@
  */
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel;
 
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -76,4 +78,27 @@ public interface TeachingAssistant extends Student
     */
    void setNoOfHours(int value);
 
+
+   
+   //==========================================================================
+   
+   public static final String PROPERTY_NOOFHOURS = "noOfHours";
+   
+   public TeachingAssistant withNoOfHours(int value);
+
+   
+   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadonly(true);
+
+   
+   /********************************************************************
+    * <pre>
+    *              many                       one
+    * TeachingAssistant ----------------------------------- Room
+    *              tas                   room
+    * </pre>
+    */
+   
+   public static final String PROPERTY_ROOM = "room";
+
+   public TeachingAssistant withRoom(Room value);
 } // TeachingAssistant

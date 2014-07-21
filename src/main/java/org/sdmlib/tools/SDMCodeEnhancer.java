@@ -28,7 +28,7 @@ public class SDMCodeEnhancer
    {
       story = new Storyboard();
       
-      main(new String[] {"emfsrc", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel"});
+      main(new String[] {"src/main/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel"});
       
       story.dumpHTML();
    }
