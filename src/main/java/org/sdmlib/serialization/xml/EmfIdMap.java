@@ -15,9 +15,10 @@ import org.sdmlib.serialization.SDMLibJsonIdMap;
 import de.uniks.networkparser.StringBuffer;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import de.uniks.networkparser.xml.XMLEntity;
+import de.uniks.networkparser.xml.XMLIdMap;
 import de.uniks.networkparser.xml.XMLTokener;
 
-public class EmfIdMap extends SDMLibJsonIdMap
+public class EmfIdMap extends XMLIdMap
 {
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
@@ -26,6 +27,66 @@ public class EmfIdMap extends SDMLibJsonIdMap
    {
    }
    
+   @Override
+   public XMLEntity encode(Object entity)
+   {
+      XMLEntity result = new XMLEntity();
+      
+      
+      String typetag = entity.getClass().getName().replaceAll("\\.", ":");
+      result.setTag(typetag);
+      
+      encodeChildren(entity, result);
+      
+      return result;
+   }
+   
+   private void encodeChildren(Object entity, XMLEntity parent)
+   {
+      SendableEntityCreator creatorClass = this.getCreatorClass(entity);
+      
+      for (String propertyName : creatorClass.getProperties())
+      {
+         Object propertyValue = creatorClass.getValue(entity, propertyName);
+         
+         if (" String long Long int Integer char Char boolean Boolean byte Byte float Float double Double java.util.Date ".indexOf(CGUtil.shortClassName(propertyValue.getClass().getName())) >= 0)
+         {
+            parent.put(propertyName, propertyValue);
+         }
+         else if (propertyValue instanceof Collection)
+         {
+            for (Object childValue : (Collection) propertyValue)
+            {
+               XMLEntity child = new XMLEntity();
+               
+               parent.add(child);
+               
+               child.setTag(propertyName);
+               
+               String typetag = childValue.getClass().getName().replaceAll("\\.", ":");
+               
+               child.put(XSI_TYPE, typetag);
+               
+               encodeChildren(childValue, child);
+            }
+         }
+         else
+         {
+            XMLEntity child = new XMLEntity();
+
+            parent.add(child);
+
+            child.setTag(propertyName);
+            
+            String typetag = propertyValue.getClass().getName().replaceAll("\\.", ":");
+            
+            child.put(XSI_TYPE, typetag);
+            
+            encodeChildren(propertyValue, child);
+         }
+      }
+   }
+
    public Object decode(String fileText)
    {
       return decode(new StringBuilder(fileText));
