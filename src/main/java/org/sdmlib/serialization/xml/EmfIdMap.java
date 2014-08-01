@@ -203,6 +203,10 @@ public class EmfIdMap extends XMLIdMap
                {
                   myRef = "_" + myRef.subSequence(0, 1) + myRef.split("\\.")[1];
                }
+               else
+               {
+                  myRef = "_" + myRef.subSequence(0, 1) + "0";
+               }
 
                if (getObject(myRef) != null)
                {
