@@ -3,7 +3,6 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -19,16 +18,13 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPa
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,7 +48,7 @@ import org.sdmlib.serialization.PropertyChangeInterface;
  *
  * @generated
  */
-public class StudentImpl extends MinimalEObjectImpl.Container implements Student, PropertyChangeInterface
+public class StudentImpl extends MinimalEObjectImpl.Container implements Student
 {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -758,7 +754,6 @@ public class StudentImpl extends MinimalEObjectImpl.Container implements Student
    
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
-   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;

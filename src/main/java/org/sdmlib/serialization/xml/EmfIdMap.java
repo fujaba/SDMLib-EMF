@@ -22,12 +22,18 @@ public class EmfIdMap extends SDMLibJsonIdMap
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
 
-   public EmfIdMap() {
-}
+   public EmfIdMap() 
+   {
+   }
+   
+   public Object decode(String fileText)
+   {
+      return decode(new StringBuilder(fileText));
+   }
    
    public Object decode(StringBuilder fileText)
    {
-      int pos = fileText.indexOf("\n");
+      int pos = fileText.indexOf(">") + 1;
 
       StringBuffer buffer = new StringBuffer().withValue(fileText.toString());
 
@@ -44,7 +50,7 @@ public class EmfIdMap extends SDMLibJsonIdMap
 
       String className = tag.split("\\:")[1];
 
-      for (String fullName : creators.keySet())
+      for (String fullName : creators.keyList())
       {
          if (CGUtil.shortClassName(fullName).equals(className))
          {
@@ -127,7 +133,23 @@ public class EmfIdMap extends SDMLibJsonIdMap
             continue;
          }
 
-         if (value.startsWith("/"))
+         if (value.startsWith("//@"))
+         {
+            for (String ref : value.split(" "))
+            {
+               String myRef = ref.substring(3);
+               if (myRef.indexOf('.') >= 0)
+               {
+                  myRef = "_" + myRef.subSequence(0, 1) + myRef.split("\\.")[1];
+               }
+
+               if (getObject(myRef) != null)
+               {
+                  rootFactory.setValue(rootObject, key, getObject(myRef), "");
+               }
+            }
+         }
+         else if (value.startsWith("/"))
          {
             // maybe multiple separated by blanks
             String tagChar = xmlEntity.getTag().substring(0, 1);
@@ -157,18 +179,6 @@ public class EmfIdMap extends SDMLibJsonIdMap
             {
                String myRef = "_" + ref.substring(1);
                if (getObject(myRef) != null && rootFactory != null)
-               {
-                  rootFactory.setValue(rootObject, key, getObject(myRef), "");
-               }
-            }
-         }
-         else if (value.startsWith("//@"))
-         {
-            for (String ref : value.split(" "))
-            {
-               String myRef = ref.substring(3);
-               myRef = "_" + myRef.subSequence(0, 1) + myRef.split("\\.")[1];
-               if (getObject(myRef) != null)
                {
                   rootFactory.setValue(rootObject, key, getObject(myRef), "");
                }
@@ -252,14 +262,16 @@ public class EmfIdMap extends SDMLibJsonIdMap
    {
       EntityFactory kidFactory = (EntityFactory) getCreator(typeName, true);
 
-      if (kidFactory == null)
+      if (kidFactory != null)
       {
-         for (String creatorName : getCreatorsKeySet())
+         return kidFactory;
+      }
+
+      for (String creatorName : getCreatorsKeySet())
+      {
+         if (creatorName.endsWith(typeName))
          {
-            if (creatorName.endsWith(typeName))
-            {
-               return (EntityFactory) getCreator(creatorName, true);
-            }
+            return (EntityFactory) getCreator(creatorName, true);
          }
       }
 

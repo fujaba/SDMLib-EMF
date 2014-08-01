@@ -3,7 +3,6 @@
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -21,10 +20,8 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
-
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
@@ -33,7 +30,6 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
-import org.sdmlib.serialization.PropertyChangeInterface;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +51,7 @@ import org.sdmlib.serialization.PropertyChangeInterface;
  *
  * @generated
  */
-public class RoomImpl extends MinimalEObjectImpl.Container implements Room, PropertyChangeInterface
+public class RoomImpl extends MinimalEObjectImpl.Container implements Room
 {
    /**
     * The default value of the '{@link #getTopic() <em>Topic</em>}' attribute.
@@ -579,7 +575,6 @@ public class RoomImpl extends MinimalEObjectImpl.Container implements Room, Prop
    
    protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
    
-   @Override
    public PropertyChangeSupport getPropertyChangeSupport()
    {
       return listeners;
