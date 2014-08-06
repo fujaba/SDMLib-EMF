@@ -111,7 +111,7 @@ public class EmfIdMap extends XMLIdMap
 
       String className = tag.split("\\:")[1];
 
-      for (String fullName : creators.keyList())
+      for (String fullName : creators.keySet())
       {
          if (CGUtil.shortClassName(fullName).equals(className))
          {
