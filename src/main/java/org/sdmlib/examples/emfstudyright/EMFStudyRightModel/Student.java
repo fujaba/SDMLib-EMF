@@ -327,7 +327,7 @@ public interface Student extends EObject
    public Student withUni(University value);
 
    
-   public static final StudentSet EMPTY_SET = new StudentSet().withReadonly(true);
+   public static final StudentSet EMPTY_SET = new StudentSet().withReadOnly(true);
 
    
    /********************************************************************

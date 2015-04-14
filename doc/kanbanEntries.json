@@ -12,7 +12,8 @@
       {"id":"KE.K7"},
       {"id":"KE.K8"},
       {"id":"KE.K10"},
-      {"id":"KE.K11"}
+      {"id":"KE.K11"},
+      {"id":"KE.K16"}
     ],
     "phases":"active, backlog, implementation, done, modeling"
   }
@@ -89,6 +90,15 @@
       {"id":"KE.L14"},
       {"id":"KE.L15"}
     ],
+    "phases":"active, backlog, implementation, done"
+  }
+},  {
+  "id":"KE.K16",
+  "class":"org.sdmlib.storyboards.KanbanEntry",
+  "prop":{
+    "name":"ReplicationChatModel",
+    "phase":"backlog",
+    "parent":{"id":"KE.K1"},
     "phases":"active, backlog, implementation, done"
   }
 },  {

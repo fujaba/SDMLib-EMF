@@ -238,7 +238,7 @@ public interface Room extends EObject
    public Room withUni(University value);
 
    
-   public static final RoomSet EMPTY_SET = new RoomSet().withReadonly(true);
+   public static final RoomSet EMPTY_SET = new RoomSet().withReadOnly(true);
 
    
    /********************************************************************

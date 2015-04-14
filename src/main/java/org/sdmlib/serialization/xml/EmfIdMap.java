@@ -34,7 +34,7 @@ public class EmfIdMap extends XMLIdMap
       
       
       String typetag = entity.getClass().getName().replaceAll("\\.", ":");
-      result.setTag(typetag);
+      result.withTag(typetag);
       
       encodeChildren(entity, result);
       
@@ -59,9 +59,9 @@ public class EmfIdMap extends XMLIdMap
             {
                XMLEntity child = new XMLEntity();
                
-               parent.add(child);
+               parent.withChild(child);
                
-               child.setTag(propertyName);
+               child.withTag(propertyName);
                
                String typetag = childValue.getClass().getName().replaceAll("\\.", ":");
                
@@ -74,9 +74,9 @@ public class EmfIdMap extends XMLIdMap
          {
             XMLEntity child = new XMLEntity();
 
-            parent.add(child);
+            parent.withChild(child);
 
-            child.setTag(propertyName);
+            child.withTag(propertyName);
             
             String typetag = propertyValue.getClass().getName().replaceAll("\\.", ":");
             
@@ -184,7 +184,7 @@ public class EmfIdMap extends XMLIdMap
       this.put(id, rootObject);
 
       // set plain attributes
-      for (Iterator<String> iter = xmlEntity.keys(); iter.hasNext();)
+      for (Iterator<String> iter = xmlEntity.keyIterator(); iter.hasNext();)
       {
          String key = iter.next();
          String value = ((String) xmlEntity.get(key)).trim();

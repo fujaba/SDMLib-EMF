@@ -87,7 +87,7 @@ public interface TeachingAssistant extends Student
    public TeachingAssistant withNoOfHours(int value);
 
    
-   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadonly(true);
+   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadOnly(true);
 
    
    /********************************************************************

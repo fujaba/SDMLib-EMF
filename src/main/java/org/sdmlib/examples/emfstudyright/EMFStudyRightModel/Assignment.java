@@ -165,7 +165,7 @@ public interface Assignment extends EObject
    public TeachingAssistantImpl createStudentsTeachingAssistantImpl();
 
    
-   public static final AssignmentSet EMPTY_SET = new AssignmentSet().withReadonly(true);
+   public static final AssignmentSet EMPTY_SET = new AssignmentSet().withReadOnly(true);
 
    
    /********************************************************************

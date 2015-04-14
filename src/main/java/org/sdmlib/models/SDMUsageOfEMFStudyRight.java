@@ -20,6 +20,8 @@ import org.sdmlib.models.pattern.Match;
 import org.sdmlib.storyboards.Kanban;
 import org.sdmlib.storyboards.Storyboard;
 
+import de.uniks.networkparser.logic.Condition;
+
 public class SDMUsageOfEMFStudyRight
 {
    @Test
@@ -188,14 +190,14 @@ public class SDMUsageOfEMFStudyRight
       // Java 8:
       // (Room elem) -> elem.getCredits() > 20
       
-      RoomSet roomsEven = university.getRoomsSet().has(rooms.new Condition() {
+      RoomSet roomsEven = university.getRoomsSet().has(new Condition<Room>() {
 
          @Override
          public boolean check(Room elem)
          {
             return elem.getCredits() % 2 == 0;
          }
-         
+
       });
       
       story.addCode();
