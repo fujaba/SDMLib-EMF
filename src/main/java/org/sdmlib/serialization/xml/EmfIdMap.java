@@ -14,6 +14,7 @@ import org.sdmlib.serialization.SDMLibJsonIdMap;
 
 import de.uniks.networkparser.StringBuffer;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
+import de.uniks.networkparser.list.SimpleKeyValueList;
 import de.uniks.networkparser.xml.XMLEntity;
 import de.uniks.networkparser.xml.XMLIdMap;
 import de.uniks.networkparser.xml.XMLTokener;
@@ -128,10 +129,12 @@ public class EmfIdMap extends XMLIdMap
       }
       else
       {
-         // just use a ArrayList
+         // just use an ArrayList
          rootObject = new ArrayList();
       }
 
+      runningNumbers = new SimpleKeyValueList<String, Integer>();
+      xmlEntity.put(XMI_ID, "$root");
       addXMIIds(xmlEntity);
 
       addValues(rootFactory, xmlEntity, rootObject);
@@ -141,6 +144,8 @@ public class EmfIdMap extends XMLIdMap
       return rootObject;
    }
 
+   SimpleKeyValueList<String, Integer> runningNumbers = null;
+   
    private void addXMIIds(XMLEntity xmlEntity)
    {
       if (xmlEntity.contains(XMI_ID))
@@ -148,22 +153,35 @@ public class EmfIdMap extends XMLIdMap
          return;
       }
 
-      xmlEntity.put(XMI_ID, "$n1");
+      // xmlEntity.put(XMI_ID, "$root");
       int i = 0;
-      String firstTag = "p";
+
       for (XMLEntity kid : xmlEntity.getChildren())
       {
          if (kid.contains(XMI_ID))
          {
             continue;
          }
-         if (!kid.getTag().startsWith(firstTag))
+
+         String tag = kid.getTag();
+         
+         Integer num = runningNumbers.get(tag);
+         
+         if (num == null)
          {
-            i = 0;
-            firstTag = kid.getTag().substring(0, 1);
+            num = 0;
+            runningNumbers.put(tag, 0);
          }
-         kid.put(XMI_ID, "$" + firstTag + i);
-         i++;
+         else
+         {
+            num++;
+            runningNumbers.put(tag, num);
+         }
+         
+         kid.put(XMI_ID, "$" + tag + num);
+
+         addXMIIds(kid);
+      
       }
    }
 
@@ -199,9 +217,11 @@ public class EmfIdMap extends XMLIdMap
             for (String ref : value.split(" "))
             {
                String myRef = ref.substring(3);
-               if (myRef.indexOf('.') >= 0)
+               int dotPos = myRef.indexOf('.');
+               if (dotPos >= 0)
                {
-                  myRef = "_" + myRef.subSequence(0, 1) + myRef.split("\\.")[1];
+                  String[] split = myRef.split("\\.");
+                  myRef = "_" + split[0] + split[1];
                }
                else
                {

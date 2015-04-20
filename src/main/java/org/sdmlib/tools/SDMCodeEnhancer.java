@@ -57,79 +57,7 @@ public class SDMCodeEnhancer
 
    public void enhance()
    {
-      File file = new File(".");
-      
-      // get class model from epackage
-      ClassModel model = new ClassModel();
-      
-      LinkedHashMap<EClass, Clazz> classMap = new LinkedHashMap<EClass, Clazz>();
-      
-      for (EClassifier eclassifier : epackage.getEClassifiers())
-      {
-         if (eclassifier instanceof EClass)
-         {
-            EClass eclass = (EClass) eclassifier;
-            
-            // add an interface and a class to the SDMModel
-            String fullClassName = eclass.getInstanceTypeName();
-            Clazz sdmClass = model.createClazz(fullClassName).withInterface(true);
-
-            String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclass.getName() + "Impl";
-            Clazz implClass = model.createClazz(implClassName).withSuperClazz(sdmClass);
-         
-            classMap.put(eclass, sdmClass);
-            
-            // add attributes
-            for (EAttribute eattr : eclass.getEAttributes())
-            {
-               sdmClass.withAttribute(eattr.getName(), DataType.ref(CGUtil.shortClassName(eattr.getEType().getInstanceClassName())));
-            }
-         }
-      }
-
-      
-      LinkedHashSet<EReference> doneERefs = new LinkedHashSet<>();
-      
-      for (EClassifier eclassifier : epackage.getEClassifiers())
-      {
-         if (eclassifier instanceof EClass)
-         {
-            EClass eclass = (EClass) eclassifier;
-            
-            if ( ! eclass.getESuperTypes().isEmpty())
-            {
-               EClass eSuperClass = eclass.getESuperTypes().get(0);
-               Clazz sdmSuperClass = classMap.get(eSuperClass);
-               Clazz sdmClass = classMap.get(eclass);
-               sdmClass.withSuperClazz(sdmSuperClass);
-            }
-               
-            for (EReference eref : eclass.getEReferences())
-            {
-               if (!doneERefs.contains(eref))
-               {
-                  EReference oppositeERef = eref.getEOpposite();
-                  
-                  // create assoc
-                  EClass srcEClass = (EClass) eref.getEType();
-                  EClass tgtEClass = (EClass) oppositeERef.getEType();
-                  
-                  Clazz srcSDMClass = classMap.get(srcEClass);
-                  Clazz tgtSDMClass = classMap.get(tgtEClass);
-                  
-                  Card tgtCard = (oppositeERef.getUpperBound() == 1 ? Card.ONE : Card.MANY);
-                  Card srcCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
-                  
-                  srcSDMClass.withAssoc(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
-                  
-                  doneERefs.add(eref);
-                  doneERefs.add(oppositeERef);
-               }
-            }
-         }
-
-
-      }
+      ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, epackage.getName());
       
       if (story != null)
       {
@@ -138,6 +66,8 @@ public class SDMCodeEnhancer
       
       model.generate(rootDir);
    }
+
+
 
    private String rootDir;
    

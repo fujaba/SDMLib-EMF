@@ -1,5 +1,7 @@
 package org.sdmlib.tools;
 
+import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -33,21 +35,21 @@ public class EMFTool
       // create the corresponding EMF ecore structures
       EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
       EcorePackage ecorePackage = EcorePackage.eINSTANCE;
-      
+
       // first we need a package
       EPackage ePackage = ecoreFactory.createEPackage();
       ePackage.setName(StrUtil.upFirstChar(CGUtil.shortClassName(model.getName()))+"Package");
       ePackage.setNsPrefix(CGUtil.shortClassName(model.getName()));
       ePackage.setNsURI("http:///" + model.getName() + ".ecore");
-      
-      
+
+
       for (Clazz c : model.getClasses())
       {
          EClass ec = ecoreFactory.createEClass();
          ec.setName(CGUtil.shortClassName(c.getName()));
-         
+
          ePackage.getEClassifiers().add(ec);
-         
+
          // transfer attributes
          for (Attribute attr : c.getAttributes())
          {
@@ -57,9 +59,9 @@ public class EMFTool
             eattr.setEType(estring);
             ec.getEStructuralFeatures().add(eattr);
          }
-         
+
       }
-      
+
       // transfer super class
       for (Clazz c : model.getClasses())
       {
@@ -67,17 +69,17 @@ public class EMFTool
          {
             EClass kidEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(c.getName()));
             EClass superEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(c.getSuperClass().getName()));
-            
+
             kidEClass.getESuperTypes().add(superEClass);
          }
       }
-      
+
       // transfer assocs
       for (Association assoc : model.getClasses().getSourceRoles().getAssoc())
       {
          Role srcRole = assoc.getSource();
          Role tgtRole = assoc.getTarget();
-            
+
          EReference fwdRef = ecoreFactory.createEReference();
          fwdRef.setName(tgtRole.getName());
          EClass tgtEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(tgtRole.getClazz().getName()));
@@ -102,31 +104,137 @@ public class EMFTool
          srcEClass.getEStructuralFeatures().add(fwdRef);
 
          tgtEClass.getEStructuralFeatures().add(bwdRef);
-            
+
       }
-      
+
       return ePackage;
    }
+
+   public ClassModel getClassModelFromEPackage(EPackage epackage, String packageName)
+   {
+      return getClassModelFromEPackage(epackage, packageName, true);
+   }
    
-   
+   public ClassModel getClassModelFromEPackage(EPackage epackage, String packageName, boolean withImpl)
+   {
+      File file = new File(".");
+
+      // get class model from epackage
+      ClassModel model = new ClassModel(packageName);
+
+      LinkedHashMap<EClass, Clazz> classMap = new LinkedHashMap<EClass, Clazz>();
+
+      for (EClassifier eclassifier : epackage.getEClassifiers())
+      {
+         if (eclassifier instanceof EClass)
+         {
+            EClass eclass = (EClass) eclassifier;
+
+            // add an interface and a class to the SDMModel
+            String fullClassName = eclass.getInstanceTypeName();
+            Clazz sdmClass = model.createClazz(fullClassName);
+            
+            if (withImpl)
+            {
+               sdmClass.withInterface(true);
+            
+               String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclass.getName() + "Impl";
+               Clazz implClass = model.createClazz(implClassName).withSuperClazz(sdmClass);
+            }
+
+            classMap.put(eclass, sdmClass);
+
+            // add attributes
+            for (EAttribute eattr : eclass.getEAttributes())
+            {
+               sdmClass.withAttribute(eattr.getName(), DataType.ref(CGUtil.shortClassName(eattr.getEType().getInstanceClassName())));
+            }
+         }
+      }
+
+
+      LinkedHashSet<EReference> doneERefs = new LinkedHashSet<>();
+
+      for (EClassifier eclassifier : epackage.getEClassifiers())
+      {
+         if (eclassifier instanceof EClass)
+         {
+            EClass eclass = (EClass) eclassifier;
+
+            if ( ! eclass.getESuperTypes().isEmpty())
+            {
+               EClass eSuperClass = eclass.getESuperTypes().get(0);
+               Clazz sdmSuperClass = classMap.get(eSuperClass);
+               Clazz sdmClass = classMap.get(eclass);
+               sdmClass.withSuperClazz(sdmSuperClass);
+            }
+
+            for (EReference eref : eclass.getEReferences())
+            {
+               if (!doneERefs.contains(eref))
+               {
+                  EReference oppositeERef = eref.getEOpposite();
+
+                  if (oppositeERef != null)
+                  {
+                     // create assoc
+                     EClass srcEClass = (EClass) eref.getEType();
+                     EClass tgtEClass = (EClass) oppositeERef.getEType();
+
+                     Clazz srcSDMClass = classMap.get(srcEClass);
+                     Clazz tgtSDMClass = classMap.get(tgtEClass);
+
+                     Card tgtCard = (oppositeERef.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+                     Card srcCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+
+                     srcSDMClass.withAssoc(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
+
+                     doneERefs.add(eref);
+                     doneERefs.add(oppositeERef);
+                  }
+                  else
+                  {
+                     // uni directional assoc
+                     EClass srcEClass = eclass;
+                     EClass tgtEClass = (EClass) eref.getEType();
+
+                     Clazz srcSDMClass = classMap.get(srcEClass);
+                     Clazz tgtSDMClass = classMap.get(tgtEClass);
+
+                     Card tgtCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+                     
+                     srcSDMClass.withUniDirectionalAssoc(tgtSDMClass, eref.getName(), tgtCard);
+
+                     doneERefs.add(eref);
+                  }
+               }
+            }
+         }
+
+
+      }
+      return model;
+   }
+
+
    public ClassModel genModelToClassModel(String genModelFileName)
    {
       GenModelPackage.eINSTANCE.eClass();
-      
+
       ResourceSet resSet = new ResourceSetImpl();
-      
+
       URI genModelURI = URI.createFileURI(genModelFileName);
-      
+
       resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMLResourceFactoryImpl());
-      
+
       Resource genModelRes = resSet.getResource(genModelURI, true);
-      
+
       GenModel genModel = (GenModel) genModelRes.getContents().get(0);
-      
+
       String packageName = genModel.getModelName();
-      
+
       String ecoreFileName = genModel.getForeignModel().get(0);
-      
+
       return ecoreModelToClassModel(packageName, ecoreFileName);
    }
 
@@ -134,34 +242,34 @@ public class EMFTool
    public ClassModel ecoreModelToClassModel(String packageName, String ecoreFileName)
    {
       ResourceSet resSet = new ResourceSetImpl();
-      
+
       URI ecoreModelURI = URI.createFileURI(ecoreFileName);
-      
+
       resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMLResourceFactoryImpl());
-      
+
       Resource ecoreModelRes = resSet.getResource(ecoreModelURI, true);
-      
+
       EPackage epackage = (EPackage) ecoreModelRes.getContents().get(0);
-      
+
       ClassModel model = new ClassModel(packageName);
-      
-      
+
+
       LinkedHashSet<EReference> refs = new LinkedHashSet<EReference>();
-      
+
       // add classes
       for (EClassifier eClassifier : epackage.getEClassifiers())
       {
          if (eClassifier instanceof EClass)
          {
             EClass eclass = (EClass) eClassifier;
-            
+
             Clazz clazz = model.createClazz(eclass.getName());
-            
+
             for (EAttribute eattr : eclass.getEAttributes())
             {
                clazz.withAttribute(eattr.getName(), DataType.ref(eattr.getEType().getName().substring(1)));
             }
-            
+
             for (EReference eref : eclass.getEReferences())
             {
                if ( ! refs.contains(eref))
@@ -178,25 +286,25 @@ public class EMFTool
             }
          }
       }
-      
+
       // inheritance
       for (EClassifier eClassifier : epackage.getEClassifiers())
       {
          if (eClassifier instanceof EClass)
          {
             EClass eclass = (EClass) eClassifier;
-            
+
             if ( ! eclass.getESuperTypes().isEmpty())
             {
                Clazz kidClazz = model.getClazz(eclass.getName());
                Clazz superClazz = model.getClazz(eclass.getESuperTypes().get(0).getName());
-               
+
                kidClazz.withSuperClazz(superClazz);
             }
-            
+
          }
       }
-      
+
       // assocs
       for (EReference eref : refs)
       {
@@ -216,13 +324,13 @@ public class EMFTool
          {
             srcCard = Card.MANY;
          }
-         
+
          Clazz tgtClazz = model.getClazz(tgtClassName);
          Clazz srcClazz = model.getClazz(srcClassName);
-         
+
          srcClazz.withAssoc(tgtClazz, tgtRoleName, tgtCard, srcRoleName, srcCard);
       }
-      
+
       return model;
    }
 }
