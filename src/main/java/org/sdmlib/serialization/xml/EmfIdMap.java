@@ -134,26 +134,29 @@ public class EmfIdMap extends XMLIdMap
       }
 
       runningNumbers = new SimpleKeyValueList<String, Integer>();
-      xmlEntity.put(XMI_ID, "$root");
-      addXMIIds(xmlEntity);
 
-      addValues(rootFactory, xmlEntity, rootObject);
+      addXMIIds(xmlEntity, "$root");
 
       addChildren(xmlEntity, rootFactory, rootObject);
+
+      addValues(rootFactory, xmlEntity, rootObject);
 
       return rootObject;
    }
 
    SimpleKeyValueList<String, Integer> runningNumbers = null;
    
-   private void addXMIIds(XMLEntity xmlEntity)
+   private void addXMIIds(XMLEntity xmlEntity, String rootId)
    {
       if (xmlEntity.contains(XMI_ID))
       {
          return;
       }
 
-      // xmlEntity.put(XMI_ID, "$root");
+      if (rootId != null)
+      { 
+         xmlEntity.put(XMI_ID, rootId);
+      }
       int i = 0;
 
       for (XMLEntity kid : xmlEntity.getChildren())
@@ -178,9 +181,9 @@ public class EmfIdMap extends XMLIdMap
             runningNumbers.put(tag, num);
          }
          
-         kid.put(XMI_ID, "$" + tag + num);
+         // kid.put(XMI_ID, "$" + tag + num);
 
-         addXMIIds(kid);
+         addXMIIds(kid, "$" + tag + num);
       
       }
    }
@@ -198,8 +201,6 @@ public class EmfIdMap extends XMLIdMap
       {
          id = "_" + id.substring(1);
       }
-
-      this.put(id, rootObject);
 
       // set plain attributes
       for (Iterator<String> iter = xmlEntity.keyIterator(); iter.hasNext();)
@@ -277,11 +278,39 @@ public class EmfIdMap extends XMLIdMap
             }
          }
       }
+      
+      // recursive on kids
+      Iterator<XMLEntity> iterator = xmlEntity.getChildren().iterator();
+      while (iterator.hasNext())
+      {
+         XMLEntity kidEntity = iterator.next();
+         String kidId = (String) kidEntity.get(XMI_ID);
+
+         if (kidId.startsWith("$"))
+         {
+            kidId = "_" + kidId.substring(1);
+         }
+
+         Object kidObject = this.getObject(kidId);
+         
+         EntityFactory kidFactory = (EntityFactory) this.getCreatorClass(kidObject);
+         
+         addValues(kidFactory, kidEntity, kidObject );
+      }
    }
 
    private void addChildren(XMLEntity xmlEntity, EntityFactory rootFactory, Object rootObject)
    {
+      String id = (String) xmlEntity.get(XMI_ID);
+
+      if (id.startsWith("$"))
+      {
+         id = "_" + id.substring(1);
+      }
       
+      this.put(id, rootObject);
+
+
       Iterator<XMLEntity> iterator = xmlEntity.getChildren().iterator();
       while (iterator.hasNext())
       {
@@ -321,7 +350,7 @@ public class EmfIdMap extends XMLIdMap
 
                Object kidObject = kidFactory.create();
 
-               addValues(kidFactory, kidEntity, kidObject);
+               // addValues(kidFactory, kidEntity, kidObject);
 
                if (rootCollection != null)
                {
