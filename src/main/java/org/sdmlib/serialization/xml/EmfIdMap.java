@@ -152,6 +152,27 @@ public class EmfIdMap extends XMLIdMap
       {
          return;
       }
+      
+      if (xmlEntity.contains("href"))
+      {
+         // might point to another xml file already loaded
+         String refString = xmlEntity.getString("href");
+         String[] split = refString.split("#//");
+         
+         if (split.length == 2)
+         {
+            String objectId = split[1];
+            objectId = objectId.replace('@', '$');
+            objectId = objectId.replace(".", "");
+            // Object object = this.getObject(objectId);
+            xmlEntity.put(XMI_ID, objectId);
+
+            return;
+         }
+         
+      }
+      
+      
 
       if (rootId != null)
       { 
@@ -318,8 +339,49 @@ public class EmfIdMap extends XMLIdMap
          String tag = kidEntity.getTag();
          Method getMethod = null;
          String typeName = null;
-
+         
          Collection rootCollection = null;
+         
+         // it might be a cross reference to an already loaded object
+         if (kidEntity.contains("href"))
+         {
+            // might point to another xml file already loaded
+            String refString = kidEntity.getString("href");
+            String[] split = refString.split("#//");
+            
+            if (split.length == 2)
+            {
+               String objectId = split[1];
+               objectId = objectId.replace('@', '_');
+               objectId = objectId.replace(".", "");
+               Object object = this.getObject(objectId);
+               
+               if (object != null)
+               {
+                  // yes we know it
+                  if (rootObject instanceof Collection)
+                  {
+                     rootCollection = (Collection) rootObject;
+                  }
+                  
+                  if (rootCollection != null)
+                  {
+                     rootCollection.add(object);
+                  }
+                  else
+                  {
+                     rootFactory.setValue(rootObject, tag, object, "");
+                  }
+
+                  // addChildren(kidEntity, kidFactory, object);
+                  return;
+               }
+               
+
+            }
+            
+         }
+
          // identify kid type
          try
          {
