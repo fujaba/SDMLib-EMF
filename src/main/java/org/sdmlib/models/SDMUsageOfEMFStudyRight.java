@@ -191,8 +191,6 @@ public class SDMUsageOfEMFStudyRight
       // (Room elem) -> elem.getCredits() > 20
       
       RoomSet roomsEven = university.getRoomsSet().has(new Condition<Room>() {
-
-         @Override
          public boolean check(Room elem)
          {
             return elem.getCredits() % 2 == 0;

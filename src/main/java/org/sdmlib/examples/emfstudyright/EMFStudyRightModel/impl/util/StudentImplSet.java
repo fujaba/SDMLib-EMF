@@ -47,7 +47,6 @@ public class StudentImplSet extends SDMSet<StudentImpl>
    }
 
 
-   @Override
    public String getEntryType()
    {
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.StudentImpl";

@@ -49,7 +49,6 @@ public class RoomImplSet extends SDMSet<RoomImpl>
    }
 
 
-   @Override
    public String getEntryType()
    {
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl";

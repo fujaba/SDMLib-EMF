@@ -153,7 +153,7 @@ public class EMFTool
       }
 
 
-      LinkedHashSet<EReference> doneERefs = new LinkedHashSet<>();
+      LinkedHashSet<EReference> doneERefs = new LinkedHashSet<EReference>();
 
       for (EClassifier eclassifier : epackage.getEClassifiers())
       {
