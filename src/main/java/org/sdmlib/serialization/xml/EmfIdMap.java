@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -133,7 +134,7 @@ public class EmfIdMap extends XMLIdMap
          rootObject = new ArrayList();
       }
 
-      runningNumbers = new SimpleKeyValueList<String, Integer>();
+      runningNumbers = new LinkedHashMap<String, Integer>();
 
       addXMIIds(xmlEntity, "$root");
 
@@ -144,7 +145,7 @@ public class EmfIdMap extends XMLIdMap
       return rootObject;
    }
 
-   SimpleKeyValueList<String, Integer> runningNumbers = null;
+   LinkedHashMap<String, Integer> runningNumbers = null;
    
    private void addXMIIds(XMLEntity xmlEntity, String rootId)
    {
