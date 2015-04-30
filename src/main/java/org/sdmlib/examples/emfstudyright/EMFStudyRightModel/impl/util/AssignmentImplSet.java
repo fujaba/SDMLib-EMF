@@ -43,7 +43,6 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
    }
 
 
-   @Override
    public String getEntryType()
    {
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.AssignmentImpl";

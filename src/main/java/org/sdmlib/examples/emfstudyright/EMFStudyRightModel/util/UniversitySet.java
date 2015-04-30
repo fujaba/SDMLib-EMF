@@ -42,7 +42,6 @@ public class UniversitySet extends SDMSet<University>
    }
 
 
-   @Override
    public String getEntryType()
    {
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University";

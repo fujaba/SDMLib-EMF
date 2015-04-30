@@ -40,7 +40,6 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
    }
 
 
-   @Override
    public String getEntryType()
    {
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl";
