@@ -1,6 +1,7 @@
 package org.sdmlib.tools;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
@@ -10,6 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -17,6 +20,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
@@ -26,6 +30,7 @@ import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.classes.DataType;
+import org.sdmlib.models.classes.Enumeration;
 import org.sdmlib.models.classes.Role;
 
 public class EMFTool
@@ -225,15 +230,21 @@ public class EMFTool
 
       URI genModelURI = URI.createFileURI(genModelFileName);
 
-      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMLResourceFactoryImpl());
+      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMIResourceFactoryImpl());
+//      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMLResourceFactoryImpl());
 
       Resource genModelRes = resSet.getResource(genModelURI, true);
+      String path = new File(genModelFileName).getParentFile().getAbsolutePath();
 
       GenModel genModel = (GenModel) genModelRes.getContents().get(0);
 
       String packageName = genModel.getModelName();
 
       String ecoreFileName = genModel.getForeignModel().get(0);
+      
+      if(path != null) {
+    	  ecoreFileName = path + File.separator + ecoreFileName;
+      }
 
       return ecoreModelToClassModel(packageName, ecoreFileName);
    }
@@ -245,7 +256,7 @@ public class EMFTool
 
       URI ecoreModelURI = URI.createFileURI(ecoreFileName);
 
-      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMLResourceFactoryImpl());
+      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
 
       Resource ecoreModelRes = resSet.getResource(ecoreModelURI, true);
 
@@ -267,7 +278,14 @@ public class EMFTool
 
             for (EAttribute eattr : eclass.getEAttributes())
             {
-               clazz.withAttribute(eattr.getName(), DataType.ref(eattr.getEType().getName().substring(1)));
+            	String name = eattr.getEType().getName();
+            	if(CGUtil.isEMFType(name)) {
+            		name = name.substring(1);
+            	}
+            	if(CGUtil.isPrimitiveType(name.toLowerCase())){
+            		name = name.toLowerCase();
+            	}
+           		clazz.withAttribute(CGUtil.toValidJavaId(eattr.getName()), DataType.ref(name));
             }
 
             for (EReference eref : eclass.getEReferences())
@@ -276,7 +294,7 @@ public class EMFTool
                {
                   if (eref.getEOpposite() == null)
                   {
-                     clazz.withAttribute(eref.getName(), DataType.ref(eref.getEReferenceType().getName()));
+                     clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
                   }
                   else if ( ! refs.contains(eref.getEOpposite()))
                   {
@@ -284,9 +302,24 @@ public class EMFTool
                   }
                }
             }
+         }else if (eClassifier instanceof EEnum) {
+        	 // VODOO
+        	 EEnum eenum = (EEnum) eClassifier;
+        	 Enumeration sdmEnum = model.createEnumeration(eClassifier.getName());
+        	 ArrayList<String> arrayList= new ArrayList<String>();
+        	 for(EEnumLiteral item : eenum.getELiterals()) {
+        		 arrayList.add(item.getName());
+        	 }
+        	 sdmEnum.withValueNames(arrayList.toArray(new String[0]));
+        	 
+        	 
+//        	 <eClassifiers xsi:type="ecore:EEnum" name="Signal">
+//        	    <eLiterals name="FAILURE" value="1"/>
+//        	    <eLiterals name="STOP"/>
+//        	    <eLiterals name="GO" value="2"/>
+//        	  </eClassifiers>
          }
       }
-
       // inheritance
       for (EClassifier eClassifier : epackage.getEClassifiers())
       {
@@ -301,7 +334,6 @@ public class EMFTool
 
                kidClazz.withSuperClazz(superClazz);
             }
-
          }
       }
 
@@ -309,7 +341,7 @@ public class EMFTool
       for (EReference eref : refs)
       {
          String tgtClassName = eref.getEReferenceType().getName();
-         String tgtRoleName = eref.getName();
+         String tgtRoleName = CGUtil.toValidJavaId(eref.getName());
          Card tgtCard = Card.ONE;
          if (eref.getUpperBound() != 1)
          {
@@ -318,7 +350,7 @@ public class EMFTool
 
          eref = eref.getEOpposite();
          String srcClassName = eref.getEReferenceType().getName();
-         String srcRoleName = eref.getName();
+         String srcRoleName = CGUtil.toValidJavaId(eref.getName());
          Card srcCard = Card.ONE;
          if (eref.getUpperBound() != 1)
          {

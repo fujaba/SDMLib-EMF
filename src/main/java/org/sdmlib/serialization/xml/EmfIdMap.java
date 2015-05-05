@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
 import org.sdmlib.serialization.EntityFactory;
-import org.sdmlib.serialization.SDMLibJsonIdMap;
 
 import de.uniks.networkparser.StringBuffer;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
-import de.uniks.networkparser.list.SimpleKeyValueList;
 import de.uniks.networkparser.xml.XMLEntity;
 import de.uniks.networkparser.xml.XMLIdMap;
 import de.uniks.networkparser.xml.XMLTokener;
@@ -25,10 +22,6 @@ public class EmfIdMap extends XMLIdMap
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
 
-   public EmfIdMap() 
-   {
-   }
-   
    @Override
    public XMLEntity encode(Object entity)
    {
