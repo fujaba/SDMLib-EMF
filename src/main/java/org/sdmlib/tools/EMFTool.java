@@ -294,7 +294,12 @@ public class EMFTool
                {
                   if (eref.getEOpposite() == null)
                   {
-                     clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
+                	  if(eref.getUpperBound()<0 || eref.getUpperBound() > 1) {
+                		  refs.add(eref);	  
+                	  }else {
+//                	  DataType.ref("java.util.ArrayList<"+eref.getEReferenceType().getName()+">");
+                		  clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
+                	  }
                   }
                   else if ( ! refs.contains(eref.getEOpposite()))
                   {
@@ -348,13 +353,22 @@ public class EMFTool
             tgtCard = Card.MANY;
          }
 
-         eref = eref.getEOpposite();
-         String srcClassName = eref.getEReferenceType().getName();
-         String srcRoleName = CGUtil.toValidJavaId(eref.getName());
-         Card srcCard = Card.ONE;
-         if (eref.getUpperBound() != 1)
-         {
-            srcCard = Card.MANY;
+         String srcClassName = null;
+         String srcRoleName = null;
+         Card srcCard = null;
+         if(eref.getEOpposite() == null) {
+        	 srcClassName = eref.getEContainingClass().getName();
+        	 srcRoleName = tgtRoleName+"_back";
+        	 srcCard = Card.MANY;
+         }else {
+	         eref = eref.getEOpposite();
+	         srcClassName = eref.getEReferenceType().getName();
+	         srcRoleName = CGUtil.toValidJavaId(eref.getName());
+	         srcCard = Card.ONE;
+	         if (eref.getUpperBound() != 1)
+	         {
+	            srcCard = Card.MANY;
+	         }
          }
 
          Clazz tgtClazz = model.getClazz(tgtClassName);

@@ -430,13 +430,12 @@ public class EmfIdMap extends XMLIdMap
 
    private EntityFactory getCreatorClassesByShortName(String typeName)
    {
-      EntityFactory kidFactory = (EntityFactory) getCreator(typeName, true);
-
+      EntityFactory kidFactory = (EntityFactory) getCreator(typeName, false);
       if (kidFactory != null)
       {
          return kidFactory;
       }
-
+      
       for (String creatorName : getCreatorsKeySet())
       {
          if (creatorName.endsWith(typeName))
