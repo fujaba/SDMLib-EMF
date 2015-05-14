@@ -129,7 +129,7 @@ public class EmfIdMap extends XMLIdMap
 
       runningNumbers = new LinkedHashMap<String, Integer>();
 
-      addXMIIds(xmlEntity, "$root");
+      addXMIIds(xmlEntity, null);
 
       addChildren(xmlEntity, rootFactory, rootObject);
 
@@ -142,10 +142,24 @@ public class EmfIdMap extends XMLIdMap
    
    private void addXMIIds(XMLEntity xmlEntity, String rootId)
    {
-      if (xmlEntity.contains(XMI_ID))
-      {
+      if (xmlEntity.contains(XMI_ID)) {
          return;
       }
+      String tag = xmlEntity.getTag();
+      if(rootId != null) {
+    	  rootId += tag;
+    	  Integer num = runningNumbers.get(rootId);
+	      if (num == null) {
+	         num = 0;
+	      } else {
+	         num++;
+	      }
+	      runningNumbers.put(rootId, num);
+	      rootId += num;
+      } else {
+    	  rootId = "$";
+      }
+      // kid.put(XMI_ID, "$" + tag + num);
       
       if (xmlEntity.contains("href"))
       {
@@ -165,41 +179,11 @@ public class EmfIdMap extends XMLIdMap
          }
          
       }
-      
-      
-
-      if (rootId != null)
-      { 
-         xmlEntity.put(XMI_ID, rootId);
-      }
-      int i = 0;
+      xmlEntity.put(XMI_ID, rootId);
 
       for (XMLEntity kid : xmlEntity.getChildren())
       {
-         if (kid.contains(XMI_ID))
-         {
-            continue;
-         }
-
-         String tag = kid.getTag();
-         
-         Integer num = runningNumbers.get(tag);
-         
-         if (num == null)
-         {
-            num = 0;
-            runningNumbers.put(tag, 0);
-         }
-         else
-         {
-            num++;
-            runningNumbers.put(tag, num);
-         }
-         
-         // kid.put(XMI_ID, "$" + tag + num);
-
-         addXMIIds(kid, "$" + tag + num);
-      
+         addXMIIds(kid, rootId);
       }
    }
 
@@ -232,23 +216,18 @@ public class EmfIdMap extends XMLIdMap
          {
             for (String ref : value.split(" "))
             {
-               String myRef = ref.substring(3);
-               int dotPos = myRef.indexOf('.');
-               if (dotPos >= 0)
-               {
-                  String[] split = myRef.split("\\.");
-                  myRef = "_" + split[0] + split[1];
-               }
-               else
-               {
+               String myRef = "_"+ref.substring(3);
+               if(myRef.indexOf('.')>0){
+	               myRef = myRef.replaceAll("\\.|/@", "");
+               } else {
                   myRef = "_" + myRef.subSequence(0, 1) + "0";
                }
 
-               if (getObject(myRef) != null)
-               {
-                  rootFactory.setValue(rootObject, key, getObject(myRef), "");
-               }
-            }
+				Object object = getObject(myRef);
+				if (object != null) {
+					rootFactory.setValue(rootObject, key, object, "");
+				}
+			}
          }
          else if (value.startsWith("/"))
          {
