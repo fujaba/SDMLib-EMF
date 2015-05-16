@@ -22,10 +22,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
 import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
 import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
-import java.lang.Object;
 
 public class Play7WorkFlowLaneManagerSet extends LinkedHashSet<Play7WorkFlowLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {

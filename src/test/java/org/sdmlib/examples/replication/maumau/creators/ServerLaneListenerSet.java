@@ -22,10 +22,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
 import org.sdmlib.examples.replication.maumau.ServerLaneManager;
 import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
-import java.lang.Object;
 
 public class ServerLaneListenerSet extends LinkedHashSet<ServerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {

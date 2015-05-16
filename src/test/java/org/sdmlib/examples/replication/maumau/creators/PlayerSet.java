@@ -22,16 +22,12 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
+import org.sdmlib.examples.replication.maumau.Card;
+import org.sdmlib.examples.replication.maumau.Duty;
+import org.sdmlib.examples.replication.maumau.MauMau;
 import org.sdmlib.examples.replication.maumau.Player;
 import org.sdmlib.models.modelsets.StringList;
-import java.util.List;
-import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
-import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
-import org.sdmlib.examples.replication.maumau.creators.DutySet;
-import org.sdmlib.examples.replication.maumau.Duty;
 
 public class PlayerSet extends LinkedHashSet<Player> implements org.sdmlib.models.modelsets.ModelSet
 {

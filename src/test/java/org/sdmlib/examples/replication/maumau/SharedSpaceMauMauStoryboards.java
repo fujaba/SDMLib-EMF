@@ -1,26 +1,16 @@
 package org.sdmlib.examples.replication.maumau;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-
-import org.junit.Assert;
 import org.junit.Test;
-import org.sdmlib.examples.replication.SWTSharedSpace;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.RemoteTaskBoard;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.serialization.json.JsonObject;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.storyboards.StoryboardStep;
 import org.sdmlib.storyboards.StoryboardWall;
-import org.sdmlib.storyboards.creators.StoryboardWallCreator;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class SharedSpaceMauMauStoryboards
 {

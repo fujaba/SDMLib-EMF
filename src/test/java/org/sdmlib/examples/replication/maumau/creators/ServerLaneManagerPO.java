@@ -1,10 +1,8 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.ServerLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerSet;
-import java.lang.Object;
 import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class ServerLaneManagerPO extends PatternObject<ServerLaneManagerPO, ServerLaneManager>
 {

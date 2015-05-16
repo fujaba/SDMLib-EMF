@@ -6,13 +6,12 @@ import java.util.Collections;
 import java.util.Random;
 
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
+import org.sdmlib.examples.replication.maumau.creators.ModelPattern;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.replication.RemoteTaskBoard;
-import org.sdmlib.replication.creators.LanePO;
-import org.sdmlib.replication.creators.ModelPattern;
+import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.storyboards.Storyboard;
 
 public class StartGameAction implements PropertyChangeListener

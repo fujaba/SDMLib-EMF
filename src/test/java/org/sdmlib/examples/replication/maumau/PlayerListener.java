@@ -5,7 +5,6 @@ import java.beans.PropertyChangeListener;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.SWTResourceManager;
 
 public class PlayerListener implements PropertyChangeListener
 {

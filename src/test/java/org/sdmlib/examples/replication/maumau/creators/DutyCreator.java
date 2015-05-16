@@ -1,9 +1,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.examples.replication.maumau.creators.CreatorCreator;
-import org.sdmlib.serialization.interfaces.EntityFactory;
-import org.sdmlib.serialization.json.JsonIdMap;
 import org.sdmlib.examples.replication.maumau.Duty;
+import org.sdmlib.serialization.EntityFactory;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class DutyCreator extends EntityFactory
 {

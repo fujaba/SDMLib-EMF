@@ -30,8 +30,9 @@ import java.util.LinkedHashSet;
 import org.eclipse.swt.widgets.Label;
 import org.sdmlib.examples.replication.maumau.creators.CardControlerSet;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.serialization.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class MultiMauMauControler implements PropertyChangeListener, PropertyChangeInterface
 {

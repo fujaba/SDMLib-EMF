@@ -30,15 +30,15 @@ import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.ChangeHistory;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.replication.ReplicationNode;
 import org.sdmlib.replication.ServerSocketAcceptThread;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.RemoteTaskBoard;
-import org.sdmlib.serialization.json.JsonIdMap;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardWall;
-import org.sdmlib.storyboards.creators.StoryboardWallCreator;
-import org.sdmlib.utils.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class ReplicationMauMauServer extends ReplicationNode implements PropertyChangeInterface
 {

@@ -22,14 +22,12 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
 import org.sdmlib.examples.replication.maumau.Duty;
-import org.sdmlib.models.modelsets.StringList;
-import java.util.List;
-import org.sdmlib.models.modelsets.intList;
-import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
-import org.sdmlib.examples.replication.maumau.Player;
-import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
 import org.sdmlib.examples.replication.maumau.MauMau;
+import org.sdmlib.examples.replication.maumau.Player;
+import org.sdmlib.models.modelsets.StringList;
+import org.sdmlib.models.modelsets.intList;
 
 public class DutySet extends LinkedHashSet<Duty> implements org.sdmlib.models.modelsets.ModelSet
 {

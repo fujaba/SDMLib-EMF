@@ -1,16 +1,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.Holder;
-import org.sdmlib.examples.replication.maumau.creators.HolderSet;
-import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.replication.maumau.creators.MauMauPO;
-import org.sdmlib.models.pattern.LinkConstraint;
-import org.sdmlib.examples.replication.maumau.creators.HolderPO;
 import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.CardPO;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
+import org.sdmlib.models.pattern.LinkConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class HolderPO extends PatternObject<HolderPO, Holder>
 {

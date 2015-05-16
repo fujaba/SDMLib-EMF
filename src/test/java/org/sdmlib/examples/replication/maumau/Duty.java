@@ -21,10 +21,10 @@
    
 package org.sdmlib.examples.replication.maumau;
 
-import org.sdmlib.utils.PropertyChangeInterface;
-import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
-import org.sdmlib.utils.StrUtil;
+import java.beans.PropertyChangeSupport;
+
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class Duty implements PropertyChangeInterface
 {

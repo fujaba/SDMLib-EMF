@@ -22,9 +22,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
 import org.eclipse.swt.widgets.Label;
 import org.sdmlib.models.modelsets.StringList;
-import java.util.List;
 
 public class LabelSet extends LinkedHashSet<Label> implements org.sdmlib.models.modelsets.ModelSet
 {

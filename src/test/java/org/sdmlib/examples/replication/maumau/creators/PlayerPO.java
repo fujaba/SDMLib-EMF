@@ -1,20 +1,12 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
-import org.sdmlib.examples.replication.maumau.Player;
-import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
-import org.sdmlib.models.pattern.AttributeConstraint;
-import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.replication.maumau.creators.MauMauPO;
-import org.sdmlib.examples.replication.maumau.Holder;
-import org.sdmlib.models.pattern.LinkConstraint;
-import org.sdmlib.examples.replication.maumau.creators.PlayerPO;
-import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.CardPO;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import org.sdmlib.examples.replication.maumau.creators.DutyPO;
 import org.sdmlib.examples.replication.maumau.Duty;
+import org.sdmlib.examples.replication.maumau.Holder;
+import org.sdmlib.examples.replication.maumau.MauMau;
+import org.sdmlib.examples.replication.maumau.Player;
+import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.LinkConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class PlayerPO extends PatternObject<PlayerPO, Player>
 {

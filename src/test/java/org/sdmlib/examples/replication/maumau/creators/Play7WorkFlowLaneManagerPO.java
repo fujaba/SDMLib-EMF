@@ -1,10 +1,8 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerSet;
-import java.lang.Object;
 import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class Play7WorkFlowLaneManagerPO extends PatternObject<Play7WorkFlowLaneManagerPO, Play7WorkFlowLaneManager>
 {

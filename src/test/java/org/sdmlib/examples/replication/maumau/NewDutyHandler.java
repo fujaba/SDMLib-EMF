@@ -2,10 +2,8 @@ package org.sdmlib.examples.replication.maumau;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.LinkedList;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 public class NewDutyHandler extends ChangeHandler

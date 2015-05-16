@@ -21,10 +21,10 @@
    
 package org.sdmlib.examples.replication.maumau;
 
-import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
+
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import java.beans.PropertyChangeListener;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class Card implements PropertyChangeInterface
 {

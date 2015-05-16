@@ -1,17 +1,13 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
-import org.sdmlib.examples.replication.maumau.CardControler;
-import org.sdmlib.examples.replication.maumau.creators.CardControlerSet;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.models.pattern.AttributeConstraint;
 import org.eclipse.swt.widgets.Label;
+import org.sdmlib.examples.replication.maumau.Card;
+import org.sdmlib.examples.replication.maumau.CardControler;
 import org.sdmlib.examples.replication.maumau.CardListener;
-import org.sdmlib.models.pattern.PatternLink;
-import org.sdmlib.examples.replication.maumau.creators.MultiMauMauControlerPO;
-import org.sdmlib.models.pattern.LinkConstraint;
-import org.sdmlib.examples.replication.maumau.creators.CardControlerPO;
 import org.sdmlib.examples.replication.maumau.MultiMauMauControler;
+import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.LinkConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class CardControlerPO extends PatternObject<CardControlerPO, CardControler>
 {

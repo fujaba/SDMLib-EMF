@@ -1,8 +1,7 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.Value;
-import org.sdmlib.examples.replication.maumau.creators.ValueSet;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class ValuePO extends PatternObject<ValuePO, Value>
 {

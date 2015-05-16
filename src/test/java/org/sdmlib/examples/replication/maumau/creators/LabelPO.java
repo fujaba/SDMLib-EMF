@@ -1,9 +1,8 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.eclipse.swt.widgets.Label;
-import org.sdmlib.examples.replication.maumau.creators.LabelSet;
 import org.sdmlib.models.pattern.AttributeConstraint;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class LabelPO extends PatternObject<LabelPO, Label>
 {

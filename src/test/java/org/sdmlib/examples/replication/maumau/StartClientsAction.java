@@ -3,8 +3,6 @@ package org.sdmlib.examples.replication.maumau;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.sdmlib.replication.Lane;
-
 class StartClientsAction implements PropertyChangeListener
 {
    /**

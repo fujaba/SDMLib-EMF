@@ -1,8 +1,7 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.CardListener;
-import org.sdmlib.examples.replication.maumau.creators.CardListenerSet;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class CardListenerPO extends PatternObject<CardListenerPO, CardListener>
 {

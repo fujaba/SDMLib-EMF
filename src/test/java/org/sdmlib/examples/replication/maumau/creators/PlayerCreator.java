@@ -1,10 +1,10 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.examples.replication.maumau.creators.CreatorCreator;
-import org.sdmlib.serialization.interfaces.EntityFactory;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.replication.maumau.Player;
 import org.sdmlib.examples.replication.maumau.Holder;
+import org.sdmlib.examples.replication.maumau.Player;
+import org.sdmlib.serialization.EntityFactory;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class PlayerCreator extends EntityFactory
 {

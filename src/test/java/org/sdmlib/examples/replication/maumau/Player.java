@@ -21,15 +21,12 @@
    
 package org.sdmlib.examples.replication.maumau;
 
-import org.sdmlib.utils.PropertyChangeInterface;
 import java.beans.PropertyChangeSupport;
-import org.sdmlib.utils.StrUtil;
+
 import org.sdmlib.examples.replication.maumau.creators.PlayerSet;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import java.util.LinkedHashSet;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.examples.replication.maumau.Holder;
-import java.beans.PropertyChangeListener;
+import org.sdmlib.serialization.PropertyChangeInterface;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class Player extends Holder implements PropertyChangeInterface
 {

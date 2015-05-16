@@ -27,9 +27,8 @@ import java.beans.PropertyChangeSupport;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.sdmlib.examples.replication.maumau.creators.CardControlerSet;
-import org.sdmlib.utils.PropertyChangeInterface;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class CardControler implements PropertyChangeListener, PropertyChangeInterface
 {

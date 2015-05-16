@@ -1,29 +1,16 @@
 package org.sdmlib.examples.replication.maumau;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import org.sdmlib.examples.replication.ChatRoot;
-import org.sdmlib.examples.replication.SWTSharedSpace;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.replication.ChangeHistory;
 import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
-import org.sdmlib.replication.ReplicationChannel;
-import org.sdmlib.replication.ReplicationServer;
-import org.sdmlib.replication.SharedModelRoot;
-import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.replication.RemoteTaskBoard;
-import org.sdmlib.serialization.json.JsonIdMap;
-import org.sdmlib.serialization.json.JsonObject;
+import org.sdmlib.replication.ReplicationChannel;
+import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.storyboards.StoryboardWall;
-import org.sdmlib.storyboards.creators.StoryboardWallCreator;
+
+import de.uniks.networkparser.json.JsonIdMap;
+import de.uniks.networkparser.json.JsonObject;
 
 
 public class MultiMauMauClientInitTask implements Runnable

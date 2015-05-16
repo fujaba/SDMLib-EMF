@@ -1,14 +1,9 @@
 package org.sdmlib.examples.replication.maumau;
 
-import static org.sdmlib.models.classes.Role.R.MANY;
-import static org.sdmlib.models.classes.Role.R.ONE;
-
 import org.eclipse.swt.widgets.Label;
 import org.junit.Test;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.Role.R;
-import org.sdmlib.replication.Lane;
 import org.sdmlib.storyboards.Storyboard;
 
 public class MauMauModel

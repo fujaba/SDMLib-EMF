@@ -3,7 +3,6 @@ package org.sdmlib.examples.replication.maumau;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.SharedSpace;
 
 class DumpHtmlAndTerminateTestAction implements PropertyChangeListener

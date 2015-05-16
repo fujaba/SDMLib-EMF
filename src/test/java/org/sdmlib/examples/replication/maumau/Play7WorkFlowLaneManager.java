@@ -23,28 +23,20 @@ package org.sdmlib.examples.replication.maumau;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.junit.Assert;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import org.sdmlib.examples.replication.maumau.creators.LabelSet;
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
+import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.replication.ReplicationChannel;
 import org.sdmlib.replication.SharedSpace;
-import org.sdmlib.replication.RemoteTaskBoard;
+import org.sdmlib.serialization.PropertyChangeInterface;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.swt.ScreenShotRunnable;
-import org.sdmlib.utils.PropertyChangeInterface;
-import java.beans.PropertyChangeSupport;
 
 public class Play7WorkFlowLaneManager  implements PropertyChangeListener, PropertyChangeInterface
 {

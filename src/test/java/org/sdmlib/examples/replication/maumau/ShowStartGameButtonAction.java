@@ -10,7 +10,6 @@ import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Node;
 import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.swt.ScreenShotRunnable;
 
 public class ShowStartGameButtonAction implements PropertyChangeListener
 {

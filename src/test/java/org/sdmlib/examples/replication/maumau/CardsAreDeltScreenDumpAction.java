@@ -10,11 +10,9 @@ import org.eclipse.swt.widgets.Label;
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.examples.replication.maumau.creators.LabelSet;
 import org.sdmlib.replication.BoardTask;
-import org.sdmlib.replication.Lane;
 import org.sdmlib.replication.Node;
 import org.sdmlib.replication.RemoteTaskBoard;
 import org.sdmlib.storyboards.Storyboard;
-import org.sdmlib.swt.ScreenShotRunnable;
 
 public class CardsAreDeltScreenDumpAction implements PropertyChangeListener
 {

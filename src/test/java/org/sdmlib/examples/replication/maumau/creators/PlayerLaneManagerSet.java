@@ -22,10 +22,9 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
+
 import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
 import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.ObjectSet;
-import java.lang.Object;
 
 public class PlayerLaneManagerSet extends LinkedHashSet<PlayerLaneManager> implements org.sdmlib.models.modelsets.ModelSet
 {

@@ -8,6 +8,7 @@ import org.sdmlib.examples.replication.maumau.Duty;
 import org.sdmlib.examples.replication.maumau.Holder;
 import org.sdmlib.examples.replication.maumau.MauMau;
 import org.sdmlib.examples.replication.maumau.MultiMauMauControler;
+import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
 import org.sdmlib.examples.replication.maumau.Player;
 import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
 import org.sdmlib.examples.replication.maumau.ReplicationMauMauServer;
@@ -15,24 +16,6 @@ import org.sdmlib.examples.replication.maumau.ServerLaneManager;
 import org.sdmlib.examples.replication.maumau.Suit;
 import org.sdmlib.examples.replication.maumau.Value;
 import org.sdmlib.models.pattern.Pattern;
-import org.sdmlib.replication.creators.LaneSet;
-import org.sdmlib.examples.replication.maumau.creators.MauMauPO;
-import org.sdmlib.examples.replication.maumau.creators.CardPO;
-import org.sdmlib.examples.replication.maumau.creators.HolderPO;
-import org.sdmlib.examples.replication.maumau.creators.PlayerPO;
-import org.sdmlib.examples.replication.maumau.creators.DutyPO;
-import org.sdmlib.examples.replication.maumau.creators.ReplicationMauMauServerPO;
-import org.sdmlib.examples.replication.maumau.creators.ServerLaneManagerPO;
-import org.sdmlib.examples.replication.maumau.creators.Play7WorkFlowLaneManagerPO;
-import org.sdmlib.examples.replication.maumau.Play7WorkFlowLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.PlayerLaneManagerPO;
-import org.sdmlib.examples.replication.maumau.creators.MultiMauMauControlerPO;
-import org.sdmlib.examples.replication.maumau.creators.CardControlerPO;
-import org.sdmlib.examples.replication.maumau.creators.LabelPO;
-import org.sdmlib.examples.replication.maumau.creators.SuitPO;
-import org.sdmlib.examples.replication.maumau.creators.ValuePO;
-import org.sdmlib.examples.replication.maumau.creators.ObjectPO;
-import org.sdmlib.examples.replication.maumau.creators.CardListenerPO;
 
 public class ModelPattern extends Pattern
 {

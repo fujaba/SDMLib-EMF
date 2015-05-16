@@ -1,10 +1,8 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.models.pattern.PatternObject;
 import org.sdmlib.examples.replication.maumau.PlayerLaneManager;
-import org.sdmlib.examples.replication.maumau.creators.PlayerLaneListenerSet;
 import org.sdmlib.models.pattern.AttributeConstraint;
-import org.sdmlib.replication.creators.LaneSet;
+import org.sdmlib.models.pattern.PatternObject;
 
 public class PlayerLaneListenerPO extends PatternObject<PlayerLaneListenerPO, PlayerLaneManager>
 {

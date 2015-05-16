@@ -21,18 +21,14 @@
    
 package org.sdmlib.examples.replication.maumau.creators;
 
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
 import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.Suit;
-import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.ValueSet;
-import org.sdmlib.examples.replication.maumau.Value;
-import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
-import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.HolderSet;
 import org.sdmlib.examples.replication.maumau.Holder;
+import org.sdmlib.examples.replication.maumau.MauMau;
+import org.sdmlib.examples.replication.maumau.Suit;
+import org.sdmlib.examples.replication.maumau.Value;
+import org.sdmlib.models.modelsets.StringList;
 
 public class CardSet extends LinkedList<Card> implements org.sdmlib.models.modelsets.ModelSet
 {

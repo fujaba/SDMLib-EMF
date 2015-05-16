@@ -1,10 +1,10 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
-import org.sdmlib.examples.replication.maumau.creators.CreatorCreator;
-import org.sdmlib.serialization.interfaces.EntityFactory;
-import org.sdmlib.serialization.json.JsonIdMap;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.sdmlib.serialization.EntityFactory;
+
+import de.uniks.networkparser.json.JsonIdMap;
 
 public class LabelCreator extends EntityFactory
 {

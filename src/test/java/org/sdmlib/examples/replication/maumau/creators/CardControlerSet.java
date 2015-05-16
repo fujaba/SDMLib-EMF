@@ -22,16 +22,13 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.examples.replication.maumau.CardControler;
-import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
-import org.sdmlib.examples.replication.maumau.Card;
-import org.sdmlib.examples.replication.maumau.creators.LabelSet;
+
 import org.eclipse.swt.widgets.Label;
-import org.sdmlib.examples.replication.maumau.creators.CardListenerSet;
+import org.sdmlib.examples.replication.maumau.Card;
+import org.sdmlib.examples.replication.maumau.CardControler;
 import org.sdmlib.examples.replication.maumau.CardListener;
-import org.sdmlib.examples.replication.maumau.creators.MultiMauMauControlerSet;
 import org.sdmlib.examples.replication.maumau.MultiMauMauControler;
+import org.sdmlib.models.modelsets.StringList;
 
 public class CardControlerSet extends LinkedHashSet<CardControler> implements org.sdmlib.models.modelsets.ModelSet
 {

@@ -22,12 +22,11 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.examples.replication.maumau.Holder;
-import org.sdmlib.models.modelsets.StringList;
-import org.sdmlib.examples.replication.maumau.creators.MauMauSet;
-import org.sdmlib.examples.replication.maumau.MauMau;
-import org.sdmlib.examples.replication.maumau.creators.CardSet;
+
 import org.sdmlib.examples.replication.maumau.Card;
+import org.sdmlib.examples.replication.maumau.Holder;
+import org.sdmlib.examples.replication.maumau.MauMau;
+import org.sdmlib.models.modelsets.StringList;
 
 public class HolderSet extends LinkedHashSet<Holder> implements org.sdmlib.models.modelsets.ModelSet
 {

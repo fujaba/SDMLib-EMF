@@ -22,7 +22,7 @@
 package org.sdmlib.examples.replication.maumau.creators;
 
 import java.util.LinkedHashSet;
-import org.sdmlib.replication.creators.LaneSet;
+
 import org.sdmlib.models.modelsets.StringList;
 
 public class LaneSetSet extends LinkedHashSet<LaneSet> implements org.sdmlib.models.modelsets.ModelSet

@@ -23,15 +23,11 @@ package org.sdmlib.examples.replication.maumau;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.LinkedHashSet;
+import java.beans.PropertyChangeSupport;
 
 import org.sdmlib.replication.BoardTask;
 import org.sdmlib.replication.Lane;
-import org.sdmlib.replication.Task;
-import org.sdmlib.replication.creators.LaneSet;
-import org.sdmlib.utils.PropertyChangeInterface;
-
-import java.beans.PropertyChangeSupport;
+import org.sdmlib.serialization.PropertyChangeInterface;
 
 public class PlayerLaneManager implements PropertyChangeListener, PropertyChangeInterface
 {

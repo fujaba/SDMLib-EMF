@@ -5,8 +5,8 @@ import java.util.Random;
 
 import org.sdmlib.examples.replication.maumau.creators.CardSet;
 import org.sdmlib.replication.BoardTask;
-import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.replication.RemoteTaskBoard;
+import org.sdmlib.replication.SharedSpace;
 import org.sdmlib.storyboards.Storyboard;
 
 public class ServerStartGameHandler 
