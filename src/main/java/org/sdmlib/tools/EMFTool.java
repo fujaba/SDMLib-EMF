@@ -294,12 +294,12 @@ public class EMFTool
                {
                   if (eref.getEOpposite() == null)
                   {
-                	  if(eref.getUpperBound()<0 || eref.getUpperBound() > 1) {
+//                	  if(eref.getUpperBound()<0 || eref.getUpperBound() > 1) {
                 		  refs.add(eref);	  
-                	  }else {
+//                	  }else {
 //                	  DataType.ref("java.util.ArrayList<"+eref.getEReferenceType().getName()+">");
-                		  clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
-                	  }
+//                		  clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
+//                	  }
                   }
                   else if ( ! refs.contains(eref.getEOpposite()))
                   {
