@@ -13,14 +13,13 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversityPO;
 import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
 import org.sdmlib.models.pattern.Match;
 import org.sdmlib.storyboards.Kanban;
 import org.sdmlib.storyboards.Storyboard;
-
-import de.uniks.networkparser.logic.Condition;
 
 public class SDMUsageOfEMFStudyRight
 {
@@ -29,7 +28,7 @@ public class SDMUsageOfEMFStudyRight
    {
       Storyboard story = new Storyboard();
       
-      story.add("Extend the class model:", Storyboard.DONE, "zuendorf", "17.01.2014 16:35:42", 40, 0);
+      story.add("Extend the class model:");
       
       ClassModel model = new ClassModel();
       
@@ -134,6 +133,8 @@ public class SDMUsageOfEMFStudyRight
       story.markCodeStart();
  
       int assignmentPoints = university.getRoomsSet().getAssignments().getPoints().sum();
+      int assignmentPoints2 = university.getRoomsSet().getAssignments()
+            .stream().mapToInt(Assignment::getPoints).sum();
       
       int donePoints = university.getStudentsSet().getDone().getPoints().sum();
       
@@ -190,13 +191,7 @@ public class SDMUsageOfEMFStudyRight
       // Java 8:
       // (Room elem) -> elem.getCredits() > 20
       
-      RoomSet roomsEven = university.getRoomsSet().has(new Condition<Room>() {
-         public boolean check(Room elem)
-         {
-            return elem.getCredits() % 2 == 0;
-         }
-
-      });
+      RoomSet roomsEven = university.getRoomsSet().has(elem -> elem.getCredits() % 2 == 0);
       
       story.addCode();
       
@@ -232,7 +227,9 @@ public class SDMUsageOfEMFStudyRight
       
       story.markCodeStart();
       
-      RoomPO roomPO = university.getRoomsSet().hasRoomPO();
+      UniversityPO universityPO = new UniversityPO(university);
+      
+      RoomPO roomPO = universityPO.hasRooms();
             
       StudentPO stud1PO = roomPO.hasStudents();      
       
@@ -358,11 +355,6 @@ public class SDMUsageOfEMFStudyRight
       
       story.addObjectDiagramWith(university.getStudents(), university.getStudentsSet().getIn());
       
-      story.addLogEntry(Kanban.DONE, "zuendorf", "24.02.2014 20:03:42 EST", 2, 0, "added createXY shortcuts for patterns");
-      story.addLogEntry(Kanban.DONE, "zuendorf", "25.02.2014 22:11:42 EST", 2, 0, "switched to roomSet.hasRoomPO()");
-      story.addLogEntry(Kanban.DONE, "zuendorf", "06.07.2014 23:51:42 EST", 8, 0, "port to refactored version and enhanced code generation works");
-
-
       story.dumpHTML();
    }
 }

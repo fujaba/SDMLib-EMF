@@ -27,6 +27,8 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssista
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class TeachingAssistantImplCreator extends EntityFactory
 {
@@ -39,6 +41,11 @@ public class TeachingAssistantImplCreator extends EntityFactory
       Student.PROPERTY_MOTIVATION,
       Student.PROPERTY_ASSIGNMENTPOINTS,
       TeachingAssistant.PROPERTY_ROOM,
+      Student.PROPERTY_UNI,
+      Student.PROPERTY_IN,
+      Student.PROPERTY_FRIENDSREV,
+      Student.PROPERTY_FRIENDS,
+      Student.PROPERTY_DONE,
    };
    
    @Override
@@ -98,6 +105,31 @@ public class TeachingAssistantImplCreator extends EntityFactory
       {
          return ((TeachingAssistantImpl) target).getRoom();
       }
+
+      if (TeachingAssistantImpl.PROPERTY_UNI.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistantImpl) target).getUni();
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_IN.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistantImpl) target).getIn();
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_FRIENDSREV.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistantImpl) target).getFriendsRev();
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_FRIENDS.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistantImpl) target).getFriends();
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_DONE.equalsIgnoreCase(attribute))
+      {
+         return ((TeachingAssistantImpl) target).getDone();
+      }
       
       return null;
    }
@@ -149,6 +181,54 @@ public class TeachingAssistantImplCreator extends EntityFactory
       if (TeachingAssistantImpl.PROPERTY_ROOM.equalsIgnoreCase(attrName))
       {
          ((TeachingAssistantImpl) target).setRoom((Room) value);
+         return true;
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_UNI.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).setUni((University) value);
+         return true;
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_IN.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).setIn((Room) value);
+         return true;
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_FRIENDSREV.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withFriendsRev((Student) value);
+         return true;
+      }
+      
+      if ((TeachingAssistantImpl.PROPERTY_FRIENDSREV + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withoutFriendsRev((Student) value);
+         return true;
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_FRIENDS.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withFriends((Student) value);
+         return true;
+      }
+      
+      if ((TeachingAssistantImpl.PROPERTY_FRIENDS + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withoutFriends((Student) value);
+         return true;
+      }
+
+      if (TeachingAssistantImpl.PROPERTY_DONE.equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withDone((Assignment) value);
+         return true;
+      }
+      
+      if ((TeachingAssistantImpl.PROPERTY_DONE + JsonIdMap.REMOVE).equalsIgnoreCase(attrName))
+      {
+         ((TeachingAssistantImpl) target).withoutDone((Assignment) value);
          return true;
       }
       

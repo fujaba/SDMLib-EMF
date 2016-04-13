@@ -427,4 +427,6 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       return this;
    }
 
+
+   public static final TeachingAssistantSet EMPTY_SET = new TeachingAssistantSet().withReadOnly(true);
 }

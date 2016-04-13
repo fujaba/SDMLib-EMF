@@ -13,6 +13,10 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
 import org.sdmlib.StrUtil;
+import org.sdmlib.serialization.PropertyChangeInterface;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +32,7 @@ import org.sdmlib.StrUtil;
  *
  * @generated
  */
-public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant
+public class TeachingAssistantImpl extends StudentImpl implements TeachingAssistant, PropertyChangeInterface
 {
    /**
     * The cached value of the '{@link #getRoom() <em>Room</em>}' reference.
@@ -297,6 +301,11 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
       result.append(" (noOfHours: ");
       result.append(noOfHours);
       result.append(')');
+      result.append(" ").append(this.getName());
+      result.append(" ").append(this.getStudId());
+      result.append(" ").append(this.getCredits());
+      result.append(" ").append(this.getMotivation());
+      result.append(" ").append(this.getAssignmentPoints());
       return result.toString();
    }
 
@@ -463,6 +472,11 @@ public class TeachingAssistantImpl extends StudentImpl implements TeachingAssist
    public void removeYou()
    {
       setRoom(null);
+      setUni(null);
+      setIn(null);
+      withoutFriendsRev(this.getFriendsRev().toArray(new Student[this.getFriendsRev().size()]));
+      withoutFriends(this.getFriends().toArray(new Student[this.getFriends().size()]));
+      withoutDone(this.getDone().toArray(new Assignment[this.getDone().size()]));
       getPropertyChangeSupport().firePropertyChange("REMOVE_YOU", this, null);
    }
 

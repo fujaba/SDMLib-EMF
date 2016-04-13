@@ -237,4 +237,6 @@ public class UniversityImplSet extends SDMSet<UniversityImpl>
       return this;
    }
 
+
+   public static final UniversityImplSet EMPTY_SET = new UniversityImplSet().withReadOnly(true);
 }

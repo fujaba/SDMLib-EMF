@@ -29,6 +29,13 @@ import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.ObjectSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversitySet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import java.util.Collections;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 
 public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
 {
@@ -422,6 +429,326 @@ public class TeachingAssistantImplSet extends SDMSet<TeachingAssistantImpl>
       for (TeachingAssistantImpl obj : this)
       {
          obj.withRoom(value);
+      }
+      
+      return this;
+   }
+
+
+   public static final TeachingAssistantImplSet EMPTY_SET = new TeachingAssistantImplSet().withReadOnly(true);
+   public UniversitySet getUni()
+   {
+      UniversitySet result = new UniversitySet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.add(obj.getUni());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasUni(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection<?>) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantImplSet answer = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if (neighbors.contains(obj.getUni()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public TeachingAssistantImplSet withUni(University value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withUni(value);
+      }
+      
+      return this;
+   }
+
+   public RoomSet getIn()
+   {
+      RoomSet result = new RoomSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.add(obj.getIn());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasIn(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection<?>) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantImplSet answer = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if (neighbors.contains(obj.getIn()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public TeachingAssistantImplSet withIn(Room value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withIn(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet getFriendsRev()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.addAll(obj.getFriendsRev());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasFriendsRev(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection<?>) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantImplSet answer = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getFriendsRev()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+
+   public StudentSet getFriendsRevTransitive()
+   {
+      StudentSet todo = new StudentSet().with(this);
+      
+      StudentSet result = new StudentSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Student current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getFriendsRev().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet withFriendsRev(Student value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withFriendsRev(value);
+      }
+      
+      return this;
+   }
+
+   public TeachingAssistantImplSet withoutFriendsRev(Student value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withoutFriendsRev(value);
+      }
+      
+      return this;
+   }
+
+   public StudentSet getFriends()
+   {
+      StudentSet result = new StudentSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.addAll(obj.getFriends());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasFriends(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection<?>) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantImplSet answer = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getFriends()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+
+   public StudentSet getFriendsTransitive()
+   {
+      StudentSet todo = new StudentSet().with(this);
+      
+      StudentSet result = new StudentSet();
+      
+      while ( ! todo.isEmpty())
+      {
+         Student current = todo.first();
+         
+         todo.remove(current);
+         
+         if ( ! result.contains(current))
+         {
+            result.add(current);
+            
+            todo.with(current.getFriends().minus(result));
+         }
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet withFriends(Student value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withFriends(value);
+      }
+      
+      return this;
+   }
+
+   public TeachingAssistantImplSet withoutFriends(Student value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withoutFriends(value);
+      }
+      
+      return this;
+   }
+
+   public AssignmentSet getDone()
+   {
+      AssignmentSet result = new AssignmentSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         result.addAll(obj.getDone());
+      }
+      
+      return result;
+   }
+
+   public TeachingAssistantImplSet hasDone(Object value)
+   {
+      ObjectSet neighbors = new ObjectSet();
+
+      if (value instanceof Collection)
+      {
+         neighbors.addAll((Collection<?>) value);
+      }
+      else
+      {
+         neighbors.add(value);
+      }
+      
+      TeachingAssistantImplSet answer = new TeachingAssistantImplSet();
+      
+      for (TeachingAssistantImpl obj : this)
+      {
+         if ( ! Collections.disjoint(neighbors, obj.getDone()))
+         {
+            answer.add(obj);
+         }
+      }
+      
+      return answer;
+   }
+
+   public TeachingAssistantImplSet withDone(Assignment value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withDone(value);
+      }
+      
+      return this;
+   }
+
+   public TeachingAssistantImplSet withoutDone(Assignment value)
+   {
+      for (TeachingAssistantImpl obj : this)
+      {
+         obj.withoutDone(value);
       }
       
       return this;

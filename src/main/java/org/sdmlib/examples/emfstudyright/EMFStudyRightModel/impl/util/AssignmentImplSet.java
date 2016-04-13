@@ -280,4 +280,6 @@ public class AssignmentImplSet extends SDMSet<AssignmentImpl>
       return this;
    }
 
+
+   public static final AssignmentImplSet EMPTY_SET = new AssignmentImplSet().withReadOnly(true);
 }

@@ -208,7 +208,7 @@ public class EMFTool
 
                      Card tgtCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
                      
-                     srcSDMClass.withUniDirectionalAssoc(tgtSDMClass, eref.getName(), tgtCard);
+                     srcSDMClass.withAssoc(tgtSDMClass, eref.getName(), tgtCard);
 
                      doneERefs.add(eref);
                   }

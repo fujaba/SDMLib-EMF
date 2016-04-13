@@ -237,4 +237,6 @@ public class UniversitySet extends SDMSet<University>
       return this;
    }
 
+
+   public static final UniversitySet EMPTY_SET = new UniversitySet().withReadOnly(true);
 }

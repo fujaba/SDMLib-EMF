@@ -565,4 +565,6 @@ public class RoomSet extends SDMSet<Room>
       return this;
    }
 
+
+   public static final RoomSet EMPTY_SET = new RoomSet().withReadOnly(true);
 }

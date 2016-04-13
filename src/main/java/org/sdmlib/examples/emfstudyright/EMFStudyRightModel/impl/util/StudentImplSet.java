@@ -652,4 +652,6 @@ public class StudentImplSet extends SDMSet<StudentImpl>
       return this;
    }
 
+
+   public static final StudentImplSet EMPTY_SET = new StudentImplSet().withReadOnly(true);
 }

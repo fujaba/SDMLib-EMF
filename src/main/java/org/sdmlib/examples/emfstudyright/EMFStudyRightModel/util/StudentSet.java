@@ -651,4 +651,6 @@ public class StudentSet extends SDMSet<Student>
       return this;
    }
 
+
+   public static final StudentSet EMPTY_SET = new StudentSet().withReadOnly(true);
 }

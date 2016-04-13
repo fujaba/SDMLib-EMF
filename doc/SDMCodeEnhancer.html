@@ -1,194 +1,219 @@
+<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href="includes/diagramstyle.css" rel="stylesheet" type="text/css">
 
-<script src="includes/dagre.js"></script>
+<script src="includes/dagre.min.js"></script>
 <script src="includes/drawer.js"></script>
 <script src="includes/graph.js"></script>
-</head><body onload="init();">
-<p>Storyboard <a href='org/sdmlib/tools/SDMCodeEnhancer.java' type='text/x-java'>SDMCodeEnhancer</a></p>
+</head><body>
+<p>Storyboard <a href='.././src/main/java/org/sdmlib/tools/SDMCodeEnhancer.java' type='text/x-java'>SDMCodeEnhancer</a></p>
 <p>SDMCodeEnhancer</p>
 <script>
    var json = {
    "typ":"class",
-   "value":{
-      "nodes":[
+   "nodes":[
+   {
+         "typ":"node",
+         "id":"University",
+         "attributes":[
+         "name : String"
+         ]
+      },
       {
-            "typ":"node",
-            "id":"University",
-            "attributes":[
-            "name : String"
-            ]
-         },
-         {
-            "typ":"node",
-            "id":"UniversityImpl",
-            "attributes":[]
-         },
-         {
-            "typ":"node",
-            "id":"Student",
-            "attributes":[
-            "name : String",
-               "studId : String",
-               "credits : int",
-               "motivation : int",
-               "assignmentPoints : int"
-            ]
-         },
-         {
-            "typ":"node",
-            "id":"StudentImpl",
-            "attributes":[]
-         },
-         {
-            "typ":"node",
-            "id":"TeachingAssistant",
-            "attributes":[
-            "noOfHours : int"
-            ]
-         },
-         {
-            "typ":"node",
-            "id":"TeachingAssistantImpl",
-            "attributes":[]
-         },
-         {
-            "typ":"node",
+         "typ":"node",
+         "id":"UniversityImpl"
+      },
+      {
+         "typ":"node",
+         "id":"Student",
+         "attributes":[
+         "name : String",
+            "studId : String",
+            "credits : int",
+            "motivation : int",
+            "assignmentPoints : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"StudentImpl"
+      },
+      {
+         "typ":"node",
+         "id":"TeachingAssistant",
+         "attributes":[
+         "noOfHours : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"TeachingAssistantImpl"
+      },
+      {
+         "typ":"node",
+         "id":"Room",
+         "attributes":[
+         "topic : String",
+            "credits : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"RoomImpl"
+      },
+      {
+         "typ":"node",
+         "id":"Assignment",
+         "attributes":[
+         "name : String",
+            "points : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"AssignmentImpl"
+      }
+   ],
+   "edges":[
+   {
+         "typ":"edge",
+         "source":{
             "id":"Room",
-            "attributes":[
-            "topic : String",
-               "credits : int"
-            ]
+            "cardinality":"many",
+            "property":"rooms"
          },
-         {
-            "typ":"node",
-            "id":"RoomImpl",
-            "attributes":[]
-         },
-         {
-            "typ":"node",
-            "id":"Assignment",
-            "attributes":[
-            "name : String",
-               "points : int"
-            ]
-         },
-         {
-            "typ":"node",
-            "id":"AssignmentImpl",
-            "attributes":[]
+         "target":{
+            "id":"University",
+            "cardinality":"one",
+            "property":"uni"
          }
-      ],
-      "edges":[
+      },
       {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"one",
-            "sourceproperty":"rooms",
-            "targetproperty":"uni",
-            "source":"Room",
-            "target":"University"
+         "typ":"edge",
+         "source":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
          },
-         {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"one",
-            "sourceproperty":"students",
-            "targetproperty":"uni",
-            "source":"Student",
-            "target":"University"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"one",
-            "targetcardinality":"many",
-            "sourceproperty":"in",
-            "targetproperty":"students",
-            "source":"Room",
-            "target":"Student"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"many",
-            "sourceproperty":"friends",
-            "targetproperty":"friendsRev",
-            "source":"Student",
-            "target":"Student"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"many",
-            "sourceproperty":"done",
-            "targetproperty":"students",
-            "source":"Assignment",
-            "target":"Student"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"one",
-            "targetcardinality":"many",
-            "sourceproperty":"room",
-            "targetproperty":"tas",
-            "source":"Room",
-            "target":"TeachingAssistant"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"many",
-            "sourceproperty":"doors",
-            "targetproperty":"doorsRev",
-            "source":"Room",
-            "target":"Room"
-         },
-         {
-            "typ":"edge",
-            "sourcecardinality":"many",
-            "targetcardinality":"one",
-            "sourceproperty":"assignments",
-            "targetproperty":"room",
-            "source":"Assignment",
-            "target":"Room"
-         },
-         {
-            "typ":"generalisation",
-            "source":"UniversityImpl",
-            "target":"University"
-         },
-         {
-            "typ":"generalisation",
-            "source":"StudentImpl",
-            "target":"Student"
-         },
-         {
-            "typ":"generalisation",
-            "source":"TeachingAssistant",
-            "target":"Student"
-         },
-         {
-            "typ":"generalisation",
-            "source":"TeachingAssistantImpl",
-            "target":"TeachingAssistant"
-         },
-         {
-            "typ":"generalisation",
-            "source":"RoomImpl",
-            "target":"Room"
-         },
-         {
-            "typ":"generalisation",
-            "source":"AssignmentImpl",
-            "target":"Assignment"
+         "target":{
+            "id":"University",
+            "cardinality":"one",
+            "property":"uni"
          }
-      ]
-   }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"in"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
+         }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"friends"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"friendsRev"
+         }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Assignment",
+            "cardinality":"many",
+            "property":"done"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
+         }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"room"
+         },
+         "target":{
+            "id":"TeachingAssistant",
+            "cardinality":"many",
+            "property":"tas"
+         }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Room",
+            "cardinality":"many",
+            "property":"doors"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"many",
+            "property":"doorsRev"
+         }
+      },
+      {
+         "typ":"edge",
+         "source":{
+            "id":"Assignment",
+            "cardinality":"many",
+            "property":"assignments"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"room"
+         }
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"UniversityImpl"},
+         "target":{"id":"University"}
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"StudentImpl"},
+         "target":{"id":"Student"}
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"TeachingAssistant"},
+         "target":{"id":"Student"}
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"TeachingAssistantImpl"},
+         "target":{"id":"TeachingAssistant"}
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"RoomImpl"},
+         "target":{"id":"Room"}
+      },
+      {
+         "typ":"generalisation",
+         "source":{"id":"AssignmentImpl"},
+         "target":{"id":"Assignment"}
+      }
+   ]
 }   ;
-   json["options"]={"canvasid":"canvasSDMCodeEnhancerClassDiagram1", "display":"html", "fontsize":10,"bar":true};   var g = new Graph(json);
-   g.layout(100,100);
+   new Graph(json, {"canvasid":"canvasSDMCodeEnhancerClassDiagram1", "display":"html", "fontsize":10,"bar":true}).layout(100,100);
 </script>
 
 </body>

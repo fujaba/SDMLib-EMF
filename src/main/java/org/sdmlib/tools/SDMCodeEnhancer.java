@@ -28,12 +28,12 @@ public class SDMCodeEnhancer
    {
       story = new Storyboard();
       
-      main(new String[] {"src/main/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel"});
+      main("src/main/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel");
       
       story.dumpHTML();
    }
    
-   public static void main(String[] args)
+   public static void main(String... args)
    {
       String rootDir = args[0];
       

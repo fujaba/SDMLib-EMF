@@ -566,4 +566,6 @@ public class RoomImplSet extends SDMSet<RoomImpl>
       return this;
    }
 
+
+   public static final RoomImplSet EMPTY_SET = new RoomImplSet().withReadOnly(true);
 }

@@ -7,6 +7,13 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.util.TeachingAssistantImplPO;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversityPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentPO;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 
 public class TeachingAssistantImplPO extends PatternObject<TeachingAssistantImplPO, TeachingAssistantImpl>
 {
@@ -386,6 +393,176 @@ public class TeachingAssistantImplPO extends PatternObject<TeachingAssistantImpl
       if (this.getPattern().getHasMatch())
       {
          return ((TeachingAssistant) this.getCurrentMatch()).getRoom();
+      }
+      return null;
+   }
+
+   public UniversityPO hasUni()
+   {
+      UniversityPO result = new UniversityPO(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University[]{});
+      
+      result.setModifier(this.getPattern().getModifier());
+      super.hasLink(Student.PROPERTY_UNI, result);
+      
+      return result;
+   }
+
+   public UniversityPO createUni()
+   {
+      return this.startCreate().hasUni().endCreate();
+   }
+
+   public TeachingAssistantImplPO hasUni(UniversityPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_UNI);
+   }
+
+   public TeachingAssistantImplPO createUni(UniversityPO tgt)
+   {
+      return this.startCreate().hasUni(tgt).endCreate();
+   }
+
+   public University getUni()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getUni();
+      }
+      return null;
+   }
+
+   public RoomPO hasIn()
+   {
+      RoomPO result = new RoomPO(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room[]{});
+      
+      result.setModifier(this.getPattern().getModifier());
+      super.hasLink(Student.PROPERTY_IN, result);
+      
+      return result;
+   }
+
+   public RoomPO createIn()
+   {
+      return this.startCreate().hasIn().endCreate();
+   }
+
+   public TeachingAssistantImplPO hasIn(RoomPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_IN);
+   }
+
+   public TeachingAssistantImplPO createIn(RoomPO tgt)
+   {
+      return this.startCreate().hasIn(tgt).endCreate();
+   }
+
+   public Room getIn()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getIn();
+      }
+      return null;
+   }
+
+   public StudentPO hasFriendsRev()
+   {
+      StudentPO result = new StudentPO(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student[]{});
+      
+      result.setModifier(this.getPattern().getModifier());
+      super.hasLink(Student.PROPERTY_FRIENDSREV, result);
+      
+      return result;
+   }
+
+   public StudentPO createFriendsRev()
+   {
+      return this.startCreate().hasFriendsRev().endCreate();
+   }
+
+   public TeachingAssistantImplPO hasFriendsRev(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_FRIENDSREV);
+   }
+
+   public TeachingAssistantImplPO createFriendsRev(StudentPO tgt)
+   {
+      return this.startCreate().hasFriendsRev(tgt).endCreate();
+   }
+
+   public StudentSet getFriendsRev()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getFriendsRev();
+      }
+      return null;
+   }
+
+   public StudentPO hasFriends()
+   {
+      StudentPO result = new StudentPO(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student[]{});
+      
+      result.setModifier(this.getPattern().getModifier());
+      super.hasLink(Student.PROPERTY_FRIENDS, result);
+      
+      return result;
+   }
+
+   public StudentPO createFriends()
+   {
+      return this.startCreate().hasFriends().endCreate();
+   }
+
+   public TeachingAssistantImplPO hasFriends(StudentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_FRIENDS);
+   }
+
+   public TeachingAssistantImplPO createFriends(StudentPO tgt)
+   {
+      return this.startCreate().hasFriends(tgt).endCreate();
+   }
+
+   public StudentSet getFriends()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getFriends();
+      }
+      return null;
+   }
+
+   public AssignmentPO hasDone()
+   {
+      AssignmentPO result = new AssignmentPO(new org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment[]{});
+      
+      result.setModifier(this.getPattern().getModifier());
+      super.hasLink(Student.PROPERTY_DONE, result);
+      
+      return result;
+   }
+
+   public AssignmentPO createDone()
+   {
+      return this.startCreate().hasDone().endCreate();
+   }
+
+   public TeachingAssistantImplPO hasDone(AssignmentPO tgt)
+   {
+      return hasLinkConstraint(tgt, Student.PROPERTY_DONE);
+   }
+
+   public TeachingAssistantImplPO createDone(AssignmentPO tgt)
+   {
+      return this.startCreate().hasDone(tgt).endCreate();
+   }
+
+   public AssignmentSet getDone()
+   {
+      if (this.getPattern().getHasMatch())
+      {
+         return ((Student) this.getCurrentMatch()).getDone();
       }
       return null;
    }

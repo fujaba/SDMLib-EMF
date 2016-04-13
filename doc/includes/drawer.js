@@ -83,7 +83,6 @@ Drawer.prototype.isInTool = function(x, y, ox, oy) {
 };
 Drawer.prototype.createBoard = function(node, graph, listener) {
 	var that = this;
-	
 	this.model = graph;
 	this.toolitems=[];
 	if(listener){
@@ -91,10 +90,9 @@ Drawer.prototype.createBoard = function(node, graph, listener) {
 			this.toolitems.push(listener[i]);
 		}
 	}
-	
 	var board = this.util.create(node);
 	node.model=graph;
-	board.className="Board";
+	board.setAttribute('class', "Board");
 	board.rasterElements=[];
 	board.saveShow=false;
 	board.onmouseover = (function () {
@@ -135,10 +133,10 @@ HTMLDrawer.prototype.getSize = function(item){return {x:item.clientWidth, y:item
 HTMLDrawer.prototype.createContainer = function(graph){
 	return this.createBoard({tag:"div"}, graph, this.getButtons(graph, "HTML"));
 };
-HTMLDrawer.prototype.createCell = function(parent, tag, innerHTML, typ){
+HTMLDrawer.prototype.createCell = function(parent, tag, node, innerHTML, typ){
 	var tr = this.util.create({"tag":'tr'});
 	var cell = this.util.create({"tag":tag, _font:true, value:innerHTML});
-	this.model.createElement(cell, typ);
+	this.model.createElement(cell, typ, node);
 	tr.appendChild(cell);
 	parent.appendChild(tr);
 	return cell;
@@ -168,13 +166,17 @@ HTMLDrawer.prototype.getNode = function(node, draw){
 		node._gui = htmlElement;
 		if(draw) {
 			this.model.draw(node);
+			htmlElement.style.borderColor = "red";
+			if(node.style && node.style.toLowerCase()=="nac"){
+				htmlElement.appendChild(symbolLib.draw(null, {typ:"stop", x:0, y:0}));
+			}
 		}else{
 			this.model.layout(0, 0, node);
 		}
 		this.setSize(htmlElement, node._gui.style.width, node._gui.style.height);
 		return htmlElement;
 	}
-	this.model.addNodeLister(htmlElement, node);
+	this.model.createElement(htmlElement, "class", node);
 	if(node["content"]){
 		node["content"]["width"] = node["content"]["width"] || 0;
 		node["content"]["height"] = node["content"]["height"] || 0;
@@ -192,8 +194,8 @@ HTMLDrawer.prototype.getNode = function(node, draw){
 	table.style.height="100%";
 	htmlElement.appendChild(table);
 	var cell;
-	if(node.head_src){
-		cell = this.createCell(table, "td");
+	if(node["head_src"]){
+		cell = this.createCell(table, "td", node);
 		if(!node.head_img){
 			node.head_img = {};
 			node.head_img.src = node["head_src"];
@@ -203,26 +205,27 @@ HTMLDrawer.prototype.getNode = function(node, draw){
 		cell.appendChild(this.util.createImage(node.head_img));
 	}
 	if(node["headinfo"]){
-		this.createCell(table, "td", node["headinfo"]).className = "head";
-		
+		this.createCell(table, "td", node, node["headinfo"]).className = "head";
 	}
 	var info;
-	if(model.typ.toLowerCase()=="objectdiagram"){
-		info = "<u>"+ node.id.charAt(0).toLowerCase() + node.id.slice(1) + "</u>";
+	if(model.typ.toLowerCase()==="objectdiagram"){
+		info = node.id.charAt(0).toLowerCase() + node.id.slice(1);
 	}else{
 		info = node.id;
 	}
 	if(node.href){
 		info = "<a href=\""+node.href+"\">" + info + "</a>";
 	}
-	this.createCell(table, "th", info, "id");
-
+	cell  = this.createCell(table, "th", node, info, "id");
+	if(model.typ.toLowerCase()==="objectdiagram"){
+		cell.style.textDecorationLine="underline";
+	}
 	cell = null;
 	var first;
 	if(node.attributes){
 		first=true;
 		for(var a = 0; a < node.attributes.length; a++){
-			cell = this.createCell(table, "td", node.attributes[a], "attribute");
+			cell = this.createCell(table, "td", node, node.attributes[a], "attribute");
 			if(!first){
 				cell.className = 'attributes';
 			}else{
@@ -235,7 +238,7 @@ HTMLDrawer.prototype.getNode = function(node, draw){
 		first=true;
 		for(var m=0;m < node.methods.length;m++){
 			var method = node.methods[m];
-			cell = this.createCell(table, "td", node.methods[m], "method");
+			cell = this.createCell(table, "td", node, node.methods[m], "method");
 			if(!first){
 				cell.className = 'methods';
 			}else{
@@ -245,16 +248,25 @@ HTMLDrawer.prototype.getNode = function(node, draw){
 		}
 	}
 	if(!cell){
-		this.createCell(table, "td", "&nbsp;").className = 'first';
+		cell = this.createCell(table, "td", node, "&nbsp;");
+		cell.className = 'first';
+		this.model.createElement(cell, "empty", node);
 	}
 	htmlElement.appendChild(table);
 	htmlElement.node = node;
-	node.htmlElement = htmlElement;
+	node._gui = htmlElement;
 	return htmlElement;
 };
-HTMLDrawer.prototype.createInfo = function(item, calculate, text) {
+HTMLDrawer.prototype.createInfo = function(item, text, angle) {
 	var info = this.util.create({tag:"div", _font:true, model:item, class:"EdgeInfo", value: text});
+	
+	if(angle!=0){
+		info.style.transform="rotate("+angle+"deg)";
+		info.style.msTransform = info.style.MozTransform = info.style.WebkitTransform = info.style.OTransform= "rotate(" + angle + "deg)";
+	}
+	
 	this.setPos(info, item.x, item.y);
+	this.model.createElement(info, "info", item);
 	return info;
 };
 HTMLDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle){
@@ -270,7 +282,7 @@ HTMLDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle){
 	// http://www.mathopenref.com/coorddist.html
 	var length = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 
-	var line = this.util.create({tag: "div", class:"lineElement", style:{width:length, position:"absolute", zIndex:42}});
+	var line = this.util.create({tag: "div", class:"lineElement", style:{width:length+"px", position:"absolute", zIndex:42}});
 	line.style.borderBottomStyle= lineStyle;
 
 	var angle = Math.atan((y1-y2)/(x1-x2));
@@ -282,12 +294,6 @@ HTMLDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle){
 	line.style.transform="rotate("+angle+"rad)";
 	line.style.msTransform = line.style.MozTransform = line.style.WebkitTransform = line.style.OTransform= "rotate(" + angle + "rad)";
 	return line;
-};
-HTMLDrawer.prototype.onLoadImage = function(event){
-	var img = event.target;
-	img.node.width = img.width;
-	img.node.height = img.height;
-	this.model.loader.onLoad(img);
 };
 HTMLDrawer.prototype.drawButton = function(text, action){
 	var btn = this.util.create({tag:"button", _font:true, width:60, height:28, style:"cursor: pointer;", value:text, "onMousedown":action});
@@ -313,9 +319,9 @@ HTMLDrawer.prototype.createPath = function(close, fill, path, angle){
 	return line;
 };
 //				###################################################### SVG ####################################################################################
-var SVGDrawer = function() {this.util = new GraphUtil("http://www.w3.org/2000/svg");}
+var SVGDrawer = function() {this.util = new GraphUtil("http://www.w3.org/2000/svg");this.showButton=true;};
 SVGDrawer.prototype = Object_create(Drawer.prototype);
-SVGDrawer.prototype.getWidth = function(label, calculate){
+SVGDrawer.prototype.getWidth = function(label){
 	var text = this.util.create({tag:"text", _font:true, value:label});
 	text.setAttribute("width", "5px");
 	var board = this.model.board;
@@ -332,7 +338,6 @@ SVGDrawer.prototype.drawDef = function(){
 	child.appendChild( this.util.create({tag:"feOffset", in:"blur-out", dx:2, dy:2}));
 	child.appendChild( this.util.create({tag:"feBlend", in:"SourceGraphic", mode:"normal"}));
 	def.appendChild( child );
-	
 	child = this.util.create({tag:"linearGradient", id:"reflect", x1:"0%", x2:"0%", y1:"50%", y2:"0%", spreadMethod:"reflect"});
 	child.appendChild( this.util.create({tag:"stop", "stop-color":"#aaa",offset:"0%"}) );
 	child.appendChild( this.util.create({tag:"stop", "stop-color":"#eee",offset:"100%"}) );
@@ -349,7 +354,6 @@ SVGDrawer.prototype.drawButton = function(text, action){
 	var btn = this.util.create({tag:"g", "#typ": text});
 	btn.tool={x:0, y: 8, height: 28, width: 60};
 	var rect = this.util.create({tag:"rect", rx:8, x: btn.tool.x, y:btn.tool.y, width:btn.tool.width, height:btn.tool.height, stroke:"#000", filter:"url(#drop-shadow)", class:"saveBtn"});
-	
 	btn.appendChild( rect );
 	btn.appendChild( this.util.create({tag:"text", _font:true, x:(btn.tool.x+10), y:(btn.tool.y+18), fill:"black", value:text, class:"hand"}));
 	this.util.bind(btn, "mousedown", action);
@@ -375,9 +379,9 @@ SVGDrawer.prototype.drawComboBox = function(elements, activText, action){
 		var h = len * 25+6;
 		choicebox.appendChild( this.util.create({tag:"rect", rx:0, x: g.tool.x, y: g.tool.y+28, width:60, height:h, stroke:"#000", fill:"#fff", opacity:"0.7"}));
 		g.tool.maxheight = h + g.tool.minheight;
-		
+
 		g.elements=elements;
-		g.activ = this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": 60, "x": (g.tool.x+10), "y": g.tool.y+20, value: activText})
+		g.activ = this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": 60, "x": (g.tool.x+10), "y": g.tool.y+20, value: activText});
 		g.appendChild(g.activ);
 		var y = 46+g.tool.y;
 		var yr = 28+g.tool.y;
@@ -401,7 +405,6 @@ SVGDrawer.prototype.drawComboBox = function(elements, activText, action){
 		}
 		g.choicebox = choicebox;
 	}
-	
 	g.onclick = (function () {
 		if(g.status=="close"){
 			g.open();
@@ -409,7 +412,6 @@ SVGDrawer.prototype.drawComboBox = function(elements, activText, action){
 			g.close();
 		}
 	});
-	
 	g.close = function(){
 		if(g.status=="open"){
 			this.removeChild(this.choicebox);
@@ -434,9 +436,11 @@ SVGDrawer.prototype.createContainer = function(graph){
 		list.push(typeof(jsEPS)!="undefined" ? "EPS" : "");
 		list.push(typeof(jsPDF)!="undefined" ? "PDF" : "");
 	}
-
-	var buttons = this.getButtons(graph, "SVG");
-	buttons.push(this.drawComboBox(list, "Save", (function (e) {that.removeToolItems(board);that.model.SaveAs(e.currentTarget.value);})));
+	var buttons = [];
+	if(this.showButton) {
+		buttons = this.getButtons(graph, "SVG");
+		buttons.push(this.drawComboBox(list, "Save", (function (e) {that.removeToolItems(board);that.model.SaveAs(e.currentTarget.value);})));
+	}
 
 	var board = this.createBoard({tag:"svg", "xmlns:svg":"http://www.w3.org/2000/svg", "xmlns:xlink":"http://www.w3.org/1999/xlink"}, graph, buttons);
 	board.appendChild( this.drawDef() );
@@ -445,8 +449,8 @@ SVGDrawer.prototype.createContainer = function(graph){
 SVGDrawer.prototype.setSize = function(item, x, y){
 	x = this.util.getValue(x);
 	y = this.util.getValue(y);
-	item.setAttribute("width", Math.ceil(x));
-	item.setAttribute("height", Math.ceil(y));
+	item.setAttribute("width", x);
+	item.setAttribute("height", y);
 	item.style.width=Math.ceil(x);
 	item.style.height=Math.ceil(y);
 };
@@ -455,6 +459,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 	if(symbolLib.isSymbol(node)) {
 		return symbolLib.draw(this, node);
 	}
+	var g;
 	if(node["content"]){
 		node["content"]["width"] = node["content"]["width"] || 0;
 		node["content"]["height"] = node["content"]["height"] || 0;
@@ -463,7 +468,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 			if(!img){return null;}
 			return img;
 		}
-		var g = this.util.create({tag:"g", model:node});
+		g = this.util.create({tag:"g", model:node});
 		if(node["content"]["svg"]){
 			g.setAttribute('transform', "translate("+node.x+" "+node.y+")");
 			g.innerHTML = node["content_svg"];return g;
@@ -473,7 +478,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 			g.innerHTML = node["content_svg"];return g;
 		}
 	}
-	var g = this.util.create({tag:"g", model:node});
+	g = this.util.create({tag:"g", model:node});
 	var width,height;
 	if(node["typ"]==="objectdiagram" || node["typ"]==="classdiagram"){
 		if(node.status=="close"){
@@ -516,16 +521,16 @@ SVGDrawer.prototype.getNode = function(node, draw){
 				node.status="close";
 				that.model.redrawNode(node);
 			}
-			if (e.stopPropagation)    e.stopPropagation();
-			if (e.cancelBubble!=null) e.cancelBubble = true;
+			if (e.stopPropagation)		e.stopPropagation();
+			if (e.cancelBubble!=null)	e.cancelBubble = true;
 		}));
 		g.appendChild( btn );
-		this.model.addNodeLister(g, node);
+		this.model.createElement(g, "class", node);
 		return g;
 	}
 
 	if(node["content_plain"]){
-		return this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": (node.x + 10), "y":y, value:node.content_plain});
+		return this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": (node.x + 10), value:node["content_plain"]});
 	}
 
 	width=0;
@@ -537,8 +542,8 @@ SVGDrawer.prototype.getNode = function(node, draw){
 		id = node.id.charAt(0).toLowerCase() + node.id.slice(1);
 	}else{
 		id = node.id;
-		if(node.counter) {
-			id += " ("+node.counter+")";
+		if(node["counter"]) {
+			id += " ("+node["counter"]+")";
 		}
 	}
 	textWidth = this.getWidth(id);
@@ -566,7 +571,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 	var y = node.getY();
 	var x = node.getX();
 
-	this.model.addNodeLister(g, node);
+	this.model.createElement(g, "class", node);
 	var rect = {tag:"rect", "width":width, "height":height, "x":x, "y":y, "fill":"#fff", class:"draggable"};
 	var typ = node.typ.toLowerCase();
 	if(typ=="patternobject") {
@@ -593,8 +598,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 
 	if(node.attributes){
 		for(var a=0;a<node.attributes.length;a++){
-			var attribute = node.attributes[a];
-			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x":(x+10), "y": y, value:attribute}));
+			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x":(x+10), "y": y, value:node.attributes[a]}));
 			y += 20;
 		}
 		if(node.attributes.length>0) {
@@ -605,8 +609,7 @@ SVGDrawer.prototype.getNode = function(node, draw){
 		g.appendChild( this.util.create({tag:"line", x1:x, y1: y, x2: x + width, y2: y, stroke:"#000"}) );
 		y+=20;
 		for(var m=0;m<node.methods.length;m++){
-			var method = node.methods[m];
-			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x": x + 10, "y": y, value:method}));
+			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x": x + 10, "y": y, value:node.methods[m]}));
 			y += 20;
 		}
 	}
@@ -615,35 +618,34 @@ SVGDrawer.prototype.getNode = function(node, draw){
 SVGDrawer.prototype.addChild = function(node, parent, child){
 	child.setAttribute("class", "draggable");
 	parent.appendChild(child);
-	this.model.addNodeLister(child, node);
+	this.model.createElement(child, "class", node);
 };
-SVGDrawer.prototype.createInfo = function(item, calculate, text, angle) {
+SVGDrawer.prototype.createInfo = function(item, text, angle) {
 	var items = text.split("\n");
-	if(!calculate && items.length>1){
-		var group = this.util.create({tag:"g", class:"draggable", rotate:angle, model:item});
+	var group;
+	if(items.length>1){
+		group = this.util.create({tag:"g", class:"draggable", rotate:angle, model:item});
 		for(var i = 0;i<items.length;i++) {
 			var child = this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": item.x, "y": item.y+(item.height*i)});
 			child.appendChild(document.createTextNode(items[i]));
 			group.appendChild(child);
 		}
-		this.model.addNodeLister(group, item);
+		this.model.createElement(group, "info", item);
 		return group;
 	}
-	var group = this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": item.x, "y": item.y, value:text, "id": item.id, class:"draggable", rotate:angle, model:item});
-	if(!calculate){
-		this.model.addNodeLister(group, item);
-	}
+	group = this.util.create({tag:"text", "#_font":true, "text-anchor":"left", "x": item.x, "y": item.y, value:text, "id": item.id, class:"draggable", rotate:angle, model:item});
+	this.model.createElement(group, "info", item);
 	return group;
 };
 SVGDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle, style){
 	var line = this.util.create({tag:"line", 'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2, "stroke":this.getColor(style)});
 	if(lineStyle && lineStyle.toLowerCase()=="dotted"){
-		line.setAttribute("stroke-miterlimit",4);
+		line.setAttribute("stroke-miterlimit","4");
 		line.setAttribute("stroke-dasharray","1,1");
 	}
 	return line;
 };
-SVGDrawer.prototype.createPath = function(close, fill, path, angle){
+SVGDrawer.prototype.createPath = function(close, fill, path){
 	var d="M"+path[0].x+" "+path[0].y;
 	for(var i=1;i<path.length;i++) {
 		d = d + "L "+path[i].x + " "+ path[i].y;
@@ -655,7 +657,6 @@ SVGDrawer.prototype.createPath = function(close, fill, path, angle){
 };
 SVGDrawer.prototype.createGroup = function(node, group){
 	var entity = this.util.create({tag:"g"});
-	
 	var transform = "translate("+group.x+" "+group.y+")";
 	if(group.scale){ transform += " scale("+group.scale+")";}
 	if(group.rotate){ transform += " rotate("+group.rotate+")";}
@@ -676,7 +677,7 @@ SVGDrawer.prototype.createGroup = function(node, group){
 // {tag:"image", height: 30, width: 50, content_src: hallo}
 // {tag:"text", "text-anchor":"left", x:"10"}
 var SymbolLibary = function(){};
-SymbolLibary.prototype.upFirstChar = function(txt){return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();}
+SymbolLibary.prototype.upFirstChar = function(txt){return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();};
 SymbolLibary.prototype.create = function(node, drawer){
 	if(this.isSymbol(node)) {
 		return this.draw(drawer, node, false);
@@ -693,6 +694,7 @@ SymbolLibary.prototype.draw = function(drawer, node){
 		var group = fn.apply(this, [node]);
 		if( !drawer){
 			drawer = new SVGDrawer();
+			drawer.showButton=false;
 			var board = drawer.createContainer(null);
 			var element = drawer.createGroup(node, group);
 			board.appendChild(element);
@@ -701,7 +703,7 @@ SymbolLibary.prototype.draw = function(drawer, node){
 		return drawer.createGroup(node, group);
 	}
 };
-SymbolLibary.prototype.drawSmily = function(node){
+SymbolLibary.prototype.drawSmily = function(){
 	return {
 		x:0,
 		y:0,
@@ -716,7 +718,7 @@ SymbolLibary.prototype.drawSmily = function(node){
 			{tag:"path", d:"m 43.5780 31.3761c-3.3945 0.9175-4.0367-2.2017-4.0367-2.2017"}
 		]};
 };
-SymbolLibary.prototype.drawDatabase = function(node){
+SymbolLibary.prototype.drawDatabase = function(){
 	return {
 		x:0,
 		y:0,
@@ -731,7 +733,7 @@ SymbolLibary.prototype.drawDatabase = function(node){
 			{tag:"rect", width:46,height:42}
 		]};
 };
-SymbolLibary.prototype.drawLetter = function(node){
+SymbolLibary.prototype.drawLetter = function(){
 	return {
 		x:0,
 		y:0,
@@ -742,7 +744,7 @@ SymbolLibary.prototype.drawLetter = function(node){
 			{tag:"path", d:"m 1.2684 1.4855 48.7259 23.3589 48.6202-23.676"}
 		]};
 };
-SymbolLibary.prototype.drawMobilphone = function(node){
+SymbolLibary.prototype.drawMobilphone = function(){
 	return {
 		x:0,
 		y:0,
@@ -753,10 +755,10 @@ SymbolLibary.prototype.drawMobilphone = function(node){
 			{tag:"path", d:"m 12.5 2.7338a 0.5 0.5 0 1 1-1 0 0.5 0.5 0 1 1 1 0z"},
 			{tag:"path", d:"m 14 45.6882a 2 2.0000 0 1 1-4 0 2 2.0000 0 1 1 4 0z"},
 			{tag:"path", d:"m 8.3516 5.0581 7.2969 0"},
-			{tag:"path", d:"m 1.6352 7.5455 20.7297 0 0 34.0796-20.7297 0z"},
+			{tag:"path", d:"m 1.6352 7.5455 20.7297 0 0 34.0796-20.7297 0z"}
 		]};
 };
-SymbolLibary.prototype.drawWall = function(node){
+SymbolLibary.prototype.drawWall = function(){
 	return {
 		x:0,
 		y:0,
@@ -767,7 +769,7 @@ SymbolLibary.prototype.drawWall = function(node){
 			{tag:"path", d:"m 2.7070 11.4274 18.3409 7.9133m-14.4589-12.5655 0 6.3473m 8.1631 21.7364 0 6.3472m-8.6393-9.9876 0 6.3472m 4.0923-10.6702 0 6.3473m 4.7743-10.2152 0 6.3473m-8.8666-10.2152 0 6.3472m 4.7743-10.2151 0 6.3472m-7.9572 14.4578 18.3409 7.9132m-18.3409-13.9132 18.3409 7.9132m-18.3409-13.9133 18.3409 7.9133m-18.3409-13.9133 18.3409 7.9132m-0.0000-13.0532-0.0001 34.0433m-18.2251-41.8406 18.2998 7.9024m 0 0.1115 4.9978-3.5723"}
 		]};
 };
-SymbolLibary.prototype.drawActor = function(node){
+SymbolLibary.prototype.drawActor = function(){
 	return {
 		x:10,
 		y:10,
@@ -781,7 +783,7 @@ SymbolLibary.prototype.drawActor = function(node){
 			{tag:"line", x1:12, y1:25, x2:20, y2:34}
 		]};
 };
-SymbolLibary.prototype.drawLamp = function(node){
+SymbolLibary.prototype.drawLamp = function(){
 	return {
 		x:10,
 		y:10,
@@ -806,12 +808,12 @@ SymbolLibary.prototype.drawLamp = function(node){
 };
 SymbolLibary.prototype.drawStop = function(node){
 	return {
-		x:node.getX(),
-		y:node.getY(),
+		x:node.x,
+		y:node.y,
 		width:30,
 		height:30,
 		items:[
-			{tag:"path", fill:"#FFF", "stroke-width":"2", stroke:"#B00", d:"m 6,6 a 14,14 0 1 0 0.0636,-0.065 z m 0,0 20.73215,21.0846"}		
+			{tag:"path", fill:"#FFF", "stroke-width":"2", stroke:"#B00", d:"m 6,6 a 14,14 0 1 0 0.0636,-0.065 z m 0,0 20.73215,21.0846"}
 		]};
 };
 SymbolLibary.prototype.drawMin = function(node){
