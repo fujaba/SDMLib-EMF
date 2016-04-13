@@ -16,10 +16,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.junit.Test;
 import org.sdmlib.CGUtil;
-import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.DataType;
 import org.sdmlib.storyboards.Storyboard;
 import org.sdmlib.tools.EMFTool;
 

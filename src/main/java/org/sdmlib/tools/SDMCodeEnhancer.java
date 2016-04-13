@@ -1,21 +1,9 @@
 package org.sdmlib.tools;
 
-import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.junit.Test;
-import org.sdmlib.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
-import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
-import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.DataType;
 import org.sdmlib.storyboards.Storyboard;
 
 public class SDMCodeEnhancer

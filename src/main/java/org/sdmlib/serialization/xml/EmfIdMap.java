@@ -11,25 +11,26 @@ import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
 import org.sdmlib.serialization.EntityFactory;
 
-import de.uniks.networkparser.StringBuffer;
+import de.uniks.networkparser.interfaces.EntityList;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import de.uniks.networkparser.xml.XMLEntity;
-import de.uniks.networkparser.xml.XMLIdMap;
 import de.uniks.networkparser.xml.XMLTokener;
+import de.uniks.networkparser.IdMap;
 
-public class EmfIdMap extends XMLIdMap
+@SuppressWarnings("restriction")
+public class EmfIdMap extends IdMap
 {
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
 
-   @Override
+   // @Override
    public XMLEntity encode(Object entity)
    {
       XMLEntity result = new XMLEntity();
       
       
       String typetag = entity.getClass().getName().replaceAll("\\.", ":");
-      result.withTag(typetag);
+      result.with(typetag);
       
       encodeChildren(entity, result);
       
@@ -56,7 +57,7 @@ public class EmfIdMap extends XMLIdMap
                
                parent.withChild(child);
                
-               child.withTag(propertyName);
+               child.with(propertyName);
                
                String typetag = childValue.getClass().getName().replaceAll("\\.", ":");
                
@@ -71,7 +72,7 @@ public class EmfIdMap extends XMLIdMap
 
             parent.withChild(child);
 
-            child.withTag(propertyName);
+            child.with(propertyName);
             
             String typetag = propertyValue.getClass().getName().replaceAll("\\.", ":");
             
@@ -91,13 +92,7 @@ public class EmfIdMap extends XMLIdMap
    {
       int pos = fileText.indexOf(">") + 1;
 
-      StringBuffer buffer = new StringBuffer().withValue(fileText.toString());
-
-      buffer.withPosition(pos);
-      
-      
-
-      XMLEntity xmlEntity = new XMLEntity().withValue(new XMLTokener().withBuffer(buffer));
+      XMLEntity xmlEntity = new XMLEntity().withValue(new XMLTokener().withBuffer(fileText.toString()));
 
       EntityFactory rootFactory = null;
 
@@ -181,9 +176,9 @@ public class EmfIdMap extends XMLIdMap
       }
       xmlEntity.put(XMI_ID, rootId);
 
-      for (XMLEntity kid : xmlEntity.getChildren())
+      for (EntityList kid : xmlEntity.getChildren())
       {
-         addXMIIds(kid, rootId);
+         addXMIIds((XMLEntity) kid, rootId);
       }
    }
 
@@ -274,10 +269,10 @@ public class EmfIdMap extends XMLIdMap
       }
       
       // recursive on kids
-      Iterator<XMLEntity> iterator = xmlEntity.getChildren().iterator();
+      Iterator<EntityList> iterator = xmlEntity.getChildren().iterator();
       while (iterator.hasNext())
       {
-         XMLEntity kidEntity = iterator.next();
+         XMLEntity kidEntity = (XMLEntity) iterator.next();
          String kidId = (String) kidEntity.get(XMI_ID);
 
          if (kidId.startsWith("$"))
@@ -305,10 +300,10 @@ public class EmfIdMap extends XMLIdMap
       this.put(id, rootObject);
 
 
-      Iterator<XMLEntity> iterator = xmlEntity.getChildren().iterator();
+      Iterator<EntityList> iterator = xmlEntity.getChildren().iterator();
       while (iterator.hasNext())
       {
-         XMLEntity kidEntity = iterator.next();
+         XMLEntity kidEntity = (XMLEntity) iterator.next();
          String tag = kidEntity.getTag();
          Method getMethod = null;
          String typeName = null;
@@ -433,7 +428,7 @@ public class EmfIdMap extends XMLIdMap
 
    public EmfIdMap withCreators(Collection<SendableEntityCreator> creatorSet)
    {
-      withCreator(creatorSet);
+      with(creatorSet);
       return this;
    }
 

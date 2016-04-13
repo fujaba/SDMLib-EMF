@@ -24,15 +24,16 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
-import org.sdmlib.models.classes.Association;
-import org.sdmlib.models.classes.Attribute;
-import org.sdmlib.models.classes.Card;
 import org.sdmlib.models.classes.ClassModel;
-import org.sdmlib.models.classes.Clazz;
-import org.sdmlib.models.classes.DataType;
-import org.sdmlib.models.classes.Enumeration;
-import org.sdmlib.models.classes.Role;
 
+import de.uniks.networkparser.graph.Association;
+import de.uniks.networkparser.graph.Attribute;
+import de.uniks.networkparser.graph.Cardinality;
+import de.uniks.networkparser.graph.Clazz;
+import de.uniks.networkparser.graph.DataType;
+import de.uniks.networkparser.graph.Literal;
+
+@SuppressWarnings("restriction")
 public class EMFTool
 {
    public EPackage classModelToEPackage(ClassModel model)
@@ -48,7 +49,7 @@ public class EMFTool
       ePackage.setNsURI("http:///" + model.getName() + ".ecore");
 
 
-      for (Clazz c : model.getClasses())
+      for (Clazz c : model.getClazzes())
       {
          EClass ec = ecoreFactory.createEClass();
          ec.setName(CGUtil.shortClassName(c.getName()));
@@ -68,7 +69,7 @@ public class EMFTool
       }
 
       // transfer super class
-      for (Clazz c : model.getClasses())
+      for (Clazz c : model.getClazzes())
       {
          if (c.getSuperClass() != null)
          {
@@ -80,25 +81,24 @@ public class EMFTool
       }
 
       // transfer assocs
-      for (Association assoc : model.getClasses().getSourceRoles().getAssoc())
+      for (Association assoc : model.getClazzes().getAssociations())
       {
-         Role srcRole = assoc.getSource();
-         Role tgtRole = assoc.getTarget();
+         Association revAssoc = assoc.getOther();
 
          EReference fwdRef = ecoreFactory.createEReference();
-         fwdRef.setName(tgtRole.getName());
-         EClass tgtEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(tgtRole.getClazz().getName()));
+         fwdRef.setName(revAssoc.getName());
+         EClass tgtEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(revAssoc.getClazz().getName()));
          fwdRef.setEType(tgtEClass);
-         if (Card.MANY.toString().equals(tgtRole.getCard()))
+         if (Cardinality.MANY.toString().equals(revAssoc.getCardinality()))
          {
             fwdRef.setUpperBound(-1);
          }
 
          EReference bwdRef = ecoreFactory.createEReference();
-         bwdRef.setName(srcRole.getName());
-         EClass srcEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(srcRole.getClazz().getName()));
+         bwdRef.setName(assoc.getName());
+         EClass srcEClass = (EClass) ePackage.getEClassifier(CGUtil.shortClassName(assoc.getClazz().getName()));
          bwdRef.setEType(srcEClass);
-         if (Card.MANY.toString().equals(srcRole.getCard()))
+         if (Cardinality.MANY.toString().equals(assoc.getCardinality()))
          {
             bwdRef.setUpperBound(-1);
          }
@@ -141,7 +141,7 @@ public class EMFTool
             
             if (withImpl)
             {
-               sdmClass.withInterface(true);
+               sdmClass.enableInterface();
             
                String implClassName = CGUtil.packageName(fullClassName) + ".impl." + eclass.getName() + "Impl";
                Clazz implClass = model.createClazz(implClassName).withSuperClazz(sdmClass);
@@ -152,7 +152,7 @@ public class EMFTool
             // add attributes
             for (EAttribute eattr : eclass.getEAttributes())
             {
-               sdmClass.withAttribute(eattr.getName(), DataType.ref(CGUtil.shortClassName(eattr.getEType().getInstanceClassName())));
+               sdmClass.withAttribute(eattr.getName(), DataType.create(CGUtil.shortClassName(eattr.getEType().getInstanceClassName())));
             }
          }
       }
@@ -189,10 +189,10 @@ public class EMFTool
                      Clazz srcSDMClass = classMap.get(srcEClass);
                      Clazz tgtSDMClass = classMap.get(tgtEClass);
 
-                     Card tgtCard = (oppositeERef.getUpperBound() == 1 ? Card.ONE : Card.MANY);
-                     Card srcCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+                     Cardinality tgtCard = (oppositeERef.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
+                     Cardinality srcCard = (eref.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
 
-                     srcSDMClass.withAssoc(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
+                     srcSDMClass.withBidirectional(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
 
                      doneERefs.add(eref);
                      doneERefs.add(oppositeERef);
@@ -206,9 +206,9 @@ public class EMFTool
                      Clazz srcSDMClass = classMap.get(srcEClass);
                      Clazz tgtSDMClass = classMap.get(tgtEClass);
 
-                     Card tgtCard = (eref.getUpperBound() == 1 ? Card.ONE : Card.MANY);
+                     Cardinality tgtCard = (eref.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
                      
-                     srcSDMClass.withAssoc(tgtSDMClass, eref.getName(), tgtCard);
+                     srcSDMClass.withUniDirectional(tgtSDMClass, eref.getName(), tgtCard);
 
                      doneERefs.add(eref);
                   }
@@ -285,7 +285,7 @@ public class EMFTool
             	if(CGUtil.isPrimitiveType(name.toLowerCase())){
             		name = name.toLowerCase();
             	}
-           		clazz.withAttribute(CGUtil.toValidJavaId(eattr.getName()), DataType.ref(name));
+           		clazz.withAttribute(CGUtil.toValidJavaId(eattr.getName()), DataType.create(name));
             }
 
             for (EReference eref : eclass.getEReferences())
@@ -310,12 +310,12 @@ public class EMFTool
          }else if (eClassifier instanceof EEnum) {
         	 // VODOO
         	 EEnum eenum = (EEnum) eClassifier;
-        	 Enumeration sdmEnum = model.createEnumeration(eClassifier.getName());
+        	 Clazz sdmEnum = model.createClazz(eClassifier.getName());
+        	 sdmEnum.enableEnumeration();
         	 ArrayList<String> arrayList= new ArrayList<String>();
         	 for(EEnumLiteral item : eenum.getELiterals()) {
-        		 arrayList.add(item.getName());
+        	    sdmEnum.with(new Literal(item.getName()));
         	 }
-        	 sdmEnum.withValueNames(arrayList.toArray(new String[0]));
         	 
         	 
 //        	 <eClassifiers xsi:type="ecore:EEnum" name="Signal">
@@ -347,34 +347,34 @@ public class EMFTool
       {
          String tgtClassName = eref.getEReferenceType().getName();
          String tgtRoleName = CGUtil.toValidJavaId(eref.getName());
-         Card tgtCard = Card.ONE;
+         Cardinality tgtCard = Cardinality.ONE;
          if (eref.getUpperBound() != 1)
          {
-            tgtCard = Card.MANY;
+            tgtCard = Cardinality.MANY;
          }
 
          String srcClassName = null;
          String srcRoleName = null;
-         Card srcCard = null;
+         Cardinality srcCard = null;
          if(eref.getEOpposite() == null) {
         	 srcClassName = eref.getEContainingClass().getName();
         	 srcRoleName = tgtRoleName+"_back";
-        	 srcCard = Card.MANY;
+        	 srcCard = Cardinality.MANY;
          }else {
 	         eref = eref.getEOpposite();
 	         srcClassName = eref.getEReferenceType().getName();
 	         srcRoleName = CGUtil.toValidJavaId(eref.getName());
-	         srcCard = Card.ONE;
+	         srcCard = Cardinality.ONE;
 	         if (eref.getUpperBound() != 1)
 	         {
-	            srcCard = Card.MANY;
+	            srcCard = Cardinality.MANY;
 	         }
          }
 
          Clazz tgtClazz = model.getClazz(tgtClassName);
          Clazz srcClazz = model.getClazz(srcClassName);
 
-         srcClazz.withAssoc(tgtClazz, tgtRoleName, tgtCard, srcRoleName, srcCard);
+         srcClazz.withBidirectional(tgtClazz, tgtRoleName, tgtCard, srcRoleName, srcCard);
       }
 
       return model;
