@@ -136,7 +136,7 @@ public class EMFTool
             EClass eclass = (EClass) eclassifier;
 
             // add an interface and a class to the SDMModel
-            String fullClassName = eclass.getInstanceTypeName();
+            String fullClassName = eclass.getName();
             Clazz sdmClass = model.createClazz(fullClassName);
             
             if (withImpl)
@@ -183,16 +183,16 @@ public class EMFTool
                   if (oppositeERef != null)
                   {
                      // create assoc
-                     EClass srcEClass = (EClass) eref.getEType();
-                     EClass tgtEClass = (EClass) oppositeERef.getEType();
+                     EClass srcEClass = (EClass) oppositeERef.getEType();
+                     EClass tgtEClass = (EClass) eref.getEType();
 
                      Clazz srcSDMClass = classMap.get(srcEClass);
                      Clazz tgtSDMClass = classMap.get(tgtEClass);
 
-                     Cardinality tgtCard = (oppositeERef.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
-                     Cardinality srcCard = (eref.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
+                     Cardinality srcCard = (oppositeERef.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
+                     Cardinality tgtCard = (eref.getUpperBound() == 1 ? Cardinality.ONE : Cardinality.MANY);
 
-                     srcSDMClass.withBidirectional(tgtSDMClass, oppositeERef.getName(), tgtCard, eref.getName(), srcCard);
+                     srcSDMClass.withBidirectional(tgtSDMClass, eref.getName(), tgtCard, oppositeERef.getName(), srcCard);
 
                      doneERefs.add(eref);
                      doneERefs.add(oppositeERef);
@@ -261,121 +261,9 @@ public class EMFTool
       Resource ecoreModelRes = resSet.getResource(ecoreModelURI, true);
 
       EPackage epackage = (EPackage) ecoreModelRes.getContents().get(0);
-
-      ClassModel model = new ClassModel(packageName);
-
-
-      LinkedHashSet<EReference> refs = new LinkedHashSet<EReference>();
-
-      // add classes
-      for (EClassifier eClassifier : epackage.getEClassifiers())
-      {
-         if (eClassifier instanceof EClass)
-         {
-            EClass eclass = (EClass) eClassifier;
-
-            Clazz clazz = model.createClazz(eclass.getName());
-
-            for (EAttribute eattr : eclass.getEAttributes())
-            {
-            	String name = eattr.getEType().getName();
-            	if(CGUtil.isEMFType(name)) {
-            		name = name.substring(1);
-            	}
-            	if(CGUtil.isPrimitiveType(name.toLowerCase())){
-            		name = name.toLowerCase();
-            	}
-           		clazz.withAttribute(CGUtil.toValidJavaId(eattr.getName()), DataType.create(name));
-            }
-
-            for (EReference eref : eclass.getEReferences())
-            {
-               if ( ! refs.contains(eref))
-               {
-                  if (eref.getEOpposite() == null)
-                  {
-//                	  if(eref.getUpperBound()<0 || eref.getUpperBound() > 1) {
-                		  refs.add(eref);	  
-//                	  }else {
-//                	  DataType.ref("java.util.ArrayList<"+eref.getEReferenceType().getName()+">");
-//                		  clazz.withAttribute(CGUtil.toValidJavaId(eref.getName()), DataType.ref(eref.getEReferenceType().getName()));
-//                	  }
-                  }
-                  else if ( ! refs.contains(eref.getEOpposite()))
-                  {
-                     refs.add(eref);
-                  }
-               }
-            }
-         }else if (eClassifier instanceof EEnum) {
-        	 // VODOO
-        	 EEnum eenum = (EEnum) eClassifier;
-        	 Clazz sdmEnum = model.createClazz(eClassifier.getName());
-        	 sdmEnum.enableEnumeration();
-        	 ArrayList<String> arrayList= new ArrayList<String>();
-        	 for(EEnumLiteral item : eenum.getELiterals()) {
-        	    sdmEnum.with(new Literal(item.getName()));
-        	 }
-        	 
-        	 
-//        	 <eClassifiers xsi:type="ecore:EEnum" name="Signal">
-//        	    <eLiterals name="FAILURE" value="1"/>
-//        	    <eLiterals name="STOP"/>
-//        	    <eLiterals name="GO" value="2"/>
-//        	  </eClassifiers>
-         }
-      }
-      // inheritance
-      for (EClassifier eClassifier : epackage.getEClassifiers())
-      {
-         if (eClassifier instanceof EClass)
-         {
-            EClass eclass = (EClass) eClassifier;
-
-            if ( ! eclass.getESuperTypes().isEmpty())
-            {
-               Clazz kidClazz = model.getClazz(eclass.getName());
-               Clazz superClazz = model.getClazz(eclass.getESuperTypes().get(0).getName());
-
-               kidClazz.withSuperClazz(superClazz);
-            }
-         }
-      }
-
-      // assocs
-      for (EReference eref : refs)
-      {
-         String tgtClassName = eref.getEReferenceType().getName();
-         String tgtRoleName = CGUtil.toValidJavaId(eref.getName());
-         Cardinality tgtCard = Cardinality.ONE;
-         if (eref.getUpperBound() != 1)
-         {
-            tgtCard = Cardinality.MANY;
-         }
-
-         String srcClassName = null;
-         String srcRoleName = null;
-         Cardinality srcCard = null;
-         if(eref.getEOpposite() == null) {
-        	 srcClassName = eref.getEContainingClass().getName();
-        	 srcRoleName = tgtRoleName+"_back";
-        	 srcCard = Cardinality.MANY;
-         }else {
-	         eref = eref.getEOpposite();
-	         srcClassName = eref.getEReferenceType().getName();
-	         srcRoleName = CGUtil.toValidJavaId(eref.getName());
-	         srcCard = Cardinality.ONE;
-	         if (eref.getUpperBound() != 1)
-	         {
-	            srcCard = Cardinality.MANY;
-	         }
-         }
-
-         Clazz tgtClazz = model.getClazz(tgtClassName);
-         Clazz srcClazz = model.getClazz(srcClassName);
-
-         srcClazz.withBidirectional(tgtClazz, tgtRoleName, tgtCard, srcRoleName, srcCard);
-      }
+      
+      ClassModel model = getClassModelFromEPackage(epackage, packageName, false);
+ 
 
       return model;
    }
