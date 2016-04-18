@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
-import org.sdmlib.serialization.EntityFactory;
+import org.sdmlib.models.SDMLibIdMap;
 
 import de.uniks.networkparser.interfaces.EntityList;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
@@ -18,8 +18,14 @@ import de.uniks.networkparser.xml.XMLTokener;
 import de.uniks.networkparser.IdMap;
 
 @SuppressWarnings("restriction")
-public class EmfIdMap extends IdMap
+public class EmfIdMap extends SDMLibIdMap
 {
+   public EmfIdMap(String sessionId)
+   {
+      super(sessionId);
+      // TODO Auto-generated constructor stub
+   }
+
    private static final String XSI_TYPE = "xsi:type";
    private static final String XMI_ID = "xmi:id";
 
@@ -27,24 +33,24 @@ public class EmfIdMap extends IdMap
    public XMLEntity encode(Object entity)
    {
       XMLEntity result = new XMLEntity();
-      
-      
+
+
       String typetag = entity.getClass().getName().replaceAll("\\.", ":");
       result.with(typetag);
-      
+
       encodeChildren(entity, result);
-      
+
       return result;
    }
-   
+
    private void encodeChildren(Object entity, XMLEntity parent)
    {
       SendableEntityCreator creatorClass = this.getCreatorClass(entity);
-      
+
       for (String propertyName : creatorClass.getProperties())
       {
          Object propertyValue = creatorClass.getValue(entity, propertyName);
-         
+
          if (" String long Long int Integer char Char boolean Boolean byte Byte float Float double Double java.util.Date ".indexOf(CGUtil.shortClassName(propertyValue.getClass().getName())) >= 0)
          {
             parent.put(propertyName, propertyValue);
@@ -54,15 +60,15 @@ public class EmfIdMap extends IdMap
             for (Object childValue : (Collection) propertyValue)
             {
                XMLEntity child = new XMLEntity();
-               
+
                parent.withChild(child);
-               
+
                child.with(propertyName);
-               
+
                String typetag = childValue.getClass().getName().replaceAll("\\.", ":");
-               
+
                child.put(XSI_TYPE, typetag);
-               
+
                encodeChildren(childValue, child);
             }
          }
@@ -73,11 +79,11 @@ public class EmfIdMap extends IdMap
             parent.withChild(child);
 
             child.with(propertyName);
-            
+
             String typetag = propertyValue.getClass().getName().replaceAll("\\.", ":");
-            
+
             child.put(XSI_TYPE, typetag);
-            
+
             encodeChildren(propertyValue, child);
          }
       }
@@ -87,14 +93,14 @@ public class EmfIdMap extends IdMap
    {
       return decode(new StringBuilder(fileText));
    }
-   
+
    public Object decode(StringBuilder fileText)
    {
       int pos = fileText.indexOf(">") + 1;
 
       XMLEntity xmlEntity = new XMLEntity().withValue(new XMLTokener().withBuffer(fileText.toString()));
 
-      EntityFactory rootFactory = null;
+      SendableEntityCreator rootFactory = null;
 
       // build root entity
       String tag = xmlEntity.getTag();
@@ -105,7 +111,7 @@ public class EmfIdMap extends IdMap
       {
          if (CGUtil.shortClassName(fullName).equals(className))
          {
-            rootFactory = (EntityFactory) getCreator(fullName, true);
+            rootFactory = getCreator(fullName, true);
             break;
          }
       }
@@ -134,7 +140,7 @@ public class EmfIdMap extends IdMap
    }
 
    LinkedHashMap<String, Integer> runningNumbers = null;
-   
+
    private void addXMIIds(XMLEntity xmlEntity, String rootId)
    {
       if (xmlEntity.contains(XMI_ID)) {
@@ -142,26 +148,26 @@ public class EmfIdMap extends IdMap
       }
       String tag = xmlEntity.getTag();
       if(rootId != null) {
-    	  rootId += tag;
-    	  Integer num = runningNumbers.get(rootId);
-	      if (num == null) {
-	         num = 0;
-	      } else {
-	         num++;
-	      }
-	      runningNumbers.put(rootId, num);
-	      rootId += num;
+         rootId += tag;
+         Integer num = runningNumbers.get(rootId);
+         if (num == null) {
+            num = 0;
+         } else {
+            num++;
+         }
+         runningNumbers.put(rootId, num);
+         rootId += num;
       } else {
-    	  rootId = "$";
+         rootId = "$";
       }
       // kid.put(XMI_ID, "$" + tag + num);
-      
+
       if (xmlEntity.contains("href"))
       {
          // might point to another xml file already loaded
          String refString = xmlEntity.getString("href");
          String[] split = refString.split("#//");
-         
+
          if (split.length == 2)
          {
             String objectId = split[1];
@@ -172,7 +178,7 @@ public class EmfIdMap extends IdMap
 
             return;
          }
-         
+
       }
       xmlEntity.put(XMI_ID, rootId);
 
@@ -182,7 +188,7 @@ public class EmfIdMap extends IdMap
       }
    }
 
-   private void addValues(EntityFactory rootFactory, XMLEntity xmlEntity, Object rootObject)
+   private void addValues(SendableEntityCreator rootFactory, XMLEntity xmlEntity, Object rootObject)
    {
       if (rootFactory == null)
       {
@@ -213,16 +219,16 @@ public class EmfIdMap extends IdMap
             {
                String myRef = "_"+ref.substring(3);
                if(myRef.indexOf('.')>0){
-	               myRef = myRef.replaceAll("\\.|/@", "");
+                  myRef = myRef.replaceAll("\\.|/@", "");
                } else {
                   myRef = "_" + myRef.subSequence(0, 1) + "0";
                }
 
-				Object object = getObject(myRef);
-				if (object != null) {
-					rootFactory.setValue(rootObject, key, object, "");
-				}
-			}
+               Object object = getObject(myRef);
+               if (object != null) {
+                  rootFactory.setValue(rootObject, key, object, "");
+               }
+            }
          }
          else if (value.startsWith("/"))
          {
@@ -267,7 +273,7 @@ public class EmfIdMap extends IdMap
             }
          }
       }
-      
+
       // recursive on kids
       Iterator<EntityList> iterator = xmlEntity.getChildren().iterator();
       while (iterator.hasNext())
@@ -281,14 +287,14 @@ public class EmfIdMap extends IdMap
          }
 
          Object kidObject = this.getObject(kidId);
-         
-         EntityFactory kidFactory = (EntityFactory) this.getCreatorClass(kidObject);
-         
+
+         SendableEntityCreator kidFactory = (SendableEntityCreator) this.getCreatorClass(kidObject);
+
          addValues(kidFactory, kidEntity, kidObject );
       }
    }
 
-   private void addChildren(XMLEntity xmlEntity, EntityFactory rootFactory, Object rootObject)
+   private void addChildren(XMLEntity xmlEntity, SendableEntityCreator rootFactory, Object rootObject)
    {
       String id = (String) xmlEntity.get(XMI_ID);
 
@@ -296,7 +302,7 @@ public class EmfIdMap extends IdMap
       {
          id = "_" + id.substring(1);
       }
-      
+
       this.put(id, rootObject);
 
 
@@ -307,23 +313,23 @@ public class EmfIdMap extends IdMap
          String tag = kidEntity.getTag();
          Method getMethod = null;
          String typeName = null;
-         
+
          Collection rootCollection = null;
-         
+
          // it might be a cross reference to an already loaded object
          if (kidEntity.contains("href"))
          {
             // might point to another xml file already loaded
             String refString = kidEntity.getString("href");
             String[] split = refString.split("#//");
-            
+
             if (split.length == 2)
             {
                String objectId = split[1];
                objectId = objectId.replace('@', '_');
                objectId = objectId.replace(".", "");
                Object object = this.getObject(objectId);
-               
+
                if (object != null)
                {
                   // yes we know it
@@ -331,7 +337,7 @@ public class EmfIdMap extends IdMap
                   {
                      rootCollection = (Collection) rootObject;
                   }
-                  
+
                   if (rootCollection != null)
                   {
                      rootCollection.add(object);
@@ -344,10 +350,10 @@ public class EmfIdMap extends IdMap
                   // addChildren(kidEntity, kidFactory, object);
                   return;
                }
-               
+
 
             }
-            
+
          }
 
          // identify kid type
@@ -371,14 +377,19 @@ public class EmfIdMap extends IdMap
             if (kidEntity.contains(XSI_TYPE))
             {
                typeName = kidEntity.getString(XSI_TYPE);
+               int pos = typeName.lastIndexOf(':');
+               if (pos >= 0)
+               {
+                  typeName = typeName.substring(pos+1);
+               }
                typeName = typeName.replaceAll(":", ".");
             }
 
             if (typeName != null)
             {
-               EntityFactory kidFactory = (EntityFactory) getCreatorClassesByShortName(typeName);
+               SendableEntityCreator kidFactory = (SendableEntityCreator) getCreatorClassesByShortName(typeName);
 
-               Object kidObject = kidFactory.create();
+               Object kidObject = kidFactory.getSendableInstance(false);
 
                // addValues(kidFactory, kidEntity, kidObject);
 
@@ -402,19 +413,19 @@ public class EmfIdMap extends IdMap
 
    }
 
-   private EntityFactory getCreatorClassesByShortName(String typeName)
+   private SendableEntityCreator getCreatorClassesByShortName(String typeName)
    {
-      EntityFactory kidFactory = (EntityFactory) getCreator(typeName, false);
+      SendableEntityCreator kidFactory = (SendableEntityCreator) getCreator(typeName, false);
       if (kidFactory != null)
       {
          return kidFactory;
       }
-      
+
       for (String creatorName : getCreatorsKeySet())
       {
          if (creatorName.endsWith(typeName))
          {
-            return (EntityFactory) getCreator(creatorName, true);
+            return (SendableEntityCreator) getCreator(creatorName, true);
          }
       }
 
