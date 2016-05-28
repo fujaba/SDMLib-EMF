@@ -72,7 +72,7 @@ public class SDMCodeEnhancer
 
    public void enhance()
    {
-      ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, epackage.getName(), false);
+      ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, rootPackage, false);
       
       if (story != null)
       {
