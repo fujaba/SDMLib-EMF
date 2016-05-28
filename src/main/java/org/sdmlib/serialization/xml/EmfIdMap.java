@@ -15,7 +15,6 @@ import de.uniks.networkparser.interfaces.EntityList;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import de.uniks.networkparser.xml.XMLEntity;
 import de.uniks.networkparser.xml.XMLTokener;
-import de.uniks.networkparser.IdMap;
 
 @SuppressWarnings("restriction")
 public class EmfIdMap extends SDMLibIdMap
@@ -125,7 +124,7 @@ public class EmfIdMap extends SDMLibIdMap
       else
       {
          // just use an ArrayList
-         rootObject = new ArrayList();
+         rootObject = new ArrayList<Object>();
       }
 
       runningNumbers = new LinkedHashMap<String, Integer>();

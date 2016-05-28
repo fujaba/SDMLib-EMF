@@ -15,5 +15,6 @@ dependencies {
     compile "org.eclipse.emf:org.eclipse.emf.ecore:2.+"
     compile "org.eclipse.emf:org.eclipse.emf.common:2.+"
     compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.+"
+    // compile 'org.eclipse.xtext:org.eclipse.xtext.xtext:2.+'
     compile 'org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:1.+'
 }

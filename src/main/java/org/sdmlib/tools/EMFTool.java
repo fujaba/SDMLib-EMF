@@ -25,6 +25,7 @@ import de.uniks.networkparser.graph.Attribute;
 import de.uniks.networkparser.graph.Cardinality;
 import de.uniks.networkparser.graph.Clazz;
 import de.uniks.networkparser.graph.DataType;
+import de.uniks.networkparser.graph.Clazz.ClazzType;
 
 @SuppressWarnings("restriction")
 public class EMFTool
@@ -130,7 +131,7 @@ public class EMFTool
 
             // add an interface and a class to the SDMModel
             String fullClassName = eclass.getName();
-            Clazz sdmClass = model.createClazz(fullClassName);
+            Clazz sdmClass = model.createClazz(fullClassName).with(ClazzType.INTERFACE);
             
             if (withImpl)
             {
