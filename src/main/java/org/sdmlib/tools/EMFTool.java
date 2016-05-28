@@ -1,18 +1,13 @@
 package org.sdmlib.tools;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -21,7 +16,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.sdmlib.CGUtil;
 import org.sdmlib.StrUtil;
 import org.sdmlib.models.classes.ClassModel;
@@ -31,7 +25,6 @@ import de.uniks.networkparser.graph.Attribute;
 import de.uniks.networkparser.graph.Cardinality;
 import de.uniks.networkparser.graph.Clazz;
 import de.uniks.networkparser.graph.DataType;
-import de.uniks.networkparser.graph.Literal;
 
 @SuppressWarnings("restriction")
 public class EMFTool
@@ -219,34 +212,6 @@ public class EMFTool
 
       }
       return model;
-   }
-
-
-   public ClassModel genModelToClassModel(String genModelFileName)
-   {
-      GenModelPackage.eINSTANCE.eClass();
-
-      ResourceSet resSet = new ResourceSetImpl();
-
-      URI genModelURI = URI.createFileURI(genModelFileName);
-
-      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMIResourceFactoryImpl());
-//      resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMLResourceFactoryImpl());
-
-      Resource genModelRes = resSet.getResource(genModelURI, true);
-      String path = new File(genModelFileName).getParentFile().getAbsolutePath();
-
-      GenModel genModel = (GenModel) genModelRes.getContents().get(0);
-
-      String packageName = genModel.getModelName();
-
-      String ecoreFileName = genModel.getForeignModel().get(0);
-      
-      if(path != null) {
-    	  ecoreFileName = path + File.separator + ecoreFileName;
-      }
-
-      return ecoreModelToClassModel(packageName, ecoreFileName);
    }
 
 

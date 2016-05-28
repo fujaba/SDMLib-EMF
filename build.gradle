@@ -1,0 +1,19 @@
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'junit:junit:4.+'
+    
+    compile 'org.sdmlib:SDMLib:2.2.+'
+    
+    compile "org.eclipse.emf:org.eclipse.emf.ecore:2.+"
+    compile "org.eclipse.emf:org.eclipse.emf.common:2.+"
+    compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.+"
+    compile 'org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:1.+'
+}

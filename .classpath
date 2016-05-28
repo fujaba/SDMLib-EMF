@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" output="target/classes" path="src/main/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry excluding="org/sdmlib/examples/replication/maumau/" kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/a6c32b40bf3d76eca54e3c601e5d1470c86fcdfa/junit-4.12-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.sdmlib/SDMLib/2.2.963/5607c827ff1f7b693fa6d338e9109114f24c44e5/SDMLib-2.2.963-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.sdmlib/SDMLib/2.2.963/cb7d0303e2aeb72cf7e7499c3ae2b42da9a9b0ce/SDMLib-2.2.963.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.11.1-v20150805-0538/98312ac6a6a9e43b38fe911a1374ff54f7d21e91/org.eclipse.emf.ecore-2.11.1-v20150805-0538-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.11.1-v20150805-0538/70743ad82e79a7c9304150f9a26f33554834f85f/org.eclipse.emf.ecore-2.11.1-v20150805-0538.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.11.0-v20150805-0538/7db3d99094b0231739dc643255838b03a7ede1a0/org.eclipse.emf.common-2.11.0-v20150805-0538-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.11.0-v20150805-0538/c86adcd76d95413fce1fe2199c9202d2f8951e06/org.eclipse.emf.common-2.11.0-v20150805-0538.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore.xmi/2.11.1-v20150805-0538/fe53952216ed9ab04add7f900c70175433c689ce/org.eclipse.emf.ecore.xmi-2.11.1-v20150805-0538-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore.xmi/2.11.1-v20150805-0538/1af83557dfd265e23da645a77a0cb47bb2e5ee32/org.eclipse.emf.ecore.xmi-2.11.1-v20150805-0538.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore.xcore.lib/1.1.100/a7d6872f03d380969c5ad479811806532730a8b2/org.eclipse.emf.ecore.xcore.lib-1.1.100-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore.xcore.lib/1.1.100/32aab3e43ff4e5f0fe61c451b457571ff1df39d8/org.eclipse.emf.ecore.xcore.lib-1.1.100.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/1dc37250fbc78e23a65a67fbbaf71d2e9cbc3c0b/hamcrest-core-1.3-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/de.uniks/Networkparser/4.4.246/eef2416c76948ab5a9d883d74eec94d753f14cdc/NetworkParser-4.4.246-sources.jar" kind="lib" path="C:/Users/zuendorf/.gradle/caches/modules-2/files-2.1/de.uniks/Networkparser/4.4.246/eef2416c76948ab5a9d883d74eec94d753f14cdc/NetworkParser-4.4.246-sources.jar" exported="true"/>
 </classpath>

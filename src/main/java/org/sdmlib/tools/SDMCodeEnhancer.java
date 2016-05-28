@@ -1,8 +1,10 @@
 package org.sdmlib.tools;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.junit.Test;
-import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelPackage;
+import org.sdmlib.CGUtil;
 import org.sdmlib.models.classes.ClassModel;
 import org.sdmlib.storyboards.Storyboard;
 
@@ -16,7 +18,7 @@ public class SDMCodeEnhancer
    {
       story = new Storyboard();
       
-      main("src/main/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel");
+      main("src/test/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel");
       
       story.dumpHTML();
    }
@@ -27,14 +29,35 @@ public class SDMCodeEnhancer
       
       String rootPackage = args[1];
       
-      SDMCodeEnhancer sdmCodeEnhancer = new SDMCodeEnhancer()
-      .withRootDir(rootDir)
-      .withRootPackage(rootPackage)
-      .withEPackage(EMFStudyRightModelPackage.eINSTANCE);
+      // load package class
       
-      sdmCodeEnhancer.enhance();
+      String shortClassName = CGUtil.shortClassName(rootPackage) + "Package";
       
-      System.out.println();
+      String fullPackageClassName = rootPackage + "." + shortClassName;
+      
+      try
+      {
+         Class<?> packageClass = Class.forName(fullPackageClassName);
+
+         Field field = packageClass.getField("eINSTANCE");
+         
+         Object thePackage = field.get(null);
+         
+         SDMCodeEnhancer sdmCodeEnhancer = new SDMCodeEnhancer()
+               .withRootDir(rootDir)
+               .withRootPackage(rootPackage)
+               .withEPackage((EPackage) thePackage); // load package from parameter
+               
+               sdmCodeEnhancer.enhance();
+               
+               System.out.println();
+      }
+      catch (ClassNotFoundException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      
    }
    
    private SDMCodeEnhancer withEPackage(EPackage epackage)

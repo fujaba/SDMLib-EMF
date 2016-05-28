@@ -1,4 +1,4 @@
-@GenModel(modelDirectory="/SDMLib-EMF/src/main/java")
+@GenModel(modelDirectory="/SDMLib-EMF/src/test/java")
 
 package org.sdmlib.examples.emfstudyright.EMFStudyRightModel
 
