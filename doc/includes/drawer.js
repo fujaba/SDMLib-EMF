@@ -1,8 +1,8 @@
 /*
  NetworkParser
- Copyright (c) 2011 - 2014, Stefan Lindel
+ Copyright (c) 2011 - 2015, Stefan Lindel
  All rights reserved.
- 
+
  Licensed under the EUPL, Version 1.1 or (as soon they
  will be approved by the European Commission) subsequent
  versions of the EUPL (the "Licence");
@@ -19,259 +19,323 @@
  See the Licence for the specific language governing
  permissions and limitations under the Licence.
 */
-"use strict";
-var Object_create = Object.create || function (o) { var F = function() {};F.prototype = o; return new F();};
 
-var Drawer = function(){this.util = new GraphUtil();};
-Drawer.prototype.clearBoard = function(){};
-Drawer.prototype.setPos = function(item, x, y){item.x = x;item.y = y;};
-Drawer.prototype.setSize = function(item, x, y){item.width = x;item.height = y;};
-Drawer.prototype.getColor = function(style, defaultColor) {
-	if(style) {
-		if(style.toLowerCase()=="create") {
+/*jslint node: true, newcap:true, nomen: true, continue: true */
+
+// VERSION: 2015.09.15 10:40
+/*global GraphUtil: false, SymbolLibary: false, svgConverter: false, jsPDF: false, document:false */
+"use strict";
+var ObjectCreate = Object.create || function (o) {var F = function () {}; F.prototype = o; return new F(); };
+
+var Drawer = function (typ) {this.util = new GraphUtil(typ); this.symbolLib = new SymbolLibary(); };
+Drawer.prototype.clearBoard = function () {};
+Drawer.prototype.setPos = function (item, x, y) {item.x = x; item.y = y; };
+Drawer.prototype.setSize = function (item, x, y) {item.width = x; item.height = y; };
+Drawer.prototype.getColor = function (style, defaultColor) {
+	if (style) {
+		if (style.toLowerCase() === "create") {
 			return "#008000";
 		}
-		if(style.toLowerCase()=="nac") {
+		if (style.toLowerCase() === "nac") {
 			return "#FE3E3E";
 		}
-		if(style.indexOf("#")==0){
+		if (style.indexOf("#") === 0) {
 			return style;
 		}
 	}
-	if(defaultColor) {
+	if (defaultColor) {
 		return defaultColor;
 	}
 	return "#000";
 };
-Drawer.prototype.removeToolItems = function(board) {
-	for(var i=0;i<this.toolitems.length;i++){
+Drawer.prototype.removeToolItems = function (board) {
+	var i;
+	for (i = 0; i < this.toolitems.length; i += 1) {
 		this.toolitems[i].close();
-		if(this.toolitems[i].showed) {
-			board.removeChild( this.toolitems[i] );
+		if (this.toolitems[i].showed) {
+			board.removeChild(this.toolitems[i]);
 			this.toolitems[i].showed = false;
 		}
 	}
 };
-Drawer.prototype.createImage = function(node){
-	node["model"]=node;
-	var n = {tag:"img", model:node, src:node.src};
-	if(node.width || node.height){
-		n["width"] = node.width;
-		n["height"] = node.height;
+Drawer.prototype.createImage = function (node) {
+	var n, img;
+	node.model = node;
+	if (this.symbolLib.isSymbol(node)) {
+		return this.symbolLib.draw(null, node);
 	}
-	var img = this.util.create(n);
-	if(!node.width && !node.height){
+	n = {tag: "img", model: node, src: node.src};
+	if (node.width || node.height) {
+		n.width = node.width;
+		n.height = node.height;
+	} else {
+		n.xmlns = "http://www.w3.org/1999/xhtml";
+	}
+	img = this.util.create(n);
+	if (!node.width && !node.height) {
 		this.model.appendImage(img);
 		return null;
 	}
 	return img;
 };
-Drawer.prototype.showToolItems = function(board) {
-	for(var i=0;i<this.toolitems.length;i++){
-		board.appendChild( this.toolitems[i] );
-		 this.toolitems[i].showed = true;
+Drawer.prototype.showToolItems = function (board) {
+	var i;
+	for (i = 0; i < this.toolitems.length; i += 1) {
+		board.appendChild(this.toolitems[i]);
+		this.toolitems[i].showed = true;
 	}
 };
-Drawer.prototype.isInTool = function(x, y, ox, oy) {
-	for(var i=0;i<this.toolitems.length;i++){
-		var g = this.toolitems[i];
-		if(x>=(g.tool.x+ox) && x<=(g.tool.x+g.tool.width+ox) && y>=(g.tool.y+oy) && y<=(g.tool.y+g.tool.height+oy)) {
+Drawer.prototype.isInTool = function (x, y, ox, oy) {
+	var i, g, gx, gy, gw, gh;
+	// Mode x,y
+	x -= ox;
+	y -= oy;
+	for (i = 0; i < this.toolitems.length; i += 1) {
+		g = this.toolitems[i];
+		if (!g.offsetWidth && g.tool) {
+			gx = g.tool.x;
+			gy = g.tool.y;
+			gw = g.tool.width + gx;
+			gh = g.tool.height + gy;
+		} else {
+			gx = g.offsetLeft;
+			gy = g.offsetTop;
+			gw = g.offsetWidth + gx;
+			gh = g.offsetHeight + gy;
+		}
+		if (x >= gx && x <= gw && y >= gy && y <= gh) {
 			return true;
 		}
 	}
 	return false;
 };
-Drawer.prototype.createBoard = function(node, graph, listener) {
-	var that = this;
+Drawer.prototype.createBoard = function (node, graph, listener) {
+	var i, that = this, board;
 	this.model = graph;
-	this.toolitems=[];
-	if(listener){
-		for(var i=0;i<listener.length;i++) {
+	this.toolitems = [];
+	if (listener) {
+		for (i = 0; i < listener.length; i += 1) {
 			this.toolitems.push(listener[i]);
 		}
 	}
-	var board = this.util.create(node);
-	node.model=graph;
+	board = this.util.create(node);
+	node.model = graph;
 	board.setAttribute('class', "Board");
-	board.rasterElements=[];
-	board.saveShow=false;
-	board.onmouseover = (function () {
+	board.rasterElements = [];
+	board.saveShow = false;
+	board.onmouseover = function () {
 		that.showToolItems(board);
-	});
-	board.onmouseout = (function (event) {
+	};
+	board.onmouseout = function (event) {
 		var left = board.offsetLeft, top = board.offsetTop, x = Math.floor(event.pageX), y = Math.floor(event.pageY);
-		if(!left){left = board.parentNode.offsetLeft;}
-		if(!top){top = board.parentNode.offsetTop;}
-		if(!that.isInTool(x, y, left, top)){
-			that.removeToolItems(board);
-		}
-	});
-	return board;
-};
-Drawer.prototype.getButtons = function(graph, notTyp) {
-	var buttons = [];
-	var that = this;
-	if(graph && graph.model.options){
-		var o = graph.model.options.buttons;
-		for(var i=0;i<o.length;i++){
-			var typ = o[i];
-			if(typ != notTyp){
-				buttons.push(this.drawButton(typ, (function (e) {
-					var t=e.target.typ || e.target.parentElement.typ;
-					that.model.initDrawer(t);that.model.layout();})));
+		if (!left) {
+			if (board.parentNode) {
+				left = board.parentNode.offsetLeft;
+			} else {
+				left = 0;
 			}
 		}
+		if (!top) {
+			if (board.parentNode) {
+				top = board.parentNode.offsetTop;
+			} else {
+				top = 0;
+			}
+		}
+		if (!that.isInTool(x, y, left, top)) {
+			that.removeToolItems(board);
+		}
+	};
+	return board;
+};
+Drawer.prototype.getButtons = function (graph, notTyp) {
+	var i, buttons = [], btn, func, that = this, item, typ, node;
+	if (graph && graph.model.options) {
+		item = graph.model.options.buttons;
+		func = function (e) {
+			var t = e.currentTarget.typ;
+			that.model.initDrawer(t);
+			that.model.layout();
+		};
+		for (i = 0; i < item.length; i += 1) {
+			typ = item[i];
+			if (typ !== notTyp) {
+				node = {typ: "Button", value: typ, y: 8, x: 2, height: 28, width: 60};
+				btn = this.symbolLib.draw(this, node);
+				btn.style.verticalAlign = "top";
+				this.util.bind(btn, "mousedown", func);
+				btn.typ = typ;
+				buttons.push(btn);
+			}
+		}
+	}
+	if (notTyp === "HTML" && !graph.noButtons && graph.model.id) {
+		func = function (e) {
+			var t = e.currentTarget.value;
+			if (t === "Save") {
+				that.model.SavePosition();
+			} else if (t === "Load") {
+				that.model.LoadPosition();
+			}
+		};
+
+		btn = {typ: "Dropdown", x: 2, y: 8, width: 120, elements: ["Save", "Load"], activText: "Localstorage", action: func};
+		item = this.symbolLib.draw(this, btn);
+		buttons.push(item);
 	}
 	return buttons;
 };
 //				###################################################### HTMLDrawer ####################################################################################
-var HTMLDrawer = function() {this.util = new GraphUtil();};
-HTMLDrawer.prototype = Object_create(Drawer.prototype);
-HTMLDrawer.prototype.setPos = function(item, x, y){item.style.left = x+"px";item.style.top = y+"px";};
-HTMLDrawer.prototype.setSize = function(item, x, y){item.style.width = x+"px";item.style.height = y+"px";};
-HTMLDrawer.prototype.getSize = function(item){return {x:item.clientWidth, y:item.clientHeight};};
-HTMLDrawer.prototype.createContainer = function(graph){
-	return this.createBoard({tag:"div"}, graph, this.getButtons(graph, "HTML"));
+Drawer.HTMLDrawer = function () { Drawer.call(this); };
+Drawer.HTMLDrawer.prototype = ObjectCreate(Drawer.prototype);
+Drawer.HTMLDrawer.prototype.setPos = function (item, x, y) {item.style.left = x + "px"; item.style.top = y + "px"; };
+Drawer.HTMLDrawer.prototype.setSize = function (item, x, y) {item.style.width = x + "px"; item.style.height = y + "px"; };
+Drawer.HTMLDrawer.prototype.getSize = function (item) {return {x: item.clientWidth, y: item.clientHeight}; };
+Drawer.HTMLDrawer.prototype.getBoard = function (graph) {
+	return this.createBoard({tag: "div"}, graph, this.getButtons(graph, "HTML"));
 };
-HTMLDrawer.prototype.createCell = function(parent, tag, node, innerHTML, typ){
-	var tr = this.util.create({"tag":'tr'});
-	var cell = this.util.create({"tag":tag, _font:true, value:innerHTML});
+Drawer.HTMLDrawer.prototype.createCell = function (parent, tag, node, innerHTML, typ) {
+	var tr = this.util.create({"tag": 'tr'}), cell;
+	cell = this.util.create({"tag": tag, $font: true, value: innerHTML});
 	this.model.createElement(cell, typ, node);
 	tr.appendChild(cell);
 	parent.appendChild(tr);
 	return cell;
 };
-HTMLDrawer.prototype.getNode = function(node, draw){
-	var htmlElement = this.util.create({tag:"div", model: node});
-	var symbolLib = new SymbolLibary();
-	var model = this.model.model;
-	if(node.typ=="patternobject") {
-		htmlElement.className="patternElement";
-	} else if(symbolLib.isSymbol(node)) {
-		return symbolLib.draw(null, node);
-	} else if(node.typ=="classdiagram") {
-		htmlElement.className="classdiagram";
-	} else if(node.typ=="objectdiagram") {
-		htmlElement.className="objectdiagram";
-	} else if(model.typ.toLowerCase()=="objectdiagram") {
-		htmlElement.className="objectElement";
+Drawer.HTMLDrawer.prototype.getNode = function (node, draw) {
+	var first, z, cell, item, model, htmlElement = this.util.create({tag: "div", model: node});
+	model = this.model.model;
+	if (node.typ === "patternobject") {
+		htmlElement.className = "patternElement";
+	} else if (this.symbolLib.isSymbol(node)) {
+		return this.symbolLib.draw(null, node);
+	}
+	if (node.typ === "classdiagram") {
+		htmlElement.className = "classdiagram";
+	} else if (node.typ === "objectdiagram") {
+		htmlElement.className = "objectdiagram";
+	} else if (model.typ.toLowerCase() === "objectdiagram") {
+		htmlElement.className = "objectElement";
 	} else {
-		htmlElement.className="classElement";
+		htmlElement.className = "classElement";
 	}
 	this.setPos(htmlElement, node.x, node.y);
-	htmlElement.style.zIndex=5000;
+	htmlElement.style.zIndex = 5000;
 
-	if(node.typ=="objectdiagram" || node.typ=="classdiagram"){
+	if (node.typ === "objectdiagram" || node.typ === "classdiagram") {
 		node.left = node.top = 30;
-		node._gui = htmlElement;
-		if(draw) {
+		node.$gui = htmlElement;
+		if (draw) {
 			this.model.draw(node);
 			htmlElement.style.borderColor = "red";
-			if(node.style && node.style.toLowerCase()=="nac"){
-				htmlElement.appendChild(symbolLib.draw(null, {typ:"stop", x:0, y:0}));
+			if (node.style && node.style.toLowerCase() === "nac") {
+				htmlElement.appendChild(this.symbolLib.draw(null, {typ: "stop", x: 0, y: 0}));
 			}
-		}else{
+		} else {
 			this.model.layout(0, 0, node);
 		}
-		this.setSize(htmlElement, node._gui.style.width, node._gui.style.height);
+		this.setSize(htmlElement, node.$gui.style.width, node.$gui.style.height);
 		return htmlElement;
 	}
 	this.model.createElement(htmlElement, "class", node);
-	if(node["content"]){
-		node["content"]["width"] = node["content"]["width"] || 0;
-		node["content"]["height"] = node["content"]["height"] || 0;
-		if(node["content"]["src"]){
-			var img = this.createImage(node["content"]);
-			if(!img){return null;}
-			htmlElement.appendChild(img);return htmlElement;
+	if (node.content) {
+		node.content.width = node.content.width || 0;
+		node.content.height = node.content.height || 0;
+		if (node.content.src) {
+			item = this.createImage(node.content);
+			if (!item) {return null; }
+			htmlElement.appendChild(item);
+			return htmlElement;
 		}
-		if(node["content"]["html"]){
-			htmlElement.innerHTML = node["content"]["html"];return htmlElement;
+		if (node.content.html) {
+			htmlElement.innerHTML = node.content.html;
+			return htmlElement;
 		}
 	}
-	var table = this.util.create({tag:'table', border:"0"});
-	table.style.width="100%";
-	table.style.height="100%";
-	htmlElement.appendChild(table);
-	var cell;
-	if(node["head_src"]){
-		cell = this.createCell(table, "td", node);
-		if(!node.head_img){
-			node.head_img = {};
-			node.head_img.src = node["head_src"];
-			node.head_img.width = node["head_width"];
-			node.head_img.height = node["head_height"];
+	item = this.util.create({tag: 'table', border: "0"});
+	item.style.width = "100%";
+	item.style.height = "100%";
+	htmlElement.appendChild(item);
+	if (node.head$src) {
+		cell = this.createCell(item, "td", node);
+		cell.style.textAlign = "center";
+		if (!node.head$img) {
+			node.head$img = {};
+			node.head$img.src = node.head$src;
+			node.head$img.width = node.head$width;
+			node.head$img.height = node.head$height;
 		}
-		cell.appendChild(this.util.createImage(node.head_img));
+		z = this.createImage(node.head$img);
+		if (z) {
+			cell.appendChild(z);
+		}
 	}
-	if(node["headinfo"]){
-		this.createCell(table, "td", node, node["headinfo"]).className = "head";
+	if (node.headinfo) {
+		this.createCell(item, "td", node, node.headinfo).className = "head";
 	}
-	var info;
-	if(model.typ.toLowerCase()==="objectdiagram"){
-		info = node.id.charAt(0).toLowerCase() + node.id.slice(1);
-	}else{
-		info = node.id;
+
+	if (model.typ.toLowerCase() === "objectdiagram") {
+		z = node.id.charAt(0).toLowerCase() + node.id.slice(1);
+	} else {
+		z = node.id;
 	}
-	if(node.href){
-		info = "<a href=\""+node.href+"\">" + info + "</a>";
+	if (node.href) {
+		z = "<a href=\"" + node.href + "\">" + z + "</a>";
 	}
-	cell  = this.createCell(table, "th", node, info, "id");
-	if(model.typ.toLowerCase()==="objectdiagram"){
-		cell.style.textDecorationLine="underline";
+	cell  = this.createCell(item, "th", node, z, "id");
+	if (model.typ.toLowerCase() === "objectdiagram") {
+		cell.style.textDecorationLine = "underline";
 	}
 	cell = null;
-	var first;
-	if(node.attributes){
-		first=true;
-		for(var a = 0; a < node.attributes.length; a++){
-			cell = this.createCell(table, "td", node, node.attributes[a], "attribute");
-			if(!first){
+	if (node.attributes) {
+		first = true;
+		for (z = 0; z < node.attributes.length; z += 1) {
+			cell = this.createCell(item, "td", node, node.attributes[z], "attribute");
+			if (!first) {
 				cell.className = 'attributes';
-			}else{
+			} else {
 				cell.className = 'attributes first';
-				first=false;
+				first = false;
 			}
 		}
 	}
-	if(node.methods){
-		first=true;
-		for(var m=0;m < node.methods.length;m++){
-			var method = node.methods[m];
-			cell = this.createCell(table, "td", node, node.methods[m], "method");
-			if(!first){
+	if (node.methods) {
+		first = true;
+		for (z = 0; z < node.methods.length; z += 1) {
+			cell = this.createCell(item, "td", node, node.methods[z], "method");
+			if (!first) {
 				cell.className = 'methods';
-			}else{
+			} else {
 				cell.className = 'methods first';
-				first=false;
+				first = false;
 			}
 		}
 	}
-	if(!cell){
-		cell = this.createCell(table, "td", node, "&nbsp;");
+	if (!cell) {
+		cell = this.createCell(item, "td", node, "&nbsp;");
 		cell.className = 'first';
 		this.model.createElement(cell, "empty", node);
 	}
-	htmlElement.appendChild(table);
+	htmlElement.appendChild(item);
 	htmlElement.node = node;
-	node._gui = htmlElement;
+	node.$gui = htmlElement;
 	return htmlElement;
 };
-HTMLDrawer.prototype.createInfo = function(item, text, angle) {
-	var info = this.util.create({tag:"div", _font:true, model:item, class:"EdgeInfo", value: text});
-	
-	if(angle!=0){
-		info.style.transform="rotate("+angle+"deg)";
-		info.style.msTransform = info.style.MozTransform = info.style.WebkitTransform = info.style.OTransform= "rotate(" + angle + "deg)";
+Drawer.HTMLDrawer.prototype.getInfo = function (item, text, angle, style) {
+	var info = this.util.create({tag: "div", $font: true, model: item, "class": "EdgeInfo", value: text, style: "color:" + this.getColor(style, "#CCC")});
+
+	if (angle !== 0) {
+		info.style.transform = "rotate(" + angle + "deg)";
+		info.style.msTransform = info.style.MozTransform = info.style.WebkitTransform = info.style.OTransform = "rotate(" + angle + "deg)";
 	}
-	
 	this.setPos(info, item.x, item.y);
 	this.model.createElement(info, "info", item);
 	return info;
 };
-HTMLDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle){
-	if (x2 < x1 ){
-		var temp = x1;
+Drawer.HTMLDrawer.prototype.getLine = function (x1, y1, x2, y2, lineStyle) {
+	var temp, angle, length, line;
+	if (x2 < x1) {
+		temp = x1;
 		x1 = x2;
 		x2 = temp;
 		temp = y1;
@@ -280,571 +344,666 @@ HTMLDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle){
 	}
 	// Formula for the distance between two points
 	// http://www.mathopenref.com/coorddist.html
-	var length = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+	length = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
-	var line = this.util.create({tag: "div", class:"lineElement", style:{width:length+"px", position:"absolute", zIndex:42}});
-	line.style.borderBottomStyle= lineStyle;
+	line = this.util.create({tag: "div", "class": "lineElement", style: {width: length + "px", position: "absolute", zIndex: 42}});
+	line.style.borderBottomStyle = lineStyle;
 
-	var angle = Math.atan((y1-y2)/(x1-x2));
-	if(x1==x2){
-		angle = Math.atan((y1-y2)/(x1-x2))*-1;
+	angle = Math.atan((y1 - y2) / (x1 - x2));
+	if (x1 === x2) {
+		angle = Math.atan((y1 - y2) / (x1 - x2)) * -1;
 	}
-	line.style.top = y1 + 0.5*length*Math.sin(angle) + "px";
-	line.style.left = x1 - 0.5*length*(1 - Math.cos(angle)) + "px";
-	line.style.transform="rotate("+angle+"rad)";
-	line.style.msTransform = line.style.MozTransform = line.style.WebkitTransform = line.style.OTransform= "rotate(" + angle + "rad)";
+	line.style.top = y1 + 0.5 * length * Math.sin(angle) + "px";
+	line.style.left = x1 - 0.5 * length * (1 - Math.cos(angle)) + "px";
+	line.style.transform = "rotate(" + angle + "rad)";
+	line.style.msTransform = line.style.MozTransform = line.style.WebkitTransform = line.style.OTransform = "rotate(" + angle + "rad)";
 	return line;
 };
-HTMLDrawer.prototype.drawButton = function(text, action){
-	var btn = this.util.create({tag:"button", _font:true, width:60, height:28, style:"cursor: pointer;", value:text, "onMousedown":action});
-	btn.tool = {x:0, y:8, height:28, width:60};
-	btn.typ = text;
-	btn.close = function(){};
-	return btn;
-};
-HTMLDrawer.prototype.createPath = function(close, fill, path, angle){
-	var line;
-	if(fill==="none") {
+Drawer.HTMLDrawer.prototype.createPath = function (close, fill, path, angle) {
+	var line, i;
+	if (fill === "none") {
 		line = this.util.create({tag: "div"});
-		for(var i=1;i<path.length;i++) {
-			line.appendChild(this.createLine(path[i-1].x, path[i-1].y, path[i].x, path[i].y));
+		for (i = 1; i < path.length; i += 1) {
+			line.appendChild(this.getLine(path[i - 1].x, path[i - 1].y, path[i].x, path[i].y));
 		}
-		if(close) {
-			line.appendChild(this.createLine(path[path.length-1].x, path[path.length-1].y, path[0].x, path[0].y));
+		if (close) {
+			line.appendChild(this.getLine(path[path.length - 1].x, path[path.length - 1].y, path[0].x, path[0].y));
 		}
 		return line;
 	}
-	line = this.util.create({tag:"div", style:{position:"absolute", left:path[0].x, top:path[0].y, transform:"rotate("+angle+"rad)"}});
-	line.appendChild(this.util.create({tag:"div", style:{background:"#000",width:8,height:8,transform:"rotate(45rad) skew(170deg, 170deg)"}}));
+	line = this.util.create({tag: "div", style: {position: "absolute", left: path[0].x - 8, top: path[0].y, transform: "rotate(" + angle + "rad)"}});
+	line.appendChild(this.util.create({tag: "div", style: {background: "#000", width: 8, height: 8, transform: "rotate(45rad) skew(170deg, 170deg)"}}));
 	return line;
 };
 //				###################################################### SVG ####################################################################################
-var SVGDrawer = function() {this.util = new GraphUtil("http://www.w3.org/2000/svg");this.showButton=true;};
-SVGDrawer.prototype = Object_create(Drawer.prototype);
-SVGDrawer.prototype.getWidth = function(label){
-	var text = this.util.create({tag:"text", _font:true, value:label});
+Drawer.SVGDrawer = function () {Drawer.call(this, "http://www.w3.org/2000/svg"); this.showButton = true; };
+Drawer.SVGDrawer.prototype = ObjectCreate(Drawer.prototype);
+Drawer.SVGDrawer.prototype.getWidth = function (label) {
+	var board, width, text = this.util.create({tag: "text", $font: true, value: label});
 	text.setAttribute("width", "5px");
-	var board = this.model.board;
+	board = this.model.board;
 	board.appendChild(text);
-	var width = text.getBoundingClientRect().width;
+	width = text.getBoundingClientRect().width;
 	board.removeChild(text);
 	return width;
 };
-SVGDrawer.prototype.drawDef = function(){
-	var def = this.util.create({tag:"defs"});
+Drawer.SVGDrawer.prototype.drawDef = function () {
+	var child, def = this.util.create({tag: "defs"});
 
-	var child = this.util.create({tag:"filter", id:"drop-shadow"});
-	child.appendChild( this.util.create({tag:"feGaussianBlur", in:"SourceAlpha", result:"blur-out", stdDeviation:2}));
-	child.appendChild( this.util.create({tag:"feOffset", in:"blur-out", dx:2, dy:2}));
-	child.appendChild( this.util.create({tag:"feBlend", in:"SourceGraphic", mode:"normal"}));
-	def.appendChild( child );
-	child = this.util.create({tag:"linearGradient", id:"reflect", x1:"0%", x2:"0%", y1:"50%", y2:"0%", spreadMethod:"reflect"});
-	child.appendChild( this.util.create({tag:"stop", "stop-color":"#aaa",offset:"0%"}) );
-	child.appendChild( this.util.create({tag:"stop", "stop-color":"#eee",offset:"100%"}) );
-	def.appendChild( child );
+	child = this.util.create({tag: "filter", id: "drop-shadow"});
+	child.appendChild(this.util.create({tag: "feGaussianBlur", "in": "SourceAlpha", result: "blur-out", stdDeviation: 2}));
+	child.appendChild(this.util.create({tag: "feOffset", "in": "blur-out", dx: 2, dy: 2}));
+	child.appendChild(this.util.create({tag: "feBlend", "in": "SourceGraphic", mode: "normal"}));
+	def.appendChild(child);
+	child = this.util.create({tag: "linearGradient", id: "reflect", x1: "0%", x2: "0%", y1: "50%", y2: "0%", spreadMethod: "reflect"});
+	child.appendChild(this.util.create({tag: "stop", "stop-color": "#aaa", offset: "0%"}));
+	child.appendChild(this.util.create({tag: "stop", "stop-color": "#eee", offset: "100%"}));
+	def.appendChild(child);
 
-	child = this.util.create({tag:"linearGradient", id:"classelement", x1:"0%", x2:"100%", y1:"100%", y2:"0%"});
-	child.appendChild( this.util.create({tag:"stop", "stop-color":"#ffffff",offset:"0"}) );
-	child.appendChild( this.util.create({tag:"stop", "stop-color":"#d3d3d3",offset:"1"}) );
-	def.appendChild( child );
+	child = this.util.create({tag: "linearGradient", id: "classelement", x1: "0%", x2: "100%", y1: "100%", y2: "0%"});
+	child.appendChild(this.util.create({tag: "stop", "stop-color": "#ffffff", offset: "0"}));
+	child.appendChild(this.util.create({tag: "stop", "stop-color": "#d3d3d3", offset: "1"}));
+	def.appendChild(child);
 	return def;
 
 };
-SVGDrawer.prototype.drawButton = function(text, action){
-	var btn = this.util.create({tag:"g", "#typ": text});
-	btn.tool={x:0, y: 8, height: 28, width: 60};
-	var rect = this.util.create({tag:"rect", rx:8, x: btn.tool.x, y:btn.tool.y, width:btn.tool.width, height:btn.tool.height, stroke:"#000", filter:"url(#drop-shadow)", class:"saveBtn"});
-	btn.appendChild( rect );
-	btn.appendChild( this.util.create({tag:"text", _font:true, x:(btn.tool.x+10), y:(btn.tool.y+18), fill:"black", value:text, class:"hand"}));
-	this.util.bind(btn, "mousedown", action);
-	btn.close = function(){};
-	return btn;
-};
-SVGDrawer.prototype.drawComboBox = function(elements, activText, action){
-	var g = this.util.create({tag:"g"});
-	g.tool={x:66, y:8, minheight: 28, maxheight: 28, width: 80};
-	g.status="close";
-	g.appendChild( this.util.create({tag:"rect", rx:0, x: g.tool.x, y: g.tool.y, width:60, height:28, stroke:"#000", fill:"none"}));
-	g.appendChild( this.util.create({tag:"rect", rx:2, x: g.tool.x+60, y: g.tool.y, width:20, height:28, stroke:"#000", class:"saveBtn"}));
-	g.appendChild( this.util.create({tag:"path", style:"fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1",
-								d:"m "+(g.tool.x+65)+","+(g.tool.y+13)+" 10,0 L "+(g.tool.x+70)+","+(g.tool.y+20)+" z"}));
-	if(elements){
-		var len=0;
-		for(var i=0;i<elements.length;i++) {
-			if(elements[i] && elements[i].length>0){
-				len++;
-			}
-		}
-		var choicebox = this.util.create({tag:"g"});
-		var h = len * 25+6;
-		choicebox.appendChild( this.util.create({tag:"rect", rx:0, x: g.tool.x, y: g.tool.y+28, width:60, height:h, stroke:"#000", fill:"#fff", opacity:"0.7"}));
-		g.tool.maxheight = h + g.tool.minheight;
+Drawer.SVGDrawer.prototype.getBoard = function (graph) {
+	var hasJS, buttons, board, node, list, that = this;
+	list = ["HTML", "SVG", "PNG"];
+	hasJS = typeof (svgConverter);
+	if (hasJS !== "undefined") {
+		hasJS = typeof (svgConverter);
+		list.push(hasJS !== "undefined" ? "EPS" : "");
+		hasJS = typeof (jsPDF);
+		list.push(hasJS !== "undefined" ? "PDF" : "");
+	}
+	buttons = [];
 
-		g.elements=elements;
-		g.activ = this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": 60, "x": (g.tool.x+10), "y": g.tool.y+20, value: activText});
-		g.appendChild(g.activ);
-		var y = 46+g.tool.y;
-		var yr = 28+g.tool.y;
-		for(var e=0;e<elements.length;e++){
-			if(!elements[e] || elements[e].length<1){
-				continue;
-			}
-			var element = elements[e];
-			choicebox.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": 60, "x": (g.tool.x+10), "y": y, value:element}));
-			var item = choicebox.appendChild( this.util.create({tag:"rect", rx:0, x: g.tool.x, y: yr, width:60, height:24, stroke:"none", class:"selection"}));
-			item.value = element;
-			if(action) {
-				item.onclick = action;
-			} else {
-				item.onclick = (function (event) {
-					g.activ.textContent = event.currentTarget.value;
-				});
-			}
-			y += 26;
-			yr += 26;
-		}
-		g.choicebox = choicebox;
-	}
-	g.onclick = (function () {
-		if(g.status=="close"){
-			g.open();
-		}else{
-			g.close();
-		}
-	});
-	g.close = function(){
-		if(g.status=="open"){
-			this.removeChild(this.choicebox);
-		}
-		this.status="close";
-		this.tool.height = this.tool.minheight;
-	};
-	g.open = function(){
-		if(g.status=="close"){
-			this.appendChild( this.choicebox );
-		}
-		this.status="open";
-		this.tool.height = this.tool.maxheight;
-	};
-	g.close();
-	return g;
-};
-SVGDrawer.prototype.createContainer = function(graph){
-	var that = this;
-	var list = ["HTML", "SVG", "PNG"];
-	if( typeof(svgConverter)!="undefined"){
-		list.push(typeof(jsEPS)!="undefined" ? "EPS" : "");
-		list.push(typeof(jsPDF)!="undefined" ? "PDF" : "");
-	}
-	var buttons = [];
-	if(this.showButton) {
+
+	if (this.showButton) {
 		buttons = this.getButtons(graph, "SVG");
-		buttons.push(this.drawComboBox(list, "Save", (function (e) {that.removeToolItems(board);that.model.SaveAs(e.currentTarget.value);})));
+		node = {typ: "Dropdown", x: 66, y: 8, minheight: 28, maxheight: 28, width: 80, elements: list, activText: "Save", action: function (e) {that.removeToolItems(that.board); that.model.SaveAs(e.currentTarget.value); }};
+		buttons.push(this.symbolLib.draw(this, node));
 	}
+	board = this.createBoard({tag: "svg", "xmlns:svg": "http://www.w3.org/2000/svg", "xmlns:xlink": "http://www.w3.org/1999/xlink"}, graph, buttons);
+	board.appendChild(this.drawDef());
+	this.board = board;
 
-	var board = this.createBoard({tag:"svg", "xmlns:svg":"http://www.w3.org/2000/svg", "xmlns:xlink":"http://www.w3.org/1999/xlink"}, graph, buttons);
-	board.appendChild( this.drawDef() );
 	return board;
 };
-SVGDrawer.prototype.setSize = function(item, x, y){
+Drawer.SVGDrawer.prototype.setSize = function (item, x, y) {
 	x = this.util.getValue(x);
 	y = this.util.getValue(y);
 	item.setAttribute("width", x);
 	item.setAttribute("height", y);
-	item.style.width=Math.ceil(x);
-	item.style.height=Math.ceil(y);
+	item.style.width = Math.ceil(x);
+	item.style.height = Math.ceil(y);
 };
-SVGDrawer.prototype.getNode = function(node, draw){
-	var symbolLib = new SymbolLibary();
-	if(symbolLib.isSymbol(node)) {
+Drawer.SVGDrawer.prototype.getNode = function (node, draw) {
+	var rect, typ, z, x, y, id, textWidth, g, item, width, height, that = this, symbolLib = new SymbolLibary();
+	if (symbolLib.isSymbol(node)) {
 		return symbolLib.draw(this, node);
 	}
-	var g;
-	if(node["content"]){
-		node["content"]["width"] = node["content"]["width"] || 0;
-		node["content"]["height"] = node["content"]["height"] || 0;
-		if(node["content"]["src"]){
-			var img = this.createImage(node["content"]);
-			if(!img){return null;}
-			return img;
+	if (node.content) {
+		node.content.width = node.content.width || 0;
+		node.content.height = node.content.height || 0;
+		if (node.content.src) {
+			item = this.createImage(node.content);
+			if (!item) {return null; }
+			return item;
 		}
-		g = this.util.create({tag:"g", model:node});
-		if(node["content"]["svg"]){
-			g.setAttribute('transform', "translate("+node.x+" "+node.y+")");
-			g.innerHTML = node["content_svg"];return g;
+		g = this.util.create({tag: "g", model: node});
+		if (node.content.svg) {
+			g.setAttribute('transform', "translate(" + node.x + " " + node.y + ")");
+			g.innerHTML = node.content$svg;
+			return g;
 		}
-		if(node["content"]["html"]){
-			g.setAttribute('transform', "translate("+node.x+" "+node.y+")");
-			g.innerHTML = node["content_svg"];return g;
+		if (node.content.html) {
+			g.setAttribute('transform', "translate(" + node.x + " " + node.y + ")");
+			g.innerHTML = node.content$svg;
+			return g;
 		}
 	}
-	g = this.util.create({tag:"g", model:node});
-	var width,height;
-	if(node["typ"]==="objectdiagram" || node["typ"]==="classdiagram"){
-		if(node.status=="close"){
-			width = this.getWidth(node.id) + 30;
+	g = this.util.create({tag: "g", model: node});
+	if (node.typ === "objectdiagram" || node.typ === "classdiagram") {
+		if (node.status === "close") {
+			width = this.getWidth(node.minid || node.id) + 30;
 			height = 40;
-			this.addChild(node, g, this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": (node.x +2), "y":node.y+12, value:node.id}));
-		}else {
+			this.addChild(node, g, this.util.create({tag: "text", $font: true, "text-anchor": "left", "x": (node.x + 2), "y": node.y + 12, value: node.minid || node.id }));
+		} else {
 			node.left = node.top = 30;
-			node._gui = g;
-			if(draw) {
+			node.$gui = g;
+			if (draw) {
 				this.model.draw(node);
-			}else{
+			} else {
 				this.model.layout(0, 0, node);
 			}
 
-			width = this.util.getValue(node._gui.style.width);
-			height = this.util.getValue(node._gui.style.height);
-			if(node.style && node.style.toLowerCase()=="nac"){
+			width = this.util.getValue(node.$gui.style.width);
+			height = this.util.getValue(node.$gui.style.height);
+			if (node.style && node.style.toLowerCase() === "nac") {
 				this.addChild(node, g, this.createGroup(node, symbolLib.drawStop(node)));
 			}
 		}
 		this.setSize(g, width, height);
-		this.addChild(node, g, this.util.create({tag:"rect", "width":width, "height":height, "fill":"none", "strokeWidth":"1px", "stroke":this.getColor(node.style, "#CCC"), "x":node.getX(), "y":node.getY(), class:"draggable"}));
-		if(width>0 && width!=node.width) {node.width = width;}
-		var btn;
-		if(node.status=="close"){
+		this.addChild(node, g, this.util.create({tag: "rect", "width": width, "height": height, "fill": "none", "strokeWidth": "1px", "stroke": this.getColor(node.style, "#CCC"), "x": node.getX(), "y": node.getY(), "class": "draggable"}));
+		if (width > 0 && width !== node.width) {node.width = width; }
+		if (node.status === "close") {
 			// Open Button
-			btn = this.createGroup(node, symbolLib.drawMax(node));
+			item = this.createGroup(node, symbolLib.drawMax({x: (node.x + width - 20), y: node.y}));
+			node.height = height;
 		} else {
-			btn = this.createGroup(node, symbolLib.drawMin(node));
+			item = this.createGroup(node, symbolLib.drawMin({x: (node.x + width - 20), y: node.y}));
 		}
-		var that = this;
-		btn.setAttribute("class", "btn");
+		item.setAttribute("class", "hand");
 
-		this.util.bind(btn, "mousedown", (function(e){
-			if(node.status=="close") {
-				node.status="open";
+		this.util.bind(item, "mousedown", function (e) {
+			var name;
+			if (node.status === "close") {
+				node.status = "open";
 				that.model.redrawNode(node);
-			}else {
-				node.status="close";
+			} else {
+				node.status = "close";
+				// try to cleanup
+				for (name in node.nodes) {
+					if (node.nodes.hasOwnProperty(name)) {
+						node.nodes[name].$gui = null;
+					}
+				}
 				that.model.redrawNode(node);
 			}
-			if (e.stopPropagation)		e.stopPropagation();
-			if (e.cancelBubble!=null)	e.cancelBubble = true;
-		}));
-		g.appendChild( btn );
+			if (e.stopPropagation) {e.stopPropagation(); }
+			if (e.cancelBubble !== null) {e.cancelBubble = true; }
+		});
+		g.appendChild(item);
 		this.model.createElement(g, "class", node);
 		return g;
 	}
 
-	if(node["content_plain"]){
-		return this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": (node.x + 10), value:node["content_plain"]});
+	if (node.content$plain) {
+		return this.util.create({tag: "text", $font: true, "text-anchor": "left", "x": (node.x + 10), value: node.content$plain});
 	}
 
-	width=0;
-	height=40;
-	var textWidth;
+	width = 0;
+	height = 40;
 
-	var id;
-	if(this.model.model.typ.toLowerCase()=="objectdiagram"){
+	if (this.model.model.typ.toLowerCase() === "objectdiagram") {
 		id = node.id.charAt(0).toLowerCase() + node.id.slice(1);
-	}else{
+	} else {
 		id = node.id;
-		if(node["counter"]) {
-			id += " ("+node["counter"]+")";
+		if (node.counter) {
+			id += " (" + node.counter + ")";
 		}
 	}
 	textWidth = this.getWidth(id);
 
 	width = Math.max(width, textWidth);
-	var i;
-	if(node.attributes && node.attributes.length > 0 ){
-		height = height + node.attributes.length*25;
-		for(i=0; i<node.attributes.length;i++){
-			var attribute = node.attributes[i];
-			width = Math.max(width, this.getWidth(attribute));
+	if (node.attributes && node.attributes.length > 0) {
+		height = height + node.attributes.length * 25;
+		for (z = 0; z < node.attributes.length; z += 1) {
+			width = Math.max(width, this.getWidth(node.attributes[z]));
 		}
-	}else{
+	} else {
 		height += 20;
 	}
-	if(node.methods && node.methods.length > 0){
-		height = height + node.methods.length*25;
-		for(i=0; i<node.methods.length;i++){
-			var method = node.methods[i];
-			width = Math.max(width, this.getWidth(method));
+	if (node.methods && node.methods.length > 0) {
+		height = height + node.methods.length * 25;
+		for (z = 0; z < node.methods.length; z += 1) {
+			width = Math.max(width, this.getWidth(node.methods[z]));
 		}
-	} 
+	}
 	width += 20;
 
-	var y = node.getY();
-	var x = node.getX();
+	y = node.getY();
+	x = node.getX();
 
 	this.model.createElement(g, "class", node);
-	var rect = {tag:"rect", "width":width, "height":height, "x":x, "y":y, "fill":"#fff", class:"draggable"};
-	var typ = node.typ.toLowerCase();
-	if(typ=="patternobject") {
-		rect["fill"] = "lightblue";
-	}
-	var strokeColor = this.getColor(node["style"]);
-	rect["stroke"] = strokeColor;
-	g.appendChild( this.util.create(rect) );
-
-	if(typ!="patternobject"){
-		g.appendChild( this.util.create({tag:"rect", rx:0, "x": x, "y": y, "width":width, height:30, fill:"none", style:"fill:url(#classelement);"}));
+	rect = {tag: "rect", "width": width, "height": height, "x": x, "y": y, "fill": "#fff", "class": "draggable"};
+	typ = node.typ.toLowerCase();
+	if (typ === "patternobject") {
+		rect.fill = "lightblue";
 	}
 
-	var text = this.util.create({tag:"text", _font:true, "text-anchor":"right", "x":x+width/2-textWidth/2, "y":y+20, "width":textWidth});
+	rect.stroke = this.getColor(node.style);
+	g.appendChild(this.util.create(rect));
 
-	if(this.model.model.typ.toLowerCase()=="objectdiagram"){
-		text.setAttribute("text-decoration", "underline");
+	if (typ !== "patternobject") {
+		g.appendChild(this.util.create({tag: "rect", rx: 0, "x": x, "y": y, "width": width, height: 30, fill: "none", style: "fill:url(#classelement);"}));
 	}
-	text.appendChild(document.createTextNode(id));
 
-	g.appendChild(text);
-	g.appendChild( this.util.create({tag:"line", x1:x, y1:y + 30, x2: x + width, y2: y + 30, stroke:strokeColor}) );
+	item = this.util.create({tag: "text", $font: true, "text-anchor": "right", "x": x + width / 2 - textWidth / 2, "y": y + 20, "width": textWidth});
+
+	if (this.model.model.typ.toLowerCase() === "objectdiagram") {
+		item.setAttribute("text-decoration", "underline");
+	}
+	item.appendChild(document.createTextNode(id));
+
+	g.appendChild(item);
+	g.appendChild(this.util.create({tag: "line", x1: x, y1: y + 30, x2: x + width, y2: y + 30, stroke: rect.stroke}));
 	y += 50;
 
-	if(node.attributes){
-		for(var a=0;a<node.attributes.length;a++){
-			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x":(x+10), "y": y, value:node.attributes[a]}));
+	if (node.attributes) {
+		for (z = 0; z < node.attributes.length; z += 1) {
+			g.appendChild(this.util.create({tag: "text", $font: true, "text-anchor": "left", "width": width, "x": (x + 10), "y": y, value: node.attributes[z]}));
 			y += 20;
 		}
-		if(node.attributes.length>0) {
+		if (node.attributes.length > 0) {
 			y -= 10;
 		}
 	}
-	if(node.methods && node.methods.length > 0){
-		g.appendChild( this.util.create({tag:"line", x1:x, y1: y, x2: x + width, y2: y, stroke:"#000"}) );
-		y+=20;
-		for(var m=0;m<node.methods.length;m++){
-			g.appendChild(this.util.create({tag:"text", _font:true, "text-anchor":"left", "width": width, "x": x + 10, "y": y, value:node.methods[m]}));
+	if (node.methods && node.methods.length > 0) {
+		g.appendChild(this.util.create({tag: "line", x1: x, y1: y, x2: x + width, y2: y, stroke: "#000"}));
+		y += 20;
+		for (z = 0; z < node.methods.length; z += 1) {
+			g.appendChild(this.util.create({tag: "text", $font: true, "text-anchor": "left", "width": width, "x": x + 10, "y": y, value: node.methods[z]}));
 			y += 20;
 		}
 	}
 	return g;
 };
-SVGDrawer.prototype.addChild = function(node, parent, child){
+Drawer.SVGDrawer.prototype.addChild = function (node, parent, child) {
 	child.setAttribute("class", "draggable");
 	parent.appendChild(child);
 	this.model.createElement(child, "class", node);
 };
-SVGDrawer.prototype.createInfo = function(item, text, angle) {
-	var items = text.split("\n");
-	var group;
-	if(items.length>1){
-		group = this.util.create({tag:"g", class:"draggable", rotate:angle, model:item});
-		for(var i = 0;i<items.length;i++) {
-			var child = this.util.create({tag:"text", _font:true, "text-anchor":"left", "x": item.x, "y": item.y+(item.height*i)});
+Drawer.SVGDrawer.prototype.getInfo = function (item, text, angle, style) {
+	var child, group, i, items = text.split("\n");
+	if (items.length > 1) {
+		group = this.util.create({tag: "g", "class": "draggable", rotate: angle, model: item});
+		for (i = 0; i < items.length; i += 1) {
+			child = this.util.create({tag: "text", $font: true, "text-anchor": "left", "x": item.x, "y": item.y + (item.height * i), fill: this.getColor(style, "#CCC")});
 			child.appendChild(document.createTextNode(items[i]));
 			group.appendChild(child);
 		}
 		this.model.createElement(group, "info", item);
 		return group;
 	}
-	group = this.util.create({tag:"text", "#_font":true, "text-anchor":"left", "x": item.x, "y": item.y, value:text, "id": item.id, class:"draggable", rotate:angle, model:item});
+	group = this.util.create({tag: "text", "#$font": true, "text-anchor": "left", "x": item.x, "y": item.y, value: text, "id": item.id, "class": "draggable", rotate: angle, model: item, fill: this.getColor(style, "#CCC")});
 	this.model.createElement(group, "info", item);
 	return group;
 };
-SVGDrawer.prototype.createLine = function(x1, y1, x2, y2, lineStyle, style){
-	var line = this.util.create({tag:"line", 'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2, "stroke":this.getColor(style)});
-	if(lineStyle && lineStyle.toLowerCase()=="dotted"){
-		line.setAttribute("stroke-miterlimit","4");
-		line.setAttribute("stroke-dasharray","1,1");
+Drawer.SVGDrawer.prototype.getLine = function (x1, y1, x2, y2, lineStyle, style) {
+	var line = this.util.create({tag: "line", 'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2, "stroke": this.getColor(style)});
+	if (lineStyle && lineStyle.toLowerCase() === "dotted") {
+		line.setAttribute("stroke-miterlimit", "4");
+		line.setAttribute("stroke-dasharray", "1,1");
 	}
 	return line;
 };
-SVGDrawer.prototype.createPath = function(close, fill, path){
-	var d="M"+path[0].x+" "+path[0].y;
-	for(var i=1;i<path.length;i++) {
-		d = d + "L "+path[i].x + " "+ path[i].y;
+Drawer.SVGDrawer.prototype.createPath = function (close, fill, path, angle) {
+	var i, d = "M" + path[0].x + " " + path[0].y;
+	for (i = 1; i < path.length; i += 1) {
+		d = d + "L " + path[i].x + " " + path[i].y;
 	}
-	if(close) {
-		d = d +" Z";
+	if (close) {
+		d = d + " Z";
 	}
-	return this.util.create({tag:"path", "d":d, "fill": fill, stroke:"#000", "stroke-width":"1px"});
+	return this.util.create({tag: "path", "d": d, "fill": fill, stroke: "#000", "stroke-width": "1px"});
 };
-SVGDrawer.prototype.createGroup = function(node, group){
-	var entity = this.util.create({tag:"g"});
-	var transform = "translate("+group.x+" "+group.y+")";
-	if(group.scale){ transform += " scale("+group.scale+")";}
-	if(group.rotate){ transform += " rotate("+group.rotate+")";}
-	entity.setAttribute('transform', transform);
-	entity.setAttribute("height", group.height);
-	entity.setAttribute("width", group.width);
-	for (var i = 0; i < group.items.length; ++i){
-		entity.appendChild( this.util.create( group.items[i] ) );
+Drawer.SVGDrawer.prototype.createGroup = function (node, group, parent) {
+	var func, y, yr, z, box, item, transform, that = this, i, g = this.util.create({tag: "g"}), offsetX = 0, offsetY = 0;
+	if (parent) {
+		offsetX = group.x;
+		offsetY = group.y;
+	} else {
+		parent = g;
 	}
-	return entity;
+	transform = "translate(" + group.x + " " + group.y + ")";
+	if (group.scale) { transform += " scale(" + group.scale + ")"; }
+	if (group.rotate) { transform += " rotate(" + group.rotate + ")"; }
+	g.setAttribute('transform', transform);
+	g.setAttribute("height", group.height);
+	g.setAttribute("width", group.width);
+
+	for (i = 0; i < group.items.length; i += 1) {
+		g.appendChild(this.util.create(group.items[i]));
+	}
+	if (!node.height) {
+		node.height = group.height;
+	}
+	if (!node.minheight) {
+		node.minheight = node.height;
+	}
+	if (!node.maxheight) {
+		node.maxheight = node.height;
+	}
+
+	if (node.elements) {
+		for (i = 0; i < node.elements.length; i += 1) {
+			if (!node.elements[i] && node.elements[i].length < 1) {
+				node.elements.splice(i, 1);
+				i -= 1;
+			}
+		}
+		box = this.util.create({tag: "g"});
+		z = node.elements.length * 25 + 6;
+		box.appendChild(this.util.create({tag: "rect", rx: 0, x: offsetX, y: (offsetY + 28), width: 60, height: z, stroke: "#000", fill: "#fff", opacity: "0.7"}));
+		node.maxheight = z + node.minheight;
+
+		parent.elements = node.elements;
+		parent.activ = this.util.create({tag: "text", $font: true, "text-anchor": "left", "width": 60, "x": (10 + offsetX), "y": 20, value: node.activText});
+		g.appendChild(parent.activ);
+		y = offsetY + 46;
+		yr = offsetY + 28;
+
+		func = function (event) {
+			parent.activ.textContent = event.currentTarget.value;
+		};
+		for (z = 0; z < node.elements.length; z += 1) {
+			box.appendChild(this.util.create({tag: "text", $font: true, "text-anchor": "left", "width": 60, "x": 10, "y": y, value: node.elements[z]}));
+			item = box.appendChild(this.util.create({tag: "rect", rx: 0, x: offsetX, y: yr, width: 60, height: 24, stroke: "none", "class": "selection"}));
+			item.value = node.elements[z];
+			if (node.action) {
+				item.onclick = node.action;
+			} else {
+				item.onclick = func;
+			}
+			y += 26;
+			yr += 26;
+		}
+		parent.choicebox = box;
+	}
+	parent.tool = node;
+	parent.onclick = function () {
+		if (parent.status === "close") {
+			parent.open();
+		} else {
+			parent.close();
+		}
+	};
+	parent.close = function () {
+		if (parent.status === "open") {
+			this.removeChild(parent.choicebox);
+		}
+		parent.status = "close";
+		parent.tool.height = parent.tool.minheight;
+		that.setSize(parent, parent.tool.width + parent.tool.x + 10, parent.tool.height + parent.tool.y + 10);
+	};
+	parent.open = function () {
+		if (this.tagName === "svg") {
+			return;
+		}
+		if (parent.status === "close") {
+			this.appendChild(parent.choicebox);
+		}
+		parent.status = "open";
+		parent.tool.height = parent.tool.maxheight;
+		that.setSize(parent, parent.tool.width + parent.tool.x + 10, parent.tool.height + parent.tool.y + 10);
+	};
+	parent.close();
+
+	return g;
 };
 // Example Items
-// {tag:"path", d:""}
-// {tag:"rect", width:46, height:34}
-// {tag:"ellipse", width:23, height:4}
-// {tag:"line", x1:650, y1:-286, x2:650, y2:-252}
-// {tag:"circle", r:5, x:12, y:0}
-// {tag:"image", height: 30, width: 50, content_src: hallo}
-// {tag:"text", "text-anchor":"left", x:"10"}
-var SymbolLibary = function(){};
-SymbolLibary.prototype.upFirstChar = function(txt){return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();};
-SymbolLibary.prototype.create = function(node, drawer){
-	if(this.isSymbol(node)) {
-		return this.draw(drawer, node, false);
+// {tag: "path", d: ""}
+// {tag: "rect", width:46, height:34}
+// {tag: "ellipse", width:23, height:4}
+// {tag: "line", x1:650, y1:-286, x2:650, y2:-252}
+// {tag: "circle", r:5, x:12, y:0}
+// {tag: "image", height: 30, width: 50, content$src: hallo}
+// {tag: "text", "text-anchor": "left", x: "10"}
+var SymbolLibary = function () {};
+SymbolLibary.prototype.upFirstChar = function (txt) {return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase(); };
+SymbolLibary.prototype.create = function (node, drawer) {
+	if (this.isSymbol(node)) {
+		return this.draw(drawer, node);
 	}
 	return null;
 };
-SymbolLibary.prototype.isSymbol = function(node){
-	var fn = this["draw" + this.upFirstChar(node.typ)];
+SymbolLibary.prototype.isSymbol = function (node) {
+	var fn = this[this.getName(node)];
 	return typeof fn === "function";
 };
-SymbolLibary.prototype.draw = function(drawer, node){
-	var fn = this["draw" + this.upFirstChar(node.typ)];
-	if(typeof fn === "function"){
-		var group = fn.apply(this, [node]);
-		if( !drawer){
-			drawer = new SVGDrawer();
-			drawer.showButton=false;
-			var board = drawer.createContainer(null);
-			var element = drawer.createGroup(node, group);
-			board.appendChild(element);
+SymbolLibary.prototype.getName = function (node) {
+	if (node.typ) {
+		return "draw" + this.upFirstChar(node.typ);
+	}
+	if (node.src) {
+		return "draw" + this.upFirstChar(node.src);
+	}
+	return "drawNode";
+};
+SymbolLibary.prototype.draw = function (drawer, node) {
+	var group, board, item, fn = this[this.getName(node)];
+	if (typeof fn === "function") {
+		group = fn.apply(this, [node]);
+		if (!drawer || typeof drawer.createGroup !== "function") {
+			drawer = new Drawer.SVGDrawer();
+			drawer.showButton = false;
+			board = drawer.getBoard(null);
+			board.setAttribute("style", "border:none;");
+			drawer.setSize(board, node.width + node.x + 10, node.height + node.y + 10);
+			item = drawer.createGroup(node, group, board);
+			board.appendChild(item);
 			return board;
 		}
 		return drawer.createGroup(node, group);
 	}
 };
-SymbolLibary.prototype.drawSmily = function(){
+SymbolLibary.prototype.drawSmily = function (node) {
 	return {
-		x:0,
-		y:0,
-		width:100,
-		height:100,
-		items:[
-			{tag:"path", d:"m 49.5002 25.0001a 24.5001 24.5000 0 1 1-49.0001 0 24.5001 24.5000 0 1 1 49.0001 0z"},
-			{tag:"path", d:"m 8.6239 30.9175c 15.9633 20 32.1560 0.3211 32.1560 0.3211"},
-			{tag:"path", d:"m 19.6330 19.6789a 1.7431 2.5229 0 1 1-3.4862 0 1.7431 2.5229 0 1 1 3.4862 0z"},
-			{tag:"path", d:"m 33.4862 19.6789a 1.7431 2.5229 0 1 1-3.4862 0 1.7431 2.5229 0 1 1 3.4862 0z"},
-			{tag:"path", d:"m 6.0550 31.0091c 3.3945 0.9175 4.0367-2.2017 4.0367-2.2017"},
-			{tag:"path", d:"m 43.5780 31.3761c-3.3945 0.9175-4.0367-2.2017-4.0367-2.2017"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 100,
+		height: 100,
+		items: [
+			{tag: "path", stroke: "black", fill: "none", d: "m49.01774,25.64542a24.5001,24.5 0 1 1 -49.0001,0a24.5001,24.5 0 1 1 49.0001,0z"},
+			{tag: "path", d: "m8,31.5c16,20 32,0.3 32,0.3"},
+			{tag: "path", d: "m19.15,20.32a1.74,2.52 0 1 1 -3.49,0a1.74,2.52 0 1 1 3.49,0z"},
+			{tag: "path", d: "m33,20.32a1.74,2.52 0 1 1 -3.48,0a1.74,2.52 0 1 1 3.48,0z"},
+			{tag: "path", d: "m5.57,31.65c3.39,0.91 4.03,-2.20 4.03,-2.20"},
+			{tag: "path", d: "m43,32c-3,0.91 -4,-2.20 -4.04,-2.20"}
+		]
+	};
 };
-SymbolLibary.prototype.drawDatabase = function(){
+SymbolLibary.prototype.drawDatabase = function (node) {
 	return {
-		x:0,
-		y:0,
-		width:100,
-		height:100,
-		items:[
-			{tag:"path", d:"M 650-252a 16 4 0 0 0 45 0"},
-			{tag:"rect", width:46, height:34},
-			{tag:"ellipse", width:23, height:4},
-			{tag:"line", x1:650, y1:-286, x2:650, y2:-252},
-			{tag:"line", x1:696, y1:-286, x2:696, y2:-252},
-			{tag:"rect", width:46,height:42}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 100,
+		height: 100,
+		items: [
+			{tag: "path", stroke: "black", fill: "none", d: "m0,6.26c0,-6.26 25.03,-6.26 25.03,0l0,25.82c0,6.26 -25.03,6.26 -25.03,0l0,-25.82z"},
+			{tag: "path", stroke: "black", fill: "none", d: "m0,6.26c0,4.69 25.03,4.69 25.03,0m-25.03,2.35c0,4.69 25.03,4.69 25.03,0m-25.03,2.35c0,4.69 25.03,4.69 25.03,0"}
+		]
+	};
 };
-SymbolLibary.prototype.drawLetter = function(){
+SymbolLibary.prototype.drawLetter = function (node) {
 	return {
-		x:0,
-		y:0,
-		width:100,
-		height:35,
-		items:[
-			{tag:"path", d:"m 1 1 98 0 0 48-98 0z"},
-			{tag:"path", d:"m 1.2684 1.4855 48.7259 23.3589 48.6202-23.676"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 100,
+		height: 50,
+		items: [
+			{tag: "path", stroke: "black", fill: "none", d: "m1,1l22,0l0,14l-22,0l0,-14z"},
+			{tag: "path", stroke: "black", fill: "none", d: "m1.06,1.14l10.94,6.81l10.91,-6.91"}
+		]
+	};
 };
-SymbolLibary.prototype.drawMobilphone = function(){
+SymbolLibary.prototype.drawMobilphone = function (node) {
 	return {
-		x:0,
-		y:0,
-		width:25,
-		height:50,
-		items:[
-			{tag:"path", d:"m 4.1937 0.5 15.6127 0c 2.0463 0 3.6937 1.6474 3.6937 3.6936l 0 41.6127c 0 2.0463-1.6474 3.6937-3.6937 3.6937l-15.6127 0c-2.0463 0-3.6937-1.6474-3.6937-3.6937l 0-41.6127c 0-2.0462 1.6474-3.6936 3.6937-3.6936z"},
-			{tag:"path", d:"m 12.5 2.7338a 0.5 0.5 0 1 1-1 0 0.5 0.5 0 1 1 1 0z"},
-			{tag:"path", d:"m 14 45.6882a 2 2.0000 0 1 1-4 0 2 2.0000 0 1 1 4 0z"},
-			{tag:"path", d:"m 8.3516 5.0581 7.2969 0"},
-			{tag:"path", d:"m 1.6352 7.5455 20.7297 0 0 34.0796-20.7297 0z"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 25,
+		height: 50,
+		items: [
+			{tag: "path", d: "m 4.2 0.5 15.61 0c 2 0 3.7 1.65 3.7 3.7l 0 41.6c 0 2-1.65 3.7-3.7 3.7l-15.6 0c-2 0-3.7-1.6-3.7-3.7l 0-41.6c 0-2 1.6-3.7 3.7-3.7z", fill: "none", stroke: "black"},
+			{tag: "path", d: "m 12.5 2.73a 0.5 0.5 0 1 1-1 0 0.5 0.5 0 1 1 1 0z"},
+			{tag: "path", d: "m 14 46a 2 2 0 1 1-4 0 2 2 0 1 1 4 0z"},
+			{tag: "path", d: "m 8 5 7 0"},
+			{tag: "path", d: "m 1.63 7.54 20.73 0 0 34-20.73 0z"}
+		]
+	};
 };
-SymbolLibary.prototype.drawWall = function(){
+SymbolLibary.prototype.drawWall = function (node) {
 	return {
-		x:0,
-		y:0,
-		width:25,
-		height:50,
-		items:[
-			{tag:"path", d:"m 26.5000 45.9384-5.0389 3.5616-20.9610-9.0435 0.0000-36.3952 5.0389-3.5613 20.9611 9.0437z"},
-			{tag:"path", d:"m 2.7070 11.4274 18.3409 7.9133m-14.4589-12.5655 0 6.3473m 8.1631 21.7364 0 6.3472m-8.6393-9.9876 0 6.3472m 4.0923-10.6702 0 6.3473m 4.7743-10.2152 0 6.3473m-8.8666-10.2152 0 6.3472m 4.7743-10.2151 0 6.3472m-7.9572 14.4578 18.3409 7.9132m-18.3409-13.9132 18.3409 7.9132m-18.3409-13.9133 18.3409 7.9133m-18.3409-13.9133 18.3409 7.9132m-0.0000-13.0532-0.0001 34.0433m-18.2251-41.8406 18.2998 7.9024m 0 0.1115 4.9978-3.5723"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 25,
+		height: 50,
+		items: [
+			{tag: "path", d: "m26,45.44l-5,3.56l-21,-9l0,-36.41l5,-3.56l20.96,9l-0,36.4z"},
+			{tag: "path", stroke: "white", d: "m2.21,11l18.34,7.91m-14.46,-12.57l0,6.3m8.2,21.74l0,6.35m-8.6,-10l0,6.351m4.1,-10.67l0,6.3m4.8,-10.2l0,6.3m-8.87,-10.23l0,6.35m4.78,-10.22l0,6.35m-8,14.5l18.34,7.91m-18.34,-13.91l18.34,7.91m-18.34,-13.91l18.34,7.91m-18.34,-13.91l18.34,7.91m0,-13l0,34m-18.23,-41.84l18.3,8m0,0.11l5,-3.57"}
+		]
+	};
 };
-SymbolLibary.prototype.drawActor = function(){
+SymbolLibary.prototype.drawActor = function (node) {
 	return {
-		x:10,
-		y:10,
-		width:25,
-		height:50,
-		items:[
-			{tag:"line", x1:12,y1:5,x2:12,y2:25},
-			{tag:"circle", r:5, cx:12, cy:0},
-			{tag:"line", x1:0, y1:13, x2:25, y2:13},
-			{tag:"line", x1:12, y1:25, x2:5, y2:34},
-			{tag:"line", x1:12, y1:25, x2:20, y2:34}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 25,
+		height: 50,
+		items: [
+			{tag: "line", stroke: "#000", x1: "12", y1: "10", x2: "12", y2: "30"},
+			{tag: "circle", stroke: "#000", cy: "5", cx: "12", r: "5"},
+			{tag: "line", stroke: "#000", y2: "18", x2: "25", y1: "18", x1: "0"},
+			{tag: "line", stroke: "#000", y2: "39", x2: "5", y1: "30", x1: "12"},
+			{tag: "line", stroke: "#000", y2: "39", x2: "20", y1: "30", x1: "12"}
+		]
+	};
 };
-SymbolLibary.prototype.drawLamp = function(){
+SymbolLibary.prototype.drawLamp = function (node) {
 	return {
-		x:10,
-		y:10,
-		width:25,
-		height:50,
-		items:[
-			{tag:"path", d:"m 22.4676 10.5797c-6.5690 0-11.8905 5.1708-11.8905 11.5437 0 2.3507 0.7376 4.538 1.9817 6.3616 2.0562 3.9241 4.3637 5.6306 4.4198 10.4001l 11.1459 0c 0.1160-4.9336 2.5455-6.7664 4.4319-10.4001 1.3930-1.5069 1.7799-4.4684 1.8016-6.3616 0-6.3729-5.3215-11.5437-11.8905-11.5437z"},
-			{tag:"path", d:"m 18.4085 40.0784 8.0294 0c 0.5820 0 1.0505 0.4685 1.0505 1.0504 0 0.582-0.4685 1.0505-1.0505 1.0505l-8.0294 0c-0.5820 0-1.0505-0.4685-1.0505-1.0505 0-0.5819 0.4685-1.0504 1.0505-1.0504z"},
-			{tag:"path", d:"m 18.4085 42.7311 8.0294 0c 0.5820 0 1.0505 0.4685 1.0505 1.0504 0 0.582-0.4685 1.0505-1.0505 1.0505l-8.0294 0c-0.5820 0-1.0505-0.4685-1.0505-1.0505 0-0.5819 0.4685-1.0504 1.0505-1.0504z"},
-			{tag:"path", d:"m 18.4411 45.2823 8.0294 0c 0.5820 0 1.0505 0.4685 1.0505 1.0505 0 0.582-0.4685 1.0505-1.0505 1.0505l-8.0294 0c-0.5820 0-1.0505-0.4685-1.0505-1.0505 0-0.582 0.4685-1.0505 1.0505-1.0505z"},
-			{tag:"path", d:"m 19.4727 48.0741c 0.3690 0.8074 1.0610 1.3087 1.8885 1.7116 0.6333 0.3084 1.4623 0.262 2.1164 0 0.7971-0.3192 1.4109-0.7966 1.8559-1.7762z"},
-			{tag:"path", d:"m 5.9483 37.4973 4.1544-4.0548c 0.3042-0.2969 0.7902-0.2931 1.0897 0.0084 0.2995 0.3016 0.2958 0.7833-0.0084 1.0802l-4.1544 4.0548c-0.3042 0.2969-0.7902 0.2931-1.0897-0.0085-0.2995-0.3016-0.2958-0.7833 0.0084-1.0802z"},
-			{tag:"path", d:"m 39.0558 37.5618-4.1544-4.0548c-0.3042-0.2969-0.7902-0.2931-1.0897 0.0085-0.2995 0.3016-0.2958 0.7833 0.0084 1.0802l 4.1544 4.0548c 0.3042 0.2969 0.7902 0.2931 1.0897-0.0085 0.2995-0.3016 0.2958-0.7833-0.0084-1.0802z"},
-			{tag:"path", d:"m 37.886 22.9798 5.8406-0.0467c 0.4233-0.0034 0.7616-0.3469 0.7584-0.7703-0.0032-0.4233-0.3465-0.7614-0.7698-0.7580l-5.8406 0.0467c-0.4233 0.0034-0.7616 0.3469-0.7584 0.7702 0.0032 0.4234 0.3465 0.7615 0.7698 0.7581z"},
-			{tag:"path", d:"m 1.2884 22.9797 5.8406-0.0467c 0.4233-0.0034 0.7616-0.3469 0.7584-0.7702-0.0032-0.4233-0.3465-0.7614-0.7698-0.7580l-5.8406 0.0467c-0.4233 0.0034-0.7616 0.3469-0.7584 0.7702 0.0032 0.4233 0.3465 0.7614 0.7698 0.7580z"},
-			{tag:"path", d:"m 34.7476 11.2245 4.0877-4.1204c 0.2994-0.3018 0.2956-0.7839-0.0084-1.0810-0.3040-0.2971-0.7898-0.2933-1.0892 0.0084l-4.0877 4.1204c-0.2994 0.3018-0.2956 0.7839 0.0084 1.0810 0.3040 0.2971 0.7898 0.2933 1.0892-0.0084z"},
-			{tag:"path", d:"m 11.2494 9.9815-4.1544-4.0548c-0.3042-0.2969-0.7902-0.2931-1.0897 0.0084-0.2995 0.3016-0.2958 0.7833 0.0084 1.0802l 4.1544 4.0548c 0.3042 0.2969 0.7902 0.2931 1.0897-0.0084 0.2995-0.3016 0.2958-0.7833-0.0084-1.0802z"},
-			{tag:"path", d:"m 21.6435 1.2928 0.0469 5.7682c 0.0035 0.4268 0.3498 0.7678 0.7766 0.7647 0.4268-0.0032 0.7676-0.3493 0.7641-0.7761l-0.0469-5.7682c-0.0035-0.4268-0.3498-0.7678-0.7766-0.7647-0.4268 0.0032-0.7676 0.3493-0.7641 0.7761z"},
-			{tag:"path", d:"m 26.1069 24.375c-0.4677 0.033-0.9728 0.1942-1.3332 0.3931-1.1368 0.6273-2.0556 2.9226-2.27 3.5024-0.2599-0.6887-1.1412-2.8637-2.2340-3.4666-0.7208-0.3978-1.9633-0.6605-2.4502 0-0.5916 0.8024 0.1647 2.1844 0.9008 2.8591 0.9822 0.9003 3.9275 0.8935 3.9275 0.8935 0 0 0.0005-0.034 0-0.036 0.5398-0.011 2.8424-0.097 3.7113-0.8935 0.7361-0.6746 1.4924-2.0566 0.9008-2.8591-0.2434-0.3302-0.6853-0.4259-1.1530-0.3931z"},
-			{tag:"path", d:"m 22.4693 28.5688 0 10.6875"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 25,
+		height: 50,
+		items: [
+			{tag: "path", d: "m 22.47 10.58c-6.57 0-11.89 5.17-11.89 11.54 0 2.35 0.74 4.54 2 6.36 2 4 4.36 5.63 4.42 10.4l 11.15 0c 0.12-4.9 2.5-6.8 4.43-10.4 1.39-1.5 1.8-4.5 1.8-6.4 0-6.4-5.3-11.5-11.9-11.5z", fill: "white", stroke: "black"},
+			{tag: "path", d: "m 18.4 40 8 0c 0.58 0 1 0.5 1 1 0 0.6-0.5 1-1 1l-8 0c-0.6 0-1-0.47-1-1 0-0.58 0.47-1 1-1z"},
+			{tag: "path", d: "m 18.4 42.7 8 0c 0.58 0 1 0.47 1 1 0 0.58-0.47 1-1 1l-8 0c-0.58 0-1-0.47-1-1 0-0.58 0.46-1 1-1z"},
+			{tag: "path", d: "m 18.4 45.3 8 0c 0.58 0 1 0.47 1 1 0 0.58-0.47 1-1 1l-8 0c-0.58 0-1-0.47-1-1 0-0.58 0.46-1 1-1z"},
+			{tag: "path", d: "m 19.5 48c 0.37 0.8 1 1.3 1.9 1.7 0.6 0.3 1.5 0.3 2 0 0.8-0.3 1.4-0.8 1.9-1.8z"},
+			{tag: "path", d: "m 6 37.5 4.2-4c 0.3-0.3 0.8-0.3 1 0 0.3 0.3 0.3 0.8 0 1.1l-4.2 4c-0.3 0.3-0.8 0.3-1.1 0-0.3-0.3-0.3-0.8 0-1z"},
+			{tag: "path", d: "m 39 37.56-4.15-4c-0.3-0.3-0.8-0.3-1 0-0.3 0.3-0.3 0.8 0 1l 4.2 4c 0.3 0.3 0.8 0.3 1 0 0.3-0.3 0.3-0.8 0-1z"},
+			{tag: "path", d: "m 38 23 5.8 0c 0.4 0 0.8-0.3 0.8-0.8 0-0.4-0.3-0.8-0.8-0.8l-5.8 0c-0.4 0-0.8 0.3-0.8 0.8 0 0.4 0.3 0.8 0.8 0.8z"},
+			{tag: "path", d: "m 1.3 23 6 0c 0.4 0 0.8-0.3 0.8-0.8 0-0.4-0.3-0.8-0.8-0.8l-5.9 0c-0.4 0-0.8 0.3-0.8 0.8 0 0.4 0.3 0.8 0.8 0.8z"},
+			{tag: "path", d: "m 34.75 11.2 4-4.1c 0.3-0.3 0.3-0.8 0-1-0.3-0.3-0.8-0.3-1 0l-4 4.1c-0.3 0.3-0.3 0.8 0 1 0.3 0.3 0.8 0.3 1 0z"},
+			{tag: "path", d: "m 11.23 10-4-4c-0.3-0.3-0.8-0.3-1 0-0.3 0.3-0.3 0.8 0 1l 4.2 4c 0.3 0.3 0.8 0.3 1 0 0.3-0.3 0.3-0.8 0-1z"},
+			{tag: "path", d: "m 21.64 1.3 0 5.8c 0 0.4 0.3 0.8 0.8 0.8 0.4 0 0.8-0.3 0.8-0.8l 0-5.8c 0-0.4-0.3-0.8-0.8-0.8-0.4 0-0.8 0.3-0.8 0.8z"},
+			{tag: "path", d: "m 26.1 24.3c-0.5 0-1 0.2-1.3 0.4-1.1 0.6-2 3-2.27 3.5-0.26-0.69-1.14-2.9-2.2-3.5-0.7-0.4-2-0.7-2.5 0-0.6 0.8 0.2 2.2 0.9 2.9 1 0.9 3.9 0.9 3.9 0.9 0 0 0 0 0 0 0.54 0 2.8 0 3.7-0.9 0.7-0.7 1.5-2 0.9-2.9-0.2-0.3-0.7-0.4-1.2-0.4z"},
+			{tag: "path", d: "m 22.5 28.57 0 10.7"}
+		]
+	};
 };
-SymbolLibary.prototype.drawStop = function(node){
+SymbolLibary.prototype.drawStop = function (node) {
 	return {
-		x:node.x,
-		y:node.y,
-		width:30,
-		height:30,
-		items:[
-			{tag:"path", fill:"#FFF", "stroke-width":"2", stroke:"#B00", d:"m 6,6 a 14,14 0 1 0 0.0636,-0.065 z m 0,0 20.73215,21.0846"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 30,
+		height: 30,
+		items: [
+			{tag: "path", fill: "#FFF", "stroke-width": "2", stroke: "#B00", d: "m 6,6 a 14,14 0 1 0 0.06,-0.06 z m 0,0 20,21"}
+		]
+	};
 };
-SymbolLibary.prototype.drawMin = function(node){
+SymbolLibary.prototype.drawMin = function (node) {
 	return {
-		x: (node.x-20+node.width),
-		y:node.y,
-		width:20,
-		height:20,
-		items:[
-			{tag:"path", fill: "none", stroke:"#000", "stroke-width":0.2, "stroke-linejoin":"round", d:"m 0,0 19.47716,0 0,19.47716 -19.47716,0 z"},
-			{tag:"path", fill: "none", stroke:"#000", "stroke-width":"1px", "stroke-linejoin":"miter", d:"m 4,10 13.48215,-0.0446"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 20,
+		height: 20,
+		items: [
+			{tag: "path", fill: "white", stroke: "#000", "stroke-width": 0.2, "stroke-linejoin": "round", d: "m 0,0 19,0 0,19 -19,0 z"},
+			{tag: "path", fill: "none", stroke: "#000", "stroke-width": "1px", "stroke-linejoin": "miter", d: "m 4,10 13,-0.04"}
+		]
+	};
 };
-SymbolLibary.prototype.drawArrow = function(node){
+SymbolLibary.prototype.drawArrow = function (node) {
 	return {
-		x: node.x,
-		y:node.y,
-		width:20,
-		height:20,
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 20,
+		height: 20,
 		rotate: node.rotate,
-		items:[ {tag:"path", fill: "#000", stroke:"#000", d:"M 0,0 10,4 0,9 z"} ]
-	}
+		items: [
+			{tag: "path", fill: "#000", stroke: "#000", d: "M 0,0 10,4 0,9 z"}
+		]
+	};
 };
-SymbolLibary.prototype.drawMax = function(node){
+SymbolLibary.prototype.drawMax = function (node) {
 	return {
-		x: (node.x-20+node.width),
-		y:node.y,
-		width:20,
-		height:20,
-		items:[
-			{tag:"path", fill: "none", stroke:"#000", "stroke-width":0.2, "stroke-linejoin":"round", "stroke-dashoffset":2, "stroke-dasharray":"4.8,4.8", d:"m 0,0 4.91187,0 5.44643,0 9.11886,0 0,19.47716 -19.47716,0 0,-15.88809 z"},
-			{tag:"path", fill: "none", stroke:"#000", "stroke-width":"1px", "stroke-linejoin":"miter", d:"m 4,10 6.66323,0.006 0.0255,5.83919 0.0109,-11.86456 -0.0342,6.02745 c 2.27159,-0.0182 4.43676,-0.002 6.80894,0.0104"}
-		]};
+		x: node.x || 0,
+		y: node.y || 0,
+		width: 20,
+		height: 20,
+		items: [
+			{tag: "path", fill: "white", stroke: "#000", "stroke-width": 0.2, "stroke-linejoin": "round", "stroke-dashoffset": 2, "stroke-dasharray": "4.8,4.8", d: "m 0,0 4.91187,0 5.44643,0 9.11886,0 0,19.47716 -19.47716,0 0,-15.88809 z"},
+			{tag: "path", fill: "none", stroke: "#000", "stroke-width": "1px", "stroke-linejoin": "miter", d: "m 4,10 6,0.006 0.02,5 0.01,-11 -0.03,6.02 c 2,-0.01 4,-0.002 6,0.01"}
+		]
+	};
+};
+SymbolLibary.prototype.drawButton = function (node) {
+	var btnX, btnY, btnWidth, btnHeight, btnValue;
+
+	btnX = node.x || 0;
+	btnY = node.y || 0;
+	btnWidth = node.width || 60;
+	btnHeight = node.height || 28;
+	btnValue = node.value || "";
+	return {
+		x: btnX,
+		y: btnY,
+		width: 60,
+		height: 28,
+		items: [
+			{tag: "rect", rx: 8, x: 0, y: 0, width: btnWidth, height: btnHeight, stroke: "#000", filter: "url(#drop-shadow)", "class": "saveBtn"},
+			{tag: "text", $font: true, x: 10, y: 18, fill: "black", value: btnValue, "class": "hand"}
+		]
+	};
+};
+SymbolLibary.prototype.drawDropdown = function (node) {
+	var btnX, btnY, btnWidth, btnHeight;
+
+	btnX = node.x || 0;
+	btnY = node.y || 0;
+	btnWidth = node.width || 60;
+	btnHeight = node.height || 28;
+	return {
+		x: btnX,
+		y: btnY,
+		width: btnWidth,
+		height: btnHeight,
+		items: [
+			{tag: "rect", rx: 0, x: 0, y: 0, width: btnWidth - 20, height: btnHeight, stroke: "#000", fill: "none"},
+			{tag: "rect", rx: 2, x: btnWidth - 20, y: 0, width: 20, height: 28, stroke: "#000", "class": "saveBtn"},
+			{tag: "path", style: "fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1", d: "m " + (btnWidth - 15) + ",13 10,0 L " + (btnWidth - 10) + ",20 z"}
+		]
+	};
+};
+SymbolLibary.prototype.drawClassicon = function (node) {
+	var btnX, btnY, btnWidth, btnHeight;
+
+	btnX = node.x || 0;
+	btnY = node.y || 0;
+	btnWidth = node.width || 60;
+	btnHeight = node.height || 28;
+	return {
+		x: btnX,
+		y: btnY,
+		width: btnWidth,
+		height: btnHeight,
+		items: [
+			{tag: "path", d: "m0,0l10.78832,0l0,4.49982l-10.78832,0.19999l0,9.19963l10.78832,0l0,-9.49962l-10.78832,0.19999l0,-4.59982z", style: "fill:none;stroke:#000000;"},
+			{tag: "path", d: "m25.68807,0l10.78832,0l0,4.49982l-10.78832,0.19999l0,9.19963l10.78832,0l0,-9.49962l-10.78832,0.2l0,-4.59982z", style: "fill:none;stroke:#000000;"},
+			{tag: "line", x1: 11, y1: 7, x2: 25, y2: 7, stroke: "#000"}
+		]
+	};
+};
+SymbolLibary.prototype.drawEdgeicon = function (node) {
+	var btnX, btnY, btnWidth, btnHeight;
+
+	btnX = node.x || 0;
+	btnY = node.y || 0;
+	btnWidth = node.width || 30;
+	btnHeight = node.height || 35;
+	return {
+		x: btnX,
+		y: btnY,
+		width: btnWidth,
+		height: btnHeight,
+		items: [
+			{tag: "path", d: "M2,10 20,10 20,35 2,35 Z M2,17 20,17 M20,10 28,5 28,9 M 28.5,4.7 24,4", style: "fill:none;stroke:#000000;transform:scale(0.4);"}
+		]
+	};
 };

@@ -13,6 +13,10 @@ public class SDMCodeEnhancer
    public static Storyboard story = null;
    private EPackage epackage;
    
+     /**
+    * 
+    * @see <a href='../../../../../../doc/SDMCodeEnhancer.html'>SDMCodeEnhancer.html</a>
+ */
    @Test
    public void testSDMCodeEnhancer()
    {
@@ -68,7 +72,7 @@ public class SDMCodeEnhancer
 
    public void enhance()
    {
-      ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, epackage.getName());
+      ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, epackage.getName(), false);
       
       if (story != null)
       {
