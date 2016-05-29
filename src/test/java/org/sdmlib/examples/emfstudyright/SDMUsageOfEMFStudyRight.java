@@ -1,12 +1,22 @@
-package org.sdmlib.models;
+package org.sdmlib.examples.emfstudyright;
 
 import org.junit.Test;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
 
 public class SDMUsageOfEMFStudyRight
 {
    @Test
    public void testStudyRightObjectModelNavigationAndQueries()
    {
+      EMFStudyRightModelFactory factory = EMFStudyRightModelFactory.eINSTANCE;
+      
+      University university = factory.createUniversity();
+      
+      UniversityImpl uniImpl = (UniversityImpl) university;
+      
+      
 //      Storyboard story = new Storyboard();
 //      
 //      story.add("Extend the class model:");
