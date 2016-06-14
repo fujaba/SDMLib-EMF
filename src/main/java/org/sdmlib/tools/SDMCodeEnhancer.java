@@ -6,26 +6,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.junit.Test;
 import org.sdmlib.CGUtil;
 import org.sdmlib.models.classes.ClassModel;
+import org.sdmlib.models.classes.Feature;
 import org.sdmlib.storyboards.Storyboard;
 
 public class SDMCodeEnhancer
 {
    public static Storyboard story = null;
    private EPackage epackage;
-   
-     /**
-    * 
-    * @see <a href='../../../../../../doc/SDMCodeEnhancer.html'>SDMCodeEnhancer.html</a>
- */
-   @Test
-   public void testSDMCodeEnhancer()
-   {
-      story = new Storyboard();
-      
-      main("src/test/java", "org.sdmlib.examples.emfstudyright.EMFStudyRightModel");
-      
-      story.dumpHTML();
-   }
    
    public static void main(String... args)
    {
@@ -74,11 +61,14 @@ public class SDMCodeEnhancer
    {
       ClassModel model = new EMFTool().getClassModelFromEPackage(epackage, rootPackage, false);
       
+      model.withFeature(Feature.EMFSTYLE);
+      
       if (story != null)
       {
          story.addClassDiagram(model);
       }
       
+      model.removeAllGeneratedCode(rootDir);
       model.generate(rootDir);
    }
 

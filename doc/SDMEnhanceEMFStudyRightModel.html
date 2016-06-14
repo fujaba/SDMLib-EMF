@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href="includes/diagramstyle.css" rel="stylesheet" type="text/css">
+
+<script src="includes/dagre.min.js"></script>
+<script src="includes/drawer.js"></script>
+<script src="includes/graph.js"></script>
+</head><body>
+<p>Storyboard <a href='.././src/test/java/org/sdmlib/examples/emfstudyright/SDMEnhanceEMFStudyRightModel.java' type='text/x-java'>SDMEnhanceEMFStudyRightModel</a></p>
+<script>
+   var json = {
+   "typ":"class",
+   "nodes":[
+      {
+         "typ":"node",
+         "id":"University",
+         "attributes":[
+            "name : String"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"Student",
+         "attributes":[
+            "name : String",
+            "studId : String",
+            "credits : int",
+            "motivation : int",
+            "assignmentPoints : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"TeachingAssistant",
+         "attributes":[
+            "noOfHours : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"Room",
+         "attributes":[
+            "topic : String",
+            "credits : int"
+         ]
+      },
+      {
+         "typ":"node",
+         "id":"Assignment",
+         "attributes":[
+            "name : String",
+            "points : int"
+         ]
+      }
+   ],
+   "edges":[
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"University",
+            "cardinality":"one",
+            "property":"uni"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"many",
+            "property":"rooms"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"University",
+            "cardinality":"one",
+            "property":"uni"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"in"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"friends"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"friendsRev"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"Student",
+            "cardinality":"many",
+            "property":"students"
+         },
+         "target":{
+            "id":"Assignment",
+            "cardinality":"many",
+            "property":"done"
+         }
+      },
+      {
+         "typ":"GENERALISATION",
+         "source":{
+            "id":"TeachingAssistant",
+            "cardinality":"one",
+            "property":"teachingassistant"
+         },
+         "target":{
+            "id":"Student",
+            "cardinality":"one",
+            "property":"student"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"TeachingAssistant",
+            "cardinality":"many",
+            "property":"tas"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"room"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"Room",
+            "cardinality":"many",
+            "property":"doors"
+         },
+         "target":{
+            "id":"Room",
+            "cardinality":"many",
+            "property":"doorsRev"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "id":"Room",
+            "cardinality":"one",
+            "property":"room"
+         },
+         "target":{
+            "id":"Assignment",
+            "cardinality":"many",
+            "property":"assignments"
+         }
+      }
+   ]
+}   ;
+   new Graph(json, {"canvasid":"canvasSDMEnhanceEMFStudyRightModelClassDiagram0", "display":"html", fontsize:10, bar:false, propertyinfo:false}).layout(100,100);
+</script>
+
+</body>
+</html>
