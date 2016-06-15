@@ -24,6 +24,7 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 import de.uniks.networkparser.interfaces.SendableEntityCreator;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import de.uniks.networkparser.IdMap;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 
@@ -48,7 +49,7 @@ public class UniversityCreator implements SendableEntityCreator
    @Override
    public Object getSendableInstance(boolean reference)
    {
-      return University.class;
+      return EMFStudyRightModelFactory.eINSTANCE.createUniversity();
    }
    
    @Override
