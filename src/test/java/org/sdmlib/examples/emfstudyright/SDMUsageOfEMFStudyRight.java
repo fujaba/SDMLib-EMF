@@ -1,123 +1,128 @@
 package org.sdmlib.examples.emfstudyright;
 
 import org.junit.Test;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.storyboards.Storyboard;
 
 public class SDMUsageOfEMFStudyRight
 {
+     /**
+    * 
+    * @see <a href='../../../../../../../doc/StudyRightObjectModelNavigationAndQueries.html'>StudyRightObjectModelNavigationAndQueries.html</a>
+ */
    @Test
    public void testStudyRightObjectModelNavigationAndQueries()
    {
       EMFStudyRightModelFactory factory = EMFStudyRightModelFactory.eINSTANCE;
       
-      University university = factory.createUniversity();
+      Storyboard story = new Storyboard();
+
+      story.add("How to navigate and query an object model.");
+
+      story.addStep("Example object structure:");
       
-      UniversityImpl uniImpl = (UniversityImpl) university;
+      University university = EMFStudyRightModelFactory.eINSTANCE.createUniversity();
+      university.setName("StudyRight");
+
+      Student karli = factory.createTeachingAssistant();
+      karli.setStudId("4242");
+      karli.setName("Karli");
+      university.getStudents().add(karli);
       
+      Student abu = factory.createStudent();
+      abu.setStudId("1337");
+      abu.setName("Abu");
+      university.getStudents().add(abu);
       
-//      Storyboard story = new Storyboard();
-//      
-//      story.add("Extend the class model:");
-//      
-//      ClassModel model = new ClassModel();
-//      
-//      Clazz studentClass = model.createClazz(Student.class.getName());
-// 
-//      studentClass.withAssoc(studentClass, "friends", Card.MANY, "friends", Card.MANY);
-//      
-//      Clazz roomClass = model.createClazz(Room.class.getName());
-//      
-//      Clazz taClass = model.createClazz("TeachingAssistant").withSuperClazz(studentClass);
-//
-//      roomClass.withAssoc(taClass, "tas", Card.MANY, "room", Card.ONE);
-//      
-//      story.addClassDiagram(model);
-//      
-//      // model.generate("examples");
-//      
-//      story.add("How to navigate and query an object model.");
-//      
-//      story.addStep("Example object structure:");
-//      
-//      University university = EMFStudyRightModelFactory.eINSTANCE.createUniversity()
-//      .withName("StudyRight");
-//
-//      Student karli = university.createStudentsTeachingAssistantImpl()
-//            .withStudId("4242")
-//            .withName("Karli");
-//      
-//      Student abu = university.createStudentsStudentImpl()
-//            .withStudId("1337")
-//            .withName("Abu");
-//      
-//      Student alice = university.createStudentsStudentImpl()
-//            .withStudId("2323")
-//            .withName("Alice");
-//      
-//      abu.withFriends(alice);
-//
-//      Assignment a1 = EMFStudyRightModelFactory.eINSTANCE.createAssignment()
-//            .withName("Matrix Multiplication")
-//            .withPoints(5)
-//            .withStudents(abu);
-//
-//      Assignment a2 = EMFStudyRightModelFactory.eINSTANCE.createAssignment()
-//            .withName("Series")
-//            .withPoints(6);
-//
-//      Assignment a3 = EMFStudyRightModelFactory.eINSTANCE.createAssignment()
-//            .withName("Integrals")
-//            .withPoints(8);
-//
-//      karli.withDone(a1, a2);
-//
-//      Room mathRoom = university.createRoomsRoomImpl()
-//            .withTopic("math")
-//            .withCredits(17)  
-//            .withStudents(karli)
-//            .withAssignments(a1, a2, a3);
-//
-//      Room artsRoom = university.createRoomsRoomImpl()
-//            .withTopic("arts")
-//            .withCredits(16)
-//            .withDoors(mathRoom); 
-//
-//      Room sportsRoom = university.createRoomsRoomImpl()
-//            .withTopic("sports")
-//            .withCredits(25)
-//            .withDoors(mathRoom, artsRoom)
-//            .withStudents(abu, alice); 
-//
-//      Assignment a4 = sportsRoom.createAssignmentsAssignmentImpl().withName("Pushups").withPoints(4).withStudents(abu);
-//
-//      Room examRoom = university.createRoomsRoomImpl()
-//            .withTopic("exam")
-//            .withCredits(0)
-//            .withDoors(sportsRoom, artsRoom);
-//
-//      Room softwareEngineering = university.createRoomsRoomImpl()
-//            .withTopic("Software Engineering")
-//            .withCredits(42)
-//            .withDoors(artsRoom, examRoom);
-//
-//      story.addObjectDiagram(
-//         "studyRight", university, 
-//         "karli", "icons/karli.png", karli, 
-//         "abu", "icons/karli.png", abu, 
-//         "alice", "icons/karli.png", alice, 
-//         "mathRoom", "icons/mathroom.png", mathRoom, 
-//         "artsRoom", artsRoom,
-//         "sportsRoom", sportsRoom, 
-//         "examRoom", examRoom, 
-//         "placeToBe", softwareEngineering, 
-//         "icons/matrix.png", a1, 
-//         "icons/limes.png", a2 , 
-//         "icons/integralAssignment.png", a3, 
-//         a4);
-//
-//
+      Student alice = factory.createStudent();
+      alice.setStudId("2323");
+      alice.setName("Alice");
+      university.getStudents().add(alice);
+      
+      abu.getFriends().add(alice);
+
+      Assignment a1 = factory.createAssignment();
+      a1.setName("Matrix Multiplication");
+      a1.setPoints(5);
+      a1.getStudents().add(abu);
+
+      Assignment a2 = factory.createAssignment();
+      a2.setName("Series");
+      a2.setPoints(6);
+
+      Assignment a3 = factory.createAssignment();
+      a3.setName("Integrals");
+      a3.setPoints(8);
+
+      karli.getDone().add(a1);
+      karli.getDone().add(a2);
+
+      Room mathRoom = factory.createRoom();
+      mathRoom.setTopic("math");
+      mathRoom.setCredits(17)  ;
+      mathRoom.getStudents().add(karli);
+      mathRoom.getAssignments().addAll(new AssignmentSet(a1, a2, a3));
+      university.getRooms().add(mathRoom);
+
+      Room artsRoom = factory.createRoom();
+      artsRoom.setTopic("arts");
+      artsRoom.setCredits(16);
+      artsRoom.getDoors().add(mathRoom); 
+            university.getRooms().add(mathRoom);
+
+      Room sportsRoom = factory.createRoom();
+      sportsRoom.setTopic("sports");
+      sportsRoom.setCredits(25);
+      sportsRoom.getDoors().add(mathRoom);
+      sportsRoom.getDoors().add(artsRoom);
+      sportsRoom.getStudents().addAll(new StudentSet(abu, alice)); 
+      university.getRooms().add(mathRoom);
+
+      Assignment a4 = factory.createAssignment();
+      a4.setName("Pushups");
+      a4.setPoints(4);
+      a4.getStudents().add(abu);
+      
+      sportsRoom.getAssignments().add(a4);
+
+      Room examRoom = factory.createRoom();
+      examRoom.setTopic("exam");
+      examRoom.setCredits(0);
+      examRoom.getDoors().add(sportsRoom);
+      examRoom.getDoors().add(artsRoom);
+      university.getRooms().add(mathRoom);
+
+      Room softwareEngineering = factory.createRoom();
+      softwareEngineering.setTopic("Software Engineering");
+      softwareEngineering.setCredits(42);
+      softwareEngineering.getDoors().add(artsRoom);
+      softwareEngineering.getDoors().add(examRoom);
+      university.getRooms().add(mathRoom);
+
+      story.addObjectDiagram(
+         "studyRight", university, 
+         "karli", "icons/karli.png", karli, 
+         "abu", "icons/karli.png", abu, 
+         "alice", "icons/karli.png", alice, 
+         "mathRoom", "icons/mathroom.png", mathRoom, 
+         "artsRoom", artsRoom,
+         "sportsRoom", sportsRoom, 
+         "examRoom", examRoom, 
+         "placeToBe", softwareEngineering, 
+         "icons/matrix.png", a1, 
+         "icons/limes.png", a2 , 
+         "icons/integralAssignment.png", a3, 
+         a4
+         );
+
+
 //      //=====================================================
 //      story.addStep("Simple set based navigation:");
 //      
@@ -346,6 +351,6 @@ public class SDMUsageOfEMFStudyRight
 //      
 //      story.addObjectDiagramWith(university.getStudents(), university.getStudentsSet().getIn());
 //      
-//      story.dumpHTML();
+      story.dumpHTML();
    }
 }

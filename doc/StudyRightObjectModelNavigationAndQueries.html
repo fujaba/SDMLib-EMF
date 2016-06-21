@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href="includes/diagramstyle.css" rel="stylesheet" type="text/css">
+
+<script src="includes/dagre.min.js"></script>
+<script src="includes/drawer.js"></script>
+<script src="includes/graph.js"></script>
+</head><body>
+<p>Storyboard <a href='.././src/test/java/org/sdmlib/examples/emfstudyright/SDMUsageOfEMFStudyRight.java' type='text/x-java'>StudyRightObjectModelNavigationAndQueries</a></p>
+<p>How to navigate and query an object model.</p>
+<p>Start: Example object structure:</p>
+<script>
+   var json = {
+   "typ":"objectdiagram",
+   "style":null,
+   "nodes":[
+      {
+         "typ":"clazz",
+         "id":"U1 : UniversityImpl",
+         "attributes":[
+            "name=StudyRight"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"R2 : RoomImpl",
+         "attributes":[
+            "topic=math",
+            "credits=17"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"T3 : TeachingAssistantImpl",
+         "attributes":[
+            "noOfHours=0",
+            "name=Karli",
+            "studId=4242",
+            "credits=0",
+            "motivation=0",
+            "assignmentPoints=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"S4 : StudentImpl",
+         "attributes":[
+            "name=Abu",
+            "studId=1337",
+            "credits=0",
+            "motivation=0",
+            "assignmentPoints=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"S5 : StudentImpl",
+         "attributes":[
+            "name=Alice",
+            "studId=2323",
+            "credits=0",
+            "motivation=0",
+            "assignmentPoints=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"R9 : RoomImpl",
+         "attributes":[
+            "topic=arts",
+            "credits=16"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"R6 : RoomImpl",
+         "attributes":[
+            "topic=sports",
+            "credits=25"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"A7 : AssignmentImpl",
+         "attributes":[
+            "name=Matrix Multiplication",
+            "points=5"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"A10 : AssignmentImpl",
+         "attributes":[
+            "name=Series",
+            "points=6"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"A11 : AssignmentImpl",
+         "attributes":[
+            "name=Integrals",
+            "points=8"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"A8 : AssignmentImpl",
+         "attributes":[
+            "name=Pushups",
+            "points=4"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"R12 : RoomImpl",
+         "attributes":[
+            "topic=exam",
+            "credits=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"R13 : RoomImpl",
+         "attributes":[
+            "topic=Software Engineering",
+            "credits=42"
+         ]
+      }
+   ],
+   "edges":[
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"rooms",
+            "id":"R2 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"uni",
+            "id":"U1 : UniversityImpl"
+         }
+      },
+      {
+         "typ":"UNDIRECTIONAL",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"T3 : TeachingAssistantImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"universityimpl",
+            "id":"U1 : UniversityImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S4 : StudentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"uni",
+            "id":"U1 : UniversityImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S5 : StudentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"uni",
+            "id":"U1 : UniversityImpl"
+         }
+      },
+      {
+         "typ":"UNDIRECTIONAL",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"T3 : TeachingAssistantImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"roomimpl",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R9 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R6 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"assignments",
+            "id":"A7 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"room",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"assignments",
+            "id":"A10 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"room",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"assignments",
+            "id":"A11 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"room",
+            "id":"R2 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"one",
+            "property":"in",
+            "id":"R6 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S4 : StudentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"friends",
+            "id":"S5 : StudentImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"friendsRev",
+            "id":"S4 : StudentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"done",
+            "id":"A7 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S4 : StudentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"done",
+            "id":"A8 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S4 : StudentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"one",
+            "property":"in",
+            "id":"R6 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"S5 : StudentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R12 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R6 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R9 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R6 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"assignments",
+            "id":"A8 : AssignmentImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"room",
+            "id":"R6 : RoomImpl"
+         }
+      },
+      {
+         "typ":"UNDIRECTIONAL",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"T3 : TeachingAssistantImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"assignmentimpl",
+            "id":"A7 : AssignmentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R12 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R9 : RoomImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R13 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R9 : RoomImpl"
+         }
+      },
+      {
+         "typ":"UNDIRECTIONAL",
+         "source":{
+            "cardinality":"many",
+            "property":"students",
+            "id":"T3 : TeachingAssistantImpl"
+         },
+         "target":{
+            "cardinality":"one",
+            "property":"assignmentimpl",
+            "id":"A10 : AssignmentImpl"
+         }
+      },
+      {
+         "typ":"ASSOCIATION",
+         "source":{
+            "cardinality":"many",
+            "property":"doorsRev",
+            "id":"R13 : RoomImpl"
+         },
+         "target":{
+            "cardinality":"many",
+            "property":"doors",
+            "id":"R12 : RoomImpl"
+         }
+      }
+   ]
+}   ;
+   json["options"]={"canvasid":"canvasStudyRightObjectModelNavigationAndQueries3", "display":"svg", "fontsize":10,"bar":true};   var g = new Graph(json);
+   g.layout(100,100);
+</script>
+
+</body>
+</html>
