@@ -1,6 +1,7 @@
 package org.sdmlib.examples.emfstudyright;
 
 import org.junit.Test;
+import org.sdmlib.CGUtil;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.EMFStudyRightModelFactory;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
@@ -8,7 +9,9 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.University;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversitySet;
 import org.sdmlib.storyboards.Storyboard;
 
 public class SDMUsageOfEMFStudyRight
@@ -75,7 +78,7 @@ public class SDMUsageOfEMFStudyRight
       artsRoom.setTopic("arts");
       artsRoom.setCredits(16);
       artsRoom.getDoors().add(mathRoom); 
-            university.getRooms().add(mathRoom);
+      university.getRooms().add(artsRoom);
 
       Room sportsRoom = factory.createRoom();
       sportsRoom.setTopic("sports");
@@ -83,7 +86,7 @@ public class SDMUsageOfEMFStudyRight
       sportsRoom.getDoors().add(mathRoom);
       sportsRoom.getDoors().add(artsRoom);
       sportsRoom.getStudents().addAll(new StudentSet(abu, alice)); 
-      university.getRooms().add(mathRoom);
+      university.getRooms().add(sportsRoom);
 
       Assignment a4 = factory.createAssignment();
       a4.setName("Pushups");
@@ -97,14 +100,14 @@ public class SDMUsageOfEMFStudyRight
       examRoom.setCredits(0);
       examRoom.getDoors().add(sportsRoom);
       examRoom.getDoors().add(artsRoom);
-      university.getRooms().add(mathRoom);
+      university.getRooms().add(examRoom);
 
       Room softwareEngineering = factory.createRoom();
       softwareEngineering.setTopic("Software Engineering");
       softwareEngineering.setCredits(42);
       softwareEngineering.getDoors().add(artsRoom);
       softwareEngineering.getDoors().add(examRoom);
-      university.getRooms().add(mathRoom);
+      university.getRooms().add(softwareEngineering);
 
       story.addObjectDiagram(
          "studyRight", university, 
@@ -123,78 +126,78 @@ public class SDMUsageOfEMFStudyRight
          );
 
 
-//      //=====================================================
-//      story.addStep("Simple set based navigation:");
-//      
-//      story.markCodeStart();
-// 
-//      int assignmentPoints = university.getRoomsSet().getAssignments().getPoints().sum();
-//      int assignmentPoints2 = university.getRoomsSet().getAssignments()
-//            .stream().mapToInt(Assignment::getPoints).sum();
-//      
-//      int donePoints = university.getStudentsSet().getDone().getPoints().sum();
-//      
-//      story.addCode();
-//      
-//      story.add("Results in:");
-//      
-//      String text = CGUtil.replaceAll(
-//         "      Sum of assignment points: 23. \n" +
-//         "      Sum of points of assignments that have been done by at least one students: 15.",
-//         "23", assignmentPoints, 
-//         "15", donePoints);
-//      
-//      story.addPreformatted(text);
-//      
-//      story.assertEquals("Assignment points: ", 23, assignmentPoints);
-//      story.assertEquals("donePoints: ", 15, donePoints);
-//      
-//      //=====================================================
-//      story.addStep("Rooms with assignments not yet done by Karli:");
-//      
-//      story.markCodeStart();
-//      
-//      AssignmentSet availableAssignments = university.getRoomsSet().getAssignments().minus(karli.getDoneSet());
-//      
-//      RoomSet rooms = availableAssignments.getRoom();
-//      
-//      story.addCode();
-//     
-//      story.add("Results in:");
-//      
-//      story.addPreformatted("      " + rooms.toString());
-//
-//      story.assertEquals("rooms.size(): ", 2, rooms.size()); 
-//      
-//      story.addStep("Filter for attribute:");
-//      
-//      story.markCodeStart();
-//      
-//      RoomSet rooms17 = university.getRoomsSet().hasCredits(17);
-//      RoomSet roomsGE20 = university.getRoomsSet().hasCredits(20, Integer.MAX_VALUE);
-//
-//      story.addCode();
-//      
-//      story.add("Results in:");
-//      
-//      story.addPreformatted("      rooms17: " + rooms17.toString() 
-//         + "\n      roomsGE20: " + roomsGE20);
-//      
-//      story.addStep("Filter for attribute greater than:");
-//      
-//      story.markCodeStart();
-//      
-//      // Java 8:
-//      // (Room elem) -> elem.getCredits() > 20
-//      
-//      RoomSet roomsEven = university.getRoomsSet().has(elem -> elem.getCredits() % 2 == 0);
-//      
-//      story.addCode();
-//      
-//      story.add("Results in:");
-//      
-//      story.addPreformatted("      " + roomsEven);
-//      
+      //=====================================================
+      story.addStep("Simple set based navigation:");
+
+      story.markCodeStart();
+
+      int assignmentPoints = new UniversitySet(university).getRooms().getAssignments().getPoints().sum();
+      int assignmentPoints2 = new RoomSet(university.getRooms()).getAssignments()
+            .stream().mapToInt(Assignment::getPoints).sum();
+
+      int donePoints = new UniversitySet(university).getStudents().getDone().getPoints().sum();
+
+      story.addCode();
+
+      story.add("Results in:");
+
+      String text = CGUtil.replaceAll(
+         "      Sum of assignment points: 23. \n" +
+               "      Sum of points of assignments that have been done by at least one students: 15.",
+               "23", assignmentPoints, 
+               "15", donePoints);
+
+      story.addPreformatted(text);
+
+      story.assertEquals("Assignment points: ", 23, assignmentPoints);
+      story.assertEquals("donePoints: ", 15, donePoints);
+
+      //=====================================================
+      story.addStep("Rooms with assignments not yet done by Karli:");
+
+      story.markCodeStart();
+
+      AssignmentSet availableAssignments = new UniversitySet(university).getRooms().getAssignments().minus(karli.getDone());
+
+      RoomSet rooms = availableAssignments.getRoom();
+
+      story.addCode();
+
+      story.add("Results in:");
+
+      story.addPreformatted("      " + rooms.toString());
+
+      story.assertEquals("rooms.size(): ", 2, rooms.size()); 
+
+      story.addStep("Filter for attribute:");
+
+      story.markCodeStart();
+
+      RoomSet rooms17 = new UniversitySet(university).getRooms().filterCredits(17);
+      RoomSet roomsGE20 = new UniversitySet(university).getRooms().filterCredits(20, Integer.MAX_VALUE);
+
+      story.addCode();
+
+      story.add("Results in:");
+
+      story.addPreformatted("      rooms17: " + rooms17.toString() 
+      + "\n      roomsGE20: " + roomsGE20);
+
+      story.addStep("Filter for attribute greater than:");
+
+      story.markCodeStart();
+
+      // Java 8:
+      // (Room elem) -> elem.getCredits() > 20
+
+      RoomSet roomsEven = new UniversitySet(university).getRooms().filter(elem -> elem.getCredits() % 2 == 0);
+
+      story.addCode();
+
+      story.add("Results in:");
+
+      story.addPreformatted("      " + roomsEven);
+
 //      //====================================================
 //      story.addStep("Filter for type: ");
 //      

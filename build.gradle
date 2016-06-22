@@ -10,7 +10,16 @@ repositories {
 dependencies {
     compile 'junit:junit:4.+'
     
-    compile 'org.sdmlib:SDMLib:2.2.+'
+   if ( ! project.hasProperty('useLocalDependencies'))
+   {
+   	  compile 'org.sdmlib:SDMLib:2.2.+'
+   }
+   else
+   {
+		println "using local networkparser and sdmlib"
+		compile fileTree(dir: "../NetworkParser", include: ['NetworkParser.jar'])
+		compile fileTree(dir: "../SDMLib", include: ['SDMLib.jar'])
+   }
     
     compile "org.eclipse.emf:org.eclipse.emf.ecore:2.+"
     compile "org.eclipse.emf:org.eclipse.emf.common:2.+"
