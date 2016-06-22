@@ -23,6 +23,7 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment;
+import de.uniks.networkparser.interfaces.Condition;
 import java.util.Collection;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
@@ -68,6 +69,12 @@ public class AssignmentSet extends SDMSet<Assignment>
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Assignment";
    }
 
+
+   public AssignmentSet filter(Condition<Assignment> condition) {
+      AssignmentSet filterList = new AssignmentSet();
+      filterItems(filterList, condition);
+      return filterList;
+   }
 
    @SuppressWarnings("unchecked")
    public AssignmentSet with(Object value)

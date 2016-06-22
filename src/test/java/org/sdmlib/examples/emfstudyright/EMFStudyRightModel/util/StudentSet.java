@@ -23,6 +23,7 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student;
+import de.uniks.networkparser.interfaces.Condition;
 import java.util.Collection;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
@@ -71,6 +72,12 @@ public class StudentSet extends SDMSet<Student>
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Student";
    }
 
+
+   public StudentSet filter(Condition<Student> condition) {
+      StudentSet filterList = new StudentSet();
+      filterItems(filterList, condition);
+      return filterList;
+   }
 
    @SuppressWarnings("unchecked")
    public StudentSet with(Object value)

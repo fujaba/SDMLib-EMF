@@ -23,6 +23,7 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room;
+import de.uniks.networkparser.interfaces.Condition;
 import java.util.Collection;
 import org.sdmlib.models.modelsets.StringList;
 import org.sdmlib.models.modelsets.intList;
@@ -73,6 +74,12 @@ public class RoomSet extends SDMSet<Room>
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.Room";
    }
 
+
+   public RoomSet filter(Condition<Room> condition) {
+      RoomSet filterList = new RoomSet();
+      filterItems(filterList, condition);
+      return filterList;
+   }
 
    @SuppressWarnings("unchecked")
    public RoomSet with(Object value)

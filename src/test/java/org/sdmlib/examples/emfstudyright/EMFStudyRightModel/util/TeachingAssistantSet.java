@@ -23,6 +23,7 @@ package org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util;
 
 import org.sdmlib.models.modelsets.SDMSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant;
+import de.uniks.networkparser.interfaces.Condition;
 import java.util.Collection;
 import org.sdmlib.models.modelsets.intList;
 import org.sdmlib.models.modelsets.StringList;
@@ -65,6 +66,12 @@ public class TeachingAssistantSet extends SDMSet<TeachingAssistant>
       return "org.sdmlib.examples.emfstudyright.EMFStudyRightModel.TeachingAssistant";
    }
 
+
+   public TeachingAssistantSet filter(Condition<TeachingAssistant> condition) {
+      TeachingAssistantSet filterList = new TeachingAssistantSet();
+      filterItems(filterList, condition);
+      return filterList;
+   }
 
    @SuppressWarnings("unchecked")
    public TeachingAssistantSet with(Object value)
