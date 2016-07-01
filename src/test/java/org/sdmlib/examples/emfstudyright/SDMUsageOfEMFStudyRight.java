@@ -11,6 +11,7 @@ import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.UniversityImpl;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.AssignmentSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.RoomSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.StudentSet;
+import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.TeachingAssistantSet;
 import org.sdmlib.examples.emfstudyright.EMFStudyRightModel.util.UniversitySet;
 import org.sdmlib.storyboards.Storyboard;
 
@@ -198,29 +199,33 @@ public class SDMUsageOfEMFStudyRight
 
       story.addPreformatted("      " + roomsEven);
 
-//      //====================================================
-//      story.addStep("Filter for type: ");
-//      
-//      story.markCodeStart();
-//      
-//      TeachingAssistantSet taStudents = university.getRoomsSet().getStudents().instanceOf(new TeachingAssistantSet());
-//      
-//      story.addCode();
-//      
-//      story.addPreformatted("" + taStudents);
-//      
-//      //====================================================
-//      story.addStep("Write operations on sets: ");
-//      
-//      story.markCodeStart();
-//      
-//      university.getStudentsSet().withMotivation(42);
-//      
-//      story.addCode();
-//      
-//      story.addObjectDiagramWith(university.getStudents());
-//      
-//      
+      //====================================================
+      story.addStep("Filter for type: ");
+      
+      story.markCodeStart();
+      
+      TeachingAssistantSet taStudents = new UniversitySet(university).getRooms().getStudents().instanceOf(new TeachingAssistantSet());
+      
+      story.addCode();
+      
+      story.assertEquals("taStudents.size() should be", 1, taStudents.size());
+      
+      story.addPreformatted("" + taStudents);
+      
+      //====================================================
+      story.addStep("Write operations on sets: ");
+      
+      story.markCodeStart();
+      
+      new UniversitySet(university).getStudents().withMotivation(42);
+      
+      story.addCode();
+      
+      story.addObjectDiagramWith(university.getStudents());
+      StudentSet studs42 = new UniversitySet(university).getStudents();
+      story.assertTrue("alls students have motivation 42", studs42.equals(studs42.clone()));
+      
+      
 //      //=====================================================
 //      story.addStep("Rooms with two students that are friends (and need supervision): ");
 //      

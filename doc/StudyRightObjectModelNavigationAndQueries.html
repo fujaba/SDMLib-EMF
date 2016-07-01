@@ -511,20 +511,75 @@
       RoomSet rooms = availableAssignments.getRoom();
 
 </pre><p>Results in:</p>
-<pre>      (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@175cb9af (topic: math, credits: 17), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5e28336b (topic: sports, credits: 25))</pre><p>Check: rooms.size():  2 actual 2</p>
+<pre>      (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5906ebcb (topic: math, credits: 17), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@55a561cf (topic: sports, credits: 25))</pre><p>Check: rooms.size():  2 actual 2</p>
 <p><a name = 'step_3'>Step 3: Filter for attribute:</a></p><pre>
       RoomSet rooms17 = new UniversitySet(university).getRooms().filterCredits(17);
       RoomSet roomsGE20 = new UniversitySet(university).getRooms().filterCredits(20, Integer.MAX_VALUE);
 
 </pre><p>Results in:</p>
-<pre>      rooms17: (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@175cb9af (topic: math, credits: 17))
-      roomsGE20: (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5e28336b (topic: sports, credits: 25), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5d521b1c (topic: Software Engineering, credits: 42))</pre><p><a name = 'step_4'>Step 4: Filter for attribute greater than:</a></p><pre>
+<pre>      rooms17: (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5906ebcb (topic: math, credits: 17))
+      roomsGE20: (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@55a561cf (topic: sports, credits: 25), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@6f3b5d16 (topic: Software Engineering, credits: 42))</pre><p><a name = 'step_4'>Step 4: Filter for attribute greater than:</a></p><pre>
       &#x2F;&#x2F; Java 8:
       &#x2F;&#x2F; (Room elem) -&gt; elem.getCredits() &gt; 20
 
       RoomSet roomsEven = new UniversitySet(university).getRooms().filter(elem -&gt; elem.getCredits() % 2 == 0);
 
 </pre><p>Results in:</p>
-<pre>      (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@249abc1d (topic: arts, credits: 16), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@2fb14e84 (topic: exam, credits: 0), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@5d521b1c (topic: Software Engineering, credits: 42))</pre>
+<pre>      (org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@3d299e3 (topic: arts, credits: 16), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@3b938003 (topic: exam, credits: 0), org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.RoomImpl@6f3b5d16 (topic: Software Engineering, credits: 42))</pre><p><a name = 'step_5'>Step 5: Filter for type: </a></p><pre>      
+      TeachingAssistantSet taStudents = new UniversitySet(university).getRooms().getStudents().instanceOf(new TeachingAssistantSet());
+      
+</pre><p>Check: taStudents.size() should be 1 actual 1</p>
+<pre>(org.sdmlib.examples.emfstudyright.EMFStudyRightModel.impl.TeachingAssistantImpl@7920ba90 (name: Karli, studId: 4242, credits: 0, motivation: 0, assignmentPoints: 0) (noOfHours: 0))</pre><p><a name = 'step_6'>Step 6: Write operations on sets: </a></p><pre>      
+      new UniversitySet(university).getStudents().withMotivation(42);
+      
+</pre><script>
+   var json = {
+   "typ":"objectdiagram",
+   "style":null,
+   "nodes":[
+      {
+         "typ":"clazz",
+         "id":"karli : TeachingAssistantImpl",
+         "head":{"src":"{\"src\":\"icons/karli.png\"}"},
+         "attributes":[
+            "noOfHours=0",
+            "name=Karli",
+            "studId=4242",
+            "credits=0",
+            "motivation=42",
+            "assignmentPoints=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"abu : StudentImpl",
+         "head":{"src":"{\"src\":\"icons/karli.png\"}"},
+         "attributes":[
+            "name=Abu",
+            "studId=1337",
+            "credits=0",
+            "motivation=42",
+            "assignmentPoints=0"
+         ]
+      },
+      {
+         "typ":"clazz",
+         "id":"alice : StudentImpl",
+         "head":{"src":"{\"src\":\"icons/karli.png\"}"},
+         "attributes":[
+            "name=Alice",
+            "studId=2323",
+            "credits=0",
+            "motivation=42",
+            "assignmentPoints=0"
+         ]
+      }
+   ]
+}   ;
+   json["options"]={"canvasid":"canvasStudyRightObjectModelNavigationAndQueries29", "display":"svg", "fontsize":10,"bar":true};   var g = new Graph(json);
+   g.layout(100,100);
+</script>
+<p>Check: alls students have motivation 42 false</p>
+
 </body>
 </html>
